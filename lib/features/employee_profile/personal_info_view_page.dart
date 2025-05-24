@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:police_com/features/employee_profile/personal_info_page.dart';
+import 'package:police_com/features/employee_profile/personal_info_page_Q.dart';
 
 class PersonalInformationViewPage extends StatelessWidget {
   const PersonalInformationViewPage({super.key});
