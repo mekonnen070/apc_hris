@@ -1,9 +1,9 @@
 enum SubModule {
-  dashboard, // also a sub-module of Dashboard
-  // Employee Profile Management sub-modules:
+  dashboard,
+  // Employee Profile SubModules
+  addNewEmployee,
   profileRecruitment,
   profileRetirement,
-  profilePersonalInfo,
   profileEmploymentDetails,
   profileDocumentManagement,
   leaveManagement,

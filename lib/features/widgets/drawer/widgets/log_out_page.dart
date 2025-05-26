@@ -16,10 +16,10 @@ class _LogOutPageState extends ConsumerState<LogOutPage> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(Icons.logout),
+      leading: const Icon(Icons.logout),
       title:
           _isLoading
-              ? Center(child: const CircularProgressIndicator.adaptive())
+              ? const Center(child: CircularProgressIndicator.adaptive())
               : const Text('Logout'),
       onTap: () async {
         setState(() => _isLoading = true);

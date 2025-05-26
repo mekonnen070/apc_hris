@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
 
-// A section for displaying a list of dynamic entries (e.g., qualifications, experiences)
-// with an "Add New" button.
+// A section for displaying a list of dynamic entries with an "Add New" button.
 class DynamicEntrySection<T> extends StatelessWidget {
   final String sectionTitle;
   final String emptyListMessage;
   final List<T> itemsData;
-  // itemBuilder provides data, onEdit callback, onDelete callback
-  final Widget Function(
-    BuildContext context,
-    T itemData,
-    VoidCallback onEdit,
-    VoidCallback onDelete,
-  )
+  // itemBuilder provides the context, specific item data, and its index.
+  final Widget Function(BuildContext context, T itemData, int index)
   itemBuilder;
   final VoidCallback onAddNew;
   final String addNewButtonText;
+  final bool showDivider; // New: control divider visibility
 
   const DynamicEntrySection({
     super.key,
@@ -25,6 +20,7 @@ class DynamicEntrySection<T> extends StatelessWidget {
     required this.itemBuilder,
     required this.onAddNew,
     required this.addNewButtonText,
+    this.showDivider = true,
   });
 
   @override
@@ -37,14 +33,18 @@ class DynamicEntrySection<T> extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                sectionTitle,
-                style: Theme.of(
-                  context,
-                ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600),
+              Expanded(
+                // Allow title to wrap if too long
+                child: Text(
+                  sectionTitle,
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600),
+                ),
               ),
+              const SizedBox(width: 8),
               ElevatedButton.icon(
-                icon: const Icon(Icons.add_circle_outline),
+                icon: const Icon(Icons.add_circle_outline, size: 20),
                 label: Text(addNewButtonText),
                 onPressed: onAddNew,
                 style: ElevatedButton.styleFrom(
@@ -56,41 +56,35 @@ class DynamicEntrySection<T> extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 12), // Increased spacing
           if (itemsData.isEmpty)
             Center(
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 20.0,
+                ), // More padding for empty message
                 child: Text(
                   emptyListMessage,
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium?.copyWith(fontStyle: FontStyle.italic),
                 ),
               ),
             )
           else
-            ListView.builder(
-              shrinkWrap: true, // Important for ListView inside Column
-              physics:
-                  const NeverScrollableScrollPhysics(), // If not meant to scroll independently
+            ListView.separated(
+              // Using separated for automatic dividers between items
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: itemsData.length,
               itemBuilder: (context, index) {
                 final item = itemsData[index];
-                // The itemBuilder from parameters handles creating the actual EditableListItemCard
-                // It needs callbacks for edit/delete specific to this item.
-                // These callbacks would typically involve Riverpod notifiers.
-                return itemBuilder(
-                  context,
-                  item,
-                  () {
-                    /* Call Riverpod notifier to signal edit for 'item' */
-                  },
-                  () {
-                    /* Call Riverpod notifier to signal delete for 'item' */
-                  },
-                );
+                return itemBuilder(context, item, index);
               },
+              separatorBuilder: (context, index) => const Divider(height: 1),
             ),
-          const Divider(height: 20),
+          if (showDivider && itemsData.isNotEmpty) const SizedBox(height: 10),
+          if (showDivider) const Divider(height: 20, thickness: 1),
         ],
       ),
     );

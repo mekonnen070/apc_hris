@@ -12,8 +12,8 @@ class GoogleSignInWidget extends ConsumerWidget {
   Future<void> _handleLogin(WidgetRef ref) async {
     // final authRepo = ref.read(authRepositoryProvider);
     toastification.show(
-      title: Text('Coming soon..'),
-      description: Text(
+      title: const Text('Coming soon..'),
+      description: const Text(
         'Google sign-in is not implemented yet. Use email instead.',
       ),
       autoCloseDuration: const Duration(seconds: 2),
@@ -29,7 +29,7 @@ class GoogleSignInWidget extends ConsumerWidget {
     minimumSize: const Size(265, 44),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(8),
-      side: const BorderSide(color: AppColors.grey, width: 1),
+      side: const BorderSide(color: AppColors.grey),
     ),
   );
 
@@ -48,7 +48,7 @@ class GoogleSignInWidget extends ConsumerWidget {
             fit: BoxFit.cover,
           ),
         ),
-        label: Text('Sign in with Google'),
+        label: const Text('Sign in with Google'),
         style: _style(),
       ),
     );

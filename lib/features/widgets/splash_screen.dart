@@ -21,14 +21,14 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
   Future<void> _checkLoginStatus() async {
     // Simulate splash delay
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 1));
 
     final prefs = await SharedPreferences.getInstance();
     // Retrieve the boolean value. Default to false if not found.
     final isLoggedIn = prefs.getBool(AppConstants.isLoggedInKey) ?? false;
 
-    if (isLoggedIn) {
-      // Navigate to HomeScreen if user is logged in.
+    if (!isLoggedIn) {
+      // Navigate to LoginPage if user is not logged in.
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const HomePage()),

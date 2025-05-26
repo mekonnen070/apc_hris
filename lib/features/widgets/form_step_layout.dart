@@ -1,83 +1,110 @@
 import 'package:flutter/material.dart';
 
-// A consistent layout for steps within a multi-page form.
+// A layout for individual steps in a multi-page form.
+// Designed to be used as a child page within a PageView managed by a host screen.
 class FormStepLayout extends StatelessWidget {
-  final String stepTitle;
-  final Widget child; // The main content of the form step
-  final VoidCallback? onNext;
-  final VoidCallback? onPrevious;
+  final Widget child;
+  final VoidCallback? onNext; // Action for the "Next" button
+  final VoidCallback? onPrevious; // Action for the "Previous" button
   final bool isNextLoading;
-  final String nextButtonText;
+  final String?
+  nextButtonText; // Nullable if no next button needed (e.g. on review screen)
   final String previousButtonText;
-  final bool showNextButton;
-  final bool showPreviousButton;
-  final GlobalKey<FormState>? formKey; // Optional: for form validation on next
+  // GlobalKey<FormState> is typically managed by the screen using this layout
+  final GlobalKey<FormState>? formKey;
+  final bool
+  isLastStep; // Is this the last data entry step before review/submit?
 
   const FormStepLayout({
     super.key,
-    required this.stepTitle,
     required this.child,
     this.onNext,
     this.onPrevious,
     this.isNextLoading = false,
-    this.nextButtonText = 'Next',
+    this.nextButtonText, // Defaults handled below
     this.previousButtonText = 'Previous',
-    this.showNextButton = true,
-    this.showPreviousButton = true,
     this.formKey,
+    this.isLastStep = false,
   });
 
   @override
   Widget build(BuildContext context) {
+    // This Scaffold is minimal. The main AppBar should come from the host screen (e.g., AddNewEmployeeHostScreen).
+    // It's primarily for providing the body structure and the bottom navigation bar for step actions.
     return Scaffold(
-      appBar: AppBar(
-        title: Text(stepTitle),
-        // Potentially add a step indicator here if complex
-      ),
-      body: SingleChildScrollView(
-        // Ensure content is scrollable
-        padding: const EdgeInsets.all(16.0),
-        child: child, // This will be the Form widget with AppTextFields etc.
+      backgroundColor:
+          Colors.transparent, // Allow host screen background to show if desired
+      body: SafeArea(
+        // Ensure content is within safe areas
+        child: Padding(
+          padding: const EdgeInsets.all(
+            0,
+          ), // Parent screen (e.g. EmployeeCoreInfoScreen) will handle its padding
+          child:
+              child, // The child is expected to be a Form containing a ListView or SingleChildScrollView
+        ),
       ),
       bottomNavigationBar:
-          (showPreviousButton && onPrevious != null) ||
-                  (showNextButton && onNext != null)
-              ? Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    if (showPreviousButton && onPrevious != null)
-                      OutlinedButton(
-                        onPressed: onPrevious,
-                        child: Text(previousButtonText),
-                      ),
-                    if (showNextButton && onNext != null)
-                      ElevatedButton(
-                        onPressed:
-                            isNextLoading
-                                ? null
-                                : () {
-                                  if (formKey?.currentState?.validate() ??
-                                      true) {
-                                    formKey?.currentState
-                                        ?.save(); // Call onSaved for FormFields
-                                    onNext!();
-                                  }
-                                },
-                        child:
-                            isNextLoading
-                                ? const SizedBox(
-                                  height: 20,
-                                  width: 20,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 2,
-                                    color: Colors.white,
+          (onPrevious != null || (onNext != null && nextButtonText != null))
+              ? BottomAppBar(
+                // Using BottomAppBar for standard placement
+                elevation: 4.0, // Add some elevation
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                    vertical: 8.0,
+                  ),
+                  child: Row(
+                    mainAxisAlignment:
+                        onPrevious == null ||
+                                (onNext == null || nextButtonText == null)
+                            ? MainAxisAlignment
+                                .end // Align to right if only one button
+                            : MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      if (onPrevious != null)
+                        OutlinedButton.icon(
+                          icon: const Icon(Icons.arrow_back_ios_new, size: 16),
+                          label: Text(previousButtonText),
+                          onPressed: onPrevious,
+                        ),
+                      if (onNext != null && nextButtonText != null)
+                        ElevatedButton.icon(
+                          icon:
+                              isNextLoading
+                                  ? const SizedBox(
+                                    height: 18,
+                                    width: 18,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                  : Icon(
+                                    isLastStep
+                                        ? Icons.preview_outlined
+                                        : Icons.arrow_forward_ios_rounded,
+                                    size: 16,
                                   ),
-                                )
-                                : Text(nextButtonText),
-                      ),
-                  ],
+                          label: Text(
+                            isNextLoading
+                                ? 'Saving...'
+                                : (nextButtonText ??
+                                    (isLastStep ? 'Review' : 'Next')),
+                          ),
+                          onPressed:
+                              isNextLoading
+                                  ? null
+                                  : () {
+                                    if (formKey?.currentState?.validate() ??
+                                        true) {
+                                      formKey?.currentState?.save();
+                                      onNext!(); // The onNext callback is now responsible for updating provider & signalling page change
+                                    }
+                                  },
+                        ),
+                    ],
+                  ),
                 ),
               )
               : null,

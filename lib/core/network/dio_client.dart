@@ -11,8 +11,8 @@ class DioClient with LoggerMixin {
   DioClient._internal() {
     final options = BaseOptions(
       baseUrl: ApiConstants.baseUrl,
-      connectTimeout: Duration(seconds: 5),
-      receiveTimeout: Duration(seconds: 3),
+      connectTimeout: const Duration(seconds: 5),
+      receiveTimeout: const Duration(seconds: 3),
       headers: {
         'Content-Type': 'application/json',
         'Accept': '*/*',

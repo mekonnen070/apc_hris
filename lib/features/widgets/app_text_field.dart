@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // A standardized text input field for consistent styling and behavior.
 class AppTextField extends StatelessWidget {
@@ -18,6 +19,9 @@ class AppTextField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final FocusNode? focusNode;
   final AutovalidateMode? autovalidateMode;
+  final bool enabled; // New: To explicitly enable/disable the field
+  final InputDecoration? decoration; // New: Allow full decoration override
+  final List<TextInputFormatter>? inputFormatters; // New: For input formatting
 
   const AppTextField({
     super.key,
@@ -37,22 +41,33 @@ class AppTextField extends StatelessWidget {
     this.onChanged,
     this.focusNode,
     this.autovalidateMode,
+    this.enabled = true,
+    this.decoration,
+    this.inputFormatters,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: TextFormField(
-        controller: controller,
-        focusNode: focusNode,
-        decoration: InputDecoration(
+    final effectiveDecoration =
+        decoration ??
+        InputDecoration(
           labelText: labelText,
           hintText: hintText,
           border: const OutlineInputBorder(),
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,
-        ),
+          // Consider adding filled: true and fillColor from theme for consistency
+          // errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.error),
+        );
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: 8.0,
+      ), // Consistent vertical spacing
+      child: TextFormField(
+        controller: controller,
+        focusNode: focusNode,
+        decoration: effectiveDecoration,
         validator: validator,
         keyboardType: keyboardType,
         textInputAction: textInputAction,
@@ -64,6 +79,8 @@ class AppTextField extends StatelessWidget {
         onChanged: onChanged,
         autovalidateMode:
             autovalidateMode ?? AutovalidateMode.onUserInteraction,
+        enabled: enabled,
+        inputFormatters: inputFormatters,
       ),
     );
   }

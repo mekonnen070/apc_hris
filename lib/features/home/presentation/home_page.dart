@@ -18,9 +18,9 @@ class HomePage extends ConsumerWidget {
       child: Scaffold(
         appBar: AppBarWidget(
           title: selectedSubModule.title,
-          actions: [ThemeSwitcherWidget()],
+          actions: const [ThemeSwitcherWidget()],
         ),
-        drawer: AppDrawer(),
+        drawer: const AppDrawer(),
         body: selectedSubModule.body,
       ),
     );

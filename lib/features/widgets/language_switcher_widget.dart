@@ -64,14 +64,14 @@ class _LanguageDialog extends StatelessWidget {
                       /// If the selected lango is amharic, show a dialog
                       if (value != null && value.code == Lango.am.code) {
                         toastification.show(
-                          title: Text('Coming soon'),
-                          description: Text(
+                          title: const Text('Coming soon'),
+                          description: const Text(
                             'Amharic language is not available yet',
                           ),
-                          autoCloseDuration: Duration(seconds: 2),
+                          autoCloseDuration: const Duration(seconds: 2),
                         );
 
-                        Navigator.of(context).pop(null);
+                        Navigator.of(context).pop();
 
                         return;
                       }

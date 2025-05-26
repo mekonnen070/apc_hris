@@ -28,7 +28,7 @@ class _LeaveManagementPageState extends ConsumerState<LeaveManagementPage> {
     },
     {
       'type': LeaveType.sick,
-      'startDate': DateTime(2025, 3, 1),
+      'startDate': DateTime(2025, 3),
       'endDate': DateTime(2025, 3, 3),
       'status': 'Pending',
     },

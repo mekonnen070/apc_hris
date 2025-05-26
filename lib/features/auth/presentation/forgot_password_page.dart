@@ -60,7 +60,7 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage>
   Widget build(BuildContext context) {
     return ThemeSwitchingArea(
       child: Scaffold(
-        appBar: AppBarWidget(
+        appBar: const AppBarWidget(
           title: 'Forgot Password',
           actions: [ThemeSwitcherWidget()],
         ),

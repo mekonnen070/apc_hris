@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:police_com/core/enums/gender_enum.dart';
+import 'package:police_com/core/enums/gender.dart';
 import 'package:police_com/core/enums/marital_status_enum.dart';
 import 'package:police_com/core/mixins/logger_mixin.dart';
 import 'package:police_com/features/auth/application/auth_controller.dart';
@@ -26,7 +26,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> with LoggerMixin {
   bool _isLoading = false;
 
   // Gender & Marital Status options
-  final List<GenderEnum> genders = GenderEnum.values;
+  final List<Gender> genders = Gender.values;
   final List<MaritalStatusEnum> maritalStatuses = MaritalStatusEnum.values;
 
   Future<void> _submitSignup() async {
@@ -70,7 +70,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> with LoggerMixin {
   Widget build(BuildContext context) {
     return ThemeSwitchingArea(
       child: Scaffold(
-        appBar: AppBarWidget(
+        appBar: const AppBarWidget(
           title: 'Sign Up',
           actions: [ThemeSwitcherWidget()],
         ),
@@ -303,7 +303,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> with LoggerMixin {
                               ),
                             ),
                         const SizedBox(height: 16),
-                        SizedBox(
+                        const SizedBox(
                           width: double.infinity,
                           child: GoogleSignInWidget(),
                         ),

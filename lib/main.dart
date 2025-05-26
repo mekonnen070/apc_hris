@@ -28,14 +28,14 @@ class MyApp extends ConsumerWidget {
     final language = ref.watch(languageControllerProvider);
 
     return ToastificationWrapper(
-      config: ToastificationConfig(alignment: Alignment.bottomCenter),
+      config: const ToastificationConfig(alignment: Alignment.bottomCenter),
       child: ThemeProvider(
         initTheme: themeData,
         duration: const Duration(milliseconds: 500),
         builder: (_, theme) {
           return MaterialApp(
             theme: theme,
-            home: SplashScreen(),
+            home: const SplashScreen(),
             navigatorKey: navigatorKey,
             title: AppStrings.appTitle,
             debugShowCheckedModeBanner: false,

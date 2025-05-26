@@ -16,7 +16,7 @@ class AppDrawer extends ConsumerWidget {
       child: Drawer(
         child: ListView(
           children: [
-            UserAccountsDrawerHeader(
+            const UserAccountsDrawerHeader(
               accountName: Text('John Doe'),
               accountEmail: Text('John@gmail.com'),
               currentAccountPicture: CircleAvatar(
@@ -61,7 +61,7 @@ class AppDrawer extends ConsumerWidget {
                         }).toList(),
                   ),
             const Divider(),
-            LogOutPage(),
+            const LogOutPage(),
             const SizedBox(height: 20),
           ],
         ),

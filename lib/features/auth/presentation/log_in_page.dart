@@ -66,7 +66,7 @@ class _LogInPageState extends ConsumerState<LogInPage> with LoggerMixin {
   Widget build(BuildContext context) {
     return ThemeSwitchingArea(
       child: Scaffold(
-        appBar: AppBarWidget(title: 'Login', actions: [ThemeSwitcherWidget()]),
+        appBar: const AppBarWidget(title: 'Login', actions: [ThemeSwitcherWidget()]),
         body: Center(
           child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
@@ -189,7 +189,7 @@ class _LogInPageState extends ConsumerState<LogInPage> with LoggerMixin {
                           ),
                       const SizedBox(height: 16),
                       // Google Sign-In
-                      SizedBox(
+                      const SizedBox(
                         width: double.infinity,
                         child: GoogleSignInWidget(),
                       ),

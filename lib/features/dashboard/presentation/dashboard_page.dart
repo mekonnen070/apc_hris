@@ -140,7 +140,6 @@ class _DashboardPageState extends State<DashboardPage> {
               height: 180,
               autoPlay: true,
               enlargeCenterPage: true,
-              aspectRatio: 16 / 9,
               autoPlayInterval: const Duration(seconds: 3),
               onPageChanged: (index, reason) {
                 setState(() {
