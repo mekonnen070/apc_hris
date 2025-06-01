@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart'; // Only if directly interacting with providers, usually not for this screen
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:police_com/core/enums/all_enums.dart';
-import 'package:police_com/features/employee_profile/domain/employee_contact_model.dart';
-
-import '../../../widgets/app_dropdown_field.dart';
-// Reusable Widgets
-import '../../../widgets/app_text_field.dart';
-// import '../../../widgets/app_checkbox_field.dart'; // Or a simple Checkbox
-
+// Your extension for display names
+import 'package:police_com/core/extensions/enum_extension.dart';
 // Models & Enums
+import 'package:police_com/features/employee_profile/domain/employee_contact_model.dart';
+import 'package:police_com/features/widgets/app_dropdown_field.dart';
+// Reusable Widgets
+import 'package:police_com/features/widgets/app_text_field.dart';
+
+// This helper function is now a top-level function for better reusability and performance.
+List<DropdownMenuItem<T>> _buildEnumDropdownItems<T extends Enum>(
+  List<T> enumValues,
+) {
+  return enumValues.map((T value) {
+    return DropdownMenuItem<T>(
+      value: value,
+      child: Text(value.toDisplayString), // Uses the .toDisplayString extension
+    );
+  }).toList();
+}
 
 class AddEditEmployeeContactScreen extends HookConsumerWidget {
   final EmployeeContactModel? initialContact;
@@ -18,7 +29,7 @@ class AddEditEmployeeContactScreen extends HookConsumerWidget {
   const AddEditEmployeeContactScreen({
     super.key,
     this.initialContact,
-    required this.employeeId, // Needed if creating a new contact to associate it
+    required this.employeeId,
   });
 
   @override
@@ -44,38 +55,17 @@ class AddEditEmployeeContactScreen extends HookConsumerWidget {
 
     final selectedRelationship = useState<RelationTypes>(
       initialContact?.relationship ?? RelationTypes.other,
-    ); // Default to 'other' or first valid enum
+    );
     final isPrimaryContact = useState<bool>(initialContact?.isPrimary ?? false);
-    // isActive defaults to true in the model, usually not set by user during creation here
-
-    // Helper for Enum Dropdown Items
-    List<DropdownMenuItem<T>> buildDropdownItems<T extends Enum>(
-      List<T> enumValues,
-      String Function(T) getDisplayName,
-    ) {
-      return enumValues.map((T value) {
-        return DropdownMenuItem<T>(
-          value: value,
-          child: Text(getDisplayName(value)),
-        );
-      }).toList();
-    }
-
-    // Example display name getter
-    String getRelationTypeDisplayName(RelationTypes r) =>
-        r.name[0].toUpperCase() + r.name.substring(1);
+    // isActive is managed by the model's default and not typically user-editable on this screen.
 
     void handleSaveChanges() {
       if (formKey.currentState?.validate() ?? false) {
         formKey.currentState?.save();
 
         final contact = EmployeeContactModel(
-          contactId:
-              initialContact?.contactId ??
-              UniqueKey()
-                  .toString(), // Use existing or generate new client-side ID
-          employeeId:
-              initialContact?.employeeId ?? employeeId, // Ensure association
+          contactId: initialContact?.contactId ?? UniqueKey().toString(),
+          employeeId: initialContact?.employeeId ?? employeeId,
           fullName: fullNameController.text,
           relationship: selectedRelationship.value,
           address:
@@ -84,12 +74,11 @@ class AddEditEmployeeContactScreen extends HookConsumerWidget {
           mobile: mobileController.text.isEmpty ? null : mobileController.text,
           email: emailController.text.isEmpty ? null : emailController.text,
           isPrimary: isPrimaryContact.value,
-          isActive:
-              initialContact?.isActive ??
-              true, // Preserve existing or default to true
-          // Audit fields (createdBy, etc.) are not handled here; backend will set them.
+          isActive: initialContact?.isActive ?? true,
+          // Audit fields are handled by the backend.
         );
-        Navigator.of(context).pop(contact); // Return the saved/updated contact
+        // Return the saved/updated contact model to the previous screen (EmployeeContactsScreen)
+        Navigator.of(context).pop(contact);
       }
     }
 
@@ -126,10 +115,9 @@ class AddEditEmployeeContactScreen extends HookConsumerWidget {
               AppDropdownField<RelationTypes>(
                 labelText: 'Relationship *',
                 value: selectedRelationship.value,
-                items: buildDropdownItems(
+                items: _buildEnumDropdownItems(
                   RelationTypes.values,
-                  getRelationTypeDisplayName,
-                ),
+                ), // Using the helper
                 onChanged:
                     (val) =>
                         selectedRelationship.value = val ?? RelationTypes.other,
@@ -173,7 +161,7 @@ class AddEditEmployeeContactScreen extends HookConsumerWidget {
                 controller: addressController,
                 labelText: 'Address (Optional)',
                 maxLines: 2,
-                textInputAction: TextInputAction.next,
+                textInputAction: TextInputAction.done, // Last text field
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -181,7 +169,12 @@ class AddEditEmployeeContactScreen extends HookConsumerWidget {
                   children: [
                     Checkbox(
                       value: isPrimaryContact.value,
-                      onChanged: (val) => isPrimaryContact.value = val ?? false,
+                      onChanged: (val) {
+                        // TODO: Add logic in EmployeeCreationNotifier to ensure only one contact is primary.
+                        // When a contact is set as primary, the notifier should iterate through other
+                        // contacts and set their isPrimary to false.
+                        isPrimaryContact.value = val ?? false;
+                      },
                     ),
                     const Text('Set as Primary Contact'),
                   ],

@@ -4,11 +4,16 @@ import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:police_com/core/enums/blood_group.dart';
 import 'package:police_com/core/enums/country.dart';
+import 'package:police_com/core/enums/education_level.dart';
+import 'package:police_com/core/enums/education_status.dart';
 import 'package:police_com/core/enums/employee_type.dart';
 import 'package:police_com/core/enums/employment_status.dart';
+import 'package:police_com/core/enums/ethiopian_university.dart';
+import 'package:police_com/core/enums/field_of_study.dart';
 import 'package:police_com/core/enums/gender.dart';
 import 'package:police_com/core/enums/marital_status.dart';
 import 'package:police_com/core/enums/medical_status.dart';
+import 'package:police_com/core/enums/relation_types.dart';
 import 'package:police_com/core/enums/religion.dart';
 import 'package:police_com/features/employee_profile/domain/employee_contact_model.dart';
 import 'package:police_com/features/employee_profile/domain/employee_dependant_model.dart';
@@ -21,41 +26,30 @@ import 'package:police_com/features/employee_profile/domain/employee_upload_mode
 
 import 'employee_creation_state.dart';
 
-// TODO: Import your actual API service or repository
-// e.g., import 'package:your_app/infrastructure/employee_api_service.dart';
-
 class EmployeeCreationNotifier extends StateNotifier<EmployeeCreationState> {
-  // final YourApiService _apiService; // TODO: Inject your API service
-
-  EmployeeCreationNotifier(/*this._apiService*/)
+  EmployeeCreationNotifier()
     : super(EmployeeCreationState(employeeData: _initialEmptyEmployeeData()));
 
   static EmployeeInfoModel _initialEmptyEmployeeData([String? employeeId]) {
-    // Provides a consistent way to get a new, defaulted EmployeeInfoModel.
-    // The admin might provide an EmployeeId or it might be generated.
     return EmployeeInfoModel(
       employeeId:
           employeeId ??
           UniqueKey().toString(), // Temporary client-side ID if not provided
       firstName: '',
-      // Sensible defaults for required fields:
-      gender: Gender.other, // Or your most common default
-      birthDate: DateTime.now().subtract(
-        const Duration(days: 365 * 25),
-      ), // e.g., 25 years ago
-      positionId: '', // This will need to be selected by the admin
+      gender: Gender.other,
+      birthDate: DateTime.now().subtract(const Duration(days: 365 * 25)),
+      positionId: '',
       address1: '',
       phone: '',
       mobile: '',
       email: '',
       hiredDate: DateTime.now(),
-      // Initialize all collections as empty lists
       employeeContacts: [],
       employeeDependants: [],
       employeeEducations: [],
       employeeExperiences: [],
       performances: [],
-      employeeSpouse: [], // Note: EmployeeInfo has List<EmployeeSpouseModel>
+      employeeSpouse: [],
       generalDocuments: [],
     );
   }
@@ -74,6 +68,70 @@ class EmployeeCreationNotifier extends StateNotifier<EmployeeCreationState> {
     }
   }
 
+  // This method is called when an admin wants to view/edit an existing employee.
+  // It fetches the full employee details from the backend.
+  Future<void> loadEmployeeForEditing(String employeeId) async {
+    state = state.copyWith(isSubmitting: true, errorMessage: null);
+    try {
+      // TODO: Call your actual API service here.
+      // final fetchedEmployeeData = await _apiService.getEmployeeDetails(employeeId);
+
+      // MOCK IMPLEMENTATION with fixes
+      debugPrint('Fetching full details for employee ID: $employeeId...');
+      await Future.delayed(const Duration(seconds: 1));
+
+      final mockLoadedEmployee = EmployeeInfoModel(
+        employeeId: employeeId,
+        firstName: 'Loaded',
+        fatherName: 'User',
+        grandName: 'For-Edit', // Fixed: No longer causes RangeError
+        gender: Gender.female,
+        birthDate: DateTime(1985, 5, 20),
+        positionId: 'Senior Officer',
+        address1: '123 Main St, Addis Ababa',
+        phone: '0911123456',
+        mobile: '0911123456',
+        email: 'existing.user@example.com',
+        hiredDate: DateTime(2010, 1, 15),
+        employeeContacts: [
+          EmployeeContactModel(
+            contactId: 'c1',
+            employeeId: employeeId,
+            fullName: 'Jane Doe',
+            relationship: RelationTypes.spouse,
+            phone: '0911654321',
+          ),
+        ],
+        employeeEducations: [
+          EmployeeEducationModel(
+            educationId: 'e1',
+            employeeId: employeeId,
+            educationLevel: EducationLevel.bachelorsDegree,
+            university: EthiopianUniversity.addisAbabaUniversity,
+            fieldOfStudy: FieldOfStudy.computerScience,
+            startDate: DateTime(2006),
+            endDate: DateTime(2010),
+            educationStatus: EducationStatus.completed,
+          ),
+        ],
+      );
+
+      // --- FIX: Check if mounted before updating state after an await ---
+      if (mounted) {
+        state = EmployeeCreationState(employeeData: mockLoadedEmployee);
+      }
+    } catch (e) {
+      debugPrint('Error loading employee for editing: $e');
+      // --- FIX: Check if mounted before updating state in the catch block ---
+      if (mounted) {
+        state = state.copyWith(
+          isSubmitting: false,
+          errorMessage: 'Failed to load employee data: ${e.toString()}',
+        );
+      }
+    }
+  }
+
   // --- Methods to update direct fields of EmployeeInfoModel ---
   // This method allows updating any subset of the core EmployeeInfoModel fields.
   void updateCoreInfo({
@@ -84,8 +142,8 @@ class EmployeeCreationNotifier extends StateNotifier<EmployeeCreationState> {
     String? grandName,
     Gender? gender,
     DateTime? birthDate,
-    File? photoFile, // For handling the local file before upload
-    String? photoUrl, // For storing the URL after upload
+    File? photoFile,
+    String? photoUrl,
     String? motherName,
     String? positionId,
     String? managerId,
@@ -107,7 +165,6 @@ class EmployeeCreationNotifier extends StateNotifier<EmployeeCreationState> {
     EmployeeType? employeeType,
     DateTime? hiredDate,
     DateTime? retirementEligibilityDate,
-    // Use this pattern to selectively update fields
   }) {
     state = state.copyWith(
       employeeData: state.employeeData.copyWith(
@@ -118,8 +175,7 @@ class EmployeeCreationNotifier extends StateNotifier<EmployeeCreationState> {
         grandName: grandName ?? state.employeeData.grandName,
         gender: gender ?? state.employeeData.gender,
         birthDate: birthDate ?? state.employeeData.birthDate,
-        // Handle photoFile update carefully, it's transient for upload
-        photoFile: photoFile, // Explicitly set or clear
+        photoFile: photoFile,
         photoUrl: photoUrl ?? state.employeeData.photoUrl,
         motherName: motherName ?? state.employeeData.motherName,
         positionId: positionId ?? state.employeeData.positionId,

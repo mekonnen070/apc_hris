@@ -1,17 +1,18 @@
-import 'dart:io'; // For File
+import 'dart:io'; // For File type
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:police_com/core/enums/all_enums.dart';
-import 'package:police_com/core/extensions/enum_extension.dart';
-// Import your string/enum display extensions
-import 'package:police_com/features/employee_profile/application/add_new_employee_step_provider.dart';
-import 'package:police_com/features/employee_profile/application/employee_creation_provider.dart';
-// Providers
 // Enums (via the barrel file)
+import 'package:police_com/core/enums/all_enums.dart';
+// Your extension for display names
+import 'package:police_com/core/extensions/enum_extension.dart'; // Ensure this path is correct
+// Corrected import for the step provider:
+import 'package:police_com/features/employee_profile/application/add_new_employee_step_provider.dart';
+// Providers
+import 'package:police_com/features/employee_profile/application/employee_creation_provider.dart';
+// Host Screen (to access static totalSteps)
 import 'package:police_com/features/employee_profile/presentation/add_new_employee_host_screen.dart';
-// Host Screen (for totalSteps, ensure correct path)
 import 'package:police_com/features/widgets/app_date_field.dart';
 import 'package:police_com/features/widgets/app_dropdown_field.dart';
 import 'package:police_com/features/widgets/app_file_upload_field.dart';
@@ -19,20 +20,20 @@ import 'package:police_com/features/widgets/app_file_upload_field.dart';
 import 'package:police_com/features/widgets/app_text_field.dart';
 import 'package:police_com/features/widgets/form_step_layout.dart';
 
+// A top-level helper function for building dropdown items.
+List<DropdownMenuItem<T>> _buildEnumDropdownItems<T extends Enum>(
+  List<T> enumValues,
+) {
+  return enumValues.map((T value) {
+    return DropdownMenuItem<T>(
+      value: value,
+      child: Text(value.toDisplayString), // Uses the .toDisplayString extension
+    );
+  }).toList();
+}
+
 class EmployeeCoreInfoScreen extends HookConsumerWidget {
   const EmployeeCoreInfoScreen({super.key});
-
-  // Helper for Enum Dropdown Items using the extension
-  static List<DropdownMenuItem<T>> _buildDropdownItems<T extends Enum>(
-    List<T> enumValues,
-  ) {
-    return enumValues.map((T value) {
-      return DropdownMenuItem<T>(
-        value: value,
-        child: Text(value.toDisplayString),
-      );
-    }).toList();
-  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -183,6 +184,7 @@ class EmployeeCoreInfoScreen extends HookConsumerWidget {
             );
 
         final currentStepVal = ref.read(currentEmployeeCreationStepProvider);
+        // Correctly access totalSteps from the imported AddNewEmployeeHostScreen
         if (currentStepVal < AddNewEmployeeHostScreen.totalSteps - 1) {
           ref.read(currentEmployeeCreationStepProvider.notifier).state++;
         }
@@ -202,8 +204,7 @@ class EmployeeCoreInfoScreen extends HookConsumerWidget {
       if (currentStepVal > 0) {
         ref.read(currentEmployeeCreationStepProvider.notifier).state--;
       } else {
-        // If on the first step, confirm exit from the host screen
-        // This logic is better handled by AddNewEmployeeHostScreen's WillPopScope or AppBar leading button
+        // If on the first step, allow host screen's WillPopScope or AppBar leading to handle exit.
         Navigator.of(context).maybePop();
       }
     }
@@ -212,7 +213,7 @@ class EmployeeCoreInfoScreen extends HookConsumerWidget {
       formKey: formKey,
       onNext: handleNext,
       onPrevious: handlePrevious,
-      // Update nextButtonText to reflect the actual next section in AddNewEmployeeHostScreen
+      // Example: "Next (Contacts)" - adjust based on actual next step name
       nextButtonText: 'Next (Contacts)',
       child: Form(
         key: formKey,
@@ -239,7 +240,7 @@ class EmployeeCoreInfoScreen extends HookConsumerWidget {
             ),
             AppTextField(
               controller: titleController,
-              labelText: 'Title (e.g., Mr., Ms., Ato.)',
+              labelText: 'Title (e.g., Ato., W/ro)',
             ),
             AppTextField(
               controller: firstNameController,
@@ -265,7 +266,7 @@ class EmployeeCoreInfoScreen extends HookConsumerWidget {
             AppDropdownField<Gender>(
               labelText: 'Gender *',
               value: selectedGender.value,
-              items: _buildDropdownItems(Gender.values),
+              items: _buildEnumDropdownItems(Gender.values),
               onChanged:
                   (val) =>
                       selectedGender.value =
@@ -281,17 +282,12 @@ class EmployeeCoreInfoScreen extends HookConsumerWidget {
                           date ?? employeeDataFromNotifier.birthDate,
               validator:
                   (val) => val == null ? 'Date of birth is required' : null,
-              lastDate: DateTime.now().subtract(
-                const Duration(days: 365 * 18),
-              ), // Min 18 years old
+              lastDate: DateTime.now().subtract(const Duration(days: 365 * 18)),
             ),
             AppFileUploadField(
               labelText: 'Profile Photo',
               pickedFile: currentPhotoFile.value,
-              onFileSelected: (file) {
-                currentPhotoFile.value = file; // Update local hook state
-                // The actual update to notifier happens in handleNext via updateCoreInfo
-              },
+              onFileSelected: (file) => currentPhotoFile.value = file,
               allowedExtensions: const ['jpg', 'jpeg', 'png'],
             ),
 
@@ -366,8 +362,11 @@ class EmployeeCoreInfoScreen extends HookConsumerWidget {
               controller: houseNumberController,
               labelText: 'House Number',
             ),
-            // TODO: For production, add structured Ethiopian address fields (Region, Zone, Woreda, Kebele)
+            // TODO: Add structured Ethiopian address fields (Region, Zone, Woreda, Kebele)
             // using AppDropdownFields and dependent logic if EmployeeInfoModel is updated to include them.
+            // For example:
+            // AppDropdownField<EthiopianRegion>(...),
+            // AppDropdownField<AmharaZone>(...), // (if region is Amhara) etc.
 
             // --- Section: Employment Details ---
             const SizedBox(height: 16),
@@ -392,7 +391,7 @@ class EmployeeCoreInfoScreen extends HookConsumerWidget {
               // TODO: Replace with a searchable dropdown/selector for actual positions
               controller: positionIdController,
               labelText: 'Position ID *',
-              hintText: 'Select or enter Position ID',
+              hintText: 'Select or enter Position ID', // Update hint
               validator:
                   (val) =>
                       (val == null || val.isEmpty)
@@ -408,7 +407,7 @@ class EmployeeCoreInfoScreen extends HookConsumerWidget {
             AppDropdownField<EmployeeType>(
               labelText: 'Employee Type *',
               value: selectedEmployeeType.value,
-              items: _buildDropdownItems(EmployeeType.values),
+              items: _buildEnumDropdownItems(EmployeeType.values),
               onChanged:
                   (val) =>
                       selectedEmployeeType.value =
@@ -418,7 +417,7 @@ class EmployeeCoreInfoScreen extends HookConsumerWidget {
             AppDropdownField<EmploymentStatus>(
               labelText: 'Employment Status *',
               value: selectedEmploymentStatus.value,
-              items: _buildDropdownItems(EmploymentStatus.values),
+              items: _buildEnumDropdownItems(EmploymentStatus.values),
               onChanged:
                   (val) =>
                       selectedEmploymentStatus.value =
@@ -450,7 +449,7 @@ class EmployeeCoreInfoScreen extends HookConsumerWidget {
             AppDropdownField<Country>(
               labelText: 'Nationality *',
               value: selectedNationality.value,
-              items: _buildDropdownItems(Country.values),
+              items: _buildEnumDropdownItems(Country.values),
               onChanged:
                   (val) =>
                       selectedNationality.value =
@@ -460,7 +459,7 @@ class EmployeeCoreInfoScreen extends HookConsumerWidget {
             AppDropdownField<BloodGroup>(
               labelText: 'Blood Group',
               value: selectedBloodGroup.value,
-              items: _buildDropdownItems(BloodGroup.values),
+              items: _buildEnumDropdownItems(BloodGroup.values),
               onChanged:
                   (val) =>
                       selectedBloodGroup.value =
@@ -469,7 +468,7 @@ class EmployeeCoreInfoScreen extends HookConsumerWidget {
             AppDropdownField<Religion>(
               labelText: 'Religion',
               value: selectedReligion.value,
-              items: _buildDropdownItems(Religion.values),
+              items: _buildEnumDropdownItems(Religion.values),
               onChanged:
                   (val) =>
                       selectedReligion.value =
@@ -478,7 +477,7 @@ class EmployeeCoreInfoScreen extends HookConsumerWidget {
             AppDropdownField<MedicalStatus>(
               labelText: 'Medical Status *',
               value: selectedMedicalStatus.value,
-              items: _buildDropdownItems(MedicalStatus.values),
+              items: _buildEnumDropdownItems(MedicalStatus.values),
               onChanged:
                   (val) =>
                       selectedMedicalStatus.value =
@@ -488,7 +487,7 @@ class EmployeeCoreInfoScreen extends HookConsumerWidget {
             AppDropdownField<MaritalStatus>(
               labelText: 'Marital Status *',
               value: selectedMaritalStatus.value,
-              items: _buildDropdownItems(MaritalStatus.values),
+              items: _buildEnumDropdownItems(MaritalStatus.values),
               onChanged:
                   (val) =>
                       selectedMaritalStatus.value =

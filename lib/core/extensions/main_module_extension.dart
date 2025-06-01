@@ -31,7 +31,7 @@ extension MainModuleX on MainModule {
   List<SubModule> get subModules => switch (this) {
     MainModule.dashboard => [SubModule.dashboard],
     MainModule.employeeProfile => [
-      SubModule.addNewEmployee, // << UPDATED from profilePersonalInfo
+      SubModule.employeeProfile, // << UPDATED from profilePersonalInfo
       // Consider adding a "View/Search Employees" sub-module here as the first item
       // SubModule.viewEmployees, (e.g., leading to an employee list screen)
       SubModule.profileRecruitment,

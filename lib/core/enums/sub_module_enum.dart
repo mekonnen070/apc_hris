@@ -1,7 +1,7 @@
 enum SubModule {
   dashboard,
   // Employee Profile SubModules
-  addNewEmployee,
+  employeeProfile,
   profileRecruitment,
   profileRetirement,
   profileEmploymentDetails,

@@ -72,7 +72,7 @@ class AddNewEmployeeHostScreen extends HookConsumerWidget {
         });
       }
       return null; // No cleanup needed for this effect
-    }, const []); // Empty dependency array means it runs once on mount
+    }, const [],); // Empty dependency array means it runs once on mount
 
     // --- Two-way Synchronization for PageController and Provider ---
     // 1. Animate PageView when currentEmployeeCreationStepProvider changes
@@ -88,7 +88,7 @@ class AddNewEmployeeHostScreen extends HookConsumerWidget {
         }
       });
       return null;
-    }, [currentStep]); // React to provider changes
+    }, [currentStep],); // React to provider changes
 
     // 2. Update provider if PageView is somehow changed directly (e.g., by swiping if enabled)
     useEffect(() {
@@ -109,7 +109,7 @@ class AddNewEmployeeHostScreen extends HookConsumerWidget {
 
       pageController.addListener(pageListener);
       return () => pageController.removeListener(pageListener);
-    }, [pageController]);
+    }, [pageController],);
 
     Future<bool> handleSystemBackPress() async {
       final currentStepVal = ref.read(currentEmployeeCreationStepProvider);
@@ -183,7 +183,7 @@ class AddNewEmployeeHostScreen extends HookConsumerWidget {
                 ref
                     .read(employeeCreationNotifierProvider.notifier)
                     .prepareNewEmployee();
-                Navigator.of(context).pop();
+                // Navigator.of(context).pop();
               }
             },
           ),

@@ -4,7 +4,7 @@ import 'package:police_com/core/enums/sub_module_enum.dart';
 import 'package:police_com/features/dashboard/presentation/dashboard_page.dart';
 import 'package:police_com/features/employee_profile/document_mgmt_page.dart';
 import 'package:police_com/features/employee_profile/employement_detail_page.dart';
-import 'package:police_com/features/employee_profile/presentation/add_new_employee_host_screen.dart';
+import 'package:police_com/features/employee_profile/presentation/employee_list_screen.dart';
 import 'package:police_com/features/employee_profile/recruitment_page.dart';
 import 'package:police_com/features/employee_profile/retirement_page.dart';
 import 'package:police_com/features/leave_mgmt/leave_mgmt_page.dart';
@@ -16,7 +16,7 @@ extension SubModuleExtension on SubModule {
         return MainModule.dashboard;
 
       // All these now clearly fall under Employee Profile
-      case SubModule.addNewEmployee:
+      case SubModule.employeeProfile:
       case SubModule.profileRecruitment:
       case SubModule.profileRetirement:
       case SubModule.profileEmploymentDetails:
@@ -33,8 +33,8 @@ extension SubModuleExtension on SubModule {
     switch (this) {
       case SubModule.dashboard:
         return 'Dashboard';
-      case SubModule.addNewEmployee: // << UPDATED title
-        return 'Add New Employee';
+      case SubModule.employeeProfile: // << UPDATED title
+        return 'Employee Profile'; // More descriptive title for employee profile
       case SubModule.profileRecruitment:
         return 'Recruitment Processes'; // Made slightly more descriptive
       case SubModule.profileRetirement:
@@ -57,8 +57,8 @@ extension SubModuleExtension on SubModule {
       case SubModule.dashboard:
         return const DashboardPage();
       case SubModule
-          .addNewEmployee: // << UPDATED: Points to our multi-step admin flow
-        return const AddNewEmployeeHostScreen();
+          .employeeProfile: // << UPDATED: Points to our multi-step admin flow
+        return const EmployeeListScreen();
       case SubModule.profileRecruitment:
         return const RecruitmentPage();
       case SubModule.profileRetirement:
