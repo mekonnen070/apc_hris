@@ -1,11 +1,10 @@
 enum MainModule {
   dashboard,
   employeeProfile,
+  transfer,
   leaveManagement,
   training,
-  recruitment,
-  payroll,
   clearance,
-  attendance,
+  payroll,
   settings,
 }

@@ -18,7 +18,7 @@ export 'gender.dart';
 export 'identification_type.dart';
 export 'marital_status.dart';
 export 'medical_status.dart';
-// New Enums for Recruitment (Onboarding)
+// Enums for Recruitment (Onboarding)
 export 'onboarding_task_status.dart';
 export 'organization_type.dart';
 export 'proficiency_level.dart';
@@ -27,5 +27,7 @@ export 'recruitment_status.dart';
 export 'relation_types.dart';
 export 'religion.dart';
 export 'task_assignee_type.dart';
+// New Enum for Employee Transfer
+export 'transfer_request_status.dart';
 // Enums for Recruitment (Vacancy)
 export 'vacancy_status.dart';

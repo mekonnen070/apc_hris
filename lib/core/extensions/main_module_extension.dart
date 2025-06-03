@@ -6,25 +6,22 @@ extension MainModuleX on MainModule {
   String get title => switch (this) {
     MainModule.dashboard => 'Dashboard',
     MainModule.employeeProfile => 'Employee Management',
+    MainModule.transfer => 'Transfer Management',
     MainModule.leaveManagement => 'Leave Management',
     MainModule.training => 'Training & Development',
-    MainModule.recruitment => 'Recruitment Dashboard',
     MainModule.payroll => 'Payroll Processing',
     MainModule.clearance => 'Employee Clearance',
-    MainModule.attendance => 'Attendance Tracking',
     MainModule.settings => 'System Settings',
   };
 
   IconData get icon => switch (this) {
     MainModule.dashboard => Icons.dashboard_rounded,
-    MainModule.employeeProfile =>
-      Icons.people_alt_rounded, // More admin-like icon
+    MainModule.employeeProfile => Icons.people_alt_rounded,
+    MainModule.transfer => Icons.transfer_within_a_station_rounded,
     MainModule.leaveManagement => Icons.calendar_today_rounded,
     MainModule.training => Icons.school_rounded,
-    MainModule.recruitment => Icons.work_outline_rounded,
     MainModule.payroll => Icons.monetization_on_rounded,
     MainModule.clearance => Icons.how_to_reg_rounded,
-    MainModule.attendance => Icons.access_time_filled_rounded,
     MainModule.settings => Icons.settings_rounded,
   };
 
@@ -38,6 +35,7 @@ extension MainModuleX on MainModule {
       SubModule.manageOnboarding,
       SubModule.profileRetirement,
     ],
+    MainModule.transfer => [SubModule.requestNewTransfer, SubModule.viewMyTransferRequests],
     MainModule.leaveManagement => [
       // If Leave Management is a single page, or has its own sub-modules
       SubModule.leaveManagement, // Example: direct link if only one screen
@@ -45,10 +43,8 @@ extension MainModuleX on MainModule {
     ],
     // Define sub-modules for these as they are developed
     MainModule.training => [],
-    MainModule.recruitment => [],
     MainModule.payroll => [],
     MainModule.clearance => [],
-    MainModule.attendance => [],
     MainModule.settings => [],
   };
 }

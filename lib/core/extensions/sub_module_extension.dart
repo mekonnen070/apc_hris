@@ -3,10 +3,12 @@ import 'package:police_com/core/enums/main_module_enum.dart';
 import 'package:police_com/core/enums/sub_module_enum.dart';
 import 'package:police_com/features/dashboard/presentation/dashboard_page.dart';
 import 'package:police_com/features/employee/employee_profile/presentation/employee_list_screen.dart';
-import 'package:police_com/features/employee/employee_profile/retirement_page.dart';
 import 'package:police_com/features/employee/employee_recruitment/presentation/hired_candidates_screen.dart';
 import 'package:police_com/features/employee/employee_recruitment/presentation/vacancies_screen.dart';
+import 'package:police_com/features/employee/employee_retirement/presentation/retirement_eligibility_screen.dart';
 import 'package:police_com/features/leave_mgmt/leave_mgmt_page.dart';
+import 'package:police_com/features/transfer/presentation/my_transfer_requests_screen.dart';
+import 'package:police_com/features/transfer/presentation/request_transfer_screen.dart';
 
 extension SubModuleExtension on SubModule {
   MainModule get mainModule {
@@ -20,7 +22,9 @@ extension SubModuleExtension on SubModule {
       case SubModule.profileRecruitment:
       case SubModule.profileRetirement:
         return MainModule.employeeProfile;
-
+      case SubModule.requestNewTransfer: // New case
+      case SubModule.viewMyTransferRequests: // New case
+        return MainModule.transfer;
       case SubModule.leaveManagement:
         return MainModule.leaveManagement;
       // Add other cases as you expand features
@@ -39,6 +43,10 @@ extension SubModuleExtension on SubModule {
         return 'Onboarding Management';
       case SubModule.profileRetirement:
         return 'Retirement Management';
+      case SubModule.requestNewTransfer: // New case
+        return 'Request New Transfer';
+      case SubModule.viewMyTransferRequests: // New case
+        return 'My Transfer Requests';
       case SubModule.leaveManagement:
         return 'Leave Management';
       // Add other cases
@@ -57,7 +65,11 @@ extension SubModuleExtension on SubModule {
       case SubModule.manageOnboarding:
         return const HiredCandidatesScreen();
       case SubModule.profileRetirement:
-        return const RetirementPage();
+        return const RetirementEligibilityScreen();
+      case SubModule.requestNewTransfer: // New case
+        return const RequestTransferScreen();
+      case SubModule.viewMyTransferRequests: // New case
+        return const MyTransferRequestsScreen();
       case SubModule.leaveManagement:
         return const LeaveManagementPage();
     }

@@ -5,6 +5,9 @@ enum SubModule {
   profileRecruitment,
   manageOnboarding,
   profileRetirement,
+  // Transfer Module SubModules
+  requestNewTransfer,
+  viewMyTransferRequests,
   // Leave Management
   leaveManagement,
   // Recruitment Module SubModules
