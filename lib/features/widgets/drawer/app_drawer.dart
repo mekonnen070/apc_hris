@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:police_com/core/enums/main_module_enum.dart';
@@ -48,6 +50,7 @@ class AppDrawer extends ConsumerWidget {
                     title: Text(mainModule.title),
                     children:
                         mainModule.subModules.map((subModule) {
+                          log('SubModule: ${subModule.title}');
                           return ListTile(
                             title: Text(subModule.title),
                             onTap: () {

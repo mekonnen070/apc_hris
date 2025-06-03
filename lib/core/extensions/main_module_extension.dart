@@ -35,9 +35,8 @@ extension MainModuleX on MainModule {
       // Consider adding a "View/Search Employees" sub-module here as the first item
       // SubModule.viewEmployees, (e.g., leading to an employee list screen)
       SubModule.profileRecruitment,
+      SubModule.manageOnboarding,
       SubModule.profileRetirement,
-      SubModule.profileEmploymentDetails,
-      SubModule.profileDocumentManagement,
     ],
     MainModule.leaveManagement => [
       // If Leave Management is a single page, or has its own sub-modules

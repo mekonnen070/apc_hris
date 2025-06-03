@@ -3,8 +3,9 @@ enum SubModule {
   // Employee Profile SubModules
   employeeProfile,
   profileRecruitment,
+  manageOnboarding,
   profileRetirement,
-  profileEmploymentDetails,
-  profileDocumentManagement,
+  // Leave Management
   leaveManagement,
+  // Recruitment Module SubModules
 }
