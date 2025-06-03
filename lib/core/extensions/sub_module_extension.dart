@@ -2,11 +2,11 @@ import 'package:flutter/widgets.dart';
 import 'package:police_com/core/enums/main_module_enum.dart';
 import 'package:police_com/core/enums/sub_module_enum.dart';
 import 'package:police_com/features/dashboard/presentation/dashboard_page.dart';
-import 'package:police_com/features/employee_profile/document_mgmt_page.dart';
-import 'package:police_com/features/employee_profile/employement_detail_page.dart';
-import 'package:police_com/features/employee_profile/presentation/employee_list_screen.dart';
-import 'package:police_com/features/employee_profile/recruitment_page.dart';
-import 'package:police_com/features/employee_profile/retirement_page.dart';
+import 'package:police_com/features/employee/employee_profile/document_mgmt_page.dart';
+import 'package:police_com/features/employee/employee_profile/employement_detail_page.dart';
+import 'package:police_com/features/employee/employee_profile/presentation/employee_list_screen.dart';
+import 'package:police_com/features/employee/employee_profile/recruitment_page.dart';
+import 'package:police_com/features/employee/employee_profile/retirement_page.dart';
 import 'package:police_com/features/leave_mgmt/leave_mgmt_page.dart';
 
 extension SubModuleExtension on SubModule {
