@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-// Models & Enums
-import 'package:police_com/features/employee_profile/application/add_new_employee_step_provider.dart';
-import 'package:police_com/features/employee_profile/application/employee_creation_provider.dart';
-import 'package:police_com/features/employee_profile/application/employee_list_providers.dart';
+import 'package:police_com/features/employee_profile/application/providers/add_new_employee_step_provider.dart';
+import 'package:police_com/features/employee_profile/application/providers/employee_creation_provider.dart';
+import 'package:police_com/features/employee_profile/application/providers/employee_list_providers.dart';
 import 'package:police_com/features/employee_profile/presentation/add_new_employee_host_screen.dart';
-// Widgets
-import 'package:police_com/features/employee_profile/presentation/widgets/employee_list_item_widget.dart'; // We defined this conceptually
+import 'package:police_com/features/employee_profile/presentation/employee_details/employee_detail_screen.dart';
+import 'package:police_com/features/employee_profile/presentation/widgets/employee_list_item_widget.dart';
 
 // A basic loading widget
 class CenteredLoadingIndicator extends StatelessWidget {
@@ -197,19 +196,10 @@ class EmployeeListScreen extends HookConsumerWidget {
               return EmployeeListItemWidget(
                 employee: employee,
                 onTap: () {
-                  // Navigate to view/edit screen (AddNewEmployeeHostScreen in edit mode)
-                  // The notifier should be prepared for editing when AddNewEmployeeHostScreen initializes with an ID.
-                  ref
-                      .read(employeeCreationNotifierProvider.notifier)
-                      .loadEmployeeForEditing(employee.employeeId);
-                  ref.read(currentEmployeeCreationStepProvider.notifier).state =
-                      0; // Start edit from first step
+                  // Navigate to the EmployeeDetailScreen, passing the selected employee data.
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder:
-                          (_) => AddNewEmployeeHostScreen(
-                            employeeIdToEdit: employee.employeeId,
-                          ),
+                      builder: (_) => EmployeeDetailScreen(employee: employee),
                     ),
                   );
                 },

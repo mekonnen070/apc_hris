@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'employee_list_notifier.dart';
-import 'employee_list_state.dart';
+import '../notifiers/employee_list_notifier.dart';
+import '../states/employee_list_state.dart';
 
 // TODO: Define and provide your actual IEmployeeRepository implementation
 // final employeeRepositoryProvider = Provider<IEmployeeRepository>((ref) => MockEmployeeRepository());

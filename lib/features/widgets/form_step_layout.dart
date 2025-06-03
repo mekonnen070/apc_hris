@@ -7,13 +7,10 @@ class FormStepLayout extends StatelessWidget {
   final VoidCallback? onNext; // Action for the "Next" button
   final VoidCallback? onPrevious; // Action for the "Previous" button
   final bool isNextLoading;
-  final String?
-  nextButtonText; // Nullable if no next button needed (e.g. on review screen)
+  final String? nextButtonText;
   final String previousButtonText;
-  // GlobalKey<FormState> is typically managed by the screen using this layout
   final GlobalKey<FormState>? formKey;
-  final bool
-  isLastStep; // Is this the last data entry step before review/submit?
+  final bool isLastStep;
 
   const FormStepLayout({
     super.key,
@@ -29,17 +26,12 @@ class FormStepLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // This Scaffold is minimal. The main AppBar should come from the host screen (e.g., AddNewEmployeeHostScreen).
-    // It's primarily for providing the body structure and the bottom navigation bar for step actions.
     return Scaffold(
       backgroundColor:
           Colors.transparent, // Allow host screen background to show if desired
       body: SafeArea(
-        // Ensure content is within safe areas
         child: Padding(
-          padding: const EdgeInsets.all(
-            0,
-          ), // Parent screen (e.g. EmployeeCoreInfoScreen) will handle its padding
+          padding: const EdgeInsets.all(0),
           child:
               child, // The child is expected to be a Form containing a ListView or SingleChildScrollView
         ),
@@ -47,7 +39,6 @@ class FormStepLayout extends StatelessWidget {
       bottomNavigationBar:
           (onPrevious != null || (onNext != null && nextButtonText != null))
               ? BottomAppBar(
-                // Using BottomAppBar for standard placement
                 elevation: 4.0, // Add some elevation
                 child: Padding(
                   padding: const EdgeInsets.symmetric(

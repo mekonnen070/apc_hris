@@ -1,8 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart'; // For date formatting
 import 'package:police_com/core/enums/all_enums.dart';
-import 'package:police_com/features/employee_profile/application/employee_creation_provider.dart';
+import 'package:police_com/features/employee_profile/application/providers/employee_creation_provider.dart';
 import 'package:police_com/features/employee_profile/domain/employee_dependant_model.dart';
 import 'package:police_com/features/employee_profile/presentation/add_new_employee_host_screen.dart';
 
@@ -10,7 +12,7 @@ import 'package:police_com/features/employee_profile/presentation/add_new_employ
 import '../../../widgets/dynamic_entry_section.dart';
 import '../../../widgets/editable_list_item_card.dart';
 import '../../../widgets/form_step_layout.dart';
-import '../../application/add_new_employee_step_provider.dart';
+import '../../application/providers/add_new_employee_step_provider.dart';
 import 'add_edit_employee_dependant_screen.dart';
 
 class EmployeeDependantsScreen extends HookConsumerWidget {
@@ -28,7 +30,7 @@ class EmployeeDependantsScreen extends HookConsumerWidget {
     final List<EmployeeDependantModel> dependantsList =
         employeeData.employeeDependants;
 
-    void _navigateToAddEditDependant([
+    void navigateToAddEditDependant([
       EmployeeDependantModel? dependantToEdit,
     ]) async {
       final result = await Navigator.of(context).push<EmployeeDependantModel>(
@@ -54,27 +56,36 @@ class EmployeeDependantsScreen extends HookConsumerWidget {
       }
     }
 
-    void _handleNext() {
+    void handleNext() {
       final currentStep = ref.read(currentEmployeeCreationStepProvider);
+      log(
+        'Current Step: $currentStep, Total Steps: ${AddNewEmployeeHostScreen.totalSteps}',
+      );
       if (currentStep < AddNewEmployeeHostScreen.totalSteps - 1) {
         ref.read(currentEmployeeCreationStepProvider.notifier).state++;
       }
     }
 
-    void _handlePrevious() {
+    void handlePrevious() {
       final currentStep = ref.read(currentEmployeeCreationStepProvider);
+      log(
+        'Current Step: $currentStep, Total Steps: ${AddNewEmployeeHostScreen.totalSteps}',
+      );
       if (currentStep > 0) {
         ref.read(currentEmployeeCreationStepProvider.notifier).state--;
       }
     }
 
     return FormStepLayout(
+      onNext: () => handleNext(),
+      onPrevious: () => handlePrevious(),
+      nextButtonText: 'Next (Education)',
       child: DynamicEntrySection<EmployeeDependantModel>(
-        sectionTitle: "Employee Dependants",
-        addNewButtonText: "+ Add Dependant",
-        emptyListMessage: "No dependants added yet.",
+        sectionTitle: 'Employee Dependants',
+        addNewButtonText: '+ Add Dependant',
+        emptyListMessage: 'No dependants added yet.',
         itemsData: dependantsList,
-        onAddNew: () => _navigateToAddEditDependant(),
+        onAddNew: () => navigateToAddEditDependant(),
         itemBuilder: (ctx, dependant, index) {
           return EditableListItemCard(
             leading: Icon(
@@ -87,7 +98,7 @@ class EmployeeDependantsScreen extends HookConsumerWidget {
             title: dependant.dependantFullName,
             subtitle:
                 "${_getRelationTypeDisplayName(dependant.relation)}\nDOB: ${DateFormat('dd MMM, yyyy').format(dependant.birthDate)}",
-            onEdit: () => _navigateToAddEditDependant(dependant),
+            onEdit: () => navigateToAddEditDependant(dependant),
             onDelete: () {
               if (dependant.dependantId != null) {
                 // Optional: Show confirmation dialog
@@ -95,18 +106,18 @@ class EmployeeDependantsScreen extends HookConsumerWidget {
                   context: context,
                   builder:
                       (BuildContext dialogContext) => AlertDialog(
-                        title: const Text("Confirm Deletion"),
+                        title: const Text('Confirm Deletion'),
                         content: Text(
                           "Are you sure you want to delete dependant '${dependant.dependantFullName}'?",
                         ),
                         actions: <Widget>[
                           TextButton(
-                            child: const Text("Cancel"),
+                            child: const Text('Cancel'),
                             onPressed: () => Navigator.of(dialogContext).pop(),
                           ),
                           TextButton(
                             child: const Text(
-                              "Delete",
+                              'Delete',
                               style: TextStyle(color: Colors.red),
                             ),
                             onPressed: () {
@@ -127,11 +138,7 @@ class EmployeeDependantsScreen extends HookConsumerWidget {
             },
           );
         },
-      ),
-      onNext: _handleNext,
-      onPrevious: _handlePrevious,
-      isLastStep: false,
-      nextButtonText: "Next (Education)", // Update according to your flow
+      ), // Update according to your flow
     );
   }
 }

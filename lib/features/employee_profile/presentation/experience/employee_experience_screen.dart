@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:police_com/core/enums/proficiency_level.dart';
-import 'package:police_com/features/employee_profile/application/employee_creation_provider.dart';
+import 'package:police_com/features/employee_profile/application/providers/employee_creation_provider.dart';
 import 'package:police_com/features/employee_profile/domain/employee_experience_model.dart';
 import 'package:police_com/features/employee_profile/presentation/add_new_employee_host_screen.dart';
 
@@ -10,7 +10,7 @@ import 'package:police_com/features/employee_profile/presentation/add_new_employ
 import '../../../widgets/dynamic_entry_section.dart';
 import '../../../widgets/editable_list_item_card.dart';
 import '../../../widgets/form_step_layout.dart';
-import '../../application/add_new_employee_step_provider.dart';
+import '../../application/providers/add_new_employee_step_provider.dart';
 import 'add_edit_employee_experience_screen.dart';
 
 class EmployeeExperienceScreen extends HookConsumerWidget {

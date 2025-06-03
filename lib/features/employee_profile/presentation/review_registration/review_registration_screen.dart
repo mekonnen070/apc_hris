@@ -4,13 +4,13 @@ import 'package:intl/intl.dart'; // For date formatting
 import 'package:path/path.dart' as p; // For basename to display file names
 import 'package:police_com/core/enums/all_enums.dart';
 import 'package:police_com/core/extensions/enum_extension.dart';
-import 'package:police_com/features/employee_profile/application/employee_creation_provider.dart';
+import 'package:police_com/features/employee_profile/application/providers/employee_creation_provider.dart';
 import 'package:police_com/features/employee_profile/domain/employee_info_model.dart';
 import 'package:police_com/features/employee_profile/presentation/add_new_employee_host_screen.dart';
 import 'package:police_com/features/employee_profile/presentation/widgets/review_widgets.dart';
 import 'package:police_com/features/widgets/form_step_layout.dart';
 
-import '../../application/add_new_employee_step_provider.dart';
+import '../../application/providers/add_new_employee_step_provider.dart';
 import '../registration_success_screen.dart';
 
 class ReviewAndSubmitScreen extends HookConsumerWidget {

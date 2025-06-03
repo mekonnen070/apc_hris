@@ -1,20 +1,26 @@
+// lib/features/employee_profile/application/employee_creation_notifier.dart
 import 'dart:io'; // For File type
 
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:police_com/core/enums/blood_group.dart';
 import 'package:police_com/core/enums/country.dart';
+import 'package:police_com/core/enums/document_type.dart';
 import 'package:police_com/core/enums/education_level.dart';
 import 'package:police_com/core/enums/education_status.dart';
 import 'package:police_com/core/enums/employee_type.dart';
 import 'package:police_com/core/enums/employment_status.dart';
+import 'package:police_com/core/enums/ethiopian_region.dart';
 import 'package:police_com/core/enums/ethiopian_university.dart';
 import 'package:police_com/core/enums/field_of_study.dart';
 import 'package:police_com/core/enums/gender.dart';
 import 'package:police_com/core/enums/marital_status.dart';
 import 'package:police_com/core/enums/medical_status.dart';
+import 'package:police_com/core/enums/organization_type.dart';
+import 'package:police_com/core/enums/proficiency_level.dart';
 import 'package:police_com/core/enums/relation_types.dart';
 import 'package:police_com/core/enums/religion.dart';
+import 'package:police_com/features/employee_profile/application/states/employee_creation_state.dart';
 import 'package:police_com/features/employee_profile/domain/employee_contact_model.dart';
 import 'package:police_com/features/employee_profile/domain/employee_dependant_model.dart';
 import 'package:police_com/features/employee_profile/domain/employee_education_model.dart';
@@ -24,21 +30,24 @@ import 'package:police_com/features/employee_profile/domain/employee_performance
 import 'package:police_com/features/employee_profile/domain/employee_spouse_model.dart';
 import 'package:police_com/features/employee_profile/domain/employee_upload_model.dart';
 
-import 'employee_creation_state.dart';
-
 class EmployeeCreationNotifier extends StateNotifier<EmployeeCreationState> {
-  EmployeeCreationNotifier()
+  final Ref _ref;
+
+  EmployeeCreationNotifier(this._ref)
     : super(EmployeeCreationState(employeeData: _initialEmptyEmployeeData()));
+
+  // TODO: Replace with your actual API service for fetching/saving employee data.
+  // Example: final _employeeApiService = YourEmployeeApiService();
 
   static EmployeeInfoModel _initialEmptyEmployeeData([String? employeeId]) {
     return EmployeeInfoModel(
       employeeId:
           employeeId ??
-          UniqueKey().toString(), // Temporary client-side ID if not provided
+          'TEMP-${UniqueKey().toString()}', // Temporary client-side ID, clearly marked
       firstName: '',
       gender: Gender.other,
       birthDate: DateTime.now().subtract(const Duration(days: 365 * 25)),
-      positionId: '',
+      positionId: '', // Will be set to a police rank if editing
       address1: '',
       phone: '',
       mobile: '',
@@ -54,7 +63,6 @@ class EmployeeCreationNotifier extends StateNotifier<EmployeeCreationState> {
     );
   }
 
-  // --- Initialize or Reset for a new employee ---
   void prepareNewEmployee({
     String? prefilledEmployeeId,
     EmployeeInfoModel? template,
@@ -68,72 +76,224 @@ class EmployeeCreationNotifier extends StateNotifier<EmployeeCreationState> {
     }
   }
 
-  // This method is called when an admin wants to view/edit an existing employee.
-  // It fetches the full employee details from the backend.
   Future<void> loadEmployeeForEditing(String employeeId) async {
-    state = state.copyWith(isSubmitting: true, errorMessage: null);
-    try {
-      // TODO: Call your actual API service here.
-      // final fetchedEmployeeData = await _apiService.getEmployeeDetails(employeeId);
+    final link = _ref.keepAlive();
+    state = EmployeeCreationState(
+      employeeData: _initialEmptyEmployeeData(employeeId),
+      isSubmitting: true,
+    );
 
-      // MOCK IMPLEMENTATION with fixes
+    try {
       debugPrint('Fetching full details for employee ID: $employeeId...');
+      // TODO: Replace MOCK IMPLEMENTATION with actual API call
+      // final fetchedEmployeeData = await _employeeApiService.getEmployeeDetails(employeeId);
       await Future.delayed(const Duration(seconds: 1));
 
       final mockLoadedEmployee = EmployeeInfoModel(
-        employeeId: employeeId,
-        firstName: 'Loaded',
-        fatherName: 'User',
-        grandName: 'For-Edit', // Fixed: No longer causes RangeError
-        gender: Gender.female,
-        birthDate: DateTime(1985, 5, 20),
-        positionId: 'Senior Officer',
-        address1: '123 Main St, Addis Ababa',
-        phone: '0911123456',
-        mobile: '0911123456',
-        email: 'existing.user@example.com',
-        hiredDate: DateTime(2010, 1, 15),
+        employeeId: employeeId, // e.g., "APC0001"
+        firstName: 'Alemayehu',
+        fatherName: 'Tesfaye',
+        grandName: 'Bekele',
+        title: 'Sergeant', // Police rank as title
+        gender: Gender.male,
+        birthDate: DateTime(1988, 7, 15),
+        photoUrl: 'https://i.pravatar.cc/150?u=$employeeId',
+        motherName: 'Yeshiwork Lemma',
+        positionId: 'Sergeant', // Police Rank
+        managerId: 'APC0000', // Example Commander ID
+        address1: 'Kirkos Sub-City, Woreda 03',
+        address2: 'Police Station Alpha',
+        houseNumber: 'SN007',
+        phone: '0911234501',
+        mobile: '0911234501',
+        email: '${employeeId.toLowerCase()}@amaharapolice.gov.et',
+        bloodGroup: BloodGroup.aPositive,
+        religion: Religion.christianity,
+        medicalStatus: MedicalStatus.fit,
+        retirementNumber: 'RT-$employeeId',
+        tin: 'TIN-$employeeId',
+        maritalStatus: MaritalStatus.married,
+        hiredDate: DateTime(2012, 3, 10),
+        retirementEligibilityDate: DateTime(2042, 3, 10),
         employeeContacts: [
           EmployeeContactModel(
-            contactId: 'c1',
+            contactId: 'C1-$employeeId',
             employeeId: employeeId,
-            fullName: 'Jane Doe',
+            fullName: 'Spouse Contact',
             relationship: RelationTypes.spouse,
-            phone: '0911654321',
+            phone: '0911987654',
+            address: 'Same as employee',
+          ),
+          EmployeeContactModel(
+            contactId: 'C2-$employeeId',
+            employeeId: employeeId,
+            fullName: 'Brother Contact',
+            relationship: RelationTypes.sibling,
+            phone: '0912112233',
+            address: 'Nearby Kebele',
+          ),
+        ],
+        employeeDependants: [
+          EmployeeDependantModel(
+            dependantId: 'D1-$employeeId',
+            employeeId: employeeId,
+            dependantFullName: 'Kidist Alemayehu',
+            relation: RelationTypes.child,
+            gender: Gender.female,
+            birthDate: DateTime(2018, 10, 5),
+            region: EthiopianRegion.addisAbaba,
+            phoneNumber: 'N/A',
+            occupation: 'Student',
+          ),
+          EmployeeDependantModel(
+            dependantId: 'D2-$employeeId',
+            employeeId: employeeId,
+            dependantFullName: 'Yonas Alemayehu',
+            relation: RelationTypes.child,
+            gender: Gender.male,
+            birthDate: DateTime(2020, 1, 20),
+            region: EthiopianRegion.addisAbaba,
+            phoneNumber: 'N/A',
+            occupation: 'Toddler',
           ),
         ],
         employeeEducations: [
           EmployeeEducationModel(
-            educationId: 'e1',
+            educationId: 'EDU1-$employeeId',
             employeeId: employeeId,
-            educationLevel: EducationLevel.bachelorsDegree,
-            university: EthiopianUniversity.addisAbabaUniversity,
-            fieldOfStudy: FieldOfStudy.computerScience,
-            startDate: DateTime(2006),
-            endDate: DateTime(2010),
+            educationLevel: EducationLevel.diploma,
+            university: EthiopianUniversity.ethiopianPoliceUniversity,
+            fieldOfStudy: FieldOfStudy.law,
+            startDate: DateTime(2010),
+            endDate: DateTime(2012),
             educationStatus: EducationStatus.completed,
+            cgpa: '3.5',
+          ),
+          EmployeeEducationModel(
+            educationId: 'EDU2-$employeeId',
+            employeeId: employeeId,
+            educationLevel: EducationLevel.secondarySchoolSecondCycle,
+            university: EthiopianUniversity.other, // Represents high school
+            fieldOfStudy: FieldOfStudy.other, // General studies
+            startDate: DateTime(2006),
+            endDate: DateTime(2009),
+            educationStatus: EducationStatus.completed,
+          ),
+        ],
+        employeeExperiences: [
+          EmployeeExperienceModel(
+            experienceId: 'EXP1-$employeeId',
+            employeeId: employeeId,
+            organization: 'Local Police Unit B',
+            organizationType: OrganizationType.govermental,
+            position: 'Constable',
+            responsibilities:
+                'Patrol and community policing, initial investigations.',
+            proficiencyLevel: ProficiencyLevel.intermediate,
+            joinDate: DateTime(2008),
+            separationDate: DateTime(2012, 3, 9),
+            separationNotes: 'Promoted to Sergeant',
+          ),
+          EmployeeExperienceModel(
+            experienceId: 'EXP2-$employeeId',
+            employeeId: employeeId,
+            organization: 'City Central Command',
+            organizationType: OrganizationType.govermental,
+            position: 'Desk Sergeant',
+            responsibilities: 'Managing station logs, coordinating dispatches.',
+            proficiencyLevel: ProficiencyLevel.expert,
+            joinDate: DateTime(2012, 3, 10),
+          ),
+        ],
+        employeeSpouse: [
+          EmployeeSpouseModel(
+            spouseId: 'SP1-$employeeId',
+            employeeId: employeeId,
+            title: 'W/ro',
+            spouseFullName: 'Hana Gebre',
+            gender: Gender.female,
+            spouseBirthDate: DateTime(1990),
+            spousePhone: '0911987654',
+            spouseOccupation: 'Teacher',
+            motherName: 'Tigist Belay',
+            address: 'Same as employee',
+            anniversaryDate: DateTime(2015, 6, 10),
+            retirementNumber: 'SP-RET-001',
+            tin: 'SP-TIN-001',
+          ),
+        ],
+        generalDocuments: [
+          EmployeeUploadModel(
+            documentId: 'DOC1-$employeeId',
+            employeeId: employeeId,
+            documentName: 'Police Academy Diploma',
+            documentType: DocumentType.academicCertificate,
+            filePath: '/uploads/docs/diploma_$employeeId.pdf',
+            uploadDate: DateTime(2012, 4),
+          ),
+          EmployeeUploadModel(
+            documentId: 'DOC2-$employeeId',
+            employeeId: employeeId,
+            documentName: 'National ID',
+            documentType: DocumentType.id,
+            filePath: '/uploads/docs/id_$employeeId.pdf',
+            uploadDate: DateTime(2007),
+            expiryDate: DateTime(2027),
+          ),
+          EmployeeUploadModel(
+            documentId: 'DOC3-$employeeId',
+            employeeId: employeeId,
+            documentName: 'Commendation Letter',
+            documentType: DocumentType.other,
+            description: 'For bravery in action',
+            filePath: '/uploads/docs/commendation_$employeeId.pdf',
+            uploadDate: DateTime(2022, 5, 15),
+          ),
+        ],
+        performances: [
+          EmployeePerformanceModel(
+            performanceId: 1,
+            employeeId: employeeId,
+            scorePoint: 85,
+            rating: 4,
+            evaluationDate: DateTime(2023, 12),
+            evaluatorName: 'Commander Abebe',
+            comments:
+                'Good performance in Q4. Recommended for advanced training.',
+            keyAchievements: 'Solved 3 high-profile cases.',
+            areasForImprovement: 'Report writing timeliness.',
+            fromDate: DateTime(2023, 9),
+            toDate: DateTime(2023, 12),
+          ),
+          EmployeePerformanceModel(
+            performanceId: 2,
+            employeeId: employeeId,
+            scorePoint: 92,
+            rating: 5,
+            evaluationDate: DateTime(2023, 6),
+            evaluatorName: 'Commander Abebe',
+            comments: 'Excellent work in community engagement.',
+            keyAchievements: 'Led successful community policing initiative.',
+            areasForImprovement: 'Delegation skills.',
+            fromDate: DateTime(2023, 3),
+            toDate: DateTime(2023, 6),
+            nextEvaluationDate: DateTime(2023, 9),
           ),
         ],
       );
 
-      // --- FIX: Check if mounted before updating state after an await ---
-      if (mounted) {
-        state = EmployeeCreationState(employeeData: mockLoadedEmployee);
-      }
-    } catch (e) {
-      debugPrint('Error loading employee for editing: $e');
-      // --- FIX: Check if mounted before updating state in the catch block ---
-      if (mounted) {
-        state = state.copyWith(
-          isSubmitting: false,
-          errorMessage: 'Failed to load employee data: ${e.toString()}',
-        );
-      }
+      state = EmployeeCreationState(employeeData: mockLoadedEmployee);
+    } catch (e, stackTrace) {
+      debugPrint('Error loading employee for editing: $e\n$stackTrace');
+      state = state.copyWith(
+        isSubmitting: false,
+        errorMessage: 'Failed to load employee data: ${e.toString()}',
+      );
+    } finally {
+      link.close();
     }
   }
 
-  // --- Methods to update direct fields of EmployeeInfoModel ---
-  // This method allows updating any subset of the core EmployeeInfoModel fields.
   void updateCoreInfo({
     String? employeeId,
     String? title,
@@ -176,7 +336,10 @@ class EmployeeCreationNotifier extends StateNotifier<EmployeeCreationState> {
         gender: gender ?? state.employeeData.gender,
         birthDate: birthDate ?? state.employeeData.birthDate,
         photoFile: photoFile,
-        photoUrl: photoUrl ?? state.employeeData.photoUrl,
+        photoUrl:
+            photoFile != null
+                ? null
+                : (photoUrl ?? state.employeeData.photoUrl),
         motherName: motherName ?? state.employeeData.motherName,
         positionId: positionId ?? state.employeeData.positionId,
         managerId: managerId ?? state.employeeData.managerId,
@@ -206,16 +369,17 @@ class EmployeeCreationNotifier extends StateNotifier<EmployeeCreationState> {
     );
   }
 
-  // Method specifically for updating the local photo file
   void updatePhotoFile(File? file) {
     state = state.copyWith(
-      employeeData: state.employeeData.copyWith(photoFile: file),
+      employeeData: state.employeeData.copyWith(
+        photoFile: file,
+        photoUrl: file != null ? null : state.employeeData.photoUrl,
+      ),
     );
   }
 
   // --- Methods for Employee Contacts ---
   void addEmployeeContact(EmployeeContactModel contact) {
-    // Ensure the contact has a client-side ID if backend doesn't assign one pre-submission
     final contactWithId =
         contact.contactId == null || contact.contactId!.isEmpty
             ? contact.copyWith(contactId: UniqueKey().toString())
@@ -387,15 +551,11 @@ class EmployeeCreationNotifier extends StateNotifier<EmployeeCreationState> {
   }
 
   // --- Methods for Employee Spouse ---
-  // EmployeeInfoModel allows a list of spouses, typically it would be one or none.
-  // Adjust logic if only one spouse is allowed (e.g., replace instead of add to list).
   void addEmployeeSpouse(EmployeeSpouseModel spouse) {
     final spouseWithId =
         spouse.spouseId == null || spouse.spouseId!.isEmpty
             ? spouse.copyWith(spouseId: UniqueKey().toString())
             : spouse;
-    // If only one spouse is allowed, you might want to replace the list or check its length.
-    // For now, assuming the model allows multiple (though uncommon for active spouses).
     state = state.copyWith(
       employeeData: state.employeeData.copyWith(
         employeeSpouse: [...state.employeeData.employeeSpouse, spouseWithId],
@@ -471,13 +631,18 @@ class EmployeeCreationNotifier extends StateNotifier<EmployeeCreationState> {
     );
   }
 
-  // --- Methods for Employee Performance (if adding performance during initial creation) ---
+  // --- Methods for Employee Performance ---
   void addEmployeePerformance(EmployeePerformanceModel performance) {
-    // Performance ID is int, backend usually generates.
-    // Client might not set it, or use a temporary local one if needed before saving.
+    // Ensure performanceId is unique if client-generated, or 0 if backend generates
+    final performanceWithId =
+        performance.performanceId == 0
+            ? performance.copyWith(
+              performanceId: DateTime.now().millisecondsSinceEpoch,
+            ) // temp client unique ID
+            : performance;
     state = state.copyWith(
       employeeData: state.employeeData.copyWith(
-        performances: [...state.employeeData.performances, performance],
+        performances: [...state.employeeData.performances, performanceWithId],
       ),
     );
   }
@@ -509,78 +674,69 @@ class EmployeeCreationNotifier extends StateNotifier<EmployeeCreationState> {
     );
   }
 
-  // --- Final Submission Logic ---
   Future<bool> submitNewEmployee() async {
+    final link = _ref.keepAlive();
+
     state = state.copyWith(isSubmitting: true, errorMessage: null);
 
-    // Perform comprehensive validation on state.employeeData here
     if (state.employeeData.employeeId.isEmpty ||
         state.employeeData.firstName.isEmpty ||
-        state.employeeData.positionId.isEmpty /* ... etc. */ ) {
+        state.employeeData.positionId.isEmpty) {
       state = state.copyWith(
         isSubmitting: false,
         errorMessage:
             'Required core employee information is missing or invalid.',
       );
+      link.close();
       return false;
     }
 
     try {
-      // TODO: Implement actual API submission logic.
-      // This involves:
-      // 1. Creating a mutable copy of state.employeeData to update with URLs.
-      //    EmployeeInfoModel dataToSubmit = state.employeeData;
-      //
-      // 2. Uploading state.employeeData.photoFile if it exists.
-      //    if (dataToSubmit.photoFile != null) {
-      //      final photoUrl = await _apiService.uploadFile(
-      //        employeeId: dataToSubmit.employeeId,
-      //        file: dataToSubmit.photoFile!,
-      //        uploadCategory: 'profile_photos', // Or similar category
-      //      );
-      //      dataToSubmit = dataToSubmit.copyWith(photoUrl: photoUrl, photoFile: null);
-      //    }
-      //
-      // 3. Iterating through collections (educations, experiences, generalDocuments)
-      //    and uploading their respective files, then updating those collection items
-      //    within dataToSubmit with the returned URLs and clearing their local File objects.
-      //    For example, for generalDocuments:
-      //    List<EmployeeUploadModel> updatedDocs = [];
-      //    for (var doc in dataToSubmit.generalDocuments) {
-      //      if (doc.documentFile != null) {
-      //        final fileUrl = await _apiService.uploadFile(
-      //            employeeId: dataToSubmit.employeeId,
-      //            file: doc.documentFile!,
-      //            uploadCategory: 'employee_documents');
-      //        updatedDocs.add(doc.copyWith(filePath: fileUrl, documentFile: null));
-      //      } else {
-      //        updatedDocs.add(doc);
-      //      }
-      //    }
-      //    dataToSubmit = dataToSubmit.copyWith(generalDocuments: updatedDocs);
-      //    // Repeat for educations, experiences that might have file uploads.
-      //
-      // 4. Sending the final `dataToSubmit` (which now contains URLs instead of local files)
-      //    to the backend API endpoint for creating/updating an employee.
-      //    await _apiService.createNewEmployee(dataToSubmit);
+      EmployeeInfoModel dataToSubmit = state.employeeData;
 
-      debugPrint(
-        'Submitting New Employee Data: ${state.employeeData.toJson()}',
-      ); // If you have toJson()
-      await Future.delayed(
-        const Duration(seconds: 2),
-      ); // Simulate API call for now
+      if (dataToSubmit.photoFile != null) {
+        debugPrint(
+          'Simulating photo upload for: ${dataToSubmit.photoFile!.path}',
+        );
+        await Future.delayed(const Duration(milliseconds: 500));
+        const photoUrl =
+            'https://example.com/uploads/profile_photos/new_photo.jpg';
+        dataToSubmit = dataToSubmit.copyWith(
+          photoUrl: photoUrl,
+          photoFile: null,
+        );
+      }
 
-      state = state.copyWith(isSubmitting: false);
-      // Optionally call prepareNewEmployee() to reset the form for the next entry.
-      // prepareNewEmployee();
+      List<EmployeeUploadModel> updatedDocs = [];
+      for (final doc in dataToSubmit.generalDocuments) {
+        if (doc.documentFile != null) {
+          debugPrint(
+            'Simulating document upload for: ${doc.documentFile!.path}',
+          );
+          await Future.delayed(const Duration(milliseconds: 300));
+          final fileUrl =
+              "https://example.com/uploads/documents/${doc.documentFile!.path.split('/').last}";
+          updatedDocs.add(doc.copyWith(filePath: fileUrl, documentFile: null));
+        } else {
+          updatedDocs.add(doc);
+        }
+      }
+      dataToSubmit = dataToSubmit.copyWith(generalDocuments: updatedDocs);
+
+      debugPrint('Submitting Final Employee Data: ${dataToSubmit.toJson()}');
+      await Future.delayed(const Duration(seconds: 1));
+
+      state = state.copyWith(isSubmitting: false, errorMessage: null);
+      // prepareNewEmployee(); // Consider if this should be called here or by the UI layer after success
+      link.close();
       return true;
-    } catch (e) {
-      debugPrint('Submission error: $e');
+    } catch (e, stackTrace) {
+      debugPrint('Submission error: $e\n$stackTrace');
       state = state.copyWith(
         isSubmitting: false,
-        errorMessage: 'Failed to create employee: ${e.toString()}',
+        errorMessage: 'Failed to create/update employee: ${e.toString()}',
       );
+      link.close();
       return false;
     }
   }

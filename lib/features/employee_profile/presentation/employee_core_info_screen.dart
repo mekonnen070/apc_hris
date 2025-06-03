@@ -8,9 +8,9 @@ import 'package:police_com/core/enums/all_enums.dart';
 // Your extension for display names
 import 'package:police_com/core/extensions/enum_extension.dart'; // Ensure this path is correct
 // Corrected import for the step provider:
-import 'package:police_com/features/employee_profile/application/add_new_employee_step_provider.dart';
+import 'package:police_com/features/employee_profile/application/providers/add_new_employee_step_provider.dart';
 // Providers
-import 'package:police_com/features/employee_profile/application/employee_creation_provider.dart';
+import 'package:police_com/features/employee_profile/application/providers/employee_creation_provider.dart';
 // Host Screen (to access static totalSteps)
 import 'package:police_com/features/employee_profile/presentation/add_new_employee_host_screen.dart';
 import 'package:police_com/features/widgets/app_date_field.dart';
@@ -199,20 +199,9 @@ class EmployeeCoreInfoScreen extends HookConsumerWidget {
       }
     }
 
-    void handlePrevious() {
-      final currentStepVal = ref.read(currentEmployeeCreationStepProvider);
-      if (currentStepVal > 0) {
-        ref.read(currentEmployeeCreationStepProvider.notifier).state--;
-      } else {
-        // If on the first step, allow host screen's WillPopScope or AppBar leading to handle exit.
-        Navigator.of(context).maybePop();
-      }
-    }
-
     return FormStepLayout(
       formKey: formKey,
       onNext: handleNext,
-      onPrevious: handlePrevious,
       // Example: "Next (Contacts)" - adjust based on actual next step name
       nextButtonText: 'Next (Contacts)',
       child: Form(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:police_com/features/employee_profile/application/add_new_employee_step_provider.dart';
-import 'package:police_com/features/employee_profile/application/employee_creation_provider.dart';
+import 'package:police_com/features/employee_profile/application/providers/add_new_employee_step_provider.dart';
+import 'package:police_com/features/employee_profile/application/providers/employee_creation_provider.dart';
 
 import 'contacts/employee_contacts_screen.dart';
 import 'dependants/employee_dependants_screen.dart';
@@ -23,6 +23,11 @@ class AddNewEmployeeHostScreen extends HookConsumerWidget {
 
   // Define the sequence of screens for the PageView
   // This order determines the flow.
+  // This list being static means the widgets themselves are created once.
+  // If data needs to be reloaded into them when employeeIdToEdit changes,
+  // those child widgets need to handle that (e.g. via useEffect watching a provider).
+  // The keying strategy discussed previously addresses this by recreating child widgets.
+  // For now, addressing the navigation issue based on current structure.
   static final List<Widget> _employeeCreationSteps = [
     const EmployeeCoreInfoScreen(),
     const EmployeeContactsScreen(),
@@ -31,9 +36,8 @@ class AddNewEmployeeHostScreen extends HookConsumerWidget {
     const EmployeeExperienceScreen(),
     const EmployeeSpouseInfoScreen(),
     const EmployeeGeneralDocumentsScreen(),
-    const EmployeePerformanceListScreen(), // This step could be conditionally added
+    const EmployeePerformanceListScreen(),
     const ReviewAndSubmitScreen(),
-    // RegistrationSuccessScreen is navigated to *after* this flow completes successfully.
   ];
 
   static int get totalSteps => _employeeCreationSteps.length;
@@ -45,87 +49,84 @@ class AddNewEmployeeHostScreen extends HookConsumerWidget {
     );
     final currentStep = ref.watch(currentEmployeeCreationStepProvider);
 
-    // Effect to prepare a new employee form when the screen is first built
-    // or to load an existing employee if employeeIdToEdit is provided.
+    // Effect to prepare a new employee form or load an existing one.
+    // Runs when employeeIdToEdit changes or on initial mount.
     useEffect(() {
       if (employeeIdToEdit != null) {
-        // TODO: Implement logic to fetch and load existing employee data
-        // ref.read(employeeCreationNotifierProvider.notifier).loadEmployeeForEditing(employeeIdToEdit!);
         print(
-          'Host Screen: Editing mode for employee ID $employeeIdToEdit (TODO: implement load)',
+          'Host Screen: Editing mode for employee ID $employeeIdToEdit. Loading data...',
         );
+        // loadEmployeeForEditing is async. The UI of child screens should handle
+        // showing loading states or reacting to data becoming available from EmployeeCreationNotifier.
+        ref
+            .read(employeeCreationNotifierProvider.notifier)
+            .loadEmployeeForEditing(employeeIdToEdit!);
       } else {
-        // Prepare a fresh form for a new employee
-        // This ensures if the user comes back to this screen, the form is reset.
+        print('Host Screen: New employee mode. Preparing new form.');
+        // Ensure this runs after the first frame to avoid issues during build.
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          ref
-              .read(employeeCreationNotifierProvider.notifier)
-              .prepareNewEmployee();
-          // Ensure the PageView and step provider are also reset to the first page
-          // if this screen is re-entered for a completely new employee.
-          if (ref.read(currentEmployeeCreationStepProvider) != 0) {
-            ref.read(currentEmployeeCreationStepProvider.notifier).state = 0;
-          }
-          if (pageController.hasClients && pageController.page != 0) {
-            pageController.jumpToPage(0);
+          if (context.mounted) {
+            // Check if widget is still in the tree
+            ref
+                .read(employeeCreationNotifierProvider.notifier)
+                .prepareNewEmployee();
+            // Reset to the first step if not already there for a new employee.
+            if (ref.read(currentEmployeeCreationStepProvider) != 0) {
+              ref.read(currentEmployeeCreationStepProvider.notifier).state = 0;
+            }
+            // Ensure PageController is also at the first page.
+            if (pageController.hasClients && pageController.page != 0) {
+              pageController.jumpToPage(0);
+            }
           }
         });
       }
-      return null; // No cleanup needed for this effect
-    }, const [],); // Empty dependency array means it runs once on mount
-
-    // --- Two-way Synchronization for PageController and Provider ---
-    // 1. Animate PageView when currentEmployeeCreationStepProvider changes
-    useEffect(() {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (pageController.hasClients &&
-            pageController.page?.round() != currentStep) {
-          pageController.animateToPage(
-            currentStep,
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.easeOutCubic,
-          );
-        }
-      });
       return null;
-    }, [currentStep],); // React to provider changes
+    }, [employeeIdToEdit]); // Depend on employeeIdToEdit
 
-    // 2. Update provider if PageView is somehow changed directly (e.g., by swiping if enabled)
-    useEffect(() {
-      void pageListener() {
-        final pageFromController = pageController.page?.round();
-        if (pageFromController != null &&
-            pageFromController !=
-                ref.read(currentEmployeeCreationStepProvider)) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            if (context.mounted) {
-              // Ensure widget is still in the tree
-              ref.read(currentEmployeeCreationStepProvider.notifier).state =
-                  pageFromController;
-            }
-          });
+    // Effect to animate PageView when currentEmployeeCreationStepProvider changes.
+    // This is the primary way the PageView should be controlled.
+    useEffect(
+      () {
+        if (pageController.hasClients) {
+          final currentPageControllerPage = pageController.page?.round();
+          if (currentPageControllerPage != currentStep) {
+            // Use addPostFrameCallback to ensure animation happens after build.
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (pageController.hasClients) {
+                // Re-check as it's in a callback
+                pageController.animateToPage(
+                  currentStep,
+                  duration: const Duration(
+                    milliseconds: 350,
+                  ), // Slightly adjusted duration
+                  curve: Curves.easeInOutCubic, // Smoother curve
+                );
+              }
+            });
+          }
         }
-      }
-
-      pageController.addListener(pageListener);
-      return () => pageController.removeListener(pageListener);
-    }, [pageController],);
+        return null;
+      },
+      [currentStep, pageController],
+    ); // Depend on currentStep and pageController itself
 
     Future<bool> handleSystemBackPress() async {
       final currentStepVal = ref.read(currentEmployeeCreationStepProvider);
       if (currentStepVal > 0) {
+        // Before navigating back, ensure current step's data is saved if necessary.
+        // This logic should ideally be in the child screen's onPrevious handler.
+        // For now, just changing the step.
         ref.read(currentEmployeeCreationStepProvider.notifier).state--;
-        return false; // Prevent default pop, we handled navigation
+        return false;
       }
-      // If on the first step, allow default pop (which might exit this screen)
-      // Or show a confirmation dialog:
       final bool? shouldPop = await showDialog<bool>(
         context: context,
         builder:
             (context) => AlertDialog(
               title: const Text('Exit Employee Creation?'),
               content: const Text(
-                'Are you sure you want to exit? Any unsaved progress on the current step might be lost.',
+                'Are you sure you want to exit? Any unsaved data may be lost.',
               ),
               actions: [
                 TextButton(
@@ -134,7 +135,10 @@ class AddNewEmployeeHostScreen extends HookConsumerWidget {
                 ),
                 TextButton(
                   onPressed: () => Navigator.of(context).pop(true),
-                  child: const Text('Exit'),
+                  child: const Text(
+                    'Exit',
+                    style: TextStyle(color: Colors.red),
+                  ),
                 ),
               ],
             ),
@@ -147,50 +151,61 @@ class AddNewEmployeeHostScreen extends HookConsumerWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Add New Employee (Step ${currentStep + 1} of $totalSteps)',
+            employeeIdToEdit == null
+                ? 'Add New Employee (Step ${currentStep + 1} of $totalSteps)'
+                : 'Edit Employee (Step ${currentStep + 1} of $totalSteps)',
           ),
           leading: IconButton(
-            icon: const Icon(
-              Icons.close_rounded,
-            ), // Changed to close for exiting flow
-            tooltip: 'Cancel Employee Creation',
+            icon: const Icon(Icons.arrow_back),
+            tooltip: 'Previous Step / Exit',
             onPressed: () async {
-              // Ask for confirmation before exiting
-              final bool? shouldExit = await showDialog<bool>(
-                context: context,
-                builder:
-                    (context) => AlertDialog(
-                      title: const Text('Cancel Employee Creation?'),
-                      content: const Text(
-                        'Are you sure you want to cancel? All entered data will be lost.',
-                      ),
-                      actions: [
-                        TextButton(
-                          onPressed: () => Navigator.of(context).pop(false),
-                          child: const Text('Stay'),
-                        ),
-                        TextButton(
-                          onPressed: () => Navigator.of(context).pop(true),
-                          child: const Text(
-                            'Exit',
-                            style: TextStyle(color: Colors.red),
-                          ),
-                        ),
-                      ],
-                    ),
+              final currentStepVal = ref.read(
+                currentEmployeeCreationStepProvider,
               );
-              if (shouldExit == true && context.mounted) {
-                ref
-                    .read(employeeCreationNotifierProvider.notifier)
-                    .prepareNewEmployee();
-                // Navigator.of(context).pop();
+              if (currentStepVal > 0) {
+                // This assumes the child screen's FormStepLayout's onPrevious handles data saving.
+                ref.read(currentEmployeeCreationStepProvider.notifier).state--;
+              } else {
+                final bool? shouldExit = await showDialog<bool>(
+                  context: context,
+                  builder:
+                      (context) => AlertDialog(
+                        title: const Text('Exit Employee Creation?'),
+                        content: Text(
+                          employeeIdToEdit == null
+                              ? 'Are you sure you want to exit? All entered data will be lost.'
+                              : 'Are you sure you want to exit editing? Unsaved changes may be lost.',
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.of(context).pop(false),
+                            child: const Text('Stay'),
+                          ),
+                          TextButton(
+                            onPressed: () => Navigator.of(context).pop(true),
+                            child: const Text(
+                              'Exit',
+                              style: TextStyle(color: Colors.red),
+                            ),
+                          ),
+                        ],
+                      ),
+                );
+                if (shouldExit == true && context.mounted) {
+                  if (employeeIdToEdit == null) {
+                    // Only reset form if it was for a new employee
+                    ref
+                        .read(employeeCreationNotifierProvider.notifier)
+                        .prepareNewEmployee();
+                  }
+                  Navigator.of(context).pop();
+                }
               }
             },
           ),
         ),
         body: Column(
           children: [
-            // --- Step Indicator ---
             Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: 12.0,
@@ -215,14 +230,10 @@ class AddNewEmployeeHostScreen extends HookConsumerWidget {
                   }
                   return Expanded(
                     child: GestureDetector(
-                      // Allow tapping on step indicator (optional)
                       onTap: () {
-                        // Allow navigation to previous completed steps or current step
-                        // Might want to prevent jumping far ahead if steps are dependent
                         if (isCompleted || isActive) {
-                          // Note: Ensure current step data is saved by child screen's onNext/onPrevious
-                          // before allowing arbitrary jumps via indicator. This simplified tap
-                          // directly changes the step without intermediate save.
+                          // Ideally, child screens should save their state before this jump.
+                          // This direct jump might bypass unsaved changes in the current step.
                           ref
                               .read(
                                 currentEmployeeCreationStepProvider.notifier,
@@ -244,18 +255,15 @@ class AddNewEmployeeHostScreen extends HookConsumerWidget {
                 }),
               ),
             ),
-            // --- PageView for Steps ---
             Expanded(
               child: PageView(
                 controller: pageController,
-                physics:
-                    const NeverScrollableScrollPhysics(), // Disable manual swiping
+                physics: const NeverScrollableScrollPhysics(),
                 children: _employeeCreationSteps,
               ),
             ),
           ],
         ),
-        // Bottom navigation buttons are now handled within each step's FormStepLayout
       ),
     );
   }
