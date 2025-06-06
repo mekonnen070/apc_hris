@@ -32,6 +32,8 @@ export 'organization_type.dart';
 export 'proficiency_level.dart';
 // Enums for Recruitment (Application)
 export 'recruitment_status.dart';
+export 'applicants.dart';
+export 'recuritment_type.dart';
 export 'relation_types.dart';
 export 'religion.dart';
 export 'task_assignee_type.dart';

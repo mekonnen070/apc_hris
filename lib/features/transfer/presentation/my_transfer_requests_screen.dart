@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:police_com/core/enums/transfer_request_status.dart';
-import 'package:police_com/features/employee/employee_profile/presentation/employee_list_screen.dart'; // For CenteredLoadingIndicator, ErrorDisplayWidget, EmptyListDisplayWidget
 import 'package:police_com/features/transfer/application/my_transfer_requests_notifier.dart';
 import 'package:police_com/features/transfer/application/my_transfer_requests_providers.dart';
 import 'package:police_com/features/transfer/domain/transfer_request_model.dart';
@@ -260,6 +259,62 @@ class MyTransferRequestsScreen extends HookConsumerWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+// CenteredLoadingIndicator
+class CenteredLoadingIndicator extends StatelessWidget {
+  const CenteredLoadingIndicator({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(child: CircularProgressIndicator.adaptive());
+  }
+}
+
+// ErrorDisplayWidget
+class ErrorDisplayWidget extends StatelessWidget {
+  final String message;
+  final VoidCallback onRetry;
+
+  const ErrorDisplayWidget({
+    required this.message,
+    required this.onRetry,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(message),
+        ElevatedButton(onPressed: onRetry, child: const Text('Retry')),
+      ],
+    );
+  }
+}
+
+// EmptyListDisplayWidget
+class EmptyListDisplayWidget extends StatelessWidget {
+  final String message;
+  final String actionText;
+  final VoidCallback onActionPressed;
+
+  const EmptyListDisplayWidget({
+    required this.message,
+    required this.actionText,
+    required this.onActionPressed,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(message),
+        ElevatedButton(onPressed: onActionPressed, child: Text(actionText)),
+      ],
     );
   }
 }

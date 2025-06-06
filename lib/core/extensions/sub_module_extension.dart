@@ -1,11 +1,9 @@
 import 'package:flutter/widgets.dart';
+
 import 'package:police_com/core/enums/main_module_enum.dart';
 import 'package:police_com/core/enums/sub_module_enum.dart';
 import 'package:police_com/features/dashboard/presentation/dashboard_page.dart';
-import 'package:police_com/features/employee/employee_profile/presentation/employee_list_screen.dart';
-import 'package:police_com/features/employee/employee_recruitment/presentation/hired_candidates_screen.dart';
-import 'package:police_com/features/employee/employee_recruitment/presentation/vacancies_screen.dart';
-import 'package:police_com/features/employee/employee_retirement/presentation/retirement_eligibility_screen.dart';
+// import 'package:police_com/features/employee/new_recruite/presentation/vacancies_screen.dart';
 import 'package:police_com/features/leave_mgmt/leave_mgmt_page.dart';
 import 'package:police_com/features/transfer/presentation/my_transfer_requests_screen.dart';
 import 'package:police_com/features/transfer/presentation/request_transfer_screen.dart';
@@ -59,13 +57,13 @@ extension SubModuleExtension on SubModule {
       case SubModule.dashboard:
         return const DashboardPage();
       case SubModule.employeeProfile:
-        return const EmployeeListScreen();
+        // return const EmployeeListScreen();
       case SubModule.profileRecruitment:
-        return const VacanciesScreen();
+        // return const VacanciesScreen();
       case SubModule.manageOnboarding:
-        return const HiredCandidatesScreen();
+        // return const HiredCandidatesScreen();
       case SubModule.profileRetirement:
-        return const RetirementEligibilityScreen();
+        // return const RetirementEligibilityScreen();
       case SubModule.requestNewTransfer: // New case
         return const RequestTransferScreen();
       case SubModule.viewMyTransferRequests: // New case

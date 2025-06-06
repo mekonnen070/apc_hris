@@ -1,5 +1,5 @@
 // In your education_level.dart or a new extensions_on_enums.dart
-import 'package:police_com/core/enums/education_level.dart';
+import '../enums/education_level.dart';
 
 extension EducationLevelX on EducationLevel {
   String get displayName {
