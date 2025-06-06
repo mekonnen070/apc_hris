@@ -1,26 +1,31 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:police_com/core/enums/country.dart';
-import 'package:police_com/core/enums/gender.dart';
+import 'package:police_com/core/enums/all_enums.dart';
 
 part 'recruit_info.freezed.dart';
 part 'recruit_info.g.dart';
 
-/// Model representing recruit information for the recruitment feature.
-/// Mirrors the C# RecruitInfo class.
 @freezed
 abstract class RecruitInfo with _$RecruitInfo {
   const factory RecruitInfo({
-    required String recruitId,
-    required String announcementId,
+    int? id,
+    required int announcementId,
     required String firstName,
-    required String fatherName,
-    String? grandName,
+    required String middleName,
+    required String lastName,
+    required DateTime dateOfBirth,
+    required int age,
     required Gender gender,
-    required DateTime birthDate,
-    String? motherName,
-    required String mobile,
-    String? email,
-    Country? nationality,
+    required MaritalStatus maritalStatus,
+    required int numberOfChildren,
+    required String nationality,
+    required Religion religion,
+    required BloodGroup bloodGroup,
+    required String photoPath,
+    required String woreda,
+    required String kebele,
+    required String houseNumber,
+    required String phoneNumber,
+    String? signature,
   }) = _RecruitInfo;
 
   factory RecruitInfo.fromJson(Map<String, dynamic> json) =>

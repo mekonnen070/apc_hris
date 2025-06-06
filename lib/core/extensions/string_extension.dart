@@ -1,7 +1,7 @@
 // Helper extension for String capitalization
 extension StringExtension on String {
   // Helper for String capitalization if not globally available
-  String capitalizeFirst() {
+  String toCapitalized() {
     if (isEmpty) return this;
     return '${this[0].toUpperCase()}${substring(1).toLowerCase()}';
   }

@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
-
 import 'package:police_com/core/enums/main_module_enum.dart';
 import 'package:police_com/core/enums/sub_module_enum.dart';
 import 'package:police_com/features/dashboard/presentation/dashboard_page.dart';
+import 'package:police_com/features/employee/new_recruite/presentation/new_recruit_screen.dart';
 // import 'package:police_com/features/employee/new_recruite/presentation/vacancies_screen.dart';
 import 'package:police_com/features/leave_mgmt/leave_mgmt_page.dart';
 import 'package:police_com/features/transfer/presentation/my_transfer_requests_screen.dart';
@@ -16,9 +16,7 @@ extension SubModuleExtension on SubModule {
 
       // All these now clearly fall under Employee Profile
       case SubModule.employeeProfile:
-      case SubModule.manageOnboarding:
-      case SubModule.profileRecruitment:
-      case SubModule.profileRetirement:
+      case SubModule.newRecruit:
         return MainModule.employeeProfile;
       case SubModule.requestNewTransfer: // New case
       case SubModule.viewMyTransferRequests: // New case
@@ -35,12 +33,8 @@ extension SubModuleExtension on SubModule {
         return 'Dashboard';
       case SubModule.employeeProfile: // << UPDATED title
         return 'Employee Profile'; // More descriptive title for employee profile
-      case SubModule.profileRecruitment:
-        return 'Recruitment Processes';
-      case SubModule.manageOnboarding:
-        return 'Onboarding Management';
-      case SubModule.profileRetirement:
-        return 'Retirement Management';
+      case SubModule.newRecruit:
+        return 'New Recruit';
       case SubModule.requestNewTransfer: // New case
         return 'Request New Transfer';
       case SubModule.viewMyTransferRequests: // New case
@@ -57,13 +51,9 @@ extension SubModuleExtension on SubModule {
       case SubModule.dashboard:
         return const DashboardPage();
       case SubModule.employeeProfile:
-        // return const EmployeeListScreen();
-      case SubModule.profileRecruitment:
-        // return const VacanciesScreen();
-      case SubModule.manageOnboarding:
-        // return const HiredCandidatesScreen();
-      case SubModule.profileRetirement:
-        // return const RetirementEligibilityScreen();
+      // return const EmployeeListScreen();
+      case SubModule.newRecruit:
+        return const NewRecruitScreen();
       case SubModule.requestNewTransfer: // New case
         return const RequestTransferScreen();
       case SubModule.viewMyTransferRequests: // New case

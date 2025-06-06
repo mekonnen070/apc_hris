@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:police_com/core/constants/api_constants.dart';
 import 'package:police_com/core/mixins/logger_mixin.dart';
+
+final dioClientProvider = Provider<DioClient>((ref) => DioClient());
 
 class DioClient with LoggerMixin {
   static final DioClient _instance = DioClient._internal();
@@ -47,7 +50,7 @@ class DioClient with LoggerMixin {
     );
   }
 
-  Future<Response> getRequest(
+  Future<Response> get(
     String path, {
     Map<String, dynamic>? queryParameters,
   }) async {
@@ -64,7 +67,7 @@ class DioClient with LoggerMixin {
     }
   }
 
-  Future<Response> postRequest(
+  Future<Response> post(
     String path, {
     dynamic data,
     Map<String, dynamic>? queryParameters,

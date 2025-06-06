@@ -2,15 +2,15 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart' as p; // For basename
+import 'package:path/path.dart' as p;
 
-// A field for picking a single file, integrating with FormField for validation.
 class AppFileUploadField extends StatelessWidget {
+  final Key? fieldKey;
   final String labelText;
-  final File? pickedFile; // The currently picked file, managed by parent state
-  final Function(File?)
-  onFileSelected; // Callback when a file is picked or cleared
-  final List<String>? allowedExtensions; // e.g., ['pdf', 'jpg']
+  final bool isRequired;
+  final File? pickedFile;
+  final Function(File?) onFileSelected;
+  final List<String>? allowedExtensions;
   final String? Function(File?)? validator;
   final AutovalidateMode? autovalidateMode;
   final String noFileSelectedText;
@@ -18,7 +18,9 @@ class AppFileUploadField extends StatelessWidget {
 
   const AppFileUploadField({
     super.key,
+    this.fieldKey,
     required this.labelText,
+    this.isRequired = false,
     this.pickedFile,
     required this.onFileSelected,
     this.allowedExtensions,
@@ -35,7 +37,7 @@ class AppFileUploadField extends StatelessWidget {
       type:
           allowedExtensions != null && allowedExtensions!.isNotEmpty
               ? FileType.custom
-              : FileType.any, // Allow any if no extensions specified
+              : FileType.any,
       allowedExtensions: allowedExtensions,
     );
 
@@ -43,29 +45,38 @@ class AppFileUploadField extends StatelessWidget {
     if (result != null && result.files.single.path != null) {
       selectedFile = File(result.files.single.path!);
     }
-    // Always call onFileSelected to update parent state
     onFileSelected(selectedFile);
-    // Update FormField state so validation runs with the new value
     field.didChange(selectedFile);
   }
 
   @override
   Widget build(BuildContext context) {
+    final label = RichText(
+      text: TextSpan(
+        text: labelText,
+        style: TextStyle(color: Theme.of(context).hintColor),
+        children:
+            isRequired
+                ? [
+                  const TextSpan(
+                    text: ' *',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ]
+                : [],
+      ),
+    );
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: FormField<File>(
-        key: ValueKey(
-          pickedFile?.path,
-        ), // Rebuild FormField if file path changes
+        key: fieldKey,
         validator: validator,
-        initialValue: pickedFile, // Initial value from parent state
+        initialValue: pickedFile,
         enabled: enabled,
         autovalidateMode:
             autovalidateMode ?? AutovalidateMode.onUserInteraction,
         builder: (FormFieldState<File> field) {
-          // Note: field.value here is the FormField's internal state for the file.
-          // We primarily use the `pickedFile` prop for display consistency,
-          // and `field.didChange` to sync them.
           final displayFileName =
               pickedFile != null
                   ? p.basename(pickedFile!.path)
@@ -73,10 +84,9 @@ class AppFileUploadField extends StatelessWidget {
 
           return InputDecorator(
             decoration: InputDecoration(
-              labelText: labelText,
+              label: label,
               border: const OutlineInputBorder(),
               errorText: field.errorText,
-              // contentPadding is handled by button/text layout
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -94,11 +104,11 @@ class AppFileUploadField extends StatelessWidget {
                   IconButton(
                     icon: const Icon(Icons.clear, size: 20),
                     onPressed: () {
-                      onFileSelected(null); // Inform parent to clear file
-                      field.didChange(null); // Update FormField state
+                      onFileSelected(null);
+                      field.didChange(null);
                     },
                     tooltip: 'Clear file',
-                    constraints: const BoxConstraints(), // Remove extra padding
+                    constraints: const BoxConstraints(),
                     padding: EdgeInsets.zero,
                   ),
                 const SizedBox(width: 8),
@@ -110,7 +120,6 @@ class AppFileUploadField extends StatelessWidget {
                       horizontal: 12,
                       vertical: 8,
                     ),
-                    // Visual feedback for disabled state could be added here too
                   ),
                   onPressed: enabled ? () => _pickFile(field) : null,
                 ),

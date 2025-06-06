@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-// A standardized text input field for consistent styling and behavior.
 class AppTextField extends StatelessWidget {
+  final Key? fieldKey;
   final TextEditingController controller;
   final String labelText;
+  final bool isRequired;
   final String? hintText;
   final String? Function(String?)? validator;
   final TextInputType keyboardType;
@@ -19,14 +20,16 @@ class AppTextField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final FocusNode? focusNode;
   final AutovalidateMode? autovalidateMode;
-  final bool enabled; // New: To explicitly enable/disable the field
-  final InputDecoration? decoration; // New: Allow full decoration override
-  final List<TextInputFormatter>? inputFormatters; // New: For input formatting
+  final bool enabled;
+  final InputDecoration? decoration;
+  final List<TextInputFormatter>? inputFormatters;
 
   const AppTextField({
     super.key,
+    this.fieldKey,
     required this.controller,
     required this.labelText,
+    this.isRequired = false,
     this.hintText,
     this.validator,
     this.keyboardType = TextInputType.text,
@@ -48,23 +51,36 @@ class AppTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final label = RichText(
+      text: TextSpan(
+        text: labelText,
+        style: TextStyle(color: Theme.of(context).hintColor),
+        children:
+            isRequired
+                ? [
+                  const TextSpan(
+                    text: ' *',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ]
+                : [],
+      ),
+    );
+
     final effectiveDecoration =
         decoration ??
         InputDecoration(
-          labelText: labelText,
+          label: label,
           hintText: hintText,
           border: const OutlineInputBorder(),
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,
-          // Consider adding filled: true and fillColor from theme for consistency
-          // errorStyle: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.error),
         );
 
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 8.0,
-      ), // Consistent vertical spacing
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
+        key: fieldKey,
         controller: controller,
         focusNode: focusNode,
         decoration: effectiveDecoration,

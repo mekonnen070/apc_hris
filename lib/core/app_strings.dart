@@ -3,4 +3,5 @@
 class AppStrings {
   /// This class contains the string constants used in the app.
   static const String appTitle = 'Police Com';
+  
 }

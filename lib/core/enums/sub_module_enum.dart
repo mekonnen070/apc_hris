@@ -2,9 +2,7 @@ enum SubModule {
   dashboard,
   // Employee Profile SubModules
   employeeProfile,
-  profileRecruitment,
-  manageOnboarding,
-  profileRetirement,
+  newRecruit,
   // Transfer Module SubModules
   requestNewTransfer,
   viewMyTransferRequests,

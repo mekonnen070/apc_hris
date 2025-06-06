@@ -31,11 +31,12 @@ extension MainModuleX on MainModule {
       SubModule.employeeProfile, // << UPDATED from profilePersonalInfo
       // Consider adding a "View/Search Employees" sub-module here as the first item
       // SubModule.viewEmployees, (e.g., leading to an employee list screen)
-      SubModule.profileRecruitment,
-      SubModule.manageOnboarding,
-      SubModule.profileRetirement,
+      SubModule.newRecruit,
     ],
-    MainModule.transfer => [SubModule.requestNewTransfer, SubModule.viewMyTransferRequests],
+    MainModule.transfer => [
+      SubModule.requestNewTransfer,
+      SubModule.viewMyTransferRequests,
+    ],
     MainModule.leaveManagement => [
       // If Leave Management is a single page, or has its own sub-modules
       SubModule.leaveManagement, // Example: direct link if only one screen

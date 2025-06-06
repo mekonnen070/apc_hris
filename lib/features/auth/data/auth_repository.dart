@@ -33,7 +33,7 @@ class AutoRepository with LoggerMixin {
     };
 
     try {
-      final response = await dioClient.postRequest(
+      final response = await dioClient.post(
         ApiEndpoints.signupEndpoint,
         data: data,
       );
@@ -55,7 +55,7 @@ class AutoRepository with LoggerMixin {
     final data = {'email': email, 'password': password};
 
     try {
-      final response = await dioClient.postRequest(
+      final response = await dioClient.post(
         ApiEndpoints.loginEndpoint,
         data: data,
       );
@@ -77,7 +77,7 @@ class AutoRepository with LoggerMixin {
     final data = {'email': email};
 
     try {
-      final response = await dioClient.postRequest(
+      final response = await dioClient.post(
         ApiEndpoints.forgotPasswordEndpoint,
         data: data,
       );
@@ -99,7 +99,7 @@ class AutoRepository with LoggerMixin {
 
   Future<void> logout() async {
     try {
-      final response = await dioClient.postRequest(ApiEndpoints.logoutEndpoint);
+      final response = await dioClient.post(ApiEndpoints.logoutEndpoint);
       if (response.statusCode == 200 || response.statusCode == 201) {
         logInfo('Logout successful: ${response.data}');
       } else {

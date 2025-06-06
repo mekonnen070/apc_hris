@@ -7,4 +7,6 @@ class ApiEndpoints {
   static const String loginEndpoint = '/api/signin';
   static const String logoutEndpoint = '/api/logout';
   static const String forgotPasswordEndpoint = '/api/forgot-password';
+  static const String recruitmentAnnouncementsEndpoint = '/api/recruitment-announcements';
+  static const String recruitsEndpoint = '/api/recruits';
 }

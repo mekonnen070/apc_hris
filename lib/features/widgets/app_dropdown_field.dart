@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 
 class AppDropdownField<T> extends StatelessWidget {
+  final Key? fieldKey;
   final String labelText;
+  final bool isRequired;
   final String? hintText;
   final T? value;
   final List<DropdownMenuItem<T>> items;
-  final ValueChanged<T?>? onChanged; // Keep this, parent handles state
+  final ValueChanged<T?>? onChanged;
   final String? Function(T?)? validator;
   final AutovalidateMode? autovalidateMode;
-  final bool enabled; // New
-  final Widget? prefixIcon; // New
+  final bool enabled;
+  final Widget? prefixIcon;
 
   const AppDropdownField({
     super.key,
+    this.fieldKey,
     required this.labelText,
+    this.isRequired = false,
     this.hintText,
-    required this.value, // Value is managed by parent state
+    required this.value,
     required this.items,
     required this.onChanged,
     this.validator,
@@ -26,22 +30,34 @@ class AppDropdownField<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final label = RichText(
+      text: TextSpan(
+        text: labelText,
+        style: TextStyle(color: Theme.of(context).hintColor),
+        children:
+            isRequired
+                ? [
+                  const TextSpan(
+                    text: ' *',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ]
+                : [],
+      ),
+    );
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: DropdownButtonFormField<T>(
+        key: fieldKey,
         decoration: InputDecoration(
-          labelText: labelText,
+          label: label,
           hintText: hintText,
           border: const OutlineInputBorder(),
           prefixIcon: prefixIcon,
-          // filled: !enabled, // Example: visual cue for disabled
-          // fillColor: Theme.of(context).disabledColor.withOpacity(0.1),
         ),
         value: value,
-        items:
-            enabled
-                ? items
-                : null, // Pass null items if disabled to prevent interaction
+        items: enabled ? items : null,
         onChanged: enabled ? onChanged : null,
         validator: validator,
         autovalidateMode:
@@ -53,8 +69,8 @@ class AppDropdownField<T> extends StatelessWidget {
                   items
                       .firstWhere((item) => item.value == value)
                       .child
-                      .toStringDeep(),
-                ) // Show selected value if disabled
+                      .toString(),
+                )
                 : (hintText != null ? Text(hintText!) : null),
       ),
     );

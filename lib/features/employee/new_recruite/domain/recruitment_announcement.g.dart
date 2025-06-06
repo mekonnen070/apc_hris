@@ -9,46 +9,19 @@ part of 'recruitment_announcement.dart';
 _RecruitmentAnnouncement _$RecruitmentAnnouncementFromJson(
   Map<String, dynamic> json,
 ) => _RecruitmentAnnouncement(
-  announcementId: json['announcementId'] as String,
-  announcementTitle: json['announcementTitle'] as String,
-  announcementDescription: json['announcementDescription'] as String,
-  requiredApplicants: (json['requiredApplicants'] as num).toInt(),
-  round: json['round'] as String,
-  createdDate:
-      json['createdDate'] == null
-          ? null
-          : DateTime.parse(json['createdDate'] as String),
-  createdBy: json['createdBy'] as String?,
-  expiryDate:
-      json['expiryDate'] == null
-          ? null
-          : DateTime.parse(json['expiryDate'] as String),
-  status: $enumDecodeNullable(_$AnnouncementStatusEnumMap, json['status']),
-  postedDate:
-      json['postedDate'] == null
-          ? null
-          : DateTime.parse(json['postedDate'] as String),
-  postedBy: json['postedBy'] as String?,
+  id: (json['id'] as num).toInt(),
+  title: json['title'] as String,
+  content: json['content'] as String,
+  startDate: DateTime.parse(json['startDate'] as String),
+  endDate: DateTime.parse(json['endDate'] as String),
 );
 
 Map<String, dynamic> _$RecruitmentAnnouncementToJson(
   _RecruitmentAnnouncement instance,
 ) => <String, dynamic>{
-  'announcementId': instance.announcementId,
-  'announcementTitle': instance.announcementTitle,
-  'announcementDescription': instance.announcementDescription,
-  'requiredApplicants': instance.requiredApplicants,
-  'round': instance.round,
-  'createdDate': instance.createdDate?.toIso8601String(),
-  'createdBy': instance.createdBy,
-  'expiryDate': instance.expiryDate?.toIso8601String(),
-  'status': _$AnnouncementStatusEnumMap[instance.status],
-  'postedDate': instance.postedDate?.toIso8601String(),
-  'postedBy': instance.postedBy,
-};
-
-const _$AnnouncementStatusEnumMap = {
-  AnnouncementStatus.created: 'created',
-  AnnouncementStatus.posted: 'posted',
-  AnnouncementStatus.expired: 'expired',
+  'id': instance.id,
+  'title': instance.title,
+  'content': instance.content,
+  'startDate': instance.startDate.toIso8601String(),
+  'endDate': instance.endDate.toIso8601String(),
 };
