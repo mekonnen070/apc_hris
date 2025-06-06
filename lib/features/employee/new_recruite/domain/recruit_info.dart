@@ -26,6 +26,7 @@ abstract class RecruitInfo with _$RecruitInfo {
     required String houseNumber,
     required String phoneNumber,
     String? signature,
+    @Default(RecruitStatus.noStatus) RecruitStatus status,
   }) = _RecruitInfo;
 
   factory RecruitInfo.fromJson(Map<String, dynamic> json) =>

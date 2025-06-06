@@ -49,6 +49,7 @@ class NewRecruitScreen extends HookConsumerWidget {
 
     void handleSubmit() async {
       final navigator = Navigator.of(context);
+
       if (formKey.currentState!.validate()) {
         formKey.currentState!.save();
         final recruitInfo = RecruitInfo(
@@ -79,15 +80,9 @@ class NewRecruitScreen extends HookConsumerWidget {
             context: context,
             title: Text(currentState.successMessage!),
             type: ToastificationType.success,
-            autoCloseDuration: const Duration(seconds: 5),
+            autoCloseDuration: const Duration(seconds: 4),
           );
-          formKey.currentState?.reset();
-          firstNameController.clear();
-          middleNameController.clear();
-          lastNameController.clear();
-          dateOfBirth.value = null;
-          ageController.clear();
-          // Optionally navigate away or reset form
+          navigator.pop(true);
         } else if (currentState.errorMessage != null) {
           toastification.show(
             context: context,
@@ -323,7 +318,7 @@ class NewRecruitScreen extends HookConsumerWidget {
                         ]),
                       ),
                       const SizedBox(height: 32),
-                      ElevatedButton(
+                      FilledButton(
                         onPressed: state.isSubmitting ? null : handleSubmit,
                         child:
                             state.isSubmitting

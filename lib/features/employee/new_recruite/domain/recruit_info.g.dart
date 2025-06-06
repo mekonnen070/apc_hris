@@ -26,6 +26,9 @@ _RecruitInfo _$RecruitInfoFromJson(Map<String, dynamic> json) => _RecruitInfo(
   houseNumber: json['houseNumber'] as String,
   phoneNumber: json['phoneNumber'] as String,
   signature: json['signature'] as String?,
+  status:
+      $enumDecodeNullable(_$RecruitStatusEnumMap, json['status']) ??
+      RecruitStatus.noStatus,
 );
 
 Map<String, dynamic> _$RecruitInfoToJson(_RecruitInfo instance) =>
@@ -49,6 +52,7 @@ Map<String, dynamic> _$RecruitInfoToJson(_RecruitInfo instance) =>
       'houseNumber': instance.houseNumber,
       'phoneNumber': instance.phoneNumber,
       'signature': instance.signature,
+      'status': _$RecruitStatusEnumMap[instance.status]!,
     };
 
 const _$GenderEnumMap = {
@@ -87,4 +91,10 @@ const _$BloodGroupEnumMap = {
   BloodGroup.oPositive: 'oPositive',
   BloodGroup.oNegative: 'oNegative',
   BloodGroup.unknown: 'unknown',
+};
+
+const _$RecruitStatusEnumMap = {
+  RecruitStatus.noStatus: 'noStatus',
+  RecruitStatus.passed: 'passed',
+  RecruitStatus.failed: 'failed',
 };

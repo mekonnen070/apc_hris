@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RecruitInfo {
 
- int? get id; int get announcementId; String get firstName; String get middleName; String get lastName; DateTime get dateOfBirth; int get age; Gender get gender; MaritalStatus get maritalStatus; int get numberOfChildren; String get nationality; Religion get religion; BloodGroup get bloodGroup; String get photoPath; String get woreda; String get kebele; String get houseNumber; String get phoneNumber; String? get signature;
+ int? get id; int get announcementId; String get firstName; String get middleName; String get lastName; DateTime get dateOfBirth; int get age; Gender get gender; MaritalStatus get maritalStatus; int get numberOfChildren; String get nationality; Religion get religion; BloodGroup get bloodGroup; String get photoPath; String get woreda; String get kebele; String get houseNumber; String get phoneNumber; String? get signature; RecruitStatus get status;
 /// Create a copy of RecruitInfo
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $RecruitInfoCopyWith<RecruitInfo> get copyWith => _$RecruitInfoCopyWithImpl<Recr
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RecruitInfo&&(identical(other.id, id) || other.id == id)&&(identical(other.announcementId, announcementId) || other.announcementId == announcementId)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.middleName, middleName) || other.middleName == middleName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.dateOfBirth, dateOfBirth) || other.dateOfBirth == dateOfBirth)&&(identical(other.age, age) || other.age == age)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.maritalStatus, maritalStatus) || other.maritalStatus == maritalStatus)&&(identical(other.numberOfChildren, numberOfChildren) || other.numberOfChildren == numberOfChildren)&&(identical(other.nationality, nationality) || other.nationality == nationality)&&(identical(other.religion, religion) || other.religion == religion)&&(identical(other.bloodGroup, bloodGroup) || other.bloodGroup == bloodGroup)&&(identical(other.photoPath, photoPath) || other.photoPath == photoPath)&&(identical(other.woreda, woreda) || other.woreda == woreda)&&(identical(other.kebele, kebele) || other.kebele == kebele)&&(identical(other.houseNumber, houseNumber) || other.houseNumber == houseNumber)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.signature, signature) || other.signature == signature));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RecruitInfo&&(identical(other.id, id) || other.id == id)&&(identical(other.announcementId, announcementId) || other.announcementId == announcementId)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.middleName, middleName) || other.middleName == middleName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.dateOfBirth, dateOfBirth) || other.dateOfBirth == dateOfBirth)&&(identical(other.age, age) || other.age == age)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.maritalStatus, maritalStatus) || other.maritalStatus == maritalStatus)&&(identical(other.numberOfChildren, numberOfChildren) || other.numberOfChildren == numberOfChildren)&&(identical(other.nationality, nationality) || other.nationality == nationality)&&(identical(other.religion, religion) || other.religion == religion)&&(identical(other.bloodGroup, bloodGroup) || other.bloodGroup == bloodGroup)&&(identical(other.photoPath, photoPath) || other.photoPath == photoPath)&&(identical(other.woreda, woreda) || other.woreda == woreda)&&(identical(other.kebele, kebele) || other.kebele == kebele)&&(identical(other.houseNumber, houseNumber) || other.houseNumber == houseNumber)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.signature, signature) || other.signature == signature)&&(identical(other.status, status) || other.status == status));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,id,announcementId,firstName,middleName,lastName,dateOfBirth,age,gender,maritalStatus,numberOfChildren,nationality,religion,bloodGroup,photoPath,woreda,kebele,houseNumber,phoneNumber,signature]);
+int get hashCode => Object.hashAll([runtimeType,id,announcementId,firstName,middleName,lastName,dateOfBirth,age,gender,maritalStatus,numberOfChildren,nationality,religion,bloodGroup,photoPath,woreda,kebele,houseNumber,phoneNumber,signature,status]);
 
 @override
 String toString() {
-  return 'RecruitInfo(id: $id, announcementId: $announcementId, firstName: $firstName, middleName: $middleName, lastName: $lastName, dateOfBirth: $dateOfBirth, age: $age, gender: $gender, maritalStatus: $maritalStatus, numberOfChildren: $numberOfChildren, nationality: $nationality, religion: $religion, bloodGroup: $bloodGroup, photoPath: $photoPath, woreda: $woreda, kebele: $kebele, houseNumber: $houseNumber, phoneNumber: $phoneNumber, signature: $signature)';
+  return 'RecruitInfo(id: $id, announcementId: $announcementId, firstName: $firstName, middleName: $middleName, lastName: $lastName, dateOfBirth: $dateOfBirth, age: $age, gender: $gender, maritalStatus: $maritalStatus, numberOfChildren: $numberOfChildren, nationality: $nationality, religion: $religion, bloodGroup: $bloodGroup, photoPath: $photoPath, woreda: $woreda, kebele: $kebele, houseNumber: $houseNumber, phoneNumber: $phoneNumber, signature: $signature, status: $status)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $RecruitInfoCopyWith<$Res>  {
   factory $RecruitInfoCopyWith(RecruitInfo value, $Res Function(RecruitInfo) _then) = _$RecruitInfoCopyWithImpl;
 @useResult
 $Res call({
- int? id, int announcementId, String firstName, String middleName, String lastName, DateTime dateOfBirth, int age, Gender gender, MaritalStatus maritalStatus, int numberOfChildren, String nationality, Religion religion, BloodGroup bloodGroup, String photoPath, String woreda, String kebele, String houseNumber, String phoneNumber, String? signature
+ int? id, int announcementId, String firstName, String middleName, String lastName, DateTime dateOfBirth, int age, Gender gender, MaritalStatus maritalStatus, int numberOfChildren, String nationality, Religion religion, BloodGroup bloodGroup, String photoPath, String woreda, String kebele, String houseNumber, String phoneNumber, String? signature, RecruitStatus status
 });
 
 
@@ -66,7 +66,7 @@ class _$RecruitInfoCopyWithImpl<$Res>
 
 /// Create a copy of RecruitInfo
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? announcementId = null,Object? firstName = null,Object? middleName = null,Object? lastName = null,Object? dateOfBirth = null,Object? age = null,Object? gender = null,Object? maritalStatus = null,Object? numberOfChildren = null,Object? nationality = null,Object? religion = null,Object? bloodGroup = null,Object? photoPath = null,Object? woreda = null,Object? kebele = null,Object? houseNumber = null,Object? phoneNumber = null,Object? signature = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? announcementId = null,Object? firstName = null,Object? middleName = null,Object? lastName = null,Object? dateOfBirth = null,Object? age = null,Object? gender = null,Object? maritalStatus = null,Object? numberOfChildren = null,Object? nationality = null,Object? religion = null,Object? bloodGroup = null,Object? photoPath = null,Object? woreda = null,Object? kebele = null,Object? houseNumber = null,Object? phoneNumber = null,Object? signature = freezed,Object? status = null,}) {
   return _then(_self.copyWith(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,announcementId: null == announcementId ? _self.announcementId : announcementId // ignore: cast_nullable_to_non_nullable
@@ -87,7 +87,8 @@ as String,kebele: null == kebele ? _self.kebele : kebele // ignore: cast_nullabl
 as String,houseNumber: null == houseNumber ? _self.houseNumber : houseNumber // ignore: cast_nullable_to_non_nullable
 as String,phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
 as String,signature: freezed == signature ? _self.signature : signature // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as RecruitStatus,
   ));
 }
 
@@ -98,7 +99,7 @@ as String?,
 @JsonSerializable()
 
 class _RecruitInfo implements RecruitInfo {
-  const _RecruitInfo({this.id, required this.announcementId, required this.firstName, required this.middleName, required this.lastName, required this.dateOfBirth, required this.age, required this.gender, required this.maritalStatus, required this.numberOfChildren, required this.nationality, required this.religion, required this.bloodGroup, required this.photoPath, required this.woreda, required this.kebele, required this.houseNumber, required this.phoneNumber, this.signature});
+  const _RecruitInfo({this.id, required this.announcementId, required this.firstName, required this.middleName, required this.lastName, required this.dateOfBirth, required this.age, required this.gender, required this.maritalStatus, required this.numberOfChildren, required this.nationality, required this.religion, required this.bloodGroup, required this.photoPath, required this.woreda, required this.kebele, required this.houseNumber, required this.phoneNumber, this.signature, this.status = RecruitStatus.noStatus});
   factory _RecruitInfo.fromJson(Map<String, dynamic> json) => _$RecruitInfoFromJson(json);
 
 @override final  int? id;
@@ -120,6 +121,7 @@ class _RecruitInfo implements RecruitInfo {
 @override final  String houseNumber;
 @override final  String phoneNumber;
 @override final  String? signature;
+@override@JsonKey() final  RecruitStatus status;
 
 /// Create a copy of RecruitInfo
 /// with the given fields replaced by the non-null parameter values.
@@ -134,16 +136,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RecruitInfo&&(identical(other.id, id) || other.id == id)&&(identical(other.announcementId, announcementId) || other.announcementId == announcementId)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.middleName, middleName) || other.middleName == middleName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.dateOfBirth, dateOfBirth) || other.dateOfBirth == dateOfBirth)&&(identical(other.age, age) || other.age == age)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.maritalStatus, maritalStatus) || other.maritalStatus == maritalStatus)&&(identical(other.numberOfChildren, numberOfChildren) || other.numberOfChildren == numberOfChildren)&&(identical(other.nationality, nationality) || other.nationality == nationality)&&(identical(other.religion, religion) || other.religion == religion)&&(identical(other.bloodGroup, bloodGroup) || other.bloodGroup == bloodGroup)&&(identical(other.photoPath, photoPath) || other.photoPath == photoPath)&&(identical(other.woreda, woreda) || other.woreda == woreda)&&(identical(other.kebele, kebele) || other.kebele == kebele)&&(identical(other.houseNumber, houseNumber) || other.houseNumber == houseNumber)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.signature, signature) || other.signature == signature));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RecruitInfo&&(identical(other.id, id) || other.id == id)&&(identical(other.announcementId, announcementId) || other.announcementId == announcementId)&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.middleName, middleName) || other.middleName == middleName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.dateOfBirth, dateOfBirth) || other.dateOfBirth == dateOfBirth)&&(identical(other.age, age) || other.age == age)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.maritalStatus, maritalStatus) || other.maritalStatus == maritalStatus)&&(identical(other.numberOfChildren, numberOfChildren) || other.numberOfChildren == numberOfChildren)&&(identical(other.nationality, nationality) || other.nationality == nationality)&&(identical(other.religion, religion) || other.religion == religion)&&(identical(other.bloodGroup, bloodGroup) || other.bloodGroup == bloodGroup)&&(identical(other.photoPath, photoPath) || other.photoPath == photoPath)&&(identical(other.woreda, woreda) || other.woreda == woreda)&&(identical(other.kebele, kebele) || other.kebele == kebele)&&(identical(other.houseNumber, houseNumber) || other.houseNumber == houseNumber)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.signature, signature) || other.signature == signature)&&(identical(other.status, status) || other.status == status));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,id,announcementId,firstName,middleName,lastName,dateOfBirth,age,gender,maritalStatus,numberOfChildren,nationality,religion,bloodGroup,photoPath,woreda,kebele,houseNumber,phoneNumber,signature]);
+int get hashCode => Object.hashAll([runtimeType,id,announcementId,firstName,middleName,lastName,dateOfBirth,age,gender,maritalStatus,numberOfChildren,nationality,religion,bloodGroup,photoPath,woreda,kebele,houseNumber,phoneNumber,signature,status]);
 
 @override
 String toString() {
-  return 'RecruitInfo(id: $id, announcementId: $announcementId, firstName: $firstName, middleName: $middleName, lastName: $lastName, dateOfBirth: $dateOfBirth, age: $age, gender: $gender, maritalStatus: $maritalStatus, numberOfChildren: $numberOfChildren, nationality: $nationality, religion: $religion, bloodGroup: $bloodGroup, photoPath: $photoPath, woreda: $woreda, kebele: $kebele, houseNumber: $houseNumber, phoneNumber: $phoneNumber, signature: $signature)';
+  return 'RecruitInfo(id: $id, announcementId: $announcementId, firstName: $firstName, middleName: $middleName, lastName: $lastName, dateOfBirth: $dateOfBirth, age: $age, gender: $gender, maritalStatus: $maritalStatus, numberOfChildren: $numberOfChildren, nationality: $nationality, religion: $religion, bloodGroup: $bloodGroup, photoPath: $photoPath, woreda: $woreda, kebele: $kebele, houseNumber: $houseNumber, phoneNumber: $phoneNumber, signature: $signature, status: $status)';
 }
 
 
@@ -154,7 +156,7 @@ abstract mixin class _$RecruitInfoCopyWith<$Res> implements $RecruitInfoCopyWith
   factory _$RecruitInfoCopyWith(_RecruitInfo value, $Res Function(_RecruitInfo) _then) = __$RecruitInfoCopyWithImpl;
 @override @useResult
 $Res call({
- int? id, int announcementId, String firstName, String middleName, String lastName, DateTime dateOfBirth, int age, Gender gender, MaritalStatus maritalStatus, int numberOfChildren, String nationality, Religion religion, BloodGroup bloodGroup, String photoPath, String woreda, String kebele, String houseNumber, String phoneNumber, String? signature
+ int? id, int announcementId, String firstName, String middleName, String lastName, DateTime dateOfBirth, int age, Gender gender, MaritalStatus maritalStatus, int numberOfChildren, String nationality, Religion religion, BloodGroup bloodGroup, String photoPath, String woreda, String kebele, String houseNumber, String phoneNumber, String? signature, RecruitStatus status
 });
 
 
@@ -171,7 +173,7 @@ class __$RecruitInfoCopyWithImpl<$Res>
 
 /// Create a copy of RecruitInfo
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? announcementId = null,Object? firstName = null,Object? middleName = null,Object? lastName = null,Object? dateOfBirth = null,Object? age = null,Object? gender = null,Object? maritalStatus = null,Object? numberOfChildren = null,Object? nationality = null,Object? religion = null,Object? bloodGroup = null,Object? photoPath = null,Object? woreda = null,Object? kebele = null,Object? houseNumber = null,Object? phoneNumber = null,Object? signature = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? announcementId = null,Object? firstName = null,Object? middleName = null,Object? lastName = null,Object? dateOfBirth = null,Object? age = null,Object? gender = null,Object? maritalStatus = null,Object? numberOfChildren = null,Object? nationality = null,Object? religion = null,Object? bloodGroup = null,Object? photoPath = null,Object? woreda = null,Object? kebele = null,Object? houseNumber = null,Object? phoneNumber = null,Object? signature = freezed,Object? status = null,}) {
   return _then(_RecruitInfo(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,announcementId: null == announcementId ? _self.announcementId : announcementId // ignore: cast_nullable_to_non_nullable
@@ -192,7 +194,8 @@ as String,kebele: null == kebele ? _self.kebele : kebele // ignore: cast_nullabl
 as String,houseNumber: null == houseNumber ? _self.houseNumber : houseNumber // ignore: cast_nullable_to_non_nullable
 as String,phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
 as String,signature: freezed == signature ? _self.signature : signature // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as RecruitStatus,
   ));
 }
 

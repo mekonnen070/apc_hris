@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:police_com/core/enums/main_module_enum.dart';
 import 'package:police_com/core/enums/sub_module_enum.dart';
 import 'package:police_com/features/dashboard/presentation/dashboard_page.dart';
-import 'package:police_com/features/employee/new_recruite/presentation/new_recruit_screen.dart';
+import 'package:police_com/features/employee/new_recruite/presentation/my_recruits_screen.dart';
 // import 'package:police_com/features/employee/new_recruite/presentation/vacancies_screen.dart';
 import 'package:police_com/features/leave_mgmt/leave_mgmt_page.dart';
 import 'package:police_com/features/transfer/presentation/my_transfer_requests_screen.dart';
@@ -53,7 +53,7 @@ extension SubModuleExtension on SubModule {
       case SubModule.employeeProfile:
       // return const EmployeeListScreen();
       case SubModule.newRecruit:
-        return const NewRecruitScreen();
+        return const MyRecruitsScreen();
       case SubModule.requestNewTransfer: // New case
         return const RequestTransferScreen();
       case SubModule.viewMyTransferRequests: // New case
