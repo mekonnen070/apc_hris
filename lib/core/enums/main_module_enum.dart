@@ -4,6 +4,7 @@ enum MainModule {
   transfer,
   leaveManagement,
   training,
+  placement,
   clearance,
   payroll,
   settings,

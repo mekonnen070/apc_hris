@@ -24,4 +24,14 @@ class ApiEndpoints {
   static const String trainingSelectedApplicants =
       'training/selected-applicants'; // New
   static const String submitTrainingAppeal = 'training/appeal'; // New
+
+  // Placement Endpoints
+  static const String availablePlacements = 'placement/available'; // New
+  static const String placementDetails = 'placement/details'; // New
+  static const String applyForPlacement = 'placement/apply'; // New
+  static const String myPlacementApplications =
+      'placement/my-applications'; // New
+  static const String placementSelectedApplicants =
+      'placement/selected-applicants'; // New
+  static const String submitPlacementAppeal = 'placement/appeal'; // New
 }

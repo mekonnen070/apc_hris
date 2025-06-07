@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:police_com/features/training/domain/training_applicant.dart';
 
-class SelectedApplicantsListWidget extends StatelessWidget {
+class SelectedTrainingApplicantsListWidget extends StatelessWidget {
   final List<TrainingApplicant> applicants;
-  const SelectedApplicantsListWidget({super.key, required this.applicants});
+  const SelectedTrainingApplicantsListWidget({super.key, required this.applicants});
 
   @override
   Widget build(BuildContext context) {

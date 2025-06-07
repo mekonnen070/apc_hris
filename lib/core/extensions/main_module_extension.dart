@@ -9,6 +9,7 @@ extension MainModuleX on MainModule {
     MainModule.transfer => 'Transfer Management',
     MainModule.leaveManagement => 'Leave Management',
     MainModule.training => 'Training & Development',
+    MainModule.placement => 'Placement Management',
     MainModule.payroll => 'Payroll Processing',
     MainModule.clearance => 'Employee Clearance',
     MainModule.settings => 'System Settings',
@@ -20,6 +21,7 @@ extension MainModuleX on MainModule {
     MainModule.transfer => Icons.transfer_within_a_station_rounded,
     MainModule.leaveManagement => Icons.calendar_today_rounded,
     MainModule.training => Icons.school_rounded,
+    MainModule.placement => Icons.location_city_rounded,
     MainModule.payroll => Icons.monetization_on_rounded,
     MainModule.clearance => Icons.how_to_reg_rounded,
     MainModule.settings => Icons.settings_rounded,
@@ -44,6 +46,7 @@ extension MainModuleX on MainModule {
     ],
     // Define sub-modules for these as they are developed
     MainModule.training => [SubModule.training],
+    MainModule.placement => [SubModule.placement],
     MainModule.payroll => [],
     MainModule.clearance => [],
     MainModule.settings => [],

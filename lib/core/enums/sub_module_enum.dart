@@ -10,4 +10,5 @@ enum SubModule {
   leaveManagement,
   // Recruitment Module SubModules
   training,
+  placement,
 }
