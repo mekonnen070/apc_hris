@@ -9,4 +9,5 @@ enum SubModule {
   // Leave Management
   leaveManagement,
   // Recruitment Module SubModules
+  training,
 }

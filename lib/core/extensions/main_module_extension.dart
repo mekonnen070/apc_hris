@@ -43,7 +43,7 @@ extension MainModuleX on MainModule {
       // Or: SubModule.requestLeave, SubModule.approveLeave etc.
     ],
     // Define sub-modules for these as they are developed
-    MainModule.training => [],
+    MainModule.training => [SubModule.training],
     MainModule.payroll => [],
     MainModule.clearance => [],
     MainModule.settings => [],

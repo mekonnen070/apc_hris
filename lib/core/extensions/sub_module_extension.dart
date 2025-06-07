@@ -4,6 +4,7 @@ import 'package:police_com/core/enums/sub_module_enum.dart';
 import 'package:police_com/features/dashboard/presentation/dashboard_page.dart';
 import 'package:police_com/features/employee/new_recruite/presentation/my_recruits_screen.dart';
 import 'package:police_com/features/leave_mgmt/presentation/leave_screen.dart';
+import 'package:police_com/features/training/presentation/available_trainings_screen.dart';
 import 'package:police_com/features/transfer/presentation/my_transfer_requests_screen.dart';
 import 'package:police_com/features/transfer/presentation/request_transfer_screen.dart';
 
@@ -23,6 +24,8 @@ extension SubModuleExtension on SubModule {
       case SubModule.leaveManagement:
         return MainModule.leaveManagement;
       // Add other cases as you expand features
+      case SubModule.training:
+        return MainModule.training;
     }
   }
 
@@ -41,6 +44,8 @@ extension SubModuleExtension on SubModule {
       case SubModule.leaveManagement:
         return 'Leave Management';
       // Add other cases
+      case SubModule.training:
+        return 'Training';
     }
   }
 
@@ -59,6 +64,8 @@ extension SubModuleExtension on SubModule {
         return const MyTransferRequestsScreen();
       case SubModule.leaveManagement:
         return const LeaveScreen();
+      case SubModule.training:
+        return const AvailableTrainingsScreen();
     }
   }
 }
