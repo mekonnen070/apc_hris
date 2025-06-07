@@ -36,7 +36,7 @@ class NewRecruitRepository implements INewRecruitRepository {
   @override
   Future<List<RecruitmentAnnouncement>> getRecruitmentAnnouncements() async {
     final response = await _dio.get(
-      ApiEndpoints.recruitmentAnnouncementsEndpoint,
+      ApiEndpoints.recruitmentAnnouncements,
     );
     return (response.data as List)
         .map((e) => RecruitmentAnnouncement.fromJson(e))
@@ -45,7 +45,7 @@ class NewRecruitRepository implements INewRecruitRepository {
 
   @override
   Future<void> createRecruit(RecruitInfo recruitInfo) async {
-    await _dio.post(ApiEndpoints.recruitsEndpoint, data: recruitInfo.toJson());
+    await _dio.post(ApiEndpoints.recruits, data: recruitInfo.toJson());
   }
 
   @override
