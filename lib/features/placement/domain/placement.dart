@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:police_com/core/enums/all_enums.dart';
 import 'package:police_com/core/enums/applicant_status.dart';
 
 part 'placement.freezed.dart';

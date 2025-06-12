@@ -60,7 +60,7 @@ class FormStepLayout extends StatelessWidget {
                           onPressed: onPrevious,
                         ),
                       if (onNext != null && nextButtonText != null)
-                        ElevatedButton.icon(
+                        FilledButton.icon(
                           icon:
                               isNextLoading
                                   ? const SizedBox(

@@ -1,9 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:police_com/core/enums/main_module_enum.dart';
-import 'package:police_com/core/extensions/main_module_extension.dart';
+import 'package:police_com/core/enums/sub_module_enum.dart';
 import 'package:police_com/core/extensions/sub_module_extension.dart';
 import 'package:police_com/features/widgets/drawer/widgets/log_out_page.dart';
 import 'package:police_com/features/widgets/language_switcher_widget.dart';
@@ -31,38 +28,17 @@ class AppDrawer extends ConsumerWidget {
               otherAccountsPictures: [LanguageSwitcherWidget()],
             ),
 
-            for (final mainModule in MainModule.values)
-              mainModule.subModules.length == 1
-                  ? ListTile(
-                    dense: true,
-                    leading: Icon(mainModule.icon),
-                    title: Text(mainModule.title),
-                    onTap: () {
-                      ref.read(selectedSubModuleProvider.notifier).state =
-                          mainModule.subModules.first;
-                      Navigator.of(context).pop();
-                    },
-                  )
-                  : ExpansionTile(
-                    dense: true,
-                    key: PageStorageKey(mainModule.toString()),
-                    leading: Icon(mainModule.icon),
-                    title: Text(mainModule.title),
-                    children:
-                        mainModule.subModules.map((subModule) {
-                          log('SubModule: ${subModule.title}');
-                          return ListTile(
-                            title: Text(subModule.title),
-                            onTap: () {
-                              // Update the provider with the selected sub-module.
-                              ref
-                                  .read(selectedSubModuleProvider.notifier)
-                                  .state = subModule;
-                              Navigator.of(context).pop();
-                            },
-                          );
-                        }).toList(),
-                  ),
+            // Create a single, flat list of all sub-modules.
+            for (final subModule in SubModule.values)
+              ListTile(
+                dense: true,
+                leading: Icon(subModule.icon),
+                title: Text(subModule.title),
+                onTap: () {
+                  ref.read(selectedSubModuleProvider.notifier).state = subModule;
+                  Navigator.of(context).pop();
+                },
+              ),
             const Divider(),
             const LogOutPage(),
             const SizedBox(height: 20),

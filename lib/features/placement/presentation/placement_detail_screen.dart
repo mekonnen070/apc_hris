@@ -65,7 +65,7 @@ class PlacementDetailScreen extends HookConsumerWidget {
                     maxLines: 5,
                   ),
                   const SizedBox(height: 16),
-                  ElevatedButton(
+                  FilledButton(
                     onPressed: () async {
                       final success = await notifier.submitAppeal(
                         appealReason: appealReasonController.text,
@@ -193,7 +193,7 @@ class PlacementDetailScreen extends HookConsumerWidget {
                               maxLines: 4,
                             ),
                             const SizedBox(height: 16),
-                            ElevatedButton(
+                            FilledButton(
                               onPressed: state.isApplying ? null : handleApply,
                               child:
                                   state.isApplying

@@ -127,9 +127,9 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage>
                           : SizedBox(
                             width: double.infinity,
                             height: 50,
-                            child: ElevatedButton(
+                            child: FilledButton(
                               onPressed: () => _submitForgotPassword(),
-                              style: ElevatedButton.styleFrom(
+                              style: FilledButton.styleFrom(
                                 backgroundColor: Theme.of(context).primaryColor,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),

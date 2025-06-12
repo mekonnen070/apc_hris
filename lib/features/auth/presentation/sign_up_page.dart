@@ -284,9 +284,9 @@ class _SignUpPageState extends ConsumerState<SignUpPage> with LoggerMixin {
                             : SizedBox(
                               width: double.infinity,
                               height: 50,
-                              child: ElevatedButton(
+                              child: FilledButton(
                                 onPressed: _submitSignup,
-                                style: ElevatedButton.styleFrom(
+                                style: FilledButton.styleFrom(
                                   backgroundColor:
                                       Theme.of(context).primaryColor,
                                   shape: RoundedRectangleBorder(

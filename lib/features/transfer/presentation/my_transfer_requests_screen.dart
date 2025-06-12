@@ -5,7 +5,9 @@ import 'package:police_com/core/enums/transfer_request_status.dart';
 import 'package:police_com/features/transfer/application/my_transfer_requests_notifier.dart';
 import 'package:police_com/features/transfer/application/my_transfer_requests_providers.dart';
 import 'package:police_com/features/transfer/domain/transfer_request_model.dart';
+import 'package:police_com/features/transfer/presentation/request_transfer_screen.dart';
 import 'package:police_com/features/transfer/presentation/widgets/transfer_request_list_item_widget.dart';
+import 'package:police_com/features/widgets/app_bar_widget.dart';
 import 'package:toastification/toastification.dart';
 
 class MyTransferRequestsScreen extends HookConsumerWidget {
@@ -72,37 +74,52 @@ class MyTransferRequestsScreen extends HookConsumerWidget {
         );
       }
 
-      return RefreshIndicator(
-        onRefresh:
-            () => transferRequestsNotifier.fetchMyTransferRequests(
-              isRefresh: true,
-            ),
-        child: ListView.builder(
-          padding: const EdgeInsets.all(8.0),
-          itemCount: transferRequestsState.requests.length,
-          itemBuilder: (context, index) {
-            final request = transferRequestsState.requests[index];
-            return TransferRequestListItemWidget(
-              request: request,
-              onTap: () {
-                // Show full details of the request in a dialog
-                _showTransferRequestDetailDialog(context, request);
-              },
-              onCancel:
-                  request.status ==
-                              TransferRequestStatus.pendingManagerApproval ||
-                          request.status ==
-                              TransferRequestStatus.pendingHRApproval
-                      ? () {
-                        _confirmCancelRequest(
-                          context,
-                          transferRequestsNotifier,
-                          request,
-                        );
-                      }
-                      : null,
+      return Scaffold(
+        appBar: const AppBarWidget(title: 'My Transfer Requests'),
+        floatingActionButton: FloatingActionButton(
+          
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const RequestTransferScreen(),
+              ),
             );
           },
+          child: const Icon(Icons.add),
+        ),
+        body: RefreshIndicator(
+          onRefresh:
+              () => transferRequestsNotifier.fetchMyTransferRequests(
+                isRefresh: true,
+              ),
+          child: ListView.builder(
+            padding: const EdgeInsets.all(8.0),
+            itemCount: transferRequestsState.requests.length,
+            itemBuilder: (context, index) {
+              final request = transferRequestsState.requests[index];
+              return TransferRequestListItemWidget(
+                request: request,
+                onTap: () {
+                  // Show full details of the request in a dialog
+                  _showTransferRequestDetailDialog(context, request);
+                },
+                onCancel:
+                    request.status ==
+                                TransferRequestStatus.pendingManagerApproval ||
+                            request.status ==
+                                TransferRequestStatus.pendingHRApproval
+                        ? () {
+                          _confirmCancelRequest(
+                            context,
+                            transferRequestsNotifier,
+                            request,
+                          );
+                        }
+                        : null,
+              );
+            },
+          ),
         ),
       );
     }
@@ -289,7 +306,7 @@ class ErrorDisplayWidget extends StatelessWidget {
     return Column(
       children: [
         Text(message),
-        ElevatedButton(onPressed: onRetry, child: const Text('Retry')),
+        FilledButton(onPressed: onRetry, child: const Text('Retry')),
       ],
     );
   }
@@ -313,7 +330,7 @@ class EmptyListDisplayWidget extends StatelessWidget {
     return Column(
       children: [
         Text(message),
-        ElevatedButton(onPressed: onActionPressed, child: Text(actionText)),
+        FilledButton(onPressed: onActionPressed, child: Text(actionText)),
       ],
     );
   }

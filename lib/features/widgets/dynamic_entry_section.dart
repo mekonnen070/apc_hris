@@ -43,11 +43,11 @@ class DynamicEntrySection<T> extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8),
-              ElevatedButton.icon(
+              FilledButton.icon(
                 icon: const Icon(Icons.add_circle_outline, size: 20),
                 label: Text(addNewButtonText),
                 onPressed: onAddNew,
-                style: ElevatedButton.styleFrom(
+                style: FilledButton.styleFrom(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 12,
                     vertical: 8,

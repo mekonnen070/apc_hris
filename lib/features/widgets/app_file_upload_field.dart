@@ -112,10 +112,10 @@ class AppFileUploadField extends StatelessWidget {
                     padding: EdgeInsets.zero,
                   ),
                 const SizedBox(width: 8),
-                ElevatedButton.icon(
+                FilledButton.icon(
                   icon: const Icon(Icons.attach_file_outlined, size: 18),
                   label: Text(pickedFile != null ? 'Change' : 'Select'),
-                  style: ElevatedButton.styleFrom(
+                  style: FilledButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 12,
                       vertical: 8,

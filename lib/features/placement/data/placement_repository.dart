@@ -111,6 +111,9 @@ class MockPlacementRepository implements IPlacementRepository {
     ApplicantStatus? status;
     if (index % 5 == 0) status = ApplicantStatus.applied;
     if (index % 5 == 1) status = ApplicantStatus.notSelected;
+    if (index % 5 == 2) status = ApplicantStatus.appealed;
+    if (index % 5 == 3) status = ApplicantStatus.appealed;
+    if (index % 5 == 4) status = ApplicantStatus.selected;
 
     return Placement(
       placementAnnouncementId: index + 1,
@@ -120,7 +123,7 @@ class MockPlacementRepository implements IPlacementRepository {
       startDate: DateTime.now().add(Duration(days: 60 + index * 10)),
       endDate: DateTime.now().add(Duration(days: 240 + index * 10)),
       location: 'North Gondar Zone',
-      currentUserApplicationStatus: status,
+      currentUserApplicationStatus: index == 0 || index == 1 ? null : status,
     );
   });
 

@@ -66,7 +66,10 @@ class _LogInPageState extends ConsumerState<LogInPage> with LoggerMixin {
   Widget build(BuildContext context) {
     return ThemeSwitchingArea(
       child: Scaffold(
-        appBar: const AppBarWidget(title: 'Login', actions: [ThemeSwitcherWidget()]),
+        appBar: const AppBarWidget(
+          title: 'Login',
+          actions: [ThemeSwitcherWidget()],
+        ),
         body: Center(
           child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
@@ -170,9 +173,9 @@ class _LogInPageState extends ConsumerState<LogInPage> with LoggerMixin {
                           : SizedBox(
                             width: double.infinity,
                             height: 50,
-                            child: ElevatedButton(
+                            child: FilledButton(
                               onPressed: () => _submitLogin(),
-                              style: ElevatedButton.styleFrom(
+                              style: FilledButton.styleFrom(
                                 backgroundColor: Theme.of(context).primaryColor,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),

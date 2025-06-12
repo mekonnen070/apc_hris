@@ -6,25 +6,25 @@ extension MainModuleX on MainModule {
   String get title => switch (this) {
     MainModule.dashboard => 'Dashboard',
     MainModule.employeeProfile => 'Employee Management',
-    MainModule.transfer => 'Transfer Management',
-    MainModule.leaveManagement => 'Leave Management',
+    MainModule.transfer => 'Transfer',
+    MainModule.leave => 'Leave',
     MainModule.training => 'Training & Development',
     MainModule.placement => 'Placement Management',
-    MainModule.payroll => 'Payroll Processing',
     MainModule.clearance => 'Employee Clearance',
-    MainModule.settings => 'System Settings',
+    MainModule.incident => 'Incident Management',
+    MainModule.promotion => 'Promotion Management',
   };
 
   IconData get icon => switch (this) {
     MainModule.dashboard => Icons.dashboard_rounded,
     MainModule.employeeProfile => Icons.people_alt_rounded,
     MainModule.transfer => Icons.transfer_within_a_station_rounded,
-    MainModule.leaveManagement => Icons.calendar_today_rounded,
+    MainModule.leave => Icons.calendar_today_rounded,
     MainModule.training => Icons.school_rounded,
     MainModule.placement => Icons.location_city_rounded,
-    MainModule.payroll => Icons.monetization_on_rounded,
     MainModule.clearance => Icons.how_to_reg_rounded,
-    MainModule.settings => Icons.settings_rounded,
+    MainModule.incident => Icons.warning_amber_rounded,
+    MainModule.promotion => Icons.stairs_rounded,
   };
 
   List<SubModule> get subModules => switch (this) {
@@ -35,20 +35,13 @@ extension MainModuleX on MainModule {
       // SubModule.viewEmployees, (e.g., leading to an employee list screen)
       SubModule.newRecruit,
     ],
-    MainModule.transfer => [
-      SubModule.requestNewTransfer,
-      SubModule.viewMyTransferRequests,
-    ],
-    MainModule.leaveManagement => [
-      // If Leave Management is a single page, or has its own sub-modules
-      SubModule.leaveManagement, // Example: direct link if only one screen
-      // Or: SubModule.requestLeave, SubModule.approveLeave etc.
-    ],
+    MainModule.transfer => [SubModule.transfer],
+    MainModule.leave => [SubModule.leave],
     // Define sub-modules for these as they are developed
     MainModule.training => [SubModule.training],
     MainModule.placement => [SubModule.placement],
-    MainModule.payroll => [],
-    MainModule.clearance => [],
-    MainModule.settings => [],
+    MainModule.clearance => [SubModule.clearance],
+    MainModule.incident => [SubModule.incident],
+    MainModule.promotion => [SubModule.promotion],
   };
 }

@@ -187,11 +187,11 @@ class RequestTransferScreen extends HookConsumerWidget {
                 child:
                     formState.isSubmitting
                         ? const CircularProgressIndicator()
-                        : ElevatedButton.icon(
+                        : FilledButton.icon(
                           onPressed: handleSubmit,
                           icon: const Icon(Icons.send_rounded),
                           label: const Text('Submit Transfer Request'),
-                          style: ElevatedButton.styleFrom(
+                          style: FilledButton.styleFrom(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 24,
                               vertical: 12,
