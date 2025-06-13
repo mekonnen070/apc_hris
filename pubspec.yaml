@@ -36,6 +36,7 @@ dependencies:
 
   path: any
   flutter_launcher_icons: ^0.14.4
+  mobile_scanner: ^7.0.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

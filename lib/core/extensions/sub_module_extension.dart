@@ -12,6 +12,7 @@ import 'package:police_com/features/profile/presentation/profile_screen.dart';
 import 'package:police_com/features/promotion/presentation/promotion_screen.dart';
 import 'package:police_com/features/training/presentation/available_trainings_screen.dart';
 import 'package:police_com/features/transfer/presentation/request_transfer_screen.dart';
+import 'package:police_com/features/verification/presentation/verification_screen.dart';
 
 extension SubModuleExtension on SubModule {
   MainModule get mainModule {
@@ -20,9 +21,9 @@ extension SubModuleExtension on SubModule {
         return MainModule.dashboard;
 
       // All these now clearly fall under Employee Profile
-      case SubModule.employeeProfile:
+      case SubModule.profile:
       case SubModule.newRecruit:
-        return MainModule.employeeProfile;
+        return MainModule.profile;
       case SubModule.transfer:
         return MainModule.transfer;
       case SubModule.leave:
@@ -38,6 +39,8 @@ extension SubModuleExtension on SubModule {
         return MainModule.incident;
       case SubModule.promotion:
         return MainModule.promotion;
+      case SubModule.verification:
+        return MainModule.verification;
     }
   }
 
@@ -45,8 +48,8 @@ extension SubModuleExtension on SubModule {
     switch (this) {
       case SubModule.dashboard:
         return 'Dashboard';
-      case SubModule.employeeProfile: // << UPDATED title
-        return 'Employee Profile'; // More descriptive title for employee profile
+      case SubModule.profile:
+        return 'Profile';
       case SubModule.newRecruit:
         return 'New Recruit';
       case SubModule.transfer:
@@ -64,6 +67,8 @@ extension SubModuleExtension on SubModule {
         return 'Incident';
       case SubModule.promotion:
         return 'Promotion';
+      case SubModule.verification:
+        return 'Verification';
     }
   }
 
@@ -75,7 +80,7 @@ extension SubModuleExtension on SubModule {
     switch (this) {
       case SubModule.dashboard:
         return const DashboardPage();
-      case SubModule.employeeProfile:
+      case SubModule.profile:
         return const ProfileScreen();
       case SubModule.newRecruit:
         return const MyRecruitsScreen();
@@ -93,6 +98,8 @@ extension SubModuleExtension on SubModule {
         return const GrievanceScreen();
       case SubModule.promotion:
         return const PromotionScreen();
+      case SubModule.verification:
+        return const VerificationScreen();
     }
   }
 }

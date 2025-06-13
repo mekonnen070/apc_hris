@@ -1,6 +1,6 @@
 enum MainModule {
   dashboard,
-  employeeProfile,
+  profile,
   transfer,
   leave,
   training,
@@ -8,4 +8,5 @@ enum MainModule {
   incident,
   clearance,
   promotion,
+  verification,
 }

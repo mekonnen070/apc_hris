@@ -1,6 +1,6 @@
 enum SubModule {
   dashboard,
-  employeeProfile,
+  profile,
   newRecruit,
   transfer,
   leave,
@@ -9,4 +9,5 @@ enum SubModule {
   clearance,
   incident,
   promotion,
+  verification,
 }

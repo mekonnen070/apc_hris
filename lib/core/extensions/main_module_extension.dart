@@ -5,7 +5,7 @@ import 'package:police_com/core/enums/sub_module_enum.dart';
 extension MainModuleX on MainModule {
   String get title => switch (this) {
     MainModule.dashboard => 'Dashboard',
-    MainModule.employeeProfile => 'Employee Management',
+    MainModule.profile => 'Profile',
     MainModule.transfer => 'Transfer',
     MainModule.leave => 'Leave',
     MainModule.training => 'Training & Development',
@@ -13,11 +13,12 @@ extension MainModuleX on MainModule {
     MainModule.clearance => 'Employee Clearance',
     MainModule.incident => 'Incident Management',
     MainModule.promotion => 'Promotion Management',
+    MainModule.verification => 'Verification',
   };
 
   IconData get icon => switch (this) {
     MainModule.dashboard => Icons.dashboard_rounded,
-    MainModule.employeeProfile => Icons.people_alt_rounded,
+    MainModule.profile => Icons.people_alt_rounded,
     MainModule.transfer => Icons.transfer_within_a_station_rounded,
     MainModule.leave => Icons.calendar_today_rounded,
     MainModule.training => Icons.school_rounded,
@@ -25,12 +26,13 @@ extension MainModuleX on MainModule {
     MainModule.clearance => Icons.how_to_reg_rounded,
     MainModule.incident => Icons.warning_amber_rounded,
     MainModule.promotion => Icons.stairs_rounded,
+    MainModule.verification => Icons.qr_code_rounded,
   };
 
   List<SubModule> get subModules => switch (this) {
     MainModule.dashboard => [SubModule.dashboard],
-    MainModule.employeeProfile => [
-      SubModule.employeeProfile, // << UPDATED from profilePersonalInfo
+    MainModule.profile => [
+      SubModule.profile, // << UPDATED from profilePersonalInfo
       // Consider adding a "View/Search Employees" sub-module here as the first item
       // SubModule.viewEmployees, (e.g., leading to an employee list screen)
       SubModule.newRecruit,
@@ -43,5 +45,6 @@ extension MainModuleX on MainModule {
     MainModule.clearance => [SubModule.clearance],
     MainModule.incident => [SubModule.incident],
     MainModule.promotion => [SubModule.promotion],
+    MainModule.verification => [SubModule.verification],
   };
 }
