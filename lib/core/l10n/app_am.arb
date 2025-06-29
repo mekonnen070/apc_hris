@@ -1,9 +1,782 @@
 {
     "@@locale": "am",
-    "language": "Amharic",
-    "signInWithGoogle": "Sign in with Google",
-    "loginErrorMessage": "Failed to sign in. Please try again.",
-    "errorMessage": "Something went wrong. Please try again.",
-    "retry": "Retry",
-    "changeLanguage": "Change Language"
+    "forgotPassword": "የይለፍ ቃል ረስተዋል",
+    "enterEmailForReset": "የይለፍ ቃልዎን እንደገና ለማስጀመር ኢሜልዎን ያስገቡ።",
+    "resetYourPassword": "የይለፍ ቃልዎን ዳግም ያስጀምሩ",
+    "enterEmailForPasswordReset": "የይለፍ ቃል ዳግም ማስጀመሪያ መመሪያዎችን ለመቀበል ኢሜልዎን ያስገቡ።",
+    "email": "ኢሜል",
+    "emailIsRequired": "ኢሜል ያስፈልጋል",
+    "enterAValidEmail": "እባክዎ ትክክለኛ ኢሜል ያስገቡ",
+    "resetPassword": "የይለፍ ቃል ዳግም ያስጀምሩ",
+    "rememberedYourPassword": "የይለፍ ቃልዎን አስታውሰዋል?",
+    "login": "ግባ",
+    "passwordResetSent": "የይለፍ ቃል ዳግም ማስጀመሪያ ተልኳል",
+    "checkEmailForResetInstructions": "ለዳግም ማስጀመሪያ መመሪያዎች ኢሜልዎን ያረጋግጡ።",
+    "passwordResetFailed": "የይለፍ ቃል ዳግም ማስጀመር አልተሳካም",
+    "welcomeBack": "እንኳን ደህና መመለስ!",
+    "logInWithEmailAndPassword": "በኢሜልዎ እና በይለፍ ቃልዎ ይግቡ",
+    "password": "የይለፍ ቃል",
+    "passwordIsRequired": "የይለፍ ቃል ያስፈልጋል",
+    "minimum6CharactersRequired": "ቢያንስ 6 ቁምፊዎች ያስፈልጋሉ",
+    "dontHaveAnAccount": "አካውንት የለዎትም?",
+    "signUp": "ይመዝገቡ",
+    "loginSuccessful": "በተሳካ ሁኔታ ገብተዋል",
+    "youHaveSuccessfullyLoggedIn": "በተሳካ ሁኔታ ገብተዋል።",
+    "loginFailed": "መግባት አልተሳካም",
+    "createAnAccount": "አካውንት ይፍጠሩ",
+    "signUpWithEmailAndPassword": "በኢሜልዎ እና በይለፍ ቃልዎ ይመዝገቡ",
+    "fullName": "ሙሉ ስም",
+    "fullNameIsRequired": "ሙሉ ስም ያስፈልጋል",
+    "address": "አድራሻ",
+    "addressIsRequired": "አድራሻ ያስፈልጋል",
+    "phoneNumber": "ስልክ ቁጥር",
+    "phoneNumberIsRequired": "ስልክ ቁጥር ያስፈልጋል",
+    "dateOfBirth": "የልደት ቀን",
+    "birthDateIsRequired": "የልደት ቀን ያስፈልጋል",
+    "gender": "ጾታ",
+    "maritalStatus": "የጋብቻ ሁኔታ",
+    "selectYourMaritalStatus": "የጋብቻ ሁኔታዎን ይምረጡ",
+    "signupSuccessful": "ምዝገባ ተሳክቷል",
+    "youHaveSuccessfullySignedUp": "በተሳካ ሁኔታ ተመዝግበዋል።",
+    "clearanceRequests": "የሥራ መልቀቂያ ጥያቄዎች",
+    "noClearanceRequests": "ምንም የሥራ መልቀቂያ ጥያቄዎች አልተገኙም።",
+    "requestClearance": "የሥራ መልቀቂያ ይጠይቁ",
+    "submitRequest": "ጥያቄ አስገባ",
+    "reason": "ምክንያት",
+    "reasonIsRequired": "ምክንያት ያስፈልጋል",
+    "description": "ዝርዝር መግለጫ",
+    "descriptionIsRequired": "ዝርዝር መግለጫ ያስፈልጋል",
+    "requestDate": "የተጠየቀበት ቀን",
+    "status": "ሁኔታ",
+    "dashboard": "ዳሽቦርድ",
+    "myRecruits": "የኔ ቅጥሮች",
+    "noRecruitsFound": "ለእርስዎ የተመደቡ አዲስ ቅጥሮች የሉም።",
+    "newRecruit": "አዲስ ቅጥር",
+    "recruitmentDetails": "የቅጥር ዝርዝሮች",
+    "personalInformation": "የግል መረጃ",
+    "emergencyContact": "የአደጋ ጊዜ ተጠሪ",
+    "documents": "ሰነዶች",
+    "submit": "አስገባ",
+    "documentManagement": "የሰነድ አስተዳደር",
+    "employmentDetails": "የቅጥር ዝርዝሮች",
+    "recruitment": "ቅጥር",
+    "retirement": "ጡረታ",
+    "incidentReports": "የክስተት ሪፖርቶች",
+    "noIncidentReports": "ምንም የክስተት ሪፖርቶች አልተገኙም።",
+    "reportIncident": "ክስተት ሪፖርት አድርግ",
+    "incidentType": "የክስተቱ አይነት",
+    "selectIncidentType": "የክስተቱን አይነት ይምረጡ",
+    "dateOfIncident": "ክስተቱ የተፈጠረበት ቀን",
+    "pleaseEnterDescription": "እባክዎ ዝርዝር መግለጫ ያስገቡ",
+    "incidentDate": "הክስተቱ የተፈጠረበት ቀን",
+    "leaveManagement": "የእረፍት ጊዜ አስተዳደር",
+    "leaveHistory": "የእረፍት ጊዜ ታሪክ",
+    "requestLeave": "የእረፍት ጊዜ ይጠይቁ",
+    "noLeaveHistory": "ምንም የእረፍት ጊዜ ታሪክ አልተገኘም።",
+    "leaveBalance": "ቀሪ የእረፍት ጊዜ",
+    "annual": "ዓመታዊ",
+    "sick": "ህመም",
+    "maternity": "ወሊድ",
+    "paternity": "አባትነት",
+    "unpaid": "ያለክፍያ",
+    "other": "ሌላ",
+    "days": "ቀናት",
+    "appliedOn": "ያመለከቱበት ቀን",
+    "leaveType": "የእረፍት ዓይነት",
+    "selectLeaveType": "እባክዎ የእረፍት ዓይነት ይምረጡ",
+    "startDate": "የመጀመሪያ ቀን",
+    "endDate": "የመጨረሻ ቀን",
+    "availablePlacements": "ክፍት የሥራ መደቦች",
+    "noPlacementsAvailable": "በአሁኑ ሰዓት ምንም ክፍት የሥራ መደቦች የሉም።",
+    "placementDetails": "የሥራ መደቡ ዝርዝሮች",
+    "postedOn": "የተለጠፈበት ቀን",
+    "deadline": "የማመልከቻ ጊዜ ገደብ",
+    "location": "ቦታ",
+    "requiredExperience": "የሚያስፈልግ የሥራ ልምድ",
+    "noApplicants": "ምንም አመልካቾች የሉም",
+    "noApplicantsForPlacement": "ለዚህ የሥራ መደብ እስካሁን ምንም አመልካቾች የሉም።",
+    "applicants": "አመልካቾች",
+    "myProfile": "የግል መገለጫ",
+    "addContact": "ተጠሪ ጨምር",
+    "editContact": "ተጠሪ አርትዕ",
+    "save": "አስቀምጥ",
+    "relationship": "ዝምድና",
+    "selectRelationship": "ዝምድና ይምረጡ",
+    "city": "ከተማ",
+    "cityIsRequired": "ከተማ ያስፈልጋል",
+    "addDependant": "ጥገኛ ጨምር",
+    "editDependant": "ጥገኛ አርትዕ",
+    "addEducation": "ትምህርት ጨምር",
+    "editEducation": "ትምህርት አርትዕ",
+    "institution": "ተቋም",
+    "institutionIsRequired": "ተቋም ያስፈልጋል",
+    "fieldOfStudy": "የትምህርት መስክ",
+    "selectFieldOfStudy": "የትምህርት መስክ ይምረጡ",
+    "gpa": "GPA",
+    "gpaIsRequired": "GPA ያስፈልጋል",
+    "addExperience": "የሥራ ልምድ ጨምር",
+    "editExperience": "የሥራ ልምድ አርትዕ",
+    "company": "ኩባንያ",
+    "companyIsRequired": "ኩባንያ ያስፈልጋል",
+    "jobTitle": "የሥራ መደብ",
+    "jobTitleIsRequired": "የሥራ መደብ ያስፈልጋል",
+    "yearsOfExperience": "የሥራ ልምድ በዓመታት",
+    "yearsOfExpRequired": "የሥራ ልምድ በዓመታት ያስፈልጋል",
+    "addSpouse": "የትዳር አጋር ጨምር",
+    "editSpouse": "የትዳር አጋር አርትዕ",
+    "editPersonalInfo": "የግል መረጃ አርትዕ",
+    "contacts": "ተጠሪዎች",
+    "noContactsAvailable": "ምንም ተጠሪዎች የሉም። እባክዎ አንድ ይጨምሩ።",
+    "addNewContact": "አዲስ ተጠሪ ጨምር",
+    "dependants": "ጥገኞች",
+    "noDependantsAvailable": "ምንም ጥገኞች የሉም። እባክዎ አንድ ይጨምሩ።",
+    "addNewDependant": "አዲስ ጥገኛ ጨምር",
+    "noDocumentsAvailable": "ምንም ሰነዶች የሉም።",
+    "education": "ትምህርት",
+    "noEducationAvailable": "ምንም የትምህርት ታሪክ የለም። እባክዎ አንድ ይጨምሩ።",
+    "addNewEducation": "አዲስ ትምህርት ጨምር",
+    "experience": "የሥራ ልምድ",
+    "noExperienceAvailable": "ምንም የሥራ ልምድ የለም። እባክዎ አንድ ይጨምሩ።",
+    "addNewExperience": "አዲስ የሥራ ልምድ ጨምር",
+    "performance": "የሥራ አፈጻጸም",
+    "noPerformanceData": "ምንም የአፈጻጸም መረጃ የለም።",
+    "middleName": "የአባት ስም",
+    "lastName": "የአያት ስም",
+    "emailAddress": "ኢሜል አድራሻ",
+    "bloodGroup": "የደም አይነት",
+    "religion": "ሃይማኖት",
+    "mobileNumber": "የሞባይል ቁጥር",
+    "edit": "አስተካክል",
+    "spouse": "የትዳር አጋር",
+    "noSpouseAvailable": "ምንም የትዳር አጋር መረጃ የለም። እባክዎ አንድ ይጨምሩ።",
+    "addNewSpouse": "አዲስ የትዳር አጋር ጨምር",
+    "promotionRequests": "የደረጃ እድገት ጥያቄዎች",
+    "noPromotionRequests": "ምንም የደረጃ እድገት ጥያቄዎች አልተገኙም።",
+    "requestPromotion": "የደረጃ እድገት ይጠይቁ",
+    "currentPosition": "የአሁኑ የሥራ መደብ",
+    "currentPositionIsRequired": "የአሁኑ የሥራ መደብ ያስፈልጋል",
+    "promotedPosition": "እድገት የተጠየቀበት የሥራ መደብ",
+    "promotedPositionIsRequired": "እድገት የተጠየቀበት የሥራ መደብ ያስፈልጋል",
+    "promotionDate": "የደረጃ እድገት ቀን",
+    "availableTrainings": "ያሉ ሥልጠናዎች",
+    "noTrainingsAvailable": "በአሁኑ ሰዓት ምንም ሥልጠናዎች የሉም።",
+    "trainingDetails": "የሥልጠና ዝርዝሮች",
+    "duration": "የሚፈጀው ጊዜ",
+    "cost": "ዋጋ",
+    "noApplicantsForTraining": "ለዚህ ሥልጠና እስካሁን ምንም አመልካቾች የሉም።",
+    "myTransferRequests": "የእኔ የዝውውር ጥያቄዎች",
+    "noTransferRequests": "ምንም የዝውውር ጥያቄዎች አልተገኙም።",
+    "requestTransfer": "ዝውውር ይጠይቁ",
+    "from": "ከ",
+    "fromDepartment": "ካለበት መምሪያ",
+    "fromDepartmentIsRequired": "ያለበት መምሪያ ያስፈልጋል",
+    "toDepartment": "ወደ ሚዛወርበት መምሪያ",
+    "toDepartmentIsRequired": "የሚዛወርበት መምሪያ ያስፈልጋል",
+    "requestDetails": "የጥያቄ ዝርዝሮች",
+    "employeeIdLabel": "የሰራተኛ መለያ ቁጥር",
+    "transferDate": "የዝውውር ቀን",
+    "scanQrCode": "QR ኮድ ይቃኙ",
+    "scanToVerify": "የሰራተኛን ዝርዝር ለማረጋገጥ QR ኮድ ይቃኙ",
+    "verification": "ማረጋገጫ",
+    "invalidQrCode": "የማይሰራ QR ኮድ",
+    "employeeDetails": "የሰራተኛ ዝርዝሮች",
+    "position": "የሥራ መደብ",
+    "department": "መምሪያ",
+    "employmentDate": "የቅጥር ቀን",
+    "verified": "የተረጋገጠ",
+    "notVerified": "ያልተረጋገጠ",
+    "home": "ዋና ገጽ",
+    "profile": "መገለጫ",
+    "language": "ቋንቋ",
+    "logout": "ውጣ",
+    "areYouSureLogout": "ለመውጣት እርግጠኛ ነዎት?",
+    "cancel": "ሰርዝ",
+    "add": "ጨምር",
+    "delete": "አጥፋ",
+    "areYouSureDelete": "ይህን ንጥል ለማጥፋት እርግጠኛ ነዎት?",
+    "selectDate": "ቀን ይምረጡ",
+    "selectFile": "ፋይል ይምረጡ",
+    "noFileSelected": "ምንም ፋይል አልተመረጠም",
+    "applicationStatus": "የማመልከቻ ሁኔታ",
+    "applied": "አመልክቷል",
+    "underReview": "በግምገማ ላይ",
+    "shortlisted": "እጩ ሆኗል",
+    "rejected": "ውድቅ ተደርጓል",
+    "approved": "ጸድቋል",
+    "applyNow": "አሁን ያመልክቱ",
+    "applicationDeadline": "የማመልከቻ ገደብ",
+    "viewApplicants": "አመልካቾችን ይመልከቱ",
+    "somethingWentWrong": "ስህተት ተፈጥሯል። እባክዎ እንደገና ይሞክሩ።",
+    "retry": "እንደገና ሞክር",
+    "english": "English",
+    "amharic": "አማርኛ",
+    "orContinueWith": "ወይም በሚከተለው ይቀጥሉ",
+    "selectGender": "ጾታ ይምረጡ",
+    "male": "ወንድ",
+    "female": "ሴት",
+    "single": "ያላገባ/ች",
+    "married": "ያገባ/ች",
+    "divorced": "የተፋታ/ች",
+    "widowed": "ባል/ሚስት የሞተበት/ባት",
+    "confirmDeleteItem": "{itemName}ን(ን) መሰረዝ እንደሚፈልጉ እርግጠኛ ነዎት?",
+    "@confirmDeleteItem": {
+        "placeholders": {
+            "itemName": {
+                "type": "String"
+            }
+        }
+    },
+    "fileIsRequired": "ፋይል ያስፈልጋል",
+    "pending": "በሂደት ላይ",
+    "completed": "ተጠናቋል",
+    "cancelled": "ተሰርዟል",
+    "accepted": "ተቀባይነት አግኝቷል",
+    "clearanceRequestSubmitted": "የሥራ መልቀቂያ ጥያቄ በተሳካ ሁኔታ ገብቷል",
+    "failedToSubmitRequest": "ጥያቄ ማስገባት አልተሳካም፦ ",
+    "reasonForClearance": "የሥራ መልቀቂያ ምክንያት",
+    "pleaseSelectReason": "እባክዎ ምክንያት ይምረጡ",
+    "lastDayOfWorkLabel": "የመጨረሻ የሥራ ቀን",
+    "lastDayOfWork": "የመጨረሻ የሥራ ቀን: {date}",
+    "@lastDayOfWork": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "pleaseSelectDate": "እባክዎ ቀን ይምረጡ",
+    "commentsOptional": "አስተያየቶች (ካለ)",
+    "provideAdditionalDetails": "ማንኛውንም ተጨማሪ ዝርዝሮች ያቅርቡ።",
+    "requestedOn": "የተጠየቀበት ቀን: {date}",
+    "@requestedOn": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "welcomeBackUser": "እንኳን ደህና መጣህ/ሽ, {name}!",
+    "@welcomeBackUser": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "totalEmployees": "ጠቅላላ ሰራተኞች",
+    "pendingTasks": "በሂደት ላይ ያሉ ተግባራት",
+    "quickActions": "ፈጣን እርምጃዎች",
+    "recentActivity": "የቅርብ ጊዜ እንቅስቃሴ",
+    "leaveRequestApproved": "የእረፍት ጥያቄ ጸድቋል",
+    "annualLeaveFor": "የ{name} ዓመታዊ ፈቃድ ከ{dateRange}።",
+    "@annualLeaveFor": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            },
+            "dateRange": {
+                "type": "String"
+            }
+        }
+    },
+    "newPromotionRequest": "አዲስ የደረጃ እድገት ጥያቄ",
+    "fromToPosition": "ከ{currentRank} {name} ለ{newPosition} የሥራ መደብ።",
+    "@fromToPosition": {
+        "placeholders": {
+            "currentRank": {
+                "type": "String"
+            },
+            "name": {
+                "type": "String"
+            },
+            "newPosition": {
+                "type": "String"
+            }
+        }
+    },
+    "resignationSubmitted": "የሥራ መልቀቂያ ቀርቧል",
+    "byEffective": "በ{rank} {name}፣ ከ{date} ጀምሮ።",
+    "@byEffective": {
+        "placeholders": {
+            "rank": {
+                "type": "String"
+            },
+            "name": {
+                "type": "String"
+            },
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "twoHoursAgo": "ከ2 ሰዓታት በፊት",
+    "eightHoursAgo": "ከ8 ሰዓታት በፊት",
+    "oneDayAgo": "ከ1 ቀን በፊት",
+    "transfer": "ዝውውር",
+    "leave": "እረፍት",
+    "training": "ስልጠና",
+    "placement": "ምደባ",
+    "clearance": "ሥራ መልቀቂያ",
+    "incident": "ክስተት",
+    "promotion": "የደረጃ እድገት",
+    "confirmAction": "እርምጃውን ያረጋግጡ",
+    "confirmRecruitAction": "{count} ቅጥር(ዎች)ን {status} ማድረግ እንደሚፈልጉ እርግጠኛ ነዎት? ይህ እርምጃ ሊቀለበስ አይችልም።",
+    "@confirmRecruitAction": {
+        "placeholders": {
+            "status": {
+                "type": "String"
+            },
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "recruitIdentifier": "{firstName} {middleName} (ID: {id})",
+    "@recruitIdentifier": {
+        "placeholders": {
+            "firstName": {
+                "type": "String"
+            },
+            "middleName": {
+                "type": "String"
+            },
+            "id": {
+                "type": "int"
+            }
+        }
+    },
+    "statusUpdatedSuccessfully": "ሁኔታው በተሳካ ሁኔታ ተዘምኗል!",
+    "processing": "በሂደት ላይ...",
+    "confirmStatus": "{status} መሆኑን ያረጋግጡ",
+    "@confirmStatus": {
+        "placeholders": {
+            "status": {
+                "type": "String"
+            }
+        }
+    },
+    "pass": "አልፏል",
+    "fail": "ወድቋል",
+    "itemsSelected": "{count} ተመርጠዋል",
+    "@itemsSelected": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "selectRecruitsToContinue": "ለመቀጠል ቅጥሮችን ይምረጡ",
+    "markAll": "ሁሉንም ምረጥ",
+    "unmarkAll": "ሁሉንም ላለመምረጥ",
+    "addNewRecruit": "አዲስ ቅጥር ጨምር",
+    "newRecruitApplication": "የአዲስ ቅጥር ማመልከቻ",
+    "recruitmentAnnouncement": "የቅጥር ማስታወቂያ",
+    "firstName": "ስም",
+    "age": "ዕድሜ",
+    "numberOfChildren": "የልጆች ብዛት",
+    "nationality": "ዜግነት",
+    "woreda": "ወረዳ",
+    "kebele": "ቀበሌ",
+    "houseNumber": "የቤት ቁጥር",
+    "reportNewIncident": "አዲስ ክስተት ሪፖርት አድርግ",
+    "pleaseSelectIncidentDate": "እባክዎ የክስተቱን ቀን ይምረጡ",
+    "pleaseSelectAnIncidentType": "እባክዎ የክስተቱን አይነት ይምረጡ",
+    "descriptionOfIncident": "የክስተቱ መግለጫ",
+    "provideClearDetailedDescription": "እባክዎ የክስተቱን ግልጽ እና ዝርዝር መግለጫ ያቅርቡ።",
+    "submitReport": "ሪፖርት አስገባ",
+    "incidentReportSubmitted": "የክስተት ሪፖርት በተሳካ ሁኔታ ገብቷል",
+    "failedToSubmitReport": "ሪፖርት ማስገባት አልተሳካም:",
+    "incidentAndGrievance": "ክስተት እና ቅሬታ",
+    "noIncidentsToDisplay": "የሚታዩ ክስተቶች የሉም።",
+    "dateLabel": "ቀን: {date}",
+    "@dateLabel": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "annualLeave": "ዓመታዊ እረፍት",
+    "sickLeave": "የህመም እረፍት",
+    "noBalanceInfoAvailable": "ምንም የቀሪ እረፍት መረጃ የለም።",
+    "requestHistory": "የጥያቄ ታሪክ",
+    "newLeaveRequest": "አዲስ የእረፍት ጥያቄ",
+    "requestNewLeave": "አዲስ የእረፍት ጥያቄ ላክ",
+    "pleaseSelectLeaveType": "እባክዎ የእረፍት አይነት ይምረጡ",
+    "selectLeaveTypeToSeeBalance": "ቀሪ ሂሳብ ለማየት የእረፍት አይነት ይምረጡ",
+    "availableDays": "የሚገኝ: {days} ቀናት",
+    "@availableDays": {
+        "placeholders": {
+            "days": {
+                "type": "int"
+            }
+        }
+    },
+    "availableOfTotalDays": "የሚገኝ: {remaining} ከ {total} ቀናት",
+    "@availableOfTotalDays": {
+        "placeholders": {
+            "remaining": {
+                "type": "int"
+            },
+            "total": {
+                "type": "int"
+            }
+        }
+    },
+    "pleaseSelectStartDate": "እባክዎ የመነሻ ቀን ይምረጡ",
+    "pleaseSelectEndDate": "እባክዎ የመጨረሻ ቀን ይምረጡ",
+    "endDateAfterStartDate": "የመጨረሻው ቀን ከመጀመሪያው ቀን በኋላ መሆን አለበት",
+    "reasonForLeave": "የእረፍት ምክንያት",
+    "leaveTitle": "{leaveType} እረፍት",
+    "@leaveTitle": {
+        "placeholders": {
+            "leaveType": {
+                "type": "String"
+            }
+        }
+    },
+    "fromLabel": "ከ:",
+    "toLabel": "እስከ:",
+    "daysWithReason": "{days} ቀን(ዎች) - {reason}",
+    "@daysWithReason": {
+        "placeholders": {
+            "days": {
+                "type": "int"
+            },
+            "reason": {
+                "type": "String"
+            }
+        }
+    },
+    "daysOnly": "{count} ቀን(ዎች)",
+    "@daysOnly": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "daysLeft": " ቀናት ቀርተዋል",
+    "usedOf": "ያገለገለ: {used} ከ {allowed}",
+    "@usedOf": {
+        "placeholders": {
+            "used": {
+                "type": "int"
+            },
+            "allowed": {
+                "type": "int"
+            }
+        }
+    },
+    "applicationSubmittedSuccessfully": "ማመልከቻው በተሳካ ሁኔታ ገብቷል!",
+    "submitAppeal": "ይግባኝ አስገባ",
+    "reasonForAppeal": "የይግባኝ ምክንያት",
+    "appealSubmitted": "ይግባኝ ገብቷል።",
+    "failedToSubmitAppeal": "ይግባኝ ማስገባት አልተሳካም።",
+    "selectedApplicants": "የተመረጡ አመልካቾች",
+    "placementNotFound": "የሥራ መደቡ አልተገኘም።",
+    "applyForThisPlacement": "ለዚህ የሥራ መደብ ያመልክቱ",
+    "reasonForApplyingOptional": "የማመልከቻ ምክንያት (በፍቃደኝነት)",
+    "submitApplication": "ማመልከቻ አስገባ",
+    "noSelectedApplicantInfo": "ስለተመረጡ አመልካቾች ምንም መረጃ የለም።",
+    "notAvailable": "የለም",
+    "noPromotionRequestsFound": "ምንም የደረጃ እድገት ጥያቄዎች አልተገኙም።",
+    "promotionRequestSubmitted": "የደረጃ እድገት ጥያቄ በተሳካ ሁኔታ ገብቷል",
+    "requestedPositionForPromotion": "ለደረጃ እድገት የተጠየቀ የሥራ መደብ",
+    "thisFieldIsRequired": "ይህ መስክ ያስፈልጋል",
+    "reasonForRequest": "የጥያቄው ምክንያት",
+    "brieflyExplainPromotionReason": "ይህን የደረጃ እድገት ለምን እንደጠየቁ በአጭሩ ይግለጹ።",
+    "pleaseProvideReason": "እባክዎ ምክንያት ያቅርቡ",
+    "requestForPromotion": "የደረጃ እድገት ጥያቄ",
+    "requestedLabel": "የተጠየቀው: {date}",
+    "@requestedLabel": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "trainingNotFound": "ስልጠና አልተገኘም።",
+    "applyForThisTraining": "ለዚህ ስልጠና ያመልክቱ",
+    "trainingLocationAndOrganizer": "{center} በ{organizer}",
+    "@trainingLocationAndOrganizer": {
+        "placeholders": {
+            "center": {
+                "type": "String"
+            },
+            "organizer": {
+                "type": "String"
+            }
+        }
+    },
+    "noTransferRequestsYet": "እስካሁን ምንም የዝውውር ጥያቄ አላቀረቡም።",
+    "refresh": "አድስ",
+    "transferRequestDetails": "የዝውውር ጥያቄ ዝርዝሮች",
+    "requestId": "የጥያቄ መለያ",
+    "currentDepartment": "የአሁኑ መምሪያ",
+    "currentLocation": "የአሁኑ ቦታ",
+    "requestedDepartment": "የተጠየቀው መምሪያ",
+    "requestedLocation": "የተጠየቀው ቦታ",
+    "requestedPosition": "የተጠየቀው የሥራ መደብ",
+    "managerComments": "የሥራ አስኪያጅ አስተያየት",
+    "hrComments": "የሰው ሃብት አስተያየት",
+    "effectiveDate": "ውጤታማ የሚሆንበት ቀን",
+    "lastUpdated": "ለመጨረሻ ጊዜ የተሻሻለው",
+    "close": "ዝጋ",
+    "confirmCancellation": "ስረዛን አረጋግጥ",
+    "confirmCancelTransferRequest": "ወደ {location} ያቀረቡትን የዝውውር ጥያቄ መሰረዝ ይፈልጋሉ?",
+    "@confirmCancelTransferRequest": {
+        "placeholders": {
+            "location": {
+                "type": "String"
+            }
+        }
+    },
+    "no": "አይ",
+    "yesCancel": "አዎ, ይሰረዝ",
+    "pleaseCorrectErrorsInForm": "እባክዎ በቅጹ ላይ ያሉትን ስህተቶች ያስተካክሉ።",
+    "currentEmployeeDetails": "የአሁኑ የሰራተኛ ዝርዝሮች:",
+    "newTransferRequest": "አዲስ የዝውውር ጥያቄ:",
+    "requestedDepartmentLabel": "የተጠየቀው መምሪያ *",
+    "requestedDepartmentHint": "ለምሳሌ: ሲ.አይ.ዲ, ትራፊክ ፖሊስ, ሰው ሃብት",
+    "requestedDepartmentRequired": "የተጠየቀው መምሪያ ያስፈልጋል።",
+    "requestedLocationLabel": "የተጠየቀው ቦታ *",
+    "requestedLocationHint": "ለምሳሌ: ጎንደር ዞን ቢሮ, ባህር ዳር ከተማ",
+    "requestedLocationRequired": "የተጠየቀው ቦታ ያስፈልጋል።",
+    "requestedPositionTitleOptional": "የተጠየቀው የሥራ መደብ (በፍቃደኝነት)",
+    "requestedPositionTitleHint": "ለምሳሌ: መርማሪ, አሰልጣኝ",
+    "reasonForRequestLabel": "የጥያቄው ምክንያት *",
+    "reasonForRequestHint": "ለዝውውር ጥያቄዎ ዝርዝር ምክንያት ያቅርቡ።",
+    "reasonForRequestRequired": "የጥያቄው ምክንያት ያስፈልጋል።",
+    "submitTransferRequest": "የዝውውር ጥያቄ አስገባ",
+    "requestTo": "ጥያቄ ወደ: {department}",
+    "@requestTo": {
+        "placeholders": {
+            "department": {
+                "type": "String"
+            }
+        }
+    },
+    "submittedOn": "የቀረበው በ: {date}",
+    "@submittedOn": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "verificationError": "የማረጋገጫ ስህተት",
+    "enterEmployeeId": "የሰራተኛ መለያ ያስገቡ",
+    "employeeIdHint": "ለምሳሌ: EMP-001",
+    "qrCodeScanned": "QR ኮድ ተቃኝቷል",
+    "searchingForEmployee": "ሰራተኛ በመፈለግ ላይ: {qrCode}",
+    "@searchingForEmployee": {
+        "placeholders": {
+            "qrCode": {
+                "type": "String"
+            }
+        }
+    },
+    "verifyNew": "አዲስ አረጋግጥ",
+    "verifyingEmployee": "ሰራተኛ በማረጋገጥ ላይ...",
+    "readyToVerify": "ለማረጋገጥ ዝግጁ",
+    "enterIdOrScanQr": "ለመጀመር የሰራተኛ መለያ ያስገቡ ወይም QR ኮድ ይቃኙ።",
+    "retrySearch": "ፍለጋን እንደገና ሞክር",
+    "scanEmployeeId": "የሰራተኛ መለያ ይቃኙ",
+    "hiredOn": "የተቀጠረበት ቀን",
+    "clearFile": "ፋይል አጽዳ",
+    "change": "ቀይር",
+    "select": "ይምረጡ",
+    "noItemsAdded": "እስካሁን ምንም ንጥሎች አልተጨመሩም።",
+    "personal": "የግል",
+    "previous": "የቀድሞ",
+    "saving": "በማስቀመጥ ላይ...",
+    "review": "ግምገማ",
+    "next": "ቀጣይ",
+    "comingSoon": "በቅርብ ቀን",
+    "amharicNotAvailable": "የአማርኛ ቋንቋ እስካሁን አይገኝም።",
+    "phone": "ስልክ",
+    "birthDate": "የልደት ቀን",
+    "hiredDate": "የቅጥር ቀን",
+    "employmentStatus": "የቅጥር ሁኔታ",
+    "editPersonalDetails": "የግል ዝርዝሮችን አርትዕ",
+    "noPerformanceReviews": "ምንም የአፈጻጸም ግምገማዎች የሉም።",
+    "reviewDate": "የግምገማ ቀን: {date}",
+    "@reviewDate": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "ratingAndComments": "ደረጃ: {rating} - {comments}",
+    "@ratingAndComments": {
+        "placeholders": {
+            "rating": {
+                "type": "double"
+            },
+            "comments": {
+                "type": "String"
+            }
+        }
+    },
+    "noComments": "አስተያየት የለም",
+    "spouseInformation": "የትዳር አጋር መረጃ",
+    "noSpouseInfoAvailable": "የትዳር አጋር መረጃ የለም።",
+    "occupation": "ሥራ: {occupation}",
+    "@occupation": {
+        "placeholders": {
+            "occupation": {
+                "type": "String"
+            }
+        }
+    },
+    "dobLabel": "የልደት ቀን: {dob}",
+    "@dobLabel": {
+        "placeholders": {
+            "dob": {
+                "type": "String"
+            }
+        }
+    },
+    "updated": "ተሻሽሏል",
+    "added": "ተጨምሯል",
+    "present": "አሁን",
+    "experienceSuccess": "የሥራ ልምድ በተሳካ ሁኔታ {action}።",
+    "@experienceSuccess": {
+        "placeholders": {
+            "action": {
+                "type": "String"
+            }
+        }
+    },
+    "failedToExperience": "የሥራ ልምድ {action} አልተቻለም።",
+    "@failedToExperience": {
+        "placeholders": {
+            "action": {
+                "type": "String"
+            }
+        }
+    },
+    "experienceDeleted": "የሥራ ልምድ በተሳካ ሁኔታ ተሰርዟል።",
+    "failedToDeleteExperience": "የሥራ ልምድ መሰረዝ አልተቻለም።",
+    "educationSuccess": "ትምህርት በተሳካ ሁኔታ {action}።",
+    "@educationSuccess": {
+        "placeholders": {
+            "action": {
+                "type": "String"
+            }
+        }
+    },
+    "failedToEducation": "ትምህርት {action} አልተቻለም።",
+    "@failedToEducation": {
+        "placeholders": {
+            "action": {
+                "type": "String"
+            }
+        }
+    },
+    "educationDeleted": "ትምህርት በተሳካ ሁኔታ ተሰርዟል።",
+    "failedToDeleteEducation": "ትምህርት መሰረዝ አልተቻለም።",
+    "uploadedOn": "የተጫነው በ: {date}",
+    "@uploadedOn": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "noDependantsListed": "ምንም ጥገኞች አልተዘረዘሩም።",
+    "relationLabel": "ዝምድና: {relation}",
+    "@relationLabel": {
+        "placeholders": {
+            "relation": {
+                "type": "String"
+            }
+        }
+    },
+    "addEmergencyContact": "የአደጋ ጊዜ ተጠሪ ጨምር",
+    "emergencyContacts": "የአደጋ ጊዜ ተጠሪዎች",
+    "noEmergencyContactsListed": "ምንም የአደጋ ጊዜ ተጠሪዎች አልተዘረዘሩም።",
+    "phoneLabel": "ስልክ: {phone}",
+    "@phoneLabel": {
+        "placeholders": {
+            "phone": {
+                "type": "String"
+            }
+        }
+    },
+    "profileUpdatedSuccessfully": "መገለጫ በተሳካ ሁኔታ ተዘምኗል",
+    "saveChanges": "ለውጦችን አስቀምጥ",
+    "titleLabel": "ማዕረግ (ለምሳሌ: አቶ, ወ/ሮ, ወ/ሪት) *",
+    "titleIsRequired": "ማዕረግ ያስፈልጋል",
+    "fullNameLabel": "ሙሉ ስም *",
+    "genderLabel": "ጾታ *",
+    "genderIsRequired": "ጾታ ያስፈልጋል",
+    "dateOfBirthLabel": "የልደት ቀን *",
+    "occupationLabel": "ሥራ",
+    "mothersFullName": "የእናት ሙሉ ስም",
+    "addressLabel": "አድራሻ *",
+    "anniversaryDate": "የጋብቻ በዓል ቀን",
+    "retirementNumber": "የጡረታ ቁጥር",
+    "tinNumber": "የታክስ ከፋይ መለያ ቁጥር",
+    "organizationLabel": "ድርጅት *",
+    "requiredField": "የግድ መሞላት ያለበት",
+    "organizationTypeLabel": "የድርጅት አይነት *",
+    "positionLabel": "የሥራ መደብ *",
+    "responsibilitiesLabel": "ኃላፊነቶች",
+    "proficiencyLevelLabel": "የብቃት ደረጃ *",
+    "joinDateLabel": "የተቀላቀሉበት ቀን *",
+    "iCurrentlyWorkHere": "አሁንም እዚህ እሰራለሁ",
+    "separationDateLabel": "የለቀቁበት ቀን",
+    "educationLevelLabel": "የትምህርት ደረጃ *",
+    "universityLabel": "ዩኒቨርሲቲ *",
+    "fieldOfStudyLabel": "የትምህርት መስክ *",
+    "cgpa": "CGPA",
+    "startDateLabel": "የጀመሩበት ቀን *",
+    "startDateIsRequired": "የጀመሩበት ቀን ያስፈልጋል",
+    "endDateLabel": "የጨረሱበት ቀን",
+    "educationStatusLabel": "የትምህርት ሁኔታ *",
+    "dependantsFullNameLabel": "የጥገኛ ሙሉ ስም *",
+    "relationshipLabel": "ዝምድና *",
+    "phoneNumberLabel": "ስልክ ቁጥር *",
+    "regionLabel": "ክልል *",
+    "phoneLabelRequired": "ስልክ *",
+    "mobile": "ሞባይል",
+    "trainingAndDevelopment": "ስልጠና እና ልማት",
+    "placementManagement": "የምደባ አስተዳደር",
+    "employeeClearance": "የሰራተኛ ሥራ መልቀቂያ",
+    "incidentManagement": "የክስተት አስተዳደር",
+    "promotionManagement": "የደረጃ እድገት አስተዳደር",
+    "id": "መለያ {id}",
+    "@id": {
+        "placeholders": {
+            "id": {
+                "type": "String"
+            }
+        }
+    },
+    "noLeaveHistoryFound": "ምንም የእረፍት ታሪክ አልተገኘም",
+    "employeeId": "የሰራተኛ መለያ {id}",
+    "@employeeId": {
+        "placeholders": {
+            "id": {
+                "type": "String"
+            }
+        }
+    },
+    "verificationFailed": "ማረጋገጥ አልተሳካም",
+    "googleSignInNotImplemented": "የጉግል መግቢያ ገና አልተተገበረም። በምትኩ ኢሜል ይጠቀሙ።",
+    "signInWithGoogle": "በGoogle ይግቡ",
+    "signupFailed": "መመዝገብ አልተሳካም",
+    "alreadyHaveAnAccount": "አካውንት አለዎት?",
+    "userNamePlaceholder": "ለምሳሌ አበበ ከበደ",
+    "userEmailPlaceholder": "abebe.kebede@example.com",
+    "userInitialsPlaceholder": "አከ",
+    "yourStatus": "የእርስዎ ሁኔታ",
+    "reasonForNonSelection": "ያልተመረጡበት ምክንያት:",
+    "noReasonProvided": "ምክንያት አልቀረበም።",
+    "yourAppealIsUnderReview": "ይግባኝዎ በግምገማ ላይ ነው።",
+    "viewSelected": "የተመረጡትን ይመልከቱ",
+    "appealDecision": "የይግባኝ ውሳኔ"
 }

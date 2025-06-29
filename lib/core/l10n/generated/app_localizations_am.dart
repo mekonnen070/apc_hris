@@ -9,790 +9,790 @@ class AppLocalizationsAm extends AppLocalizations {
   AppLocalizationsAm([String locale = 'am']) : super(locale);
 
   @override
-  String get forgotPassword => 'Forgot Password';
+  String get forgotPassword => 'የይለፍ ቃል ረስተዋል';
 
   @override
-  String get enterEmailForReset => 'Enter your email to reset your password.';
+  String get enterEmailForReset => 'የይለፍ ቃልዎን እንደገና ለማስጀመር ኢሜልዎን ያስገቡ።';
 
   @override
-  String get resetYourPassword => 'Reset Your Password';
+  String get resetYourPassword => 'የይለፍ ቃልዎን ዳግም ያስጀምሩ';
 
   @override
-  String get enterEmailForPasswordReset => 'Enter your email to receive password reset instructions.';
+  String get enterEmailForPasswordReset => 'የይለፍ ቃል ዳግም ማስጀመሪያ መመሪያዎችን ለመቀበል ኢሜልዎን ያስገቡ።';
 
   @override
-  String get email => 'Email';
+  String get email => 'ኢሜል';
 
   @override
-  String get emailIsRequired => 'Email is required';
+  String get emailIsRequired => 'ኢሜል ያስፈልጋል';
 
   @override
-  String get enterAValidEmail => 'Enter a valid email';
+  String get enterAValidEmail => 'እባክዎ ትክክለኛ ኢሜል ያስገቡ';
 
   @override
-  String get resetPassword => 'Reset Password';
+  String get resetPassword => 'የይለፍ ቃል ዳግም ያስጀምሩ';
 
   @override
-  String get rememberedYourPassword => 'Remembered your password?';
+  String get rememberedYourPassword => 'የይለፍ ቃልዎን አስታውሰዋል?';
 
   @override
-  String get login => 'Login';
+  String get login => 'ግባ';
 
   @override
-  String get passwordResetSent => 'Password Reset Sent';
+  String get passwordResetSent => 'የይለፍ ቃል ዳግም ማስጀመሪያ ተልኳል';
 
   @override
-  String get checkEmailForResetInstructions => 'Check your email for reset instructions.';
+  String get checkEmailForResetInstructions => 'ለዳግም ማስጀመሪያ መመሪያዎች ኢሜልዎን ያረጋግጡ።';
 
   @override
-  String get passwordResetFailed => 'Password Reset Failed';
+  String get passwordResetFailed => 'የይለፍ ቃል ዳግም ማስጀመር አልተሳካም';
 
   @override
-  String get welcomeBack => 'Welcome Back!';
+  String get welcomeBack => 'እንኳን ደህና መመለስ!';
 
   @override
-  String get logInWithEmailAndPassword => 'Log in with your email and password';
+  String get logInWithEmailAndPassword => 'በኢሜልዎ እና በይለፍ ቃልዎ ይግቡ';
 
   @override
-  String get password => 'Password';
+  String get password => 'የይለፍ ቃል';
 
   @override
-  String get passwordIsRequired => 'Password is required';
+  String get passwordIsRequired => 'የይለፍ ቃል ያስፈልጋል';
 
   @override
-  String get minimum6CharactersRequired => 'Minimum 6 characters required';
+  String get minimum6CharactersRequired => 'ቢያንስ 6 ቁምፊዎች ያስፈልጋሉ';
 
   @override
-  String get dontHaveAnAccount => 'Don\'t have an account?';
+  String get dontHaveAnAccount => 'አካውንት የለዎትም?';
 
   @override
-  String get signUp => 'Sign Up';
+  String get signUp => 'ይመዝገቡ';
 
   @override
-  String get loginSuccessful => 'Login Successful';
+  String get loginSuccessful => 'በተሳካ ሁኔታ ገብተዋል';
 
   @override
-  String get youHaveSuccessfullyLoggedIn => 'You have successfully logged in.';
+  String get youHaveSuccessfullyLoggedIn => 'በተሳካ ሁኔታ ገብተዋል።';
 
   @override
-  String get loginFailed => 'Login Failed';
+  String get loginFailed => 'መግባት አልተሳካም';
 
   @override
-  String get createAnAccount => 'Create an Account';
+  String get createAnAccount => 'አካውንት ይፍጠሩ';
 
   @override
-  String get signUpWithEmailAndPassword => 'Sign up with your email and password';
+  String get signUpWithEmailAndPassword => 'በኢሜልዎ እና በይለፍ ቃልዎ ይመዝገቡ';
 
   @override
-  String get fullName => 'Full Name';
+  String get fullName => 'ሙሉ ስም';
 
   @override
-  String get fullNameIsRequired => 'Full Name is required';
+  String get fullNameIsRequired => 'ሙሉ ስም ያስፈልጋል';
 
   @override
-  String get address => 'Address';
+  String get address => 'አድራሻ';
 
   @override
-  String get addressIsRequired => 'Address is required';
+  String get addressIsRequired => 'አድራሻ ያስፈልጋል';
 
   @override
-  String get phoneNumber => 'Phone Number';
+  String get phoneNumber => 'ስልክ ቁጥር';
 
   @override
-  String get phoneNumberIsRequired => 'Phone number is required';
+  String get phoneNumberIsRequired => 'ስልክ ቁጥር ያስፈልጋል';
 
   @override
-  String get dateOfBirth => 'Date of Birth';
+  String get dateOfBirth => 'የልደት ቀን';
 
   @override
-  String get birthDateIsRequired => 'Birth date is required';
+  String get birthDateIsRequired => 'የልደት ቀን ያስፈልጋል';
 
   @override
-  String get gender => 'Gender';
+  String get gender => 'ጾታ';
 
   @override
-  String get maritalStatus => 'Marital Status';
+  String get maritalStatus => 'የጋብቻ ሁኔታ';
 
   @override
-  String get selectYourMaritalStatus => 'Select your marital status';
+  String get selectYourMaritalStatus => 'የጋብቻ ሁኔታዎን ይምረጡ';
 
   @override
-  String get signupSuccessful => 'Signup Successful';
+  String get signupSuccessful => 'ምዝገባ ተሳክቷል';
 
   @override
-  String get youHaveSuccessfullySignedUp => 'You have successfully signed up.';
+  String get youHaveSuccessfullySignedUp => 'በተሳካ ሁኔታ ተመዝግበዋል።';
 
   @override
-  String get clearanceRequests => 'Clearance Requests';
+  String get clearanceRequests => 'የሥራ መልቀቂያ ጥያቄዎች';
 
   @override
-  String get noClearanceRequests => 'No clearance requests found.';
+  String get noClearanceRequests => 'ምንም የሥራ መልቀቂያ ጥያቄዎች አልተገኙም።';
 
   @override
-  String get requestClearance => 'Request Clearance';
+  String get requestClearance => 'የሥራ መልቀቂያ ይጠይቁ';
 
   @override
-  String get submitRequest => 'Submit Request';
+  String get submitRequest => 'ጥያቄ አስገባ';
 
   @override
-  String get reason => 'Reason';
+  String get reason => 'ምክንያት';
 
   @override
-  String get reasonIsRequired => 'Reason is required';
+  String get reasonIsRequired => 'ምክንያት ያስፈልጋል';
 
   @override
-  String get description => 'Description';
+  String get description => 'ዝርዝር መግለጫ';
 
   @override
-  String get descriptionIsRequired => 'Description is required';
+  String get descriptionIsRequired => 'ዝርዝር መግለጫ ያስፈልጋል';
 
   @override
-  String get requestDate => 'Request Date';
+  String get requestDate => 'የተጠየቀበት ቀን';
 
   @override
-  String get status => 'Status';
+  String get status => 'ሁኔታ';
 
   @override
-  String get dashboard => 'Dashboard';
+  String get dashboard => 'ዳሽቦርድ';
 
   @override
-  String get myRecruits => 'My Recruits';
+  String get myRecruits => 'የኔ ቅጥሮች';
 
   @override
-  String get noRecruitsFound => 'No new recruits assigned to you.';
+  String get noRecruitsFound => 'ለእርስዎ የተመደቡ አዲስ ቅጥሮች የሉም።';
 
   @override
-  String get newRecruit => 'New Recruit';
+  String get newRecruit => 'አዲስ ቅጥር';
 
   @override
-  String get recruitmentDetails => 'Recruitment Details';
+  String get recruitmentDetails => 'የቅጥር ዝርዝሮች';
 
   @override
-  String get personalInformation => 'Personal Information';
+  String get personalInformation => 'የግል መረጃ';
 
   @override
-  String get emergencyContact => 'Emergency Contact';
+  String get emergencyContact => 'የአደጋ ጊዜ ተጠሪ';
 
   @override
-  String get documents => 'Documents';
+  String get documents => 'ሰነዶች';
 
   @override
-  String get submit => 'Submit';
+  String get submit => 'አስገባ';
 
   @override
-  String get documentManagement => 'Document Management';
+  String get documentManagement => 'የሰነድ አስተዳደር';
 
   @override
-  String get employmentDetails => 'Employment Details';
+  String get employmentDetails => 'የቅጥር ዝርዝሮች';
 
   @override
-  String get recruitment => 'Recruitment';
+  String get recruitment => 'ቅጥር';
 
   @override
-  String get retirement => 'Retirement';
+  String get retirement => 'ጡረታ';
 
   @override
-  String get incidentReports => 'Incident Reports';
+  String get incidentReports => 'የክስተት ሪፖርቶች';
 
   @override
-  String get noIncidentReports => 'No incident reports found.';
+  String get noIncidentReports => 'ምንም የክስተት ሪፖርቶች አልተገኙም።';
 
   @override
-  String get reportIncident => 'Report Incident';
+  String get reportIncident => 'ክስተት ሪፖርት አድርግ';
 
   @override
-  String get incidentType => 'Incident Type';
+  String get incidentType => 'የክስተቱ አይነት';
 
   @override
-  String get selectIncidentType => 'Select Incident Type';
+  String get selectIncidentType => 'የክስተቱን አይነት ይምረጡ';
 
   @override
-  String get dateOfIncident => 'Date of Incident';
+  String get dateOfIncident => 'ክስተቱ የተፈጠረበት ቀን';
 
   @override
-  String get pleaseEnterDescription => 'Please enter a description';
+  String get pleaseEnterDescription => 'እባክዎ ዝርዝር መግለጫ ያስገቡ';
 
   @override
-  String get incidentDate => 'Incident Date';
+  String get incidentDate => 'הክስተቱ የተፈጠረበት ቀን';
 
   @override
-  String get leaveManagement => 'Leave Management';
+  String get leaveManagement => 'የእረፍት ጊዜ አስተዳደር';
 
   @override
-  String get leaveHistory => 'Leave History';
+  String get leaveHistory => 'የእረፍት ጊዜ ታሪክ';
 
   @override
-  String get requestLeave => 'Request Leave';
+  String get requestLeave => 'የእረፍት ጊዜ ይጠይቁ';
 
   @override
-  String get noLeaveHistory => 'No leave history found.';
+  String get noLeaveHistory => 'ምንም የእረፍት ጊዜ ታሪክ አልተገኘም።';
 
   @override
-  String get leaveBalance => 'Leave Balance';
+  String get leaveBalance => 'ቀሪ የእረፍት ጊዜ';
 
   @override
-  String get annual => 'Annual';
+  String get annual => 'ዓመታዊ';
 
   @override
-  String get sick => 'Sick';
+  String get sick => 'ህመም';
 
   @override
-  String get maternity => 'Maternity';
+  String get maternity => 'ወሊድ';
 
   @override
-  String get paternity => 'Paternity';
+  String get paternity => 'አባትነት';
 
   @override
-  String get unpaid => 'Unpaid';
+  String get unpaid => 'ያለክፍያ';
 
   @override
-  String get other => 'Other';
+  String get other => 'ሌላ';
 
   @override
-  String get days => 'Days';
+  String get days => 'ቀናት';
 
   @override
-  String get appliedOn => 'Applied on';
+  String get appliedOn => 'ያመለከቱበት ቀን';
 
   @override
-  String get leaveType => 'Leave Type';
+  String get leaveType => 'የእረፍት ዓይነት';
 
   @override
-  String get selectLeaveType => 'Please select a leave type';
+  String get selectLeaveType => 'እባክዎ የእረፍት ዓይነት ይምረጡ';
 
   @override
-  String get startDate => 'Start Date';
+  String get startDate => 'የመጀመሪያ ቀን';
 
   @override
-  String get endDate => 'End Date';
+  String get endDate => 'የመጨረሻ ቀን';
 
   @override
-  String get availablePlacements => 'Available Placements';
+  String get availablePlacements => 'ክፍት የሥራ መደቦች';
 
   @override
-  String get noPlacementsAvailable => 'No placements available at the moment.';
+  String get noPlacementsAvailable => 'በአሁኑ ሰዓት ምንም ክፍት የሥራ መደቦች የሉም።';
 
   @override
-  String get placementDetails => 'Placement Details';
+  String get placementDetails => 'የሥራ መደቡ ዝርዝሮች';
 
   @override
-  String get postedOn => 'Posted On';
+  String get postedOn => 'የተለጠፈበት ቀን';
 
   @override
-  String get deadline => 'Deadline';
+  String get deadline => 'የማመልከቻ ጊዜ ገደብ';
 
   @override
-  String get location => 'Location';
+  String get location => 'ቦታ';
 
   @override
-  String get requiredExperience => 'Required Experience';
+  String get requiredExperience => 'የሚያስፈልግ የሥራ ልምድ';
 
   @override
-  String get noApplicants => 'No Applicants';
+  String get noApplicants => 'ምንም አመልካቾች የሉም';
 
   @override
-  String get noApplicantsForPlacement => 'There are no applicants for this placement yet.';
+  String get noApplicantsForPlacement => 'ለዚህ የሥራ መደብ እስካሁን ምንም አመልካቾች የሉም።';
 
   @override
-  String get applicants => 'Applicants';
+  String get applicants => 'አመልካቾች';
 
   @override
-  String get myProfile => 'My Profile';
+  String get myProfile => 'የግል መገለጫ';
 
   @override
-  String get addContact => 'Add Contact';
+  String get addContact => 'ተጠሪ ጨምር';
 
   @override
-  String get editContact => 'Edit Contact';
+  String get editContact => 'ተጠሪ አርትዕ';
 
   @override
-  String get save => 'Save';
+  String get save => 'አስቀምጥ';
 
   @override
-  String get relationship => 'Relationship';
+  String get relationship => 'ዝምድና';
 
   @override
-  String get selectRelationship => 'Select Relationship';
+  String get selectRelationship => 'ዝምድና ይምረጡ';
 
   @override
-  String get city => 'City';
+  String get city => 'ከተማ';
 
   @override
-  String get cityIsRequired => 'City is required';
+  String get cityIsRequired => 'ከተማ ያስፈልጋል';
 
   @override
-  String get addDependant => 'Add Dependant';
+  String get addDependant => 'ጥገኛ ጨምር';
 
   @override
-  String get editDependant => 'Edit Dependant';
+  String get editDependant => 'ጥገኛ አርትዕ';
 
   @override
-  String get addEducation => 'Add Education';
+  String get addEducation => 'ትምህርት ጨምር';
 
   @override
-  String get editEducation => 'Edit Education';
+  String get editEducation => 'ትምህርት አርትዕ';
 
   @override
-  String get institution => 'Institution';
+  String get institution => 'ተቋም';
 
   @override
-  String get institutionIsRequired => 'Institution is required';
+  String get institutionIsRequired => 'ተቋም ያስፈልጋል';
 
   @override
-  String get fieldOfStudy => 'Field of Study';
+  String get fieldOfStudy => 'የትምህርት መስክ';
 
   @override
-  String get selectFieldOfStudy => 'Select Field of Study';
+  String get selectFieldOfStudy => 'የትምህርት መስክ ይምረጡ';
 
   @override
   String get gpa => 'GPA';
 
   @override
-  String get gpaIsRequired => 'GPA is required';
+  String get gpaIsRequired => 'GPA ያስፈልጋል';
 
   @override
-  String get addExperience => 'Add Experience';
+  String get addExperience => 'የሥራ ልምድ ጨምር';
 
   @override
-  String get editExperience => 'Edit Experience';
+  String get editExperience => 'የሥራ ልምድ አርትዕ';
 
   @override
-  String get company => 'Company';
+  String get company => 'ኩባንያ';
 
   @override
-  String get companyIsRequired => 'Company is required';
+  String get companyIsRequired => 'ኩባንያ ያስፈልጋል';
 
   @override
-  String get jobTitle => 'Job Title';
+  String get jobTitle => 'የሥራ መደብ';
 
   @override
-  String get jobTitleIsRequired => 'Job Title is required';
+  String get jobTitleIsRequired => 'የሥራ መደብ ያስፈልጋል';
 
   @override
-  String get yearsOfExperience => 'Years of Experience';
+  String get yearsOfExperience => 'የሥራ ልምድ በዓመታት';
 
   @override
-  String get yearsOfExpRequired => 'Years of experience is required';
+  String get yearsOfExpRequired => 'የሥራ ልምድ በዓመታት ያስፈልጋል';
 
   @override
-  String get addSpouse => 'Add Spouse';
+  String get addSpouse => 'የትዳር አጋር ጨምር';
 
   @override
-  String get editSpouse => 'Edit Spouse';
+  String get editSpouse => 'የትዳር አጋር አርትዕ';
 
   @override
-  String get editPersonalInfo => 'Edit Personal Info';
+  String get editPersonalInfo => 'የግል መረጃ አርትዕ';
 
   @override
-  String get contacts => 'Contacts';
+  String get contacts => 'ተጠሪዎች';
 
   @override
-  String get noContactsAvailable => 'No contacts available. Please add one.';
+  String get noContactsAvailable => 'ምንም ተጠሪዎች የሉም። እባክዎ አንድ ይጨምሩ።';
 
   @override
-  String get addNewContact => 'Add New Contact';
+  String get addNewContact => 'አዲስ ተጠሪ ጨምር';
 
   @override
-  String get dependants => 'Dependants';
+  String get dependants => 'ጥገኞች';
 
   @override
-  String get noDependantsAvailable => 'No dependants available. Please add one.';
+  String get noDependantsAvailable => 'ምንም ጥገኞች የሉም። እባክዎ አንድ ይጨምሩ።';
 
   @override
-  String get addNewDependant => 'Add New Dependant';
+  String get addNewDependant => 'አዲስ ጥገኛ ጨምር';
 
   @override
-  String get noDocumentsAvailable => 'No documents available.';
+  String get noDocumentsAvailable => 'ምንም ሰነዶች የሉም።';
 
   @override
-  String get education => 'Education';
+  String get education => 'ትምህርት';
 
   @override
-  String get noEducationAvailable => 'No education history available. Please add one.';
+  String get noEducationAvailable => 'ምንም የትምህርት ታሪክ የለም። እባክዎ አንድ ይጨምሩ።';
 
   @override
-  String get addNewEducation => 'Add New Education';
+  String get addNewEducation => 'አዲስ ትምህርት ጨምር';
 
   @override
-  String get experience => 'Experience';
+  String get experience => 'የሥራ ልምድ';
 
   @override
-  String get noExperienceAvailable => 'No work experience available. Please add one.';
+  String get noExperienceAvailable => 'ምንም የሥራ ልምድ የለም። እባክዎ አንድ ይጨምሩ።';
 
   @override
-  String get addNewExperience => 'Add New Experience';
+  String get addNewExperience => 'አዲስ የሥራ ልምድ ጨምር';
 
   @override
-  String get performance => 'Performance';
+  String get performance => 'የሥራ አፈጻጸም';
 
   @override
-  String get noPerformanceData => 'No performance data available.';
+  String get noPerformanceData => 'ምንም የአፈጻጸም መረጃ የለም።';
 
   @override
-  String get middleName => 'Middle Name';
+  String get middleName => 'የአባት ስም';
 
   @override
-  String get lastName => 'Last Name';
+  String get lastName => 'የአያት ስም';
 
   @override
-  String get emailAddress => 'Email Address';
+  String get emailAddress => 'ኢሜል አድራሻ';
 
   @override
-  String get bloodGroup => 'Blood Group';
+  String get bloodGroup => 'የደም አይነት';
 
   @override
-  String get religion => 'Religion';
+  String get religion => 'ሃይማኖት';
 
   @override
-  String get mobileNumber => 'Mobile Number';
+  String get mobileNumber => 'የሞባይል ቁጥር';
 
   @override
-  String get edit => 'Edit';
+  String get edit => 'አስተካክል';
 
   @override
-  String get spouse => 'Spouse';
+  String get spouse => 'የትዳር አጋር';
 
   @override
-  String get noSpouseAvailable => 'No spouse information available. Please add one.';
+  String get noSpouseAvailable => 'ምንም የትዳር አጋር መረጃ የለም። እባክዎ አንድ ይጨምሩ።';
 
   @override
-  String get addNewSpouse => 'Add New Spouse';
+  String get addNewSpouse => 'አዲስ የትዳር አጋር ጨምር';
 
   @override
-  String get promotionRequests => 'Promotion Requests';
+  String get promotionRequests => 'የደረጃ እድገት ጥያቄዎች';
 
   @override
-  String get noPromotionRequests => 'No promotion requests found.';
+  String get noPromotionRequests => 'ምንም የደረጃ እድገት ጥያቄዎች አልተገኙም።';
 
   @override
-  String get requestPromotion => 'Request Promotion';
+  String get requestPromotion => 'የደረጃ እድገት ይጠይቁ';
 
   @override
-  String get currentPosition => 'Current Position';
+  String get currentPosition => 'የአሁኑ የሥራ መደብ';
 
   @override
-  String get currentPositionIsRequired => 'Current position is required';
+  String get currentPositionIsRequired => 'የአሁኑ የሥራ መደብ ያስፈልጋል';
 
   @override
-  String get promotedPosition => 'Position to be Promoted To';
+  String get promotedPosition => 'እድገት የተጠየቀበት የሥራ መደብ';
 
   @override
-  String get promotedPositionIsRequired => 'Promoted position is required';
+  String get promotedPositionIsRequired => 'እድገት የተጠየቀበት የሥራ መደብ ያስፈልጋል';
 
   @override
-  String get promotionDate => 'Promotion Date';
+  String get promotionDate => 'የደረጃ እድገት ቀን';
 
   @override
-  String get availableTrainings => 'Available Trainings';
+  String get availableTrainings => 'ያሉ ሥልጠናዎች';
 
   @override
-  String get noTrainingsAvailable => 'No trainings available at the moment.';
+  String get noTrainingsAvailable => 'በአሁኑ ሰዓት ምንም ሥልጠናዎች የሉም።';
 
   @override
-  String get trainingDetails => 'Training Details';
+  String get trainingDetails => 'የሥልጠና ዝርዝሮች';
 
   @override
-  String get duration => 'Duration';
+  String get duration => 'የሚፈጀው ጊዜ';
 
   @override
-  String get cost => 'Cost';
+  String get cost => 'ዋጋ';
 
   @override
-  String get noApplicantsForTraining => 'There are no applicants for this training yet.';
+  String get noApplicantsForTraining => 'ለዚህ ሥልጠና እስካሁን ምንም አመልካቾች የሉም።';
 
   @override
-  String get myTransferRequests => 'My Transfer Requests';
+  String get myTransferRequests => 'የእኔ የዝውውር ጥያቄዎች';
 
   @override
-  String get noTransferRequests => 'No transfer requests found.';
+  String get noTransferRequests => 'ምንም የዝውውር ጥያቄዎች አልተገኙም።';
 
   @override
-  String get requestTransfer => 'Request Transfer';
+  String get requestTransfer => 'ዝውውር ይጠይቁ';
 
   @override
-  String get from => 'From';
+  String get from => 'ከ';
 
   @override
-  String get fromDepartment => 'From Department';
+  String get fromDepartment => 'ካለበት መምሪያ';
 
   @override
-  String get fromDepartmentIsRequired => 'From department is required';
+  String get fromDepartmentIsRequired => 'ያለበት መምሪያ ያስፈልጋል';
 
   @override
-  String get toDepartment => 'To Department';
+  String get toDepartment => 'ወደ ሚዛወርበት መምሪያ';
 
   @override
-  String get toDepartmentIsRequired => 'To department is required';
+  String get toDepartmentIsRequired => 'የሚዛወርበት መምሪያ ያስፈልጋል';
 
   @override
-  String get requestDetails => 'Request Details';
+  String get requestDetails => 'የጥያቄ ዝርዝሮች';
 
   @override
-  String get employeeIdLabel => 'Employee ID';
+  String get employeeIdLabel => 'የሰራተኛ መለያ ቁጥር';
 
   @override
-  String get transferDate => 'Transfer Date';
+  String get transferDate => 'የዝውውር ቀን';
 
   @override
-  String get scanQrCode => 'Scan QR Code';
+  String get scanQrCode => 'QR ኮድ ይቃኙ';
 
   @override
-  String get scanToVerify => 'Scan a QR code to verify employee details';
+  String get scanToVerify => 'የሰራተኛን ዝርዝር ለማረጋገጥ QR ኮድ ይቃኙ';
 
   @override
-  String get verification => 'Verification';
+  String get verification => 'ማረጋገጫ';
 
   @override
-  String get invalidQrCode => 'Invalid QR Code';
+  String get invalidQrCode => 'የማይሰራ QR ኮድ';
 
   @override
-  String get employeeDetails => 'Employee Details';
+  String get employeeDetails => 'የሰራተኛ ዝርዝሮች';
 
   @override
-  String get position => 'Position';
+  String get position => 'የሥራ መደብ';
 
   @override
-  String get department => 'Department';
+  String get department => 'መምሪያ';
 
   @override
-  String get employmentDate => 'Employment Date';
+  String get employmentDate => 'የቅጥር ቀን';
 
   @override
-  String get verified => 'Verified';
+  String get verified => 'የተረጋገጠ';
 
   @override
-  String get notVerified => 'Not Verified';
+  String get notVerified => 'ያልተረጋገጠ';
 
   @override
-  String get home => 'Home';
+  String get home => 'ዋና ገጽ';
 
   @override
-  String get profile => 'Profile';
+  String get profile => 'መገለጫ';
 
   @override
-  String get language => 'Amharic';
+  String get language => 'ቋንቋ';
 
   @override
-  String get logout => 'Logout';
+  String get logout => 'ውጣ';
 
   @override
-  String get areYouSureLogout => 'Are you sure you want to logout?';
+  String get areYouSureLogout => 'ለመውጣት እርግጠኛ ነዎት?';
 
   @override
-  String get cancel => 'Cancel';
+  String get cancel => 'ሰርዝ';
 
   @override
-  String get add => 'Add';
+  String get add => 'ጨምር';
 
   @override
-  String get delete => 'Delete';
+  String get delete => 'አጥፋ';
 
   @override
-  String get areYouSureDelete => 'Are you sure you want to delete this item?';
+  String get areYouSureDelete => 'ይህን ንጥል ለማጥፋት እርግጠኛ ነዎት?';
 
   @override
-  String get selectDate => 'Select Date';
+  String get selectDate => 'ቀን ይምረጡ';
 
   @override
-  String get selectFile => 'Select File';
+  String get selectFile => 'ፋይል ይምረጡ';
 
   @override
-  String get noFileSelected => 'No file selected';
+  String get noFileSelected => 'ምንም ፋይል አልተመረጠም';
 
   @override
-  String get applicationStatus => 'Application Status';
+  String get applicationStatus => 'የማመልከቻ ሁኔታ';
 
   @override
-  String get applied => 'Applied';
+  String get applied => 'አመልክቷል';
 
   @override
-  String get underReview => 'Under Review';
+  String get underReview => 'በግምገማ ላይ';
 
   @override
-  String get shortlisted => 'Shortlisted';
+  String get shortlisted => 'እጩ ሆኗል';
 
   @override
-  String get rejected => 'Rejected';
+  String get rejected => 'ውድቅ ተደርጓል';
 
   @override
-  String get approved => 'Approved';
+  String get approved => 'ጸድቋል';
 
   @override
-  String get applyNow => 'Apply Now';
+  String get applyNow => 'አሁን ያመልክቱ';
 
   @override
-  String get applicationDeadline => 'Application Deadline';
+  String get applicationDeadline => 'የማመልከቻ ገደብ';
 
   @override
-  String get viewApplicants => 'View Applicants';
+  String get viewApplicants => 'አመልካቾችን ይመልከቱ';
 
   @override
-  String get somethingWentWrong => 'Something went wrong. Please try again.';
+  String get somethingWentWrong => 'ስህተት ተፈጥሯል። እባክዎ እንደገና ይሞክሩ።';
 
   @override
-  String get retry => 'Retry';
+  String get retry => 'እንደገና ሞክር';
 
   @override
   String get english => 'English';
 
   @override
-  String get amharic => 'Amharic';
+  String get amharic => 'አማርኛ';
 
   @override
-  String get orContinueWith => 'Or continue with';
+  String get orContinueWith => 'ወይም በሚከተለው ይቀጥሉ';
 
   @override
-  String get selectGender => 'Select Gender';
+  String get selectGender => 'ጾታ ይምረጡ';
 
   @override
-  String get male => 'Male';
+  String get male => 'ወንድ';
 
   @override
-  String get female => 'Female';
+  String get female => 'ሴት';
 
   @override
-  String get single => 'Single';
+  String get single => 'ያላገባ/ች';
 
   @override
-  String get married => 'Married';
+  String get married => 'ያገባ/ች';
 
   @override
-  String get divorced => 'Divorced';
+  String get divorced => 'የተፋታ/ች';
 
   @override
-  String get widowed => 'Widowed';
+  String get widowed => 'ባል/ሚስት የሞተበት/ባት';
 
   @override
   String confirmDeleteItem({required String itemName}) {
-    return 'Are you sure you want to delete $itemName?';
+    return '$itemNameን(ን) መሰረዝ እንደሚፈልጉ እርግጠኛ ነዎት?';
   }
 
   @override
-  String get fileIsRequired => 'File is required';
+  String get fileIsRequired => 'ፋይል ያስፈልጋል';
 
   @override
-  String get pending => 'Pending';
+  String get pending => 'በሂደት ላይ';
 
   @override
-  String get completed => 'Completed';
+  String get completed => 'ተጠናቋል';
 
   @override
-  String get cancelled => 'Cancelled';
+  String get cancelled => 'ተሰርዟል';
 
   @override
-  String get accepted => 'Accepted';
+  String get accepted => 'ተቀባይነት አግኝቷል';
 
   @override
-  String get clearanceRequestSubmitted => 'Clearance request submitted successfully';
+  String get clearanceRequestSubmitted => 'የሥራ መልቀቂያ ጥያቄ በተሳካ ሁኔታ ገብቷል';
 
   @override
-  String get failedToSubmitRequest => 'Failed to submit request: ';
+  String get failedToSubmitRequest => 'ጥያቄ ማስገባት አልተሳካም፦ ';
 
   @override
-  String get reasonForClearance => 'Reason for Clearance';
+  String get reasonForClearance => 'የሥራ መልቀቂያ ምክንያት';
 
   @override
-  String get pleaseSelectReason => 'Please select a reason';
+  String get pleaseSelectReason => 'እባክዎ ምክንያት ይምረጡ';
 
   @override
-  String get lastDayOfWorkLabel => 'Last Day of Work';
+  String get lastDayOfWorkLabel => 'የመጨረሻ የሥራ ቀን';
 
   @override
   String lastDayOfWork({required String date}) {
-    return 'Last Day of Work: $date';
+    return 'የመጨረሻ የሥራ ቀን: $date';
   }
 
   @override
-  String get pleaseSelectDate => 'Please select a date';
+  String get pleaseSelectDate => 'እባክዎ ቀን ይምረጡ';
 
   @override
-  String get commentsOptional => 'Comments (Optional)';
+  String get commentsOptional => 'አስተያየቶች (ካለ)';
 
   @override
-  String get provideAdditionalDetails => 'Provide any additional details.';
+  String get provideAdditionalDetails => 'ማንኛውንም ተጨማሪ ዝርዝሮች ያቅርቡ።';
 
   @override
   String requestedOn({required String date}) {
-    return 'Requested On: $date';
+    return 'የተጠየቀበት ቀን: $date';
   }
 
   @override
   String welcomeBackUser({required String name}) {
-    return 'Welcome back, $name!';
+    return 'እንኳን ደህና መጣህ/ሽ, $name!';
   }
 
   @override
-  String get totalEmployees => 'Total Employees';
+  String get totalEmployees => 'ጠቅላላ ሰራተኞች';
 
   @override
-  String get pendingTasks => 'Pending Tasks';
+  String get pendingTasks => 'በሂደት ላይ ያሉ ተግባራት';
 
   @override
-  String get quickActions => 'Quick Actions';
+  String get quickActions => 'ፈጣን እርምጃዎች';
 
   @override
-  String get recentActivity => 'Recent Activity';
+  String get recentActivity => 'የቅርብ ጊዜ እንቅስቃሴ';
 
   @override
-  String get leaveRequestApproved => 'Leave Request Approved';
+  String get leaveRequestApproved => 'የእረፍት ጥያቄ ጸድቋል';
 
   @override
   String annualLeaveFor({required String name, required String dateRange}) {
-    return 'Annual leave for $name from $dateRange.';
+    return 'የ$name ዓመታዊ ፈቃድ ከ$dateRange።';
   }
 
   @override
-  String get newPromotionRequest => 'New Promotion Request';
+  String get newPromotionRequest => 'አዲስ የደረጃ እድገት ጥያቄ';
 
   @override
   String fromToPosition({required String currentRank, required String name, required String newPosition}) {
-    return 'From $currentRank $name for $newPosition position.';
+    return 'ከ$currentRank $name ለ$newPosition የሥራ መደብ።';
   }
 
   @override
-  String get resignationSubmitted => 'Resignation Submitted';
+  String get resignationSubmitted => 'የሥራ መልቀቂያ ቀርቧል';
 
   @override
   String byEffective({required String rank, required String name, required String date}) {
-    return 'By $rank $name, effective $date.';
+    return 'በ$rank $name፣ ከ$date ጀምሮ።';
   }
 
   @override
-  String get twoHoursAgo => '2h ago';
+  String get twoHoursAgo => 'ከ2 ሰዓታት በፊት';
 
   @override
-  String get eightHoursAgo => '8h ago';
+  String get eightHoursAgo => 'ከ8 ሰዓታት በፊት';
 
   @override
-  String get oneDayAgo => '1d ago';
+  String get oneDayAgo => 'ከ1 ቀን በፊት';
 
   @override
-  String get transfer => 'Transfer';
+  String get transfer => 'ዝውውር';
 
   @override
-  String get leave => 'Leave';
+  String get leave => 'እረፍት';
 
   @override
-  String get training => 'Training';
+  String get training => 'ስልጠና';
 
   @override
-  String get placement => 'Placement';
+  String get placement => 'ምደባ';
 
   @override
-  String get clearance => 'Clearance';
+  String get clearance => 'ሥራ መልቀቂያ';
 
   @override
-  String get incident => 'Incident';
+  String get incident => 'ክስተት';
 
   @override
-  String get promotion => 'Promotion';
+  String get promotion => 'የደረጃ እድገት';
 
   @override
-  String get confirmAction => 'Confirm Action';
+  String get confirmAction => 'እርምጃውን ያረጋግጡ';
 
   @override
   String confirmRecruitAction({required String status, required int count}) {
-    return 'Are you sure you want to $status $count recruit(s)? This action cannot be undone.';
+    return '$count ቅጥር(ዎች)ን $status ማድረግ እንደሚፈልጉ እርግጠኛ ነዎት? ይህ እርምጃ ሊቀለበስ አይችልም።';
   }
 
   @override
@@ -801,727 +801,727 @@ class AppLocalizationsAm extends AppLocalizations {
   }
 
   @override
-  String get statusUpdatedSuccessfully => 'Status updated successfully!';
+  String get statusUpdatedSuccessfully => 'ሁኔታው በተሳካ ሁኔታ ተዘምኗል!';
 
   @override
-  String get processing => 'Processing...';
+  String get processing => 'በሂደት ላይ...';
 
   @override
   String confirmStatus({required String status}) {
-    return 'Confirm $status';
+    return '$status መሆኑን ያረጋግጡ';
   }
 
   @override
-  String get pass => 'Pass';
+  String get pass => 'አልፏል';
 
   @override
-  String get fail => 'Fail';
+  String get fail => 'ወድቋል';
 
   @override
   String itemsSelected({required int count}) {
-    return '$count selected';
+    return '$count ተመርጠዋል';
   }
 
   @override
-  String get selectRecruitsToContinue => 'Select recruits to continue';
+  String get selectRecruitsToContinue => 'ለመቀጠል ቅጥሮችን ይምረጡ';
 
   @override
-  String get markAll => 'Mark All';
+  String get markAll => 'ሁሉንም ምረጥ';
 
   @override
-  String get unmarkAll => 'Unmark All';
+  String get unmarkAll => 'ሁሉንም ላለመምረጥ';
 
   @override
-  String get addNewRecruit => 'Add New Recruit';
+  String get addNewRecruit => 'አዲስ ቅጥር ጨምር';
 
   @override
-  String get newRecruitApplication => 'New Recruit Application';
+  String get newRecruitApplication => 'የአዲስ ቅጥር ማመልከቻ';
 
   @override
-  String get recruitmentAnnouncement => 'Recruitment Announcement';
+  String get recruitmentAnnouncement => 'የቅጥር ማስታወቂያ';
 
   @override
-  String get firstName => 'First Name';
+  String get firstName => 'ስም';
 
   @override
-  String get age => 'Age';
+  String get age => 'ዕድሜ';
 
   @override
-  String get numberOfChildren => 'Number of Children';
+  String get numberOfChildren => 'የልጆች ብዛት';
 
   @override
-  String get nationality => 'Nationality';
+  String get nationality => 'ዜግነት';
 
   @override
-  String get woreda => 'Woreda';
+  String get woreda => 'ወረዳ';
 
   @override
-  String get kebele => 'Kebele';
+  String get kebele => 'ቀበሌ';
 
   @override
-  String get houseNumber => 'House Number';
+  String get houseNumber => 'የቤት ቁጥር';
 
   @override
-  String get reportNewIncident => 'Report New Incident';
+  String get reportNewIncident => 'አዲስ ክስተት ሪፖርት አድርግ';
 
   @override
-  String get pleaseSelectIncidentDate => 'Please select the incident date';
+  String get pleaseSelectIncidentDate => 'እባክዎ የክስተቱን ቀን ይምረጡ';
 
   @override
-  String get pleaseSelectAnIncidentType => 'Please select an incident type';
+  String get pleaseSelectAnIncidentType => 'እባክዎ የክስተቱን አይነት ይምረጡ';
 
   @override
-  String get descriptionOfIncident => 'Description of Incident';
+  String get descriptionOfIncident => 'የክስተቱ መግለጫ';
 
   @override
-  String get provideClearDetailedDescription => 'Please provide a clear and detailed description of the incident.';
+  String get provideClearDetailedDescription => 'እባክዎ የክስተቱን ግልጽ እና ዝርዝር መግለጫ ያቅርቡ።';
 
   @override
-  String get submitReport => 'Submit Report';
+  String get submitReport => 'ሪፖርት አስገባ';
 
   @override
-  String get incidentReportSubmitted => 'Incident report submitted successfully';
+  String get incidentReportSubmitted => 'የክስተት ሪፖርት በተሳካ ሁኔታ ገብቷል';
 
   @override
-  String get failedToSubmitReport => 'Failed to submit report:';
+  String get failedToSubmitReport => 'ሪፖርት ማስገባት አልተሳካም:';
 
   @override
-  String get incidentAndGrievance => 'Incident & Grievance';
+  String get incidentAndGrievance => 'ክስተት እና ቅሬታ';
 
   @override
-  String get noIncidentsToDisplay => 'No incidents to display.';
+  String get noIncidentsToDisplay => 'የሚታዩ ክስተቶች የሉም።';
 
   @override
   String dateLabel({required String date}) {
-    return 'Date: $date';
+    return 'ቀን: $date';
   }
 
   @override
-  String get annualLeave => 'Annual Leave';
+  String get annualLeave => 'ዓመታዊ እረፍት';
 
   @override
-  String get sickLeave => 'Sick Leave';
+  String get sickLeave => 'የህመም እረፍት';
 
   @override
-  String get noBalanceInfoAvailable => 'No balance information available.';
+  String get noBalanceInfoAvailable => 'ምንም የቀሪ እረፍት መረጃ የለም።';
 
   @override
-  String get requestHistory => 'Request History';
+  String get requestHistory => 'የጥያቄ ታሪክ';
 
   @override
-  String get newLeaveRequest => 'New Leave Request';
+  String get newLeaveRequest => 'አዲስ የእረፍት ጥያቄ';
 
   @override
-  String get requestNewLeave => 'Request New Leave';
+  String get requestNewLeave => 'አዲስ የእረፍት ጥያቄ ላክ';
 
   @override
-  String get pleaseSelectLeaveType => 'Please select a leave type';
+  String get pleaseSelectLeaveType => 'እባክዎ የእረፍት አይነት ይምረጡ';
 
   @override
-  String get selectLeaveTypeToSeeBalance => 'Select a leave type to see balance';
+  String get selectLeaveTypeToSeeBalance => 'ቀሪ ሂሳብ ለማየት የእረፍት አይነት ይምረጡ';
 
   @override
   String availableDays({required int days}) {
-    return 'Available: $days days';
+    return 'የሚገኝ: $days ቀናት';
   }
 
   @override
   String availableOfTotalDays({required int remaining, required int total}) {
-    return 'Available: $remaining of $total days';
+    return 'የሚገኝ: $remaining ከ $total ቀናት';
   }
 
   @override
-  String get pleaseSelectStartDate => 'Please select a start date';
+  String get pleaseSelectStartDate => 'እባክዎ የመነሻ ቀን ይምረጡ';
 
   @override
-  String get pleaseSelectEndDate => 'Please select an end date';
+  String get pleaseSelectEndDate => 'እባክዎ የመጨረሻ ቀን ይምረጡ';
 
   @override
-  String get endDateAfterStartDate => 'End date must be after start date';
+  String get endDateAfterStartDate => 'የመጨረሻው ቀን ከመጀመሪያው ቀን በኋላ መሆን አለበት';
 
   @override
-  String get reasonForLeave => 'Reason for Leave';
+  String get reasonForLeave => 'የእረፍት ምክንያት';
 
   @override
   String leaveTitle({required String leaveType}) {
-    return '$leaveType Leave';
+    return '$leaveType እረፍት';
   }
 
   @override
-  String get fromLabel => 'From:';
+  String get fromLabel => 'ከ:';
 
   @override
-  String get toLabel => 'To:';
+  String get toLabel => 'እስከ:';
 
   @override
   String daysWithReason({required int days, required String reason}) {
-    return '$days Day(s) - $reason';
+    return '$days ቀን(ዎች) - $reason';
   }
 
   @override
   String daysOnly({required int count}) {
-    return '$count Day(s)';
+    return '$count ቀን(ዎች)';
   }
 
   @override
-  String get daysLeft => ' Days Left';
+  String get daysLeft => ' ቀናት ቀርተዋል';
 
   @override
   String usedOf({required int used, required int allowed}) {
-    return 'Used: $used of $allowed';
+    return 'ያገለገለ: $used ከ $allowed';
   }
 
   @override
-  String get applicationSubmittedSuccessfully => 'Application submitted successfully!';
+  String get applicationSubmittedSuccessfully => 'ማመልከቻው በተሳካ ሁኔታ ገብቷል!';
 
   @override
-  String get submitAppeal => 'Submit Appeal';
+  String get submitAppeal => 'ይግባኝ አስገባ';
 
   @override
-  String get reasonForAppeal => 'Reason for Appeal';
+  String get reasonForAppeal => 'የይግባኝ ምክንያት';
 
   @override
-  String get appealSubmitted => 'Appeal submitted.';
+  String get appealSubmitted => 'ይግባኝ ገብቷል።';
 
   @override
-  String get failedToSubmitAppeal => 'Failed to submit appeal.';
+  String get failedToSubmitAppeal => 'ይግባኝ ማስገባት አልተሳካም።';
 
   @override
-  String get selectedApplicants => 'Selected Applicants';
+  String get selectedApplicants => 'የተመረጡ አመልካቾች';
 
   @override
-  String get placementNotFound => 'Placement not found.';
+  String get placementNotFound => 'የሥራ መደቡ አልተገኘም።';
 
   @override
-  String get applyForThisPlacement => 'Apply for this Placement';
+  String get applyForThisPlacement => 'ለዚህ የሥራ መደብ ያመልክቱ';
 
   @override
-  String get reasonForApplyingOptional => 'Reason for Applying (Optional)';
+  String get reasonForApplyingOptional => 'የማመልከቻ ምክንያት (በፍቃደኝነት)';
 
   @override
-  String get submitApplication => 'Submit Application';
+  String get submitApplication => 'ማመልከቻ አስገባ';
 
   @override
-  String get noSelectedApplicantInfo => 'No information on selected applicants is available.';
+  String get noSelectedApplicantInfo => 'ስለተመረጡ አመልካቾች ምንም መረጃ የለም።';
 
   @override
-  String get notAvailable => 'N/A';
+  String get notAvailable => 'የለም';
 
   @override
-  String get noPromotionRequestsFound => 'No promotion requests found.';
+  String get noPromotionRequestsFound => 'ምንም የደረጃ እድገት ጥያቄዎች አልተገኙም።';
 
   @override
-  String get promotionRequestSubmitted => 'Promotion request submitted successfully';
+  String get promotionRequestSubmitted => 'የደረጃ እድገት ጥያቄ በተሳካ ሁኔታ ገብቷል';
 
   @override
-  String get requestedPositionForPromotion => 'Requested Position for Promotion';
+  String get requestedPositionForPromotion => 'ለደረጃ እድገት የተጠየቀ የሥራ መደብ';
 
   @override
-  String get thisFieldIsRequired => 'This field is required';
+  String get thisFieldIsRequired => 'ይህ መስክ ያስፈልጋል';
 
   @override
-  String get reasonForRequest => 'Reason for Request';
+  String get reasonForRequest => 'የጥያቄው ምክንያት';
 
   @override
-  String get brieflyExplainPromotionReason => 'Briefly explain why you are requesting this promotion.';
+  String get brieflyExplainPromotionReason => 'ይህን የደረጃ እድገት ለምን እንደጠየቁ በአጭሩ ይግለጹ።';
 
   @override
-  String get pleaseProvideReason => 'Please provide a reason';
+  String get pleaseProvideReason => 'እባክዎ ምክንያት ያቅርቡ';
 
   @override
-  String get requestForPromotion => 'Request for Promotion';
+  String get requestForPromotion => 'የደረጃ እድገት ጥያቄ';
 
   @override
   String requestedLabel({required String date}) {
-    return 'Requested: $date';
+    return 'የተጠየቀው: $date';
   }
 
   @override
-  String get trainingNotFound => 'Training not found.';
+  String get trainingNotFound => 'ስልጠና አልተገኘም።';
 
   @override
-  String get applyForThisTraining => 'Apply for this Training';
+  String get applyForThisTraining => 'ለዚህ ስልጠና ያመልክቱ';
 
   @override
   String trainingLocationAndOrganizer({required String center, required String organizer}) {
-    return '$center by $organizer';
+    return '$center በ$organizer';
   }
 
   @override
-  String get noTransferRequestsYet => 'You have not submitted any transfer requests yet.';
+  String get noTransferRequestsYet => 'እስካሁን ምንም የዝውውር ጥያቄ አላቀረቡም።';
 
   @override
-  String get refresh => 'Refresh';
+  String get refresh => 'አድስ';
 
   @override
-  String get transferRequestDetails => 'Transfer Request Details';
+  String get transferRequestDetails => 'የዝውውር ጥያቄ ዝርዝሮች';
 
   @override
-  String get requestId => 'Request ID';
+  String get requestId => 'የጥያቄ መለያ';
 
   @override
-  String get currentDepartment => 'Current Department';
+  String get currentDepartment => 'የአሁኑ መምሪያ';
 
   @override
-  String get currentLocation => 'Current Location';
+  String get currentLocation => 'የአሁኑ ቦታ';
 
   @override
-  String get requestedDepartment => 'Requested Department';
+  String get requestedDepartment => 'የተጠየቀው መምሪያ';
 
   @override
-  String get requestedLocation => 'Requested Location';
+  String get requestedLocation => 'የተጠየቀው ቦታ';
 
   @override
-  String get requestedPosition => 'Requested Position';
+  String get requestedPosition => 'የተጠየቀው የሥራ መደብ';
 
   @override
-  String get managerComments => 'Manager Comments';
+  String get managerComments => 'የሥራ አስኪያጅ አስተያየት';
 
   @override
-  String get hrComments => 'HR Comments';
+  String get hrComments => 'የሰው ሃብት አስተያየት';
 
   @override
-  String get effectiveDate => 'Effective Date';
+  String get effectiveDate => 'ውጤታማ የሚሆንበት ቀን';
 
   @override
-  String get lastUpdated => 'Last Updated';
+  String get lastUpdated => 'ለመጨረሻ ጊዜ የተሻሻለው';
 
   @override
-  String get close => 'Close';
+  String get close => 'ዝጋ';
 
   @override
-  String get confirmCancellation => 'Confirm Cancellation';
+  String get confirmCancellation => 'ስረዛን አረጋግጥ';
 
   @override
   String confirmCancelTransferRequest({required String location}) {
-    return 'Are you sure you want to cancel your transfer request to $location?';
+    return 'ወደ $location ያቀረቡትን የዝውውር ጥያቄ መሰረዝ ይፈልጋሉ?';
   }
 
   @override
-  String get no => 'No';
+  String get no => 'አይ';
 
   @override
-  String get yesCancel => 'Yes, Cancel';
+  String get yesCancel => 'አዎ, ይሰረዝ';
 
   @override
-  String get pleaseCorrectErrorsInForm => 'Please correct the errors in the form.';
+  String get pleaseCorrectErrorsInForm => 'እባክዎ በቅጹ ላይ ያሉትን ስህተቶች ያስተካክሉ።';
 
   @override
-  String get currentEmployeeDetails => 'Current Employee Details:';
+  String get currentEmployeeDetails => 'የአሁኑ የሰራተኛ ዝርዝሮች:';
 
   @override
-  String get newTransferRequest => 'New Transfer Request:';
+  String get newTransferRequest => 'አዲስ የዝውውር ጥያቄ:';
 
   @override
-  String get requestedDepartmentLabel => 'Requested Department *';
+  String get requestedDepartmentLabel => 'የተጠየቀው መምሪያ *';
 
   @override
-  String get requestedDepartmentHint => 'e.g., CID, Traffic Police, HR';
+  String get requestedDepartmentHint => 'ለምሳሌ: ሲ.አይ.ዲ, ትራፊክ ፖሊስ, ሰው ሃብት';
 
   @override
-  String get requestedDepartmentRequired => 'Requested department is required.';
+  String get requestedDepartmentRequired => 'የተጠየቀው መምሪያ ያስፈልጋል።';
 
   @override
-  String get requestedLocationLabel => 'Requested Location *';
+  String get requestedLocationLabel => 'የተጠየቀው ቦታ *';
 
   @override
-  String get requestedLocationHint => 'e.g., Gondar Zonal Office, Bahir Dar City';
+  String get requestedLocationHint => 'ለምሳሌ: ጎንደር ዞን ቢሮ, ባህር ዳር ከተማ';
 
   @override
-  String get requestedLocationRequired => 'Requested location is required.';
+  String get requestedLocationRequired => 'የተጠየቀው ቦታ ያስፈልጋል።';
 
   @override
-  String get requestedPositionTitleOptional => 'Requested Position Title (Optional)';
+  String get requestedPositionTitleOptional => 'የተጠየቀው የሥራ መደብ (በፍቃደኝነት)';
 
   @override
-  String get requestedPositionTitleHint => 'e.g., Investigator, Trainer';
+  String get requestedPositionTitleHint => 'ለምሳሌ: መርማሪ, አሰልጣኝ';
 
   @override
-  String get reasonForRequestLabel => 'Reason for Request *';
+  String get reasonForRequestLabel => 'የጥያቄው ምክንያት *';
 
   @override
-  String get reasonForRequestHint => 'Provide a detailed reason for your transfer request.';
+  String get reasonForRequestHint => 'ለዝውውር ጥያቄዎ ዝርዝር ምክንያት ያቅርቡ።';
 
   @override
-  String get reasonForRequestRequired => 'Reason for request is required.';
+  String get reasonForRequestRequired => 'የጥያቄው ምክንያት ያስፈልጋል።';
 
   @override
-  String get submitTransferRequest => 'Submit Transfer Request';
+  String get submitTransferRequest => 'የዝውውር ጥያቄ አስገባ';
 
   @override
   String requestTo({required String department}) {
-    return 'Request to: $department';
+    return 'ጥያቄ ወደ: $department';
   }
 
   @override
   String submittedOn({required String date}) {
-    return 'Submitted: $date';
+    return 'የቀረበው በ: $date';
   }
 
   @override
-  String get verificationError => 'Verification Error';
+  String get verificationError => 'የማረጋገጫ ስህተት';
 
   @override
-  String get enterEmployeeId => 'Enter Employee ID';
+  String get enterEmployeeId => 'የሰራተኛ መለያ ያስገቡ';
 
   @override
-  String get employeeIdHint => 'e.g., EMP-001';
+  String get employeeIdHint => 'ለምሳሌ: EMP-001';
 
   @override
-  String get qrCodeScanned => 'QR Code Scanned';
+  String get qrCodeScanned => 'QR ኮድ ተቃኝቷል';
 
   @override
   String searchingForEmployee({required String qrCode}) {
-    return 'Searching for employee: $qrCode';
+    return 'ሰራተኛ በመፈለግ ላይ: $qrCode';
   }
 
   @override
-  String get verifyNew => 'Verify New';
+  String get verifyNew => 'አዲስ አረጋግጥ';
 
   @override
-  String get verifyingEmployee => 'Verifying employee...';
+  String get verifyingEmployee => 'ሰራተኛ በማረጋገጥ ላይ...';
 
   @override
-  String get readyToVerify => 'Ready to Verify';
+  String get readyToVerify => 'ለማረጋገጥ ዝግጁ';
 
   @override
-  String get enterIdOrScanQr => 'Enter an Employee ID or scan a QR code to begin.';
+  String get enterIdOrScanQr => 'ለመጀመር የሰራተኛ መለያ ያስገቡ ወይም QR ኮድ ይቃኙ።';
 
   @override
-  String get retrySearch => 'Retry Search';
+  String get retrySearch => 'ፍለጋን እንደገና ሞክር';
 
   @override
-  String get scanEmployeeId => 'Scan Employee ID';
+  String get scanEmployeeId => 'የሰራተኛ መለያ ይቃኙ';
 
   @override
-  String get hiredOn => 'Hired On';
+  String get hiredOn => 'የተቀጠረበት ቀን';
 
   @override
-  String get clearFile => 'Clear file';
+  String get clearFile => 'ፋይል አጽዳ';
 
   @override
-  String get change => 'Change';
+  String get change => 'ቀይር';
 
   @override
-  String get select => 'Select';
+  String get select => 'ይምረጡ';
 
   @override
-  String get noItemsAdded => 'No items added yet.';
+  String get noItemsAdded => 'እስካሁን ምንም ንጥሎች አልተጨመሩም።';
 
   @override
-  String get personal => 'Personal';
+  String get personal => 'የግል';
 
   @override
-  String get previous => 'Previous';
+  String get previous => 'የቀድሞ';
 
   @override
-  String get saving => 'Saving...';
+  String get saving => 'በማስቀመጥ ላይ...';
 
   @override
-  String get review => 'Review';
+  String get review => 'ግምገማ';
 
   @override
-  String get next => 'Next';
+  String get next => 'ቀጣይ';
 
   @override
-  String get comingSoon => 'Coming soon';
+  String get comingSoon => 'በቅርብ ቀን';
 
   @override
-  String get amharicNotAvailable => 'Amharic language is not available yet';
+  String get amharicNotAvailable => 'የአማርኛ ቋንቋ እስካሁን አይገኝም።';
 
   @override
-  String get phone => 'Phone';
+  String get phone => 'ስልክ';
 
   @override
-  String get birthDate => 'Birth Date';
+  String get birthDate => 'የልደት ቀን';
 
   @override
-  String get hiredDate => 'Hired Date';
+  String get hiredDate => 'የቅጥር ቀን';
 
   @override
-  String get employmentStatus => 'Employment Status';
+  String get employmentStatus => 'የቅጥር ሁኔታ';
 
   @override
-  String get editPersonalDetails => 'Edit Personal Details';
+  String get editPersonalDetails => 'የግል ዝርዝሮችን አርትዕ';
 
   @override
-  String get noPerformanceReviews => 'No performance reviews available.';
+  String get noPerformanceReviews => 'ምንም የአፈጻጸም ግምገማዎች የሉም።';
 
   @override
   String reviewDate({required String date}) {
-    return 'Review Date: $date';
+    return 'የግምገማ ቀን: $date';
   }
 
   @override
   String ratingAndComments({required double rating, required String comments}) {
-    return 'Rating: $rating - $comments';
+    return 'ደረጃ: $rating - $comments';
   }
 
   @override
-  String get noComments => 'No comments';
+  String get noComments => 'አስተያየት የለም';
 
   @override
-  String get spouseInformation => 'Spouse Information';
+  String get spouseInformation => 'የትዳር አጋር መረጃ';
 
   @override
-  String get noSpouseInfoAvailable => 'No spouse information available.';
+  String get noSpouseInfoAvailable => 'የትዳር አጋር መረጃ የለም።';
 
   @override
   String occupation({required String occupation}) {
-    return 'Occupation: $occupation';
+    return 'ሥራ: $occupation';
   }
 
   @override
   String dobLabel({required String dob}) {
-    return 'DOB: $dob';
+    return 'የልደት ቀን: $dob';
   }
 
   @override
-  String get updated => 'updated';
+  String get updated => 'ተሻሽሏል';
 
   @override
-  String get added => 'added';
+  String get added => 'ተጨምሯል';
 
   @override
-  String get present => 'Present';
+  String get present => 'አሁን';
 
   @override
   String experienceSuccess({required String action}) {
-    return 'Experience successfully $action.';
+    return 'የሥራ ልምድ በተሳካ ሁኔታ $action።';
   }
 
   @override
   String failedToExperience({required String action}) {
-    return 'Failed to $action experience.';
+    return 'የሥራ ልምድ $action አልተቻለም።';
   }
 
   @override
-  String get experienceDeleted => 'Experience successfully deleted.';
+  String get experienceDeleted => 'የሥራ ልምድ በተሳካ ሁኔታ ተሰርዟል።';
 
   @override
-  String get failedToDeleteExperience => 'Failed to delete experience.';
+  String get failedToDeleteExperience => 'የሥራ ልምድ መሰረዝ አልተቻለም።';
 
   @override
   String educationSuccess({required String action}) {
-    return 'Education successfully $action.';
+    return 'ትምህርት በተሳካ ሁኔታ $action።';
   }
 
   @override
   String failedToEducation({required String action}) {
-    return 'Failed to $action education.';
+    return 'ትምህርት $action አልተቻለም።';
   }
 
   @override
-  String get educationDeleted => 'Education successfully deleted.';
+  String get educationDeleted => 'ትምህርት በተሳካ ሁኔታ ተሰርዟል።';
 
   @override
-  String get failedToDeleteEducation => 'Failed to delete education.';
+  String get failedToDeleteEducation => 'ትምህርት መሰረዝ አልተቻለም።';
 
   @override
   String uploadedOn({required String date}) {
-    return 'Uploaded: $date';
+    return 'የተጫነው በ: $date';
   }
 
   @override
-  String get noDependantsListed => 'No dependants listed.';
+  String get noDependantsListed => 'ምንም ጥገኞች አልተዘረዘሩም።';
 
   @override
   String relationLabel({required String relation}) {
-    return 'Relation: $relation';
+    return 'ዝምድና: $relation';
   }
 
   @override
-  String get addEmergencyContact => 'Add Emergency Contact';
+  String get addEmergencyContact => 'የአደጋ ጊዜ ተጠሪ ጨምር';
 
   @override
-  String get emergencyContacts => 'Emergency Contacts';
+  String get emergencyContacts => 'የአደጋ ጊዜ ተጠሪዎች';
 
   @override
-  String get noEmergencyContactsListed => 'No emergency contacts listed.';
+  String get noEmergencyContactsListed => 'ምንም የአደጋ ጊዜ ተጠሪዎች አልተዘረዘሩም።';
 
   @override
   String phoneLabel({required String phone}) {
-    return 'Phone: $phone';
+    return 'ስልክ: $phone';
   }
 
   @override
-  String get profileUpdatedSuccessfully => 'Profile updated successfully';
+  String get profileUpdatedSuccessfully => 'መገለጫ በተሳካ ሁኔታ ተዘምኗል';
 
   @override
-  String get saveChanges => 'Save Changes';
+  String get saveChanges => 'ለውጦችን አስቀምጥ';
 
   @override
-  String get titleLabel => 'Title (e.g., Mr., Mrs., Ms.) *';
+  String get titleLabel => 'ማዕረግ (ለምሳሌ: አቶ, ወ/ሮ, ወ/ሪት) *';
 
   @override
-  String get titleIsRequired => 'Title is required';
+  String get titleIsRequired => 'ማዕረግ ያስፈልጋል';
 
   @override
-  String get fullNameLabel => 'Full Name *';
+  String get fullNameLabel => 'ሙሉ ስም *';
 
   @override
-  String get genderLabel => 'Gender *';
+  String get genderLabel => 'ጾታ *';
 
   @override
-  String get genderIsRequired => 'Gender is required';
+  String get genderIsRequired => 'ጾታ ያስፈልጋል';
 
   @override
-  String get dateOfBirthLabel => 'Date of Birth *';
+  String get dateOfBirthLabel => 'የልደት ቀን *';
 
   @override
-  String get occupationLabel => 'Occupation';
+  String get occupationLabel => 'ሥራ';
 
   @override
-  String get mothersFullName => 'Mother\'s Full Name';
+  String get mothersFullName => 'የእናት ሙሉ ስም';
 
   @override
-  String get addressLabel => 'Address *';
+  String get addressLabel => 'አድራሻ *';
 
   @override
-  String get anniversaryDate => 'Anniversary Date';
+  String get anniversaryDate => 'የጋብቻ በዓል ቀን';
 
   @override
-  String get retirementNumber => 'Retirement Number';
+  String get retirementNumber => 'የጡረታ ቁጥር';
 
   @override
-  String get tinNumber => 'TIN Number';
+  String get tinNumber => 'የታክስ ከፋይ መለያ ቁጥር';
 
   @override
-  String get organizationLabel => 'Organization *';
+  String get organizationLabel => 'ድርጅት *';
 
   @override
-  String get requiredField => 'Required';
+  String get requiredField => 'የግድ መሞላት ያለበት';
 
   @override
-  String get organizationTypeLabel => 'Organization Type *';
+  String get organizationTypeLabel => 'የድርጅት አይነት *';
 
   @override
-  String get positionLabel => 'Position *';
+  String get positionLabel => 'የሥራ መደብ *';
 
   @override
-  String get responsibilitiesLabel => 'Responsibilities';
+  String get responsibilitiesLabel => 'ኃላፊነቶች';
 
   @override
-  String get proficiencyLevelLabel => 'Proficiency Level *';
+  String get proficiencyLevelLabel => 'የብቃት ደረጃ *';
 
   @override
-  String get joinDateLabel => 'Join Date *';
+  String get joinDateLabel => 'የተቀላቀሉበት ቀን *';
 
   @override
-  String get iCurrentlyWorkHere => 'I currently work here';
+  String get iCurrentlyWorkHere => 'አሁንም እዚህ እሰራለሁ';
 
   @override
-  String get separationDateLabel => 'Separation Date';
+  String get separationDateLabel => 'የለቀቁበት ቀን';
 
   @override
-  String get educationLevelLabel => 'Education Level *';
+  String get educationLevelLabel => 'የትምህርት ደረጃ *';
 
   @override
-  String get universityLabel => 'University *';
+  String get universityLabel => 'ዩኒቨርሲቲ *';
 
   @override
-  String get fieldOfStudyLabel => 'Field Of Study *';
+  String get fieldOfStudyLabel => 'የትምህርት መስክ *';
 
   @override
   String get cgpa => 'CGPA';
 
   @override
-  String get startDateLabel => 'Start Date *';
+  String get startDateLabel => 'የጀመሩበት ቀን *';
 
   @override
-  String get startDateIsRequired => 'Start date is required';
+  String get startDateIsRequired => 'የጀመሩበት ቀን ያስፈልጋል';
 
   @override
-  String get endDateLabel => 'End Date';
+  String get endDateLabel => 'የጨረሱበት ቀን';
 
   @override
-  String get educationStatusLabel => 'Education Status *';
+  String get educationStatusLabel => 'የትምህርት ሁኔታ *';
 
   @override
-  String get dependantsFullNameLabel => 'Dependant\'s Full Name *';
+  String get dependantsFullNameLabel => 'የጥገኛ ሙሉ ስም *';
 
   @override
-  String get relationshipLabel => 'Relationship *';
+  String get relationshipLabel => 'ዝምድና *';
 
   @override
-  String get phoneNumberLabel => 'Phone Number *';
+  String get phoneNumberLabel => 'ስልክ ቁጥር *';
 
   @override
-  String get regionLabel => 'Region *';
+  String get regionLabel => 'ክልል *';
 
   @override
-  String get phoneLabelRequired => 'Phone *';
+  String get phoneLabelRequired => 'ስልክ *';
 
   @override
-  String get mobile => 'Mobile';
+  String get mobile => 'ሞባይል';
 
   @override
-  String get trainingAndDevelopment => 'Training & Development';
+  String get trainingAndDevelopment => 'ስልጠና እና ልማት';
 
   @override
-  String get placementManagement => 'Placement Management';
+  String get placementManagement => 'የምደባ አስተዳደር';
 
   @override
-  String get employeeClearance => 'Employee Clearance';
+  String get employeeClearance => 'የሰራተኛ ሥራ መልቀቂያ';
 
   @override
-  String get incidentManagement => 'Incident Management';
+  String get incidentManagement => 'የክስተት አስተዳደር';
 
   @override
-  String get promotionManagement => 'Promotion Management';
+  String get promotionManagement => 'የደረጃ እድገት አስተዳደር';
 
   @override
   String id({required String id}) {
-    return 'ID $id';
+    return 'መለያ $id';
   }
 
   @override
-  String get noLeaveHistoryFound => 'No Leave History Found';
+  String get noLeaveHistoryFound => 'ምንም የእረፍት ታሪክ አልተገኘም';
 
   @override
   String employeeId({required String id}) {
-    return 'Employee ID $id';
+    return 'የሰራተኛ መለያ $id';
   }
 
   @override
-  String get verificationFailed => 'Verification Failed';
+  String get verificationFailed => 'ማረጋገጥ አልተሳካም';
 
   @override
-  String get googleSignInNotImplemented => 'Google sign-in is not implemented yet. Use email instead.';
+  String get googleSignInNotImplemented => 'የጉግል መግቢያ ገና አልተተገበረም። በምትኩ ኢሜል ይጠቀሙ።';
 
   @override
-  String get signInWithGoogle => 'Sign in with Google';
+  String get signInWithGoogle => 'በGoogle ይግቡ';
 
   @override
-  String get signupFailed => 'Signup Failed';
+  String get signupFailed => 'መመዝገብ አልተሳካም';
 
   @override
-  String get alreadyHaveAnAccount => 'Already have an account?';
+  String get alreadyHaveAnAccount => 'አካውንት አለዎት?';
 
   @override
-  String get userNamePlaceholder => 'John Doe';
+  String get userNamePlaceholder => 'ለምሳሌ አበበ ከበደ';
 
   @override
-  String get userEmailPlaceholder => 'john.doe@example.com';
+  String get userEmailPlaceholder => 'abebe.kebede@example.com';
 
   @override
-  String get userInitialsPlaceholder => 'JD';
+  String get userInitialsPlaceholder => 'አከ';
 
   @override
-  String get yourStatus => 'Your Status';
+  String get yourStatus => 'የእርስዎ ሁኔታ';
 
   @override
-  String get reasonForNonSelection => 'Reason for non-selection:';
+  String get reasonForNonSelection => 'ያልተመረጡበት ምክንያት:';
 
   @override
-  String get noReasonProvided => 'No reason provided.';
+  String get noReasonProvided => 'ምክንያት አልቀረበም።';
 
   @override
-  String get yourAppealIsUnderReview => 'Your appeal is under review.';
+  String get yourAppealIsUnderReview => 'ይግባኝዎ በግምገማ ላይ ነው።';
 
   @override
-  String get viewSelected => 'View Selected';
+  String get viewSelected => 'የተመረጡትን ይመልከቱ';
 
   @override
-  String get appealDecision => 'Appeal Decision';
+  String get appealDecision => 'የይግባኝ ውሳኔ';
 }
