@@ -75,7 +75,9 @@ class TransferRequestListItemWidget extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      context.lango.requestTo(department: request.requestedDepartment), // <-- REPLACED
+                      context.lango.requestTo(
+                        department: request.requestedDepartment,
+                      ), // <-- REPLACED
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: theme.colorScheme.primary,
@@ -84,7 +86,11 @@ class TransferRequestListItemWidget extends StatelessWidget {
                     ),
                   ),
                   Chip(
-                    avatar: Icon(_getStatusIcon(request.status), size: 18, color: statusColor),
+                    avatar: Icon(
+                      _getStatusIcon(request.status),
+                      size: 18,
+                      color: statusColor,
+                    ),
                     label: Text(
                       request.status.toDisplayString,
                       style: TextStyle(
@@ -93,16 +99,23 @@ class TransferRequestListItemWidget extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    backgroundColor: statusColor.withOpacity(0.1),
+                    backgroundColor: statusColor.withValues(alpha: 0.1),
                     side: BorderSide.none,
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0,
+                      vertical: 2.0,
+                    ),
                   ),
                 ],
               ),
               const SizedBox(height: 8),
               Row(
                 children: [
-                  Icon(Icons.location_on_outlined, size: 16, color: theme.textTheme.bodySmall?.color),
+                  Icon(
+                    Icons.location_on_outlined,
+                    size: 16,
+                    color: theme.textTheme.bodySmall?.color,
+                  ),
                   const SizedBox(width: 6),
                   Expanded(
                     child: Text(
@@ -113,11 +126,16 @@ class TransferRequestListItemWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              if (request.requestedPositionTitle != null && request.requestedPositionTitle!.isNotEmpty) ...[
+              if (request.requestedPositionTitle != null &&
+                  request.requestedPositionTitle!.isNotEmpty) ...[
                 const SizedBox(height: 4),
                 Row(
                   children: [
-                    Icon(Icons.work_outline, size: 16, color: theme.textTheme.bodySmall?.color),
+                    Icon(
+                      Icons.work_outline,
+                      size: 16,
+                      color: theme.textTheme.bodySmall?.color,
+                    ),
                     const SizedBox(width: 6),
                     Expanded(
                       child: Text(
@@ -134,15 +152,23 @@ class TransferRequestListItemWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    context.lango.submittedOn(date: DateFormat('dd MMM, yyyy').format(request.requestDate)), // <-- REPLACED
-                    style: theme.textTheme.bodySmall?.copyWith(fontStyle: FontStyle.italic),
+                    context.lango.submittedOn(
+                      date: DateFormat(
+                        'dd MMM, yyyy',
+                      ).format(request.requestDate),
+                    ), // <-- REPLACED
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      fontStyle: FontStyle.italic,
+                    ),
                   ),
                   if (onCancel != null)
                     TextButton.icon(
                       onPressed: onCancel,
                       icon: const Icon(Icons.cancel_outlined, size: 18),
                       label: Text(context.lango.cancel), // <-- REPLACED
-                      style: TextButton.styleFrom(foregroundColor: theme.colorScheme.error),
+                      style: TextButton.styleFrom(
+                        foregroundColor: theme.colorScheme.error,
+                      ),
                     ),
                 ],
               ),

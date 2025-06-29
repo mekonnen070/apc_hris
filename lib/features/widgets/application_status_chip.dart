@@ -32,8 +32,8 @@ class ApplicationStatusChip extends StatelessWidget {
         color: statusColor,
         fontWeight: FontWeight.bold,
       ),
-      backgroundColor: statusColor.withOpacity(0.15),
-      side: BorderSide(color: statusColor.withOpacity(0.3)),
+      backgroundColor: statusColor.withValues(alpha: 0.15),
+      side: BorderSide(color: statusColor.withValues(alpha: 0.3)),
       padding: const EdgeInsets.symmetric(horizontal: 8),
     );
   }

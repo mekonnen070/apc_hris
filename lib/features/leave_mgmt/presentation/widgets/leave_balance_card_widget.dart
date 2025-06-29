@@ -22,7 +22,7 @@ class LeaveBalanceCard extends StatelessWidget {
 
     return Expanded(
       child: Card(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         elevation: 0,
         shape: RoundedRectangleBorder(
           side: BorderSide(color: color),
@@ -58,7 +58,10 @@ class LeaveBalanceCard extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                context.lango.usedOf(used: used, allowed: allowed), // <-- REPLACED
+                context.lango.usedOf(
+                  used: used,
+                  allowed: allowed,
+                ), // <-- REPLACED
                 style: theme.textTheme.bodyMedium?.copyWith(color: color),
               ),
             ],

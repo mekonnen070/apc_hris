@@ -39,7 +39,9 @@ class LeaveHistoryListItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  context.lango.leaveTitle(leaveType: request.leaveTypeId.toCapitalized()), // <-- REPLACED
+                  context.lango.leaveTitle(
+                    leaveType: request.leaveTypeId.toCapitalized(),
+                  ), // <-- REPLACED
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 Container(
@@ -48,7 +50,7 @@ class LeaveHistoryListItem extends StatelessWidget {
                     vertical: 4,
                   ),
                   decoration: BoxDecoration(
-                    color: statusColor.withOpacity(0.2),
+                    color: statusColor.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
@@ -82,12 +84,17 @@ class LeaveHistoryListItem extends StatelessWidget {
             if (request.requestReason != null &&
                 request.requestReason!.isNotEmpty)
               Text(
-                context.lango.daysWithReason(days: request.numOfDays, reason: request.requestReason!), // <-- REPLACED
+                context.lango.daysWithReason(
+                  days: request.numOfDays,
+                  reason: request.requestReason!,
+                ), // <-- REPLACED
                 style: Theme.of(context).textTheme.bodySmall,
               )
             else
               Text(
-                context.lango.daysOnly(count: request.numOfDays), // <-- REPLACED
+                context.lango.daysOnly(
+                  count: request.numOfDays,
+                ), // <-- REPLACED
                 style: Theme.of(context).textTheme.bodySmall,
               ),
           ],

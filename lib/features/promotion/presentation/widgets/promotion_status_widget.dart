@@ -39,8 +39,8 @@ class PromotionStatusWidget extends StatelessWidget {
       avatar: Icon(icon, color: color, size: 18),
       label: Text(status.name.toDisplayCase()),
       labelStyle: TextStyle(color: color, fontWeight: FontWeight.bold),
-      backgroundColor: color.withOpacity(0.1),
-      side: BorderSide(color: color.withOpacity(0.2)),
+      backgroundColor: color.withValues(alpha: 0.1),
+      side: BorderSide(color: color.withValues(alpha: 0.2)),
     );
   }
 }
