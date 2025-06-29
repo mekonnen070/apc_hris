@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:police_com/core/enums/applicant_status.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/widgets/application_status_chip.dart';
 
 class ApplicationStatusCard extends StatelessWidget {
@@ -29,7 +30,7 @@ class ApplicationStatusCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Your Status', style: theme.textTheme.titleMedium),
+                Text(context.lango.yourStatus, style: theme.textTheme.titleMedium), // <-- REPLACED
                 ApplicationStatusChip(status: status),
               ],
             ),
@@ -38,18 +39,18 @@ class ApplicationStatusCard extends StatelessWidget {
               const Divider(height: 24),
               if (status == ApplicantStatus.notSelected) ...[
                 Text(
-                  'Reason for non-selection:',
+                  context.lango.reasonForNonSelection, // <-- REPLACED
                   style: theme.textTheme.labelLarge,
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  reasonForRejection ?? 'No reason provided.',
+                  reasonForRejection ?? context.lango.noReasonProvided, // <-- REPLACED
                   style: theme.textTheme.bodyMedium,
                 ),
               ],
               if (status == ApplicantStatus.appealed) ...[
                 Text(
-                  'Your appeal is under review.',
+                  context.lango.yourAppealIsUnderReview, // <-- REPLACED
                   style: theme.textTheme.bodyMedium?.copyWith(
                     fontStyle: FontStyle.italic,
                   ),
@@ -62,14 +63,14 @@ class ApplicationStatusCard extends StatelessWidget {
                   if (onViewSelected != null)
                     TextButton(
                       onPressed: onViewSelected,
-                      child: const Text('View Selected'),
+                      child: Text(context.lango.viewSelected), // <-- REPLACED
                     ),
                   if (onAppeal != null &&
                       status == ApplicantStatus.notSelected) ...[
                     const SizedBox(width: 8),
                     FilledButton(
                       onPressed: onAppeal,
-                      child: const Text('Appeal Decision'),
+                      child: Text(context.lango.appealDecision), // <-- REPLACED
                     ),
                   ],
                 ],

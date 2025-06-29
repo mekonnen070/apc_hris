@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:police_com/core/l10n/language_controller.dart';
 import 'package:police_com/features/auth/data/auth_repository.dart';
+import 'package:police_com/providers/user_provider.dart';
 
 final authControllerProvider = Provider<AuthController>((ref) {
   return AuthController(ref);
@@ -41,10 +41,10 @@ class AuthController {
   }
 
   Future<void> logout() async {
-    // ref.read(isLoggedInProvider.notifier).state = false;
+    ref.read(isLoggedInProvider.notifier).state = false;
     await ref
         .read(userControllerProvider.notifier)
         .updateUserLoginStatus(false);
-    // await ref.read(auhtRepositoryProvider).logout();
+    await ref.read(auhtRepositoryProvider).logout();
   }
 }

@@ -52,7 +52,7 @@ class RequestClearanceScreen extends HookConsumerWidget {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text('${context.lango.failedToSubmitRequest}$e'),
-            ), // <-- REPLACED
+            ),
           );
         } finally {
           isLoading.value = false;

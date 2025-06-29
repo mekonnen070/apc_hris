@@ -1485,4 +1485,43 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get verificationFailed => 'Verification Failed';
+
+  @override
+  String get googleSignInNotImplemented => 'Google sign-in is not implemented yet. Use email instead.';
+
+  @override
+  String get signInWithGoogle => 'Sign in with Google';
+
+  @override
+  String get signupFailed => 'Signup Failed';
+
+  @override
+  String get alreadyHaveAnAccount => 'Already have an account?';
+
+  @override
+  String get userNamePlaceholder => 'John Doe';
+
+  @override
+  String get userEmailPlaceholder => 'john.doe@example.com';
+
+  @override
+  String get userInitialsPlaceholder => 'JD';
+
+  @override
+  String get yourStatus => 'Your Status';
+
+  @override
+  String get reasonForNonSelection => 'Reason for non-selection:';
+
+  @override
+  String get noReasonProvided => 'No reason provided.';
+
+  @override
+  String get yourAppealIsUnderReview => 'Your appeal is under review.';
+
+  @override
+  String get viewSelected => 'View Selected';
+
+  @override
+  String get appealDecision => 'Appeal Decision';
 }

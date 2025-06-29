@@ -465,6 +465,18 @@
     "id",
     "noLeaveHistoryFound",
     "employeeId",
-    "verificationFailed"
+    "verificationFailed",
+    "googleSignInNotImplemented",
+    "signupFailed",
+    "alreadyHaveAnAccount",
+    "userNamePlaceholder",
+    "userEmailPlaceholder",
+    "userInitialsPlaceholder",
+    "yourStatus",
+    "reasonForNonSelection",
+    "noReasonProvided",
+    "yourAppealIsUnderReview",
+    "viewSelected",
+    "appealDecision"
   ]
 }

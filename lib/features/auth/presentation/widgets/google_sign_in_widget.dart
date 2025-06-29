@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:police_com/core/assets.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/core/theme/app_colors.dart';
 import 'package:toastification/toastification.dart';
 
@@ -9,12 +10,13 @@ class GoogleSignInWidget extends ConsumerWidget {
 
   /// Handles the Google sign-in process.
   ///
-  Future<void> _handleLogin(WidgetRef ref) async {
+  Future<void> _handleLogin(BuildContext context, WidgetRef ref) async { // <-- Pass context
     // final authRepo = ref.read(authRepositoryProvider);
     toastification.show(
-      title: const Text('Coming soon..'),
-      description: const Text(
-        'Google sign-in is not implemented yet. Use email instead.',
+      context: context, // <-- Pass context
+      title: Text(context.lango.comingSoon), // <-- REPLACED
+      description: Text(
+        context.lango.googleSignInNotImplemented, // <-- REPLACED
       ),
       autoCloseDuration: const Duration(seconds: 2),
     );
@@ -23,6 +25,7 @@ class GoogleSignInWidget extends ConsumerWidget {
   }
 
   /// Returns the style for the button.
+  ///
   ButtonStyle _style() => FilledButton.styleFrom(
     backgroundColor: AppColors.white,
     foregroundColor: AppColors.black,
@@ -38,7 +41,7 @@ class GoogleSignInWidget extends ConsumerWidget {
     return SizedBox(
       width: double.infinity,
       child: FilledButton.icon(
-        onPressed: () => _handleLogin(ref),
+        onPressed: () => _handleLogin(context, ref), // <-- Pass context
         icon: ClipRRect(
           borderRadius: BorderRadius.circular(4),
           child: Image.asset(
@@ -48,7 +51,7 @@ class GoogleSignInWidget extends ConsumerWidget {
             fit: BoxFit.cover,
           ),
         ),
-        label: const Text('Sign in with Google'),
+        label: Text(context.lango.signInWithGoogle), // <-- REPLACED
         style: _style(),
       ),
     );

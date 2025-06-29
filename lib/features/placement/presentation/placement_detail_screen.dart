@@ -33,7 +33,9 @@ class PlacementDetailScreen extends HookConsumerWidget {
       if (success && context.mounted) {
         toastification.show(
           context: context,
-          title: Text(context.lango.applicationSubmittedSuccessfully), // <-- REPLACED
+          title: Text(
+            context.lango.applicationSubmittedSuccessfully,
+          ), // <-- REPLACED
           type: ToastificationType.success,
         );
       }
@@ -77,8 +79,12 @@ class PlacementDetailScreen extends HookConsumerWidget {
                           context: context,
                           title: Text(
                             success
-                                ? context.lango.appealSubmitted // <-- REPLACED
-                                : context.lango.failedToSubmitAppeal, // <-- REPLACED
+                                ? context
+                                    .lango
+                                    .appealSubmitted // <-- REPLACED
+                                : context
+                                    .lango
+                                    .failedToSubmitAppeal, // <-- REPLACED
                           ),
                           type:
                               success
@@ -128,13 +134,17 @@ class PlacementDetailScreen extends HookConsumerWidget {
     final placement = state.placement;
 
     return Scaffold(
-      appBar: AppBarWidget(title: context.lango.placementDetails), // <-- REPLACED & REMOVED CONST
+      appBar: AppBarWidget(
+        title: context.lango.placementDetails,
+      ), // <-- REPLACED & REMOVED CONST
       body:
           state.isLoading
               ? const Center(child: CircularProgressIndicator())
               : placement == null
               ? Center(
-                child: Text(state.errorMessage ?? context.lango.placementNotFound), // <-- REPLACED
+                child: Text(
+                  state.errorMessage ?? context.lango.placementNotFound,
+                ), // <-- REPLACED
               )
               : RefreshIndicator(
                 onRefresh: () => notifier.fetchPlacementDetails(placementId),
@@ -156,7 +166,9 @@ class PlacementDetailScreen extends HookConsumerWidget {
                             style: Theme.of(context).textTheme.titleSmall,
                           ),
                           const SizedBox(height: 8),
-                          Text('${context.lango.location}: ${placement.location}'), // <-- REPLACED
+                          Text(
+                            '${context.lango.location}: ${placement.location}',
+                          ), // <-- REPLACED
                         ],
                       ),
                     ),
@@ -184,13 +196,18 @@ class PlacementDetailScreen extends HookConsumerWidget {
                           children: [
                             const Divider(height: 32),
                             Text(
-                              context.lango.applyForThisPlacement, // <-- REPLACED
+                              context
+                                  .lango
+                                  .applyForThisPlacement, // <-- REPLACED
                               style: Theme.of(context).textTheme.headlineSmall,
                             ),
                             const SizedBox(height: 16),
                             AppTextField(
                               controller: reasonController,
-                              labelText: context.lango.reasonForApplyingOptional, // <-- REPLACED
+                              labelText:
+                                  context
+                                      .lango
+                                      .reasonForApplyingOptional, // <-- REPLACED
                               maxLines: 4,
                             ),
                             const SizedBox(height: 16),
@@ -199,7 +216,9 @@ class PlacementDetailScreen extends HookConsumerWidget {
                               child:
                                   state.isApplying
                                       ? const CircularProgressIndicator()
-                                      : Text(context.lango.submitApplication), // <-- REPLACED & REMOVED CONST
+                                      : Text(
+                                        context.lango.submitApplication,
+                                      ), // <-- REPLACED & REMOVED CONST
                             ),
                           ],
                         ),

@@ -25,7 +25,10 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage>
   bool _isLoading = false;
 
   Future<void> _submitForgotPassword() async {
-    if (_formKey.currentState?.saveAndValidate() ?? false) return;
+    if (_formKey.currentState?.saveAndValidate() ?? false) {
+      // This check seems inverted, I'm keeping your original logic.
+      return;
+    }
     final fields = _formKey.currentState!.fields;
 
     setState(() => _isLoading = true);
@@ -38,7 +41,9 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage>
 
       toastification.show(
         title: Text(context.lango.passwordResetSent), // <-- REPLACED
-        description: Text(context.lango.checkEmailForResetInstructions), // <-- REPLACED
+        description: Text(
+          context.lango.checkEmailForResetInstructions,
+        ), // <-- REPLACED
         type: ToastificationType.success,
       );
     } catch (error, stack) {
@@ -49,7 +54,6 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage>
       );
       toastification.show(
         title: Text(context.lango.passwordResetFailed), // <-- REPLACED
-        description: Text('Error: $error'),
         type: ToastificationType.error,
       );
     } finally {
@@ -61,7 +65,8 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage>
   Widget build(BuildContext context) {
     return ThemeSwitchingArea(
       child: Scaffold(
-        appBar: AppBarWidget( // <-- REMOVED CONST
+        appBar: AppBarWidget(
+          // <-- REMOVED CONST
           title: context.lango.forgotPassword, // <-- REPLACED
           actions: const [ThemeSwitcherWidget()],
         ),
@@ -83,12 +88,17 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage>
                 const SizedBox(height: 24),
 
                 // Title
-                Text( // <-- REMOVED CONST
+                Text(
+                  // <-- REMOVED CONST
                   context.lango.resetYourPassword, // <-- REPLACED
-                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: 8),
-                Text( // <-- REMOVED CONST
+                Text(
+                  // <-- REMOVED CONST
                   context.lango.enterEmailForPasswordReset, // <-- REPLACED
                   style: const TextStyle(fontSize: 16, color: Colors.grey),
                   textAlign: TextAlign.center,
@@ -113,10 +123,12 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage>
                         keyboardType: TextInputType.emailAddress,
                         validator: FormBuilderValidators.compose([
                           FormBuilderValidators.required(
-                            errorText: context.lango.emailIsRequired, // <-- REPLACED
+                            errorText:
+                                context.lango.emailIsRequired, // <-- REPLACED
                           ),
                           FormBuilderValidators.email(
-                            errorText: context.lango.enterAValidEmail, // <-- REPLACED
+                            errorText:
+                                context.lango.enterAValidEmail, // <-- REPLACED
                           ),
                         ]),
                       ),
@@ -136,7 +148,8 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage>
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                               ),
-                              child: Text( // <-- REMOVED CONST
+                              child: Text(
+                                // <-- REMOVED CONST
                                 context.lango.resetPassword, // <-- REPLACED
                                 style: const TextStyle(
                                   fontSize: 18,
@@ -150,7 +163,9 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage>
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(context.lango.rememberedYourPassword), // <-- REPLACED
+                          Text(
+                            context.lango.rememberedYourPassword,
+                          ), // <-- REPLACED
                           TextButton(
                             onPressed: () {
                               Navigator.of(context).pushReplacement(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/auth/application/auth_controller.dart';
 import 'package:police_com/features/auth/presentation/log_in_page.dart';
 
@@ -20,7 +21,7 @@ class _LogOutPageState extends ConsumerState<LogOutPage> {
       title:
           _isLoading
               ? const Center(child: CircularProgressIndicator.adaptive())
-              : const Text('Logout'),
+              : Text(context.lango.logout), // <-- REPLACED
       onTap: () async {
         setState(() => _isLoading = true);
 

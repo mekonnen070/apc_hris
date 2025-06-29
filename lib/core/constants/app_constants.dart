@@ -11,4 +11,11 @@ class AppConstants {
 
   /// The key used to store and retrieve the user login status.
   static const String isLoggedInKey = 'is_logged_in';
+
+    /// Shared Preferences Keys
+  static const String kLoggedInPrefKey = 'isLoggedIn';
+  static const String kOnBoardedPrefKey = 'isOnBoarded';
+  static const String kUpdateAndOffers = 'updateAndOffers';
+  static const String kThemeModePrefKey = 'themeMode';
+  static const String kLanguagePrefKey = 'language';
 }

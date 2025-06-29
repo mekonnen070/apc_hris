@@ -42,7 +42,9 @@ class _LogInPageState extends ConsumerState<LogInPage> with LoggerMixin {
 
       toastification.show(
         title: Text(context.lango.loginSuccessful), // <-- REPLACED
-        description: Text(context.lango.youHaveSuccessfullyLoggedIn), // <-- REPLACED
+        description: Text(
+          context.lango.youHaveSuccessfullyLoggedIn,
+        ), // <-- REPLACED
         type: ToastificationType.success,
         autoCloseDuration: const Duration(seconds: 2),
       );
@@ -55,7 +57,6 @@ class _LogInPageState extends ConsumerState<LogInPage> with LoggerMixin {
       logError('Error during login: $error', error: error, stackTrace: stack);
       toastification.show(
         title: Text(context.lango.loginFailed), // <-- REPLACED
-        description: Text('Error: $error'),
         type: ToastificationType.error,
       );
     } finally {
@@ -67,7 +68,8 @@ class _LogInPageState extends ConsumerState<LogInPage> with LoggerMixin {
   Widget build(BuildContext context) {
     return ThemeSwitchingArea(
       child: Scaffold(
-        appBar: AppBarWidget( // <-- REMOVED CONST
+        appBar: AppBarWidget(
+          // <-- REMOVED CONST
           title: context.lango.login, // <-- REPLACED
           actions: const [ThemeSwitcherWidget()],
         ),
@@ -89,12 +91,17 @@ class _LogInPageState extends ConsumerState<LogInPage> with LoggerMixin {
                 const SizedBox(height: 24),
 
                 // Title
-                Text( // <-- REMOVED CONST
+                Text(
+                  // <-- REMOVED CONST
                   context.lango.welcomeBack, // <-- REPLACED
-                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: 8),
-                Text( // <-- REMOVED CONST
+                Text(
+                  // <-- REMOVED CONST
                   context.lango.logInWithEmailAndPassword, // <-- REPLACED
                   style: const TextStyle(fontSize: 16, color: Colors.grey),
                 ),
@@ -118,10 +125,12 @@ class _LogInPageState extends ConsumerState<LogInPage> with LoggerMixin {
                         keyboardType: TextInputType.emailAddress,
                         validator: FormBuilderValidators.compose([
                           FormBuilderValidators.required(
-                            errorText: context.lango.emailIsRequired, // <-- REPLACED
+                            errorText:
+                                context.lango.emailIsRequired, // <-- REPLACED
                           ),
                           FormBuilderValidators.email(
-                            errorText: context.lango.enterAValidEmail, // <-- REPLACED
+                            errorText:
+                                context.lango.enterAValidEmail, // <-- REPLACED
                           ),
                         ]),
                       ),
@@ -140,11 +149,17 @@ class _LogInPageState extends ConsumerState<LogInPage> with LoggerMixin {
                         obscureText: true,
                         validator: FormBuilderValidators.compose([
                           FormBuilderValidators.required(
-                            errorText: context.lango.passwordIsRequired, // <-- REPLACED
+                            errorText:
+                                context
+                                    .lango
+                                    .passwordIsRequired, // <-- REPLACED
                           ),
                           FormBuilderValidators.minLength(
                             6,
-                            errorText: context.lango.minimum6CharactersRequired, // <-- REPLACED
+                            errorText:
+                                context
+                                    .lango
+                                    .minimum6CharactersRequired, // <-- REPLACED
                           ),
                         ]),
                       ),
@@ -163,7 +178,9 @@ class _LogInPageState extends ConsumerState<LogInPage> with LoggerMixin {
                               ),
                             );
                           },
-                          child: Text(context.lango.forgotPassword), // <-- REPLACED
+                          child: Text(
+                            context.lango.forgotPassword,
+                          ), // <-- REPLACED
                         ),
                       ),
                       const SizedBox(height: 16),
@@ -172,26 +189,26 @@ class _LogInPageState extends ConsumerState<LogInPage> with LoggerMixin {
                       _isLoading
                           ? const CircularProgressIndicator()
                           : SizedBox(
-                              width: double.infinity,
-                              height: 50,
-                              child: FilledButton(
-                                onPressed: () => _submitLogin(),
-                                style: FilledButton.styleFrom(
-                                  backgroundColor:
-                                      Theme.of(context).primaryColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
+                            width: double.infinity,
+                            height: 50,
+                            child: FilledButton(
+                              onPressed: () => _submitLogin(),
+                              style: FilledButton.styleFrom(
+                                backgroundColor: Theme.of(context).primaryColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
                                 ),
-                                child: Text( // <-- REMOVED CONST
-                                  context.lango.login, // <-- REPLACED
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.white,
-                                  ),
+                              ),
+                              child: Text(
+                                // <-- REMOVED CONST
+                                context.lango.login, // <-- REPLACED
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
+                          ),
                       const SizedBox(height: 16),
                       // Google Sign-In
                       const SizedBox(

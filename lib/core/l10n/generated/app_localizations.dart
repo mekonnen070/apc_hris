@@ -2902,6 +2902,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Verification Failed'**
   String get verificationFailed;
+
+  /// No description provided for @googleSignInNotImplemented.
+  ///
+  /// In en, this message translates to:
+  /// **'Google sign-in is not implemented yet. Use email instead.'**
+  String get googleSignInNotImplemented;
+
+  /// No description provided for @signInWithGoogle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with Google'**
+  String get signInWithGoogle;
+
+  /// No description provided for @signupFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Signup Failed'**
+  String get signupFailed;
+
+  /// No description provided for @alreadyHaveAnAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account?'**
+  String get alreadyHaveAnAccount;
+
+  /// No description provided for @userNamePlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'John Doe'**
+  String get userNamePlaceholder;
+
+  /// No description provided for @userEmailPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'john.doe@example.com'**
+  String get userEmailPlaceholder;
+
+  /// No description provided for @userInitialsPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'JD'**
+  String get userInitialsPlaceholder;
+
+  /// No description provided for @yourStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Status'**
+  String get yourStatus;
+
+  /// No description provided for @reasonForNonSelection.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason for non-selection:'**
+  String get reasonForNonSelection;
+
+  /// No description provided for @noReasonProvided.
+  ///
+  /// In en, this message translates to:
+  /// **'No reason provided.'**
+  String get noReasonProvided;
+
+  /// No description provided for @yourAppealIsUnderReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Your appeal is under review.'**
+  String get yourAppealIsUnderReview;
+
+  /// No description provided for @viewSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'View Selected'**
+  String get viewSelected;
+
+  /// No description provided for @appealDecision.
+  ///
+  /// In en, this message translates to:
+  /// **'Appeal Decision'**
+  String get appealDecision;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

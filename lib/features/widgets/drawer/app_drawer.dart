@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:police_com/core/enums/sub_module_enum.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/core/extensions/sub_module_extension.dart';
 import 'package:police_com/features/widgets/drawer/widgets/log_out_page.dart';
 import 'package:police_com/features/widgets/language_switcher_widget.dart';
@@ -15,17 +16,17 @@ class AppDrawer extends ConsumerWidget {
       child: Drawer(
         child: ListView(
           children: [
-            const UserAccountsDrawerHeader(
-              accountName: Text('John Doe'),
-              accountEmail: Text('John@gmail.com'),
+            UserAccountsDrawerHeader(
+              accountName: Text(context.lango.userNamePlaceholder), // <-- REPLACED
+              accountEmail: Text(context.lango.userEmailPlaceholder), // <-- REPLACED
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
                 child: Text(
-                  'JD',
-                  style: TextStyle(fontSize: 40.0, color: Colors.blue),
+                  context.lango.userInitialsPlaceholder, // <-- REPLACED
+                  style: const TextStyle(fontSize: 40.0, color: Colors.blue),
                 ),
               ),
-              otherAccountsPictures: [LanguageSwitcherWidget()],
+              otherAccountsPictures: const [LanguageSwitcherWidget()],
             ),
 
             // Create a single, flat list of all sub-modules.

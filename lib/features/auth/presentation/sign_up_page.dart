@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
+import 'package:police_com/core/extensions/context_extension.dart';
 import 'package:police_com/core/mixins/logger_mixin.dart';
 import 'package:police_com/features/auth/application/auth_controller.dart';
 import 'package:police_com/features/auth/presentation/log_in_page.dart';
@@ -38,14 +38,15 @@ class _SignUpPageState extends ConsumerState<SignUpPage> with LoggerMixin {
         password: fields['password']!.value as String,
         fullName: fields['fullName']!.value as String,
         address: fields['address']!.value as String,
-        phoneNumber: fields['phone']!.value as String,
-        dateOfBirth: fields['dateOfBirth']!.value as DateTime,
-        gender: 'male',
-        maritalStatus: 'single',
+        phoneNumber: fields['phoneNumber']!.value as String, // Corrected field name
+        dateOfBirth: fields['dob']!.value as DateTime, // Corrected field name
+        gender: fields['gender']!.value as String,
+        maritalStatus: fields['maritalStatus']!.value as String,
       );
       toastification.show(
-        title: Text(context.lango.signupSuccessful), // <-- REPLACED
-        description: Text(context.lango.youHaveSuccessfullySignedUp), // <-- REPLACED
+        context: context,
+        title: Text(context.lango.signupSuccessful),
+        description: Text(context.lango.youHaveSuccessfullySignedUp),
         type: ToastificationType.success,
       );
       Navigator.pushReplacement(
@@ -55,8 +56,8 @@ class _SignUpPageState extends ConsumerState<SignUpPage> with LoggerMixin {
     } catch (e, st) {
       logError('Error during sign up: $e', error: e, stackTrace: st);
       toastification.show(
-        title: const Text('Signup Failed'), // Not in ARB. Left as is.
-        description: Text('Error: $e'),
+        context: context,
+        title: Text(context.lango.signupFailed),
         type: ToastificationType.error,
       );
     } finally {
@@ -68,8 +69,8 @@ class _SignUpPageState extends ConsumerState<SignUpPage> with LoggerMixin {
   Widget build(BuildContext context) {
     return ThemeSwitchingArea(
       child: Scaffold(
-        appBar: AppBarWidget( // <-- REMOVED CONST
-          title: context.lango.signUp, // <-- REPLACED
+        appBar: AppBarWidget(
+          title: context.lango.signUp,
           actions: const [ThemeSwitcherWidget()],
         ),
         body: Center(
@@ -78,19 +79,16 @@ class _SignUpPageState extends ConsumerState<SignUpPage> with LoggerMixin {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Title
-                Text( // <-- REMOVED CONST
-                  context.lango.createAnAccount, // <-- REPLACED
+                Text(
+                  context.lango.createAnAccount,
                   style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),
-                Text( // <-- REMOVED CONST
-                  context.lango.signUpWithEmailAndPassword, // <-- REPLACED
+                Text(
+                  context.lango.signUpWithEmailAndPassword,
                   style: const TextStyle(fontSize: 16, color: Colors.grey),
                 ),
                 const SizedBox(height: 24),
-
-                // Signup Form
                 FormBuilder(
                   key: _formKey,
                   child: Column(
@@ -98,20 +96,20 @@ class _SignUpPageState extends ConsumerState<SignUpPage> with LoggerMixin {
                       FormBuilderTextField(
                         name: 'fullName',
                         decoration: InputDecoration(
-                          labelText: context.lango.fullName, // <-- REPLACED
+                          labelText: context.lango.fullName,
                           prefixIcon: const Icon(Icons.person),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
                         ),
                         validator: FormBuilderValidators.required(
-                            errorText: context.lango.fullNameIsRequired,), // <-- REPLACED
+                            errorText: context.lango.fullNameIsRequired),
                       ),
                       const SizedBox(height: 16),
                       FormBuilderTextField(
                         name: 'email',
                         decoration: InputDecoration(
-                          labelText: context.lango.email, // <-- REPLACED
+                          labelText: context.lango.email,
                           prefixIcon: const Icon(Icons.email),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -120,16 +118,16 @@ class _SignUpPageState extends ConsumerState<SignUpPage> with LoggerMixin {
                         keyboardType: TextInputType.emailAddress,
                         validator: FormBuilderValidators.compose([
                           FormBuilderValidators.required(
-                              errorText: context.lango.emailIsRequired,), // <-- REPLACED
+                              errorText: context.lango.emailIsRequired),
                           FormBuilderValidators.email(
-                              errorText: context.lango.enterAValidEmail,), // <-- REPLACED
+                              errorText: context.lango.enterAValidEmail),
                         ]),
                       ),
                       const SizedBox(height: 16),
                       FormBuilderTextField(
                         name: 'password',
                         decoration: InputDecoration(
-                          labelText: context.lango.password, // <-- REPLACED
+                          labelText: context.lango.password,
                           prefixIcon: const Icon(Icons.lock),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -138,30 +136,30 @@ class _SignUpPageState extends ConsumerState<SignUpPage> with LoggerMixin {
                         obscureText: true,
                         validator: FormBuilderValidators.compose([
                           FormBuilderValidators.required(
-                              errorText: context.lango.passwordIsRequired,), // <-- REPLACED
+                              errorText: context.lango.passwordIsRequired),
                           FormBuilderValidators.minLength(6,
                               errorText:
-                                  context.lango.minimum6CharactersRequired,), // <-- REPLACED
+                                  context.lango.minimum6CharactersRequired),
                         ]),
                       ),
                       const SizedBox(height: 16),
                       FormBuilderTextField(
                         name: 'address',
                         decoration: InputDecoration(
-                          labelText: context.lango.address, // <-- REPLACED
+                          labelText: context.lango.address,
                           prefixIcon: const Icon(Icons.location_city),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
                         ),
                         validator: FormBuilderValidators.required(
-                            errorText: context.lango.addressIsRequired,), // <-- REPLACED
+                            errorText: context.lango.addressIsRequired),
                       ),
                       const SizedBox(height: 16),
                       FormBuilderTextField(
                         name: 'phoneNumber',
                         decoration: InputDecoration(
-                          labelText: context.lango.phoneNumber, // <-- REPLACED
+                          labelText: context.lango.phoneNumber,
                           prefixIcon: const Icon(Icons.phone),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -169,13 +167,13 @@ class _SignUpPageState extends ConsumerState<SignUpPage> with LoggerMixin {
                         ),
                         keyboardType: TextInputType.phone,
                         validator: FormBuilderValidators.required(
-                            errorText: context.lango.phoneNumberIsRequired,), // <-- REPLACED
+                            errorText: context.lango.phoneNumberIsRequired),
                       ),
                       const SizedBox(height: 16),
                       FormBuilderDateTimePicker(
                         name: 'dob',
                         decoration: InputDecoration(
-                          labelText: context.lango.dateOfBirth, // <-- REPLACED
+                          labelText: context.lango.dateOfBirth,
                           prefixIcon: const Icon(Icons.calendar_today),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -183,13 +181,13 @@ class _SignUpPageState extends ConsumerState<SignUpPage> with LoggerMixin {
                         ),
                         inputType: InputType.date,
                         validator: FormBuilderValidators.required(
-                            errorText: context.lango.birthDateIsRequired,), // <-- REPLACED
+                            errorText: context.lango.birthDateIsRequired),
                       ),
                       const SizedBox(height: 16),
                       FormBuilderDropdown(
                         name: 'gender',
                         decoration: InputDecoration(
-                          labelText: context.lango.gender, // <-- REPLACED
+                          labelText: context.lango.gender,
                           prefixIcon: const Icon(Icons.wc),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -198,11 +196,11 @@ class _SignUpPageState extends ConsumerState<SignUpPage> with LoggerMixin {
                         items: [
                           DropdownMenuItem(
                             value: 'male',
-                            child: Text(context.lango.male), // <-- REPLACED
+                            child: Text(context.lango.male),
                           ),
                           DropdownMenuItem(
                             value: 'female',
-                            child: Text(context.lango.female), // <-- REPLACED
+                            child: Text(context.lango.female),
                           ),
                         ],
                       ),
@@ -210,7 +208,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> with LoggerMixin {
                       FormBuilderDropdown(
                         name: 'maritalStatus',
                         decoration: InputDecoration(
-                          labelText: context.lango.maritalStatus, // <-- REPLACED
+                          labelText: context.lango.maritalStatus,
                           prefixIcon: const Icon(Icons.family_restroom),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -219,23 +217,23 @@ class _SignUpPageState extends ConsumerState<SignUpPage> with LoggerMixin {
                         items: [
                           DropdownMenuItem(
                             value: 'single',
-                            child: Text(context.lango.single), // <-- REPLACED
+                            child: Text(context.lango.single),
                           ),
                           DropdownMenuItem(
                             value: 'married',
-                            child: Text(context.lango.married), // <-- REPLACED
+                            child: Text(context.lango.married),
                           ),
                           DropdownMenuItem(
                             value: 'divorced',
-                            child: Text(context.lango.divorced), // <-- REPLACED
+                            child: Text(context.lango.divorced),
                           ),
                           DropdownMenuItem(
                             value: 'widowed',
-                            child: Text(context.lango.widowed), // <-- REPLACED
+                            child: Text(context.lango.widowed),
                           ),
                         ],
                         validator: FormBuilderValidators.required(
-                            errorText: context.lango.selectYourMaritalStatus,), // <-- REPLACED
+                            errorText: context.lango.selectYourMaritalStatus),
                       ),
                       const SizedBox(height: 24),
                       _isLoading
@@ -252,8 +250,8 @@ class _SignUpPageState extends ConsumerState<SignUpPage> with LoggerMixin {
                                     borderRadius: BorderRadius.circular(12),
                                   ),
                                 ),
-                                child: Text( // <-- REMOVED CONST
-                                  context.lango.signUp, // <-- REPLACED
+                                child: Text(
+                                  context.lango.signUp,
                                   style: const TextStyle(
                                     fontSize: 18,
                                     color: Colors.white,
@@ -267,7 +265,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> with LoggerMixin {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text('Already have an account?'), // Not in ARB. Left as is.
+                          Text(context.lango.alreadyHaveAnAccount),
                           TextButton(
                             onPressed: () {
                               Navigator.pushReplacement(
@@ -278,7 +276,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> with LoggerMixin {
                               );
                             },
                             child: Text(
-                              context.lango.login, // <-- REPLACED
+                              context.lango.login,
                               style: TextStyle(
                                 color: Theme.of(context).primaryColor,
                               ),

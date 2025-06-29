@@ -765,5 +765,18 @@
       }
     }
   },
-  "verificationFailed": "Verification Failed"
+  "verificationFailed": "Verification Failed",
+  "googleSignInNotImplemented": "Google sign-in is not implemented yet. Use email instead.",
+  "signInWithGoogle": "Sign in with Google",
+  "signupFailed": "Signup Failed",
+  "alreadyHaveAnAccount": "Already have an account?",
+  "userNamePlaceholder": "John Doe",
+  "userEmailPlaceholder": "john.doe@example.com",
+  "userInitialsPlaceholder": "JD",
+  "yourStatus": "Your Status",
+  "reasonForNonSelection": "Reason for non-selection:",
+  "noReasonProvided": "No reason provided.",
+  "yourAppealIsUnderReview": "Your appeal is under review.",
+  "viewSelected": "View Selected",
+  "appealDecision": "Appeal Decision"
 }
