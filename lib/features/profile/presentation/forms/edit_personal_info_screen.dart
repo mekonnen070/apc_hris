@@ -1,8 +1,8 @@
-// lib/features/profile/presentation/forms/edit_personal_info_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:police_com/core/enums/all_enums.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/employee_profile/domain/employee_info_model.dart';
 import 'package:police_com/features/profile/application/profile_notifier.dart';
 import 'package:police_com/features/widgets/app_bar_widget.dart';
@@ -44,7 +44,7 @@ class EditPersonalInfoScreen extends HookConsumerWidget {
 
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Profile updated successfully')),
+            SnackBar(content: Text(context.lango.profileUpdatedSuccessfully)), // <-- REPLACED
           );
           Navigator.of(context).pop();
         }
@@ -54,12 +54,12 @@ class EditPersonalInfoScreen extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBarWidget(
-        title: 'Edit Personal Info',
+        title: context.lango.editPersonalInfo, // <-- REPLACED
         actions: [
           IconButton(
             onPressed: isLoading.value ? null : handleSave,
             icon: const Icon(Icons.save_outlined),
-            tooltip: 'Save Changes',
+            tooltip: context.lango.saveChanges, // <-- REPLACED
           ),
         ],
       ),
@@ -72,30 +72,30 @@ class EditPersonalInfoScreen extends HookConsumerWidget {
             children: [
               AppTextField(
                 controller: phoneController,
-                labelText: 'Phone Number',
+                labelText: context.lango.phoneNumber, // <-- REPLACED
                 keyboardType: TextInputType.phone,
               ),
               const SizedBox(height: 16),
               AppTextField(
                 controller: mobileController,
-                labelText: 'Mobile Number',
+                labelText: context.lango.mobileNumber, // <-- REPLACED
                 keyboardType: TextInputType.phone,
               ),
               const SizedBox(height: 16),
               AppTextField(
                 controller: emailController,
-                labelText: 'Email Address',
+                labelText: context.lango.emailAddress, // <-- REPLACED
                 keyboardType: TextInputType.emailAddress,
               ),
               const SizedBox(height: 16),
               AppTextField(
                 controller: address1Controller,
-                labelText: 'Address',
+                labelText: context.lango.address, // <-- REPLACED
                 maxLines: 2,
               ),
               const SizedBox(height: 16),
               AppDropdownField<MaritalStatus>(
-                labelText: 'Marital Status',
+                labelText: context.lango.maritalStatus, // <-- REPLACED
                 value: maritalStatus.value,
                 items:
                     MaritalStatus.values
@@ -117,7 +117,7 @@ class EditPersonalInfoScreen extends HookConsumerWidget {
                 child:
                     isLoading.value
                         ? const CircularProgressIndicator()
-                        : const Text('Save Changes'),
+                        : Text(context.lango.saveChanges), // <-- REPLACED
               ),
             ],
           ),

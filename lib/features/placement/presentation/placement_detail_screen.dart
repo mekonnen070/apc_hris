@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/placement/application/placement_detail_notifier.dart';
 import 'package:police_com/features/placement/presentation/widgets/selected_placement_applicants_list_widget.dart';
 import 'package:police_com/features/widgets/app_bar_widget.dart';
@@ -32,7 +33,7 @@ class PlacementDetailScreen extends HookConsumerWidget {
       if (success && context.mounted) {
         toastification.show(
           context: context,
-          title: const Text('Application submitted successfully!'),
+          title: Text(context.lango.applicationSubmittedSuccessfully), // <-- REPLACED
           type: ToastificationType.success,
         );
       }
@@ -55,13 +56,13 @@ class PlacementDetailScreen extends HookConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'Submit Appeal',
+                    context.lango.submitAppeal, // <-- REPLACED
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   const SizedBox(height: 16),
                   AppTextField(
                     controller: appealReasonController,
-                    labelText: 'Reason for Appeal',
+                    labelText: context.lango.reasonForAppeal, // <-- REPLACED
                     maxLines: 5,
                   ),
                   const SizedBox(height: 16),
@@ -76,8 +77,8 @@ class PlacementDetailScreen extends HookConsumerWidget {
                           context: context,
                           title: Text(
                             success
-                                ? 'Appeal submitted.'
-                                : 'Failed to submit appeal.',
+                                ? context.lango.appealSubmitted // <-- REPLACED
+                                : context.lango.failedToSubmitAppeal, // <-- REPLACED
                           ),
                           type:
                               success
@@ -86,7 +87,7 @@ class PlacementDetailScreen extends HookConsumerWidget {
                         );
                       }
                     },
-                    child: const Text('Submit Appeal'),
+                    child: Text(context.lango.submitAppeal), // <-- REPLACED
                   ),
                 ],
               ),
@@ -106,7 +107,7 @@ class PlacementDetailScreen extends HookConsumerWidget {
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Text(
-                      'Selected Applicants',
+                      context.lango.selectedApplicants, // <-- REPLACED
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                   ),
@@ -127,13 +128,13 @@ class PlacementDetailScreen extends HookConsumerWidget {
     final placement = state.placement;
 
     return Scaffold(
-      appBar: const AppBarWidget(title: 'Placement Details'),
+      appBar: AppBarWidget(title: context.lango.placementDetails), // <-- REPLACED & REMOVED CONST
       body:
           state.isLoading
               ? const Center(child: CircularProgressIndicator())
               : placement == null
               ? Center(
-                child: Text(state.errorMessage ?? 'Placement not found.'),
+                child: Text(state.errorMessage ?? context.lango.placementNotFound), // <-- REPLACED
               )
               : RefreshIndicator(
                 onRefresh: () => notifier.fetchPlacementDetails(placementId),
@@ -155,7 +156,7 @@ class PlacementDetailScreen extends HookConsumerWidget {
                             style: Theme.of(context).textTheme.titleSmall,
                           ),
                           const SizedBox(height: 8),
-                          Text('Location: ${placement.location}'),
+                          Text('${context.lango.location}: ${placement.location}'), // <-- REPLACED
                         ],
                       ),
                     ),
@@ -183,13 +184,13 @@ class PlacementDetailScreen extends HookConsumerWidget {
                           children: [
                             const Divider(height: 32),
                             Text(
-                              'Apply for this Placement',
+                              context.lango.applyForThisPlacement, // <-- REPLACED
                               style: Theme.of(context).textTheme.headlineSmall,
                             ),
                             const SizedBox(height: 16),
                             AppTextField(
                               controller: reasonController,
-                              labelText: 'Reason for Applying (Optional)',
+                              labelText: context.lango.reasonForApplyingOptional, // <-- REPLACED
                               maxLines: 4,
                             ),
                             const SizedBox(height: 16),
@@ -198,7 +199,7 @@ class PlacementDetailScreen extends HookConsumerWidget {
                               child:
                                   state.isApplying
                                       ? const CircularProgressIndicator()
-                                      : const Text('Submit Application'),
+                                      : Text(context.lango.submitApplication), // <-- REPLACED & REMOVED CONST
                             ),
                           ],
                         ),

@@ -1,9 +1,9 @@
-// lib/features/transfer/presentation/request_transfer_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/transfer/application/transfer_request_form_providers.dart';
 import 'package:police_com/features/widgets/app_text_field.dart';
 import 'package:toastification/toastification.dart';
@@ -75,7 +75,7 @@ class RequestTransferScreen extends HookConsumerWidget {
       } else {
         Toastification().show(
           context: context,
-          title: const Text('Please correct the errors in the form.'),
+          title: Text(context.lango.pleaseCorrectErrorsInForm), // <-- REPLACED
           type: ToastificationType.warning,
           autoCloseDuration: const Duration(seconds: 3),
         );
@@ -92,7 +92,7 @@ class RequestTransferScreen extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                'Current Employee Details:',
+                context.lango.currentEmployeeDetails, // <-- REPLACED
                 style: Theme.of(
                   context,
                 ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
@@ -100,32 +100,32 @@ class RequestTransferScreen extends HookConsumerWidget {
               const SizedBox(height: 8),
               _buildDetailRow(
                 context,
-                'Employee ID',
+                context.lango.employeeIdLabel, // <-- REPLACED
                 currentRequestData.employeeId,
               ),
               _buildDetailRow(
                 context,
-                'Full Name',
+                context.lango.fullName, // <-- REPLACED
                 currentRequestData.employeeFullName,
               ),
               _buildDetailRow(
                 context,
-                'Current Position',
+                context.lango.currentPosition, // <-- REPLACED
                 currentRequestData.currentPositionTitle,
               ),
               _buildDetailRow(
                 context,
-                'Current Department',
+                context.lango.currentDepartment, // <-- REPLACED
                 currentRequestData.currentDepartment,
               ),
               _buildDetailRow(
                 context,
-                'Current Location',
+                context.lango.currentLocation, // <-- REPLACED
                 currentRequestData.currentLocation,
               ),
               const Divider(height: 32),
               Text(
-                'New Transfer Request:',
+                context.lango.newTransferRequest, // <-- REPLACED
                 style: Theme.of(
                   context,
                 ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
@@ -135,10 +135,10 @@ class RequestTransferScreen extends HookConsumerWidget {
                 controller: useTextEditingController(
                   text: currentRequestData.requestedDepartment,
                 ),
-                labelText: 'Requested Department *',
-                hintText: 'e.g., CID, Traffic Police, HR',
+                labelText: context.lango.requestedDepartmentLabel, // <-- REPLACED
+                hintText: context.lango.requestedDepartmentHint, // <-- REPLACED
                 validator: FormBuilderValidators.required(
-                  errorText: 'Requested department is required.',
+                  errorText: context.lango.requestedDepartmentRequired, // <-- REPLACED
                 ),
                 onChanged:
                     (value) =>
@@ -148,10 +148,10 @@ class RequestTransferScreen extends HookConsumerWidget {
                 controller: useTextEditingController(
                   text: currentRequestData.requestedLocation,
                 ),
-                labelText: 'Requested Location *',
-                hintText: 'e.g., Gondar Zonal Office, Bahir Dar City',
+                labelText: context.lango.requestedLocationLabel, // <-- REPLACED
+                hintText: context.lango.requestedLocationHint, // <-- REPLACED
                 validator: FormBuilderValidators.required(
-                  errorText: 'Requested location is required.',
+                  errorText: context.lango.requestedLocationRequired, // <-- REPLACED
                 ),
                 onChanged:
                     (value) =>
@@ -161,8 +161,8 @@ class RequestTransferScreen extends HookConsumerWidget {
                 controller: useTextEditingController(
                   text: currentRequestData.requestedPositionTitle,
                 ),
-                labelText: 'Requested Position Title (Optional)',
-                hintText: 'e.g., Investigator, Trainer',
+                labelText: context.lango.requestedPositionTitleOptional, // <-- REPLACED
+                hintText: context.lango.requestedPositionTitleHint, // <-- REPLACED
                 onChanged:
                     (value) =>
                         formNotifier.updateField(requestedPositionTitle: value),
@@ -171,12 +171,11 @@ class RequestTransferScreen extends HookConsumerWidget {
                 controller: useTextEditingController(
                   text: currentRequestData.reasonForRequest,
                 ),
-                labelText: 'Reason for Request *',
-                hintText:
-                    'Provide a detailed reason for your transfer request.',
+                labelText: context.lango.reasonForRequestLabel, // <-- REPLACED
+                hintText: context.lango.reasonForRequestHint, // <-- REPLACED
                 maxLines: 4,
                 validator: FormBuilderValidators.required(
-                  errorText: 'Reason for request is required.',
+                  errorText: context.lango.reasonForRequestRequired, // <-- REPLACED
                 ),
                 onChanged:
                     (value) =>
@@ -190,7 +189,7 @@ class RequestTransferScreen extends HookConsumerWidget {
                         : FilledButton.icon(
                           onPressed: handleSubmit,
                           icon: const Icon(Icons.send_rounded),
-                          label: const Text('Submit Transfer Request'),
+                          label: Text(context.lango.submitTransferRequest), // <-- REPLACED
                           style: FilledButton.styleFrom(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 24,

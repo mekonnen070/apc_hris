@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/employee_profile/domain/employee_education_model.dart';
 import 'package:police_com/features/employee_profile/domain/employee_info_model.dart';
 import 'package:police_com/features/profile/application/profile_notifier.dart';
@@ -34,27 +35,27 @@ class EducationTab extends ConsumerWidget {
 
       if (education != null) {
         success = await notifier.updateEducation(result);
-        action = 'updated';
+        action = context.lango.updated; // <-- REPLACED
       } else {
         success = await notifier.addEducation(result);
-        action = 'added';
+        action = context.lango.added; // <-- REPLACED
       }
 
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(success
-                ? 'Education successfully $action.'
-                : 'Failed to ${action.replaceAll('ed', '')} education.'),
+                ? context.lango.educationSuccess(action: action) // <-- REPLACED
+                : context.lango.failedToEducation(action: action.replaceAll('ed', ''))), // <-- REPLACED
           ),
         );
       }
     }
 
     return DynamicEntrySection<EmployeeEducationModel>(
-      sectionTitle: 'Education',
+      sectionTitle: context.lango.education, // <-- REPLACED
       itemsData: educations,
-      addNewButtonText: 'Add Education',
+      addNewButtonText: context.lango.addEducation, // <-- REPLACED
       onAddNew: () => navigateToAddEdit(null),
       itemBuilder: (context, education, index) {
         return EditableListItemCard(
@@ -67,15 +68,15 @@ class EducationTab extends ConsumerWidget {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(success
-                      ? 'Education successfully deleted.'
-                      : 'Failed to delete education.'),
+                      ? context.lango.educationDeleted // <-- REPLACED
+                      : context.lango.failedToDeleteEducation), // <-- REPLACED
                 ),
               );
             }
           },
           title: education.fieldOfStudy.name,
           subtitle:
-              '${education.university.name}\n${DateFormat.yMMMd().format(education.startDate)} - ${education.endDate != null ? DateFormat.yMMMd().format(education.endDate!) : 'Present'}',
+              '${education.university.name}\n${DateFormat.yMMMd().format(education.startDate)} - ${education.endDate != null ? DateFormat.yMMMd().format(education.endDate!) : context.lango.present}', // <-- REPLACED
           isThreeLine: true,
         );
       },

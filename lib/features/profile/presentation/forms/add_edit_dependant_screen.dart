@@ -1,7 +1,7 @@
-// lib/features/profile/presentation/forms/add_edit_dependant_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:police_com/core/enums/all_enums.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/employee_profile/domain/employee_dependant_model.dart';
 import 'package:police_com/features/widgets/app_date_field.dart';
 import 'package:police_com/features/widgets/app_dropdown_field.dart';
@@ -60,7 +60,7 @@ class AddEditDependantScreen extends HookWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          initialDependant == null ? 'Add Dependant' : 'Edit Dependant',
+          initialDependant == null ? context.lango.addDependant : context.lango.editDependant, // <-- REPLACED
         ),
         actions: [
           IconButton(
@@ -78,12 +78,12 @@ class AddEditDependantScreen extends HookWidget {
             children: [
               AppTextField(
                 controller: fullNameController,
-                labelText: "Dependant's Full Name *",
-                validator: (v) => v!.isEmpty ? 'Required' : null,
+                labelText: context.lango.dependantsFullNameLabel, // <-- REPLACED
+                validator: (v) => v!.isEmpty ? context.lango.requiredField : null, // <-- REPLACED
               ),
               const SizedBox(height: 16),
               AppDropdownField<RelationTypes>(
-                labelText: 'Relationship *',
+                labelText: context.lango.relationshipLabel, // <-- REPLACED
                 value: selectedRelation.value,
                 items:
                     RelationTypes.values
@@ -98,7 +98,7 @@ class AddEditDependantScreen extends HookWidget {
               ),
               const SizedBox(height: 16),
               AppDropdownField<Gender>(
-                labelText: 'Gender *',
+                labelText: context.lango.genderLabel, // <-- REPLACED
                 value: selectedGender.value,
                 items:
                     Gender.values
@@ -111,26 +111,26 @@ class AddEditDependantScreen extends HookWidget {
               ),
               const SizedBox(height: 16),
               AppDateField(
-                labelText: 'Date of Birth *',
+                labelText: context.lango.dateOfBirthLabel, // <-- REPLACED
                 selectedDate: selectedBirthDate.value,
                 onDateSelected: (d) => selectedBirthDate.value = d,
-                validator: (d) => d == null ? 'Required' : null,
+                validator: (d) => d == null ? context.lango.requiredField : null, // <-- REPLACED
               ),
               const SizedBox(height: 16),
               AppTextField(
                 controller: occupationController,
-                labelText: 'Occupation',
+                labelText: context.lango.occupationLabel, // <-- REPLACED
               ),
               const SizedBox(height: 16),
               AppTextField(
                 controller: phoneNumberController,
-                labelText: 'Phone Number *',
+                labelText: context.lango.phoneNumberLabel, // <-- REPLACED
                 keyboardType: TextInputType.phone,
-                validator: (v) => v!.isEmpty ? 'Required' : null,
+                validator: (v) => v!.isEmpty ? context.lango.requiredField : null, // <-- REPLACED
               ),
               const SizedBox(height: 16),
               AppDropdownField<EthiopianRegion>(
-                labelText: 'Region *',
+                labelText: context.lango.regionLabel, // <-- REPLACED
                 value: selectedRegion.value,
                 items:
                     EthiopianRegion.values
@@ -147,7 +147,7 @@ class AddEditDependantScreen extends HookWidget {
               const SizedBox(height: 24),
               FilledButton(
                 onPressed: handleSaveChanges,
-                child: const Text('Save Changes'),
+                child: Text(context.lango.saveChanges), // <-- REPLACED
               ),
             ],
           ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:police_com/core/enums/all_enums.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/core/extensions/string_extension.dart';
 import 'package:police_com/features/employee_profile/domain/employee_spouse_model.dart';
 import 'package:police_com/features/widgets/app_date_field.dart';
@@ -74,7 +75,7 @@ class AddEditSpouseScreen extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(initialSpouse == null ? 'Add Spouse' : 'Edit Spouse'),
+        title: Text(initialSpouse == null ? context.lango.addSpouse : context.lango.editSpouse), // <-- REPLACED
         actions: [
           IconButton(
             icon: const Icon(Icons.done),
@@ -91,26 +92,26 @@ class AddEditSpouseScreen extends HookConsumerWidget {
             children: <Widget>[
               AppTextField(
                 controller: titleController,
-                labelText: 'Title (e.g., Mr., Mrs., Ms.) *',
+                labelText: context.lango.titleLabel, // <-- REPLACED
                 validator:
                     (val) =>
                         (val == null || val.isEmpty)
-                            ? 'Title is required'
+                            ? context.lango.titleIsRequired // <-- REPLACED
                             : null,
               ),
               const SizedBox(height: 16),
               AppTextField(
                 controller: fullNameController,
-                labelText: 'Full Name *',
+                labelText: context.lango.fullNameLabel, // <-- REPLACED
                 validator:
                     (val) =>
                         (val == null || val.isEmpty)
-                            ? 'Full name is required'
+                            ? context.lango.fullNameIsRequired // <-- REPLACED
                             : null,
               ),
               const SizedBox(height: 16),
               AppDropdownField<Gender>(
-                labelText: 'Gender *',
+                labelText: context.lango.genderLabel, // <-- REPLACED
                 value: selectedGender.value,
                 items:
                     Gender.values.map((Gender value) {
@@ -120,59 +121,59 @@ class AddEditSpouseScreen extends HookConsumerWidget {
                       );
                     }).toList(),
                 onChanged: (val) => selectedGender.value = val ?? Gender.other,
-                validator: (val) => val == null ? 'Gender is required' : null,
+                validator: (val) => val == null ? context.lango.genderIsRequired : null, // <-- REPLACED
               ),
               const SizedBox(height: 16),
               AppDateField(
-                labelText: 'Date of Birth *',
+                labelText: context.lango.dateOfBirthLabel, // <-- REPLACED
                 selectedDate: birthDate.value,
                 onDateSelected: (date) => birthDate.value = date,
                 validator:
-                    (val) => val == null ? 'Date of birth is required' : null,
+                    (val) => val == null ? context.lango.birthDateIsRequired : null, // <-- REPLACED
               ),
               const SizedBox(height: 16),
               AppTextField(
                 controller: phoneController,
-                labelText: 'Phone Number',
+                labelText: context.lango.phoneNumber, // <-- REPLACED
                 keyboardType: TextInputType.phone,
               ),
               const SizedBox(height: 16),
               AppTextField(
                 controller: occupationController,
-                labelText: 'Occupation',
+                labelText: context.lango.occupationLabel, // <-- REPLACED
               ),
               const SizedBox(height: 16),
               AppTextField(
                 controller: motherNameController,
-                labelText: 'Mother\'s Full Name',
+                labelText: context.lango.mothersFullName, // <-- REPLACED
               ),
               const SizedBox(height: 16),
               AppTextField(
                 controller: addressController,
-                labelText: 'Address *',
+                labelText: context.lango.addressLabel, // <-- REPLACED
                 validator:
                     (val) =>
                         (val == null || val.isEmpty)
-                            ? 'Address is required'
+                            ? context.lango.addressIsRequired // <-- REPLACED
                             : null,
               ),
               const SizedBox(height: 16),
               AppDateField(
-                labelText: 'Anniversary Date',
+                labelText: context.lango.anniversaryDate, // <-- REPLACED
                 selectedDate: anniversaryDate.value,
                 onDateSelected: (date) => anniversaryDate.value = date,
               ),
               const SizedBox(height: 16),
               AppTextField(
                 controller: retirementNumberController,
-                labelText: 'Retirement Number',
+                labelText: context.lango.retirementNumber, // <-- REPLACED
               ),
               const SizedBox(height: 16),
-              AppTextField(controller: tinController, labelText: 'TIN Number'),
+              AppTextField(controller: tinController, labelText: context.lango.tinNumber), // <-- REPLACED
               const SizedBox(height: 24),
               FilledButton(
                 onPressed: handleSaveChanges,
-                child: const Text('Save Changes'),
+                child: Text(context.lango.saveChanges), // <-- REPLACED
               ),
             ],
           ),

@@ -15,7 +15,7 @@ class LanguageSwitcherWidget extends ConsumerWidget {
 
     return IconButton(
       icon: const Icon(Icons.language, size: 32, color: Colors.white),
-      tooltip: context.lango.changeLanguage,
+      tooltip: context.lango.language, // <-- REPLACED (used 'language' key)
       onPressed: () async {
         final selectedLanguage = await showAdaptiveDialog<Lango>(
           context: context,
@@ -47,7 +47,7 @@ class _LanguageDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog.adaptive(
-      title: Text(context.lango.changeLanguage),
+      title: Text(context.lango.language), // <-- REPLACED
       content: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -64,9 +64,9 @@ class _LanguageDialog extends StatelessWidget {
                       /// If the selected lango is amharic, show a dialog
                       if (value != null && value.code == Lango.am.code) {
                         toastification.show(
-                          title: const Text('Coming soon'),
-                          description: const Text(
-                            'Amharic language is not available yet',
+                          title: Text(context.lango.comingSoon), // <-- REPLACED
+                          description: Text(
+                            context.lango.amharicNotAvailable, // <-- REPLACED
                           ),
                           autoCloseDuration: const Duration(seconds: 2),
                         );

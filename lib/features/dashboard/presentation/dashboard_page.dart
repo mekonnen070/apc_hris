@@ -1,8 +1,8 @@
-// lib/features/dashboard/presentation/dashboard_page.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:police_com/core/enums/sub_module_enum.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/core/extensions/sub_module_extension.dart';
 import 'package:police_com/providers/drawer_selection_provider.dart';
 
@@ -17,29 +17,46 @@ class DashboardPage extends ConsumerWidget {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16.0),
       child: Column(
+        crossAxisAlignment:
+            CrossAxisAlignment.start, // <-- Note: Changed for header alignment
         children: [
-          _buildWelcomeHeader(textTheme, colorScheme),
+          _buildWelcomeHeader(
+            context,
+            textTheme,
+            colorScheme,
+          ), // <-- Pass context
           const SizedBox(height: 24),
-          _buildQuickStats(context, colorScheme, textTheme),
+          _buildQuickStats(context, colorScheme, textTheme), // <-- Pass context
           const SizedBox(height: 24),
-          _buildSectionHeader(context, 'Quick Actions'),
+          _buildSectionHeader(
+            context,
+            context.lango.quickActions,
+          ), // <-- REPLACED
           const SizedBox(height: 16),
           _buildActionGrid(context, ref),
           const SizedBox(height: 24),
-          _buildSectionHeader(context, 'Recent Activity'),
+          _buildSectionHeader(
+            context,
+            context.lango.recentActivity,
+          ), // <-- REPLACED
           const SizedBox(height: 16),
-          _buildRecentActivityList(context, colorScheme),
+          _buildRecentActivityList(context, colorScheme), // <-- Pass context
         ],
       ),
     );
   }
 
-  Widget _buildWelcomeHeader(TextTheme textTheme, ColorScheme colorScheme) {
+  Widget _buildWelcomeHeader(
+    BuildContext context,
+    TextTheme textTheme,
+    ColorScheme colorScheme,
+  ) {
+    // <-- Pass context
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          DateFormat('EEEE, d MMMM yyyy').format(DateTime.now()),
+          DateFormat('EEEE, d MMMM').format(DateTime.now()),
           textAlign: TextAlign.left,
           style: textTheme.bodyMedium?.copyWith(
             color: colorScheme.onSurfaceVariant,
@@ -47,7 +64,7 @@ class DashboardPage extends ConsumerWidget {
         ),
         const SizedBox(height: 4),
         Text(
-          'Welcome back, Abe!',
+          context.lango.welcomeBackUser(name: 'Abe'), // <-- REPLACED
           textAlign: TextAlign.left,
           style: textTheme.headlineMedium?.copyWith(
             fontWeight: FontWeight.bold,
@@ -70,7 +87,7 @@ class DashboardPage extends ConsumerWidget {
             color: Colors.blue.shade50,
             icon: Icons.person_outline,
             iconColor: Colors.blue,
-            label: 'Total Employees',
+            label: context.lango.totalEmployees, // <-- REPLACED
             value: '1,254',
           ),
         ),
@@ -80,7 +97,7 @@ class DashboardPage extends ConsumerWidget {
             color: Colors.green.shade50,
             icon: Icons.pending_actions_outlined,
             iconColor: Colors.green,
-            label: 'Pending Tasks',
+            label: context.lango.pendingTasks, // <-- REPLACED
             value: '8',
           ),
         ),
@@ -114,7 +131,7 @@ class DashboardPage extends ConsumerWidget {
             width: 85,
             child: _ActionItem(
               icon: module.icon,
-              label: module.title,
+              label: module.title(context), // <-- MODIFIED to pass context
               onTap: () {
                 ref.read(selectedSubModuleProvider.notifier).state = module;
               },
@@ -126,7 +143,7 @@ class DashboardPage extends ConsumerWidget {
   }
 
   Widget _buildRecentActivityList(
-    BuildContext context,
+    BuildContext context, // <-- Pass context
     ColorScheme colorScheme,
   ) {
     return Card(
@@ -135,30 +152,42 @@ class DashboardPage extends ConsumerWidget {
         borderRadius: BorderRadius.circular(12),
         side: BorderSide(color: colorScheme.outline.withOpacity(0.2)),
       ),
-      child: const Column(
+      child: Column(
+        // <-- REMOVED CONST
         children: [
           _ActivityListItem(
             icon: Icons.file_download_done_outlined,
             iconColor: Colors.green,
-            title: 'Leave Request Approved',
-            subtitle: 'Annual leave for Abebe K. from Oct 2-5.',
-            time: '2h ago',
+            title: context.lango.leaveRequestApproved, // <-- REPLACED
+            subtitle: context.lango.annualLeaveFor(
+              name: 'Abebe K.',
+              dateRange: 'Oct 2-5',
+            ), // <-- REPLACED
+            time: context.lango.twoHoursAgo, // <-- REPLACED
           ),
-          Divider(height: 1),
+          const Divider(height: 1),
           _ActivityListItem(
             icon: Icons.new_releases_outlined,
             iconColor: Colors.orange,
-            title: 'New Promotion Request',
-            subtitle: 'From Sgt. Almaz T. for Lieutenant position.',
-            time: '8h ago',
+            title: context.lango.newPromotionRequest, // <-- REPLACED
+            subtitle: context.lango.fromToPosition(
+              currentRank: 'Sgt.',
+              name: 'Almaz T.',
+              newPosition: 'Lieutenant',
+            ), // <-- REPLACED
+            time: context.lango.eightHoursAgo, // <-- REPLACED
           ),
-          Divider(height: 1),
+          const Divider(height: 1),
           _ActivityListItem(
             icon: Icons.person_remove_outlined,
             iconColor: Colors.red,
-            title: 'Resignation Submitted',
-            subtitle: 'By Officer Kassahun M., effective Nov 1.',
-            time: '1d ago',
+            title: context.lango.resignationSubmitted, // <-- REPLACED
+            subtitle: context.lango.byEffective(
+              rank: 'Officer',
+              name: 'Kassahun M.',
+              date: 'Nov 1',
+            ), // <-- REPLACED
+            time: context.lango.oneDayAgo, // <-- REPLACED
           ),
         ],
       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:police_com/core/enums/all_enums.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/core/extensions/string_extension.dart';
 import 'package:police_com/features/leave_mgmt/domain/leave_request.dart';
 
@@ -38,7 +39,7 @@ class LeaveHistoryListItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '${request.leaveTypeId.toCapitalized()} Leave',
+                  context.lango.leaveTitle(leaveType: request.leaveTypeId.toCapitalized()), // <-- REPLACED
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 Container(
@@ -64,14 +65,14 @@ class LeaveHistoryListItem extends StatelessWidget {
               TextSpan(
                 style: Theme.of(context).textTheme.bodyMedium,
                 children: [
-                  const TextSpan(
-                    text: 'From: ',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  TextSpan(
+                    text: '${context.lango.fromLabel} ', // <-- REPLACED
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   TextSpan(text: formattedStartDate),
-                  const TextSpan(
-                    text: '  To: ',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  TextSpan(
+                    text: '  ${context.lango.toLabel} ', // <-- REPLACED
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   TextSpan(text: formattedEndDate),
                 ],
@@ -81,12 +82,12 @@ class LeaveHistoryListItem extends StatelessWidget {
             if (request.requestReason != null &&
                 request.requestReason!.isNotEmpty)
               Text(
-                '${request.numOfDays} Day(s) - ${request.requestReason}',
+                context.lango.daysWithReason(days: request.numOfDays, reason: request.requestReason!), // <-- REPLACED
                 style: Theme.of(context).textTheme.bodySmall,
               )
             else
               Text(
-                '${request.numOfDays} Day(s)',
+                context.lango.daysOnly(count: request.numOfDays), // <-- REPLACED
                 style: Theme.of(context).textTheme.bodySmall,
               ),
           ],

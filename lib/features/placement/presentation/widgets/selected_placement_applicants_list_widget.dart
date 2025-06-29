@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/placement/domain/placement_applicant.dart';
 
 class SelectedPlacementApplicantsListWidget extends StatelessWidget {
@@ -8,10 +9,10 @@ class SelectedPlacementApplicantsListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (applicants.isEmpty) {
-      return const Center(
+      return Center(
         child: Padding(
-          padding: EdgeInsets.all(24.0),
-          child: Text('No information on selected applicants is available.'),
+          padding: const EdgeInsets.all(24.0),
+          child: Text(context.lango.noSelectedApplicantInfo), // <-- REPLACED
         ),
       );
     }
@@ -35,8 +36,8 @@ class SelectedPlacementApplicantsListWidget extends StatelessWidget {
                     ? Text(applicant.employeeFullName?[0] ?? '?')
                     : null,
           ),
-          title: Text(applicant.employeeFullName ?? 'N/A'),
-          subtitle: Text('Employee ID: ${applicant.employeeId}'),
+          title: Text(applicant.employeeFullName ?? context.lango.notAvailable), // <-- REPLACED
+          subtitle: Text(context.lango.employeeId(id: applicant.employeeId)), // <-- REPLACED
         );
       },
     );

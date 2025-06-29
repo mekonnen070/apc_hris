@@ -1,8 +1,9 @@
-// lib/features/grievance/presentation/widgets/incident_list_item_widget.dart
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
+import 'package:police_com/core/extensions/string_extension.dart'; // <-- ADDED for .toDisplayCase()
 import 'package:police_com/features/incident/domain/incident_report.dart';
-import 'package:police_com/features/widgets/Incident_status_chip.dart';
+import 'package:police_com/features/widgets/incident_status_chip.dart'; // <-- CORRECTED TYPO
 
 class IncidentListItemWidget extends StatelessWidget {
   final IncidentReport report;
@@ -22,14 +23,14 @@ class IncidentListItemWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  report.incidentType.toString(),
+                  report.incidentType.name.toDisplayCase(), // <-- REPLACED toString() with name.toDisplayCase()
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 IncidentStatusChip(status: report.status),
               ],
             ),
             const SizedBox(height: 8),
-            Text('Date: ${DateFormat.yMMMd().format(report.incidentDate)}'),
+            Text(context.lango.dateLabel(date: DateFormat.yMMMd().format(report.incidentDate))), // <-- REPLACED
             const Divider(height: 24),
             Text(report.description),
           ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/employee/new_recruite/domain/recruit_info.dart';
 
 class RecruitListItemWidget extends StatelessWidget {
@@ -39,7 +40,9 @@ class RecruitListItemWidget extends StatelessWidget {
           child: recruit.photoPath.isEmpty ? Text(recruit.firstName[0]) : null,
         ),
         title: Text(fullName),
-        subtitle: Text('ID: ${recruit.id}'),
+        subtitle: Text(
+          context.lango.id(id: recruit.id.toString()),
+        ), // <-- REPLACED
       ),
     );
   }

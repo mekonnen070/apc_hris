@@ -1,7 +1,7 @@
-// lib/features/profile/presentation/tabs/dependants_tab.dart
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/core/extensions/string_extension.dart';
 import 'package:police_com/features/employee_profile/domain/employee_dependant_model.dart';
 import 'package:police_com/features/employee_profile/domain/employee_info_model.dart';
@@ -36,16 +36,16 @@ class DependantsTab extends ConsumerWidget {
     }
 
     return DynamicEntrySection<EmployeeDependantModel>(
-      addNewButtonText: 'Add Dependant',
-      sectionTitle: 'Dependants',
+      addNewButtonText: context.lango.addDependant, // <-- REPLACED
+      sectionTitle: context.lango.dependants, // <-- REPLACED
       onAddNew: () => navigateToAddEdit(null),
       itemsData: employee.employeeDependants,
-      emptyListMessage: 'No dependants listed.',
+      emptyListMessage: context.lango.noDependantsListed, // <-- REPLACED
       itemBuilder: (context, dependant, index) {
         return EditableListItemCard(
           title: dependant.dependantFullName,
           subtitle:
-              'Relation: ${dependant.relation.name.toDisplayCase()}\nDOB: ${DateFormat.yMMMd().format(dependant.birthDate)}',
+              '${context.lango.relationLabel(relation: dependant.relation.name.toDisplayCase())}\n${context.lango.dobLabel(dob: DateFormat.yMMMd().format(dependant.birthDate))}', // <-- REPLACED
           isThreeLine: true,
           onEdit: () => navigateToAddEdit(dependant),
           onDelete:

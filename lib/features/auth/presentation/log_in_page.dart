@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/core/mixins/logger_mixin.dart';
 import 'package:police_com/features/auth/application/auth_controller.dart';
 import 'package:police_com/features/auth/presentation/forgot_password_page.dart';
@@ -40,8 +41,8 @@ class _LogInPageState extends ConsumerState<LogInPage> with LoggerMixin {
       );
 
       toastification.show(
-        title: const Text('Login Successful'),
-        description: const Text('You have successfully logged in.'),
+        title: Text(context.lango.loginSuccessful), // <-- REPLACED
+        description: Text(context.lango.youHaveSuccessfullyLoggedIn), // <-- REPLACED
         type: ToastificationType.success,
         autoCloseDuration: const Duration(seconds: 2),
       );
@@ -53,7 +54,7 @@ class _LogInPageState extends ConsumerState<LogInPage> with LoggerMixin {
     } catch (error, stack) {
       logError('Error during login: $error', error: error, stackTrace: stack);
       toastification.show(
-        title: const Text('Login Failed'),
+        title: Text(context.lango.loginFailed), // <-- REPLACED
         description: Text('Error: $error'),
         type: ToastificationType.error,
       );
@@ -66,9 +67,9 @@ class _LogInPageState extends ConsumerState<LogInPage> with LoggerMixin {
   Widget build(BuildContext context) {
     return ThemeSwitchingArea(
       child: Scaffold(
-        appBar: const AppBarWidget(
-          title: 'Login',
-          actions: [ThemeSwitcherWidget()],
+        appBar: AppBarWidget( // <-- REMOVED CONST
+          title: context.lango.login, // <-- REPLACED
+          actions: const [ThemeSwitcherWidget()],
         ),
         body: Center(
           child: SingleChildScrollView(
@@ -88,14 +89,14 @@ class _LogInPageState extends ConsumerState<LogInPage> with LoggerMixin {
                 const SizedBox(height: 24),
 
                 // Title
-                const Text(
-                  'Welcome Back!',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                Text( // <-- REMOVED CONST
+                  context.lango.welcomeBack, // <-- REPLACED
+                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),
-                const Text(
-                  'Log in with your email and password',
-                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                Text( // <-- REMOVED CONST
+                  context.lango.logInWithEmailAndPassword, // <-- REPLACED
+                  style: const TextStyle(fontSize: 16, color: Colors.grey),
                 ),
                 const SizedBox(height: 24),
 
@@ -108,7 +109,7 @@ class _LogInPageState extends ConsumerState<LogInPage> with LoggerMixin {
                       FormBuilderTextField(
                         name: 'email',
                         decoration: InputDecoration(
-                          labelText: 'Email',
+                          labelText: context.lango.email, // <-- REPLACED
                           prefixIcon: const Icon(Icons.email),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -117,10 +118,10 @@ class _LogInPageState extends ConsumerState<LogInPage> with LoggerMixin {
                         keyboardType: TextInputType.emailAddress,
                         validator: FormBuilderValidators.compose([
                           FormBuilderValidators.required(
-                            errorText: 'Email is required',
+                            errorText: context.lango.emailIsRequired, // <-- REPLACED
                           ),
                           FormBuilderValidators.email(
-                            errorText: 'Enter a valid email',
+                            errorText: context.lango.enterAValidEmail, // <-- REPLACED
                           ),
                         ]),
                       ),
@@ -130,7 +131,7 @@ class _LogInPageState extends ConsumerState<LogInPage> with LoggerMixin {
                       FormBuilderTextField(
                         name: 'password',
                         decoration: InputDecoration(
-                          labelText: 'Password',
+                          labelText: context.lango.password, // <-- REPLACED
                           prefixIcon: const Icon(Icons.lock),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -139,11 +140,11 @@ class _LogInPageState extends ConsumerState<LogInPage> with LoggerMixin {
                         obscureText: true,
                         validator: FormBuilderValidators.compose([
                           FormBuilderValidators.required(
-                            errorText: 'Password is required',
+                            errorText: context.lango.passwordIsRequired, // <-- REPLACED
                           ),
                           FormBuilderValidators.minLength(
                             6,
-                            errorText: 'Minimum 6 characters required',
+                            errorText: context.lango.minimum6CharactersRequired, // <-- REPLACED
                           ),
                         ]),
                       ),
@@ -162,7 +163,7 @@ class _LogInPageState extends ConsumerState<LogInPage> with LoggerMixin {
                               ),
                             );
                           },
-                          child: const Text('Forgot Password?'),
+                          child: Text(context.lango.forgotPassword), // <-- REPLACED
                         ),
                       ),
                       const SizedBox(height: 16),
@@ -171,25 +172,26 @@ class _LogInPageState extends ConsumerState<LogInPage> with LoggerMixin {
                       _isLoading
                           ? const CircularProgressIndicator()
                           : SizedBox(
-                            width: double.infinity,
-                            height: 50,
-                            child: FilledButton(
-                              onPressed: () => _submitLogin(),
-                              style: FilledButton.styleFrom(
-                                backgroundColor: Theme.of(context).primaryColor,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
+                              width: double.infinity,
+                              height: 50,
+                              child: FilledButton(
+                                onPressed: () => _submitLogin(),
+                                style: FilledButton.styleFrom(
+                                  backgroundColor:
+                                      Theme.of(context).primaryColor,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
                                 ),
-                              ),
-                              child: const Text(
-                                'Login',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.white,
+                                child: Text( // <-- REMOVED CONST
+                                  context.lango.login, // <-- REPLACED
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
                       const SizedBox(height: 16),
                       // Google Sign-In
                       const SizedBox(
@@ -201,7 +203,7 @@ class _LogInPageState extends ConsumerState<LogInPage> with LoggerMixin {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text("Don't have an account?"),
+                          Text(context.lango.dontHaveAnAccount), // <-- REPLACED
                           TextButton(
                             onPressed: () {
                               Navigator.pushReplacement(
@@ -212,7 +214,7 @@ class _LogInPageState extends ConsumerState<LogInPage> with LoggerMixin {
                               );
                             },
                             child: Text(
-                              'Sign Up',
+                              context.lango.signUp, // <-- REPLACED
                               style: TextStyle(
                                 color: Theme.of(context).primaryColor,
                               ),

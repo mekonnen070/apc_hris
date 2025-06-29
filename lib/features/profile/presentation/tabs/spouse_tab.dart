@@ -1,7 +1,7 @@
-// lib/features/profile/presentation/tabs/spouse_tab.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/employee_profile/domain/employee_info_model.dart';
 import 'package:police_com/features/employee_profile/domain/employee_spouse_model.dart';
 import 'package:police_com/features/profile/application/profile_notifier.dart';
@@ -39,16 +39,16 @@ class SpouseTab extends ConsumerWidget {
     }
 
     return DynamicEntrySection<EmployeeSpouseModel>(
-      sectionTitle: 'Spouse Information',
+      sectionTitle: context.lango.spouseInformation, // <-- REPLACED
       onAddNew: () => navigateToAddEdit(null),
 
       itemsData: employee.employeeSpouse,
-      emptyListMessage: 'No spouse information available.',
+      emptyListMessage: context.lango.noSpouseInfoAvailable, // <-- REPLACED
       itemBuilder: (context, spouse, index) {
         return EditableListItemCard(
           title: spouse.spouseFullName,
           subtitle:
-              'Occupation: ${spouse.spouseOccupation ?? 'N/A'}\nDOB: ${DateFormat.yMMMd().format(spouse.spouseBirthDate)}',
+              '${context.lango.occupation(occupation: spouse.spouseOccupation ?? context.lango.notAvailable)}\n${context.lango.dobLabel(dob: DateFormat.yMMMd().format(spouse.spouseBirthDate))}', // <-- REPLACED
           isThreeLine: true,
           onEdit: () {
             navigateToAddEdit(spouse);

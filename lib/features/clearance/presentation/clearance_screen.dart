@@ -1,6 +1,6 @@
-// lib/features/clearance/presentation/clearance_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/clearance/application/clearance_notifier.dart';
 import 'package:police_com/features/clearance/presentation/request_clearance_screen.dart';
 import 'package:police_com/features/clearance/presentation/widgets/clearance_list_item_widget.dart';
@@ -31,12 +31,16 @@ class _ClearanceScreenState extends ConsumerState<ClearanceScreen> {
     final state = ref.watch(clearanceNotifierProvider);
 
     return Scaffold(
-      appBar: const AppBarWidget(title: 'Clearance Requests'),
+      appBar: AppBarWidget(
+        title: context.lango.clearanceRequests,
+      ), // <-- REPLACED & CONST REMOVED
       body: state.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         data: (requests) {
           if (requests.isEmpty) {
-            return const Center(child: Text('No requests to display.'));
+            return Center(
+              child: Text(context.lango.noClearanceRequests),
+            ); // <-- REPLACED & CONST REMOVED
           }
           return RefreshIndicator(
             onRefresh:
@@ -70,7 +74,7 @@ class _ClearanceScreenState extends ConsumerState<ClearanceScreen> {
                 .getMyClearanceRequests('CURRENT_USER_ID');
           }
         },
-        tooltip: 'Request Clearance',
+        tooltip: context.lango.requestClearance, // <-- REPLACED
         child: const Icon(Icons.add_task_outlined),
       ),
     );

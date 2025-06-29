@@ -1,9 +1,9 @@
-// lib/features/clearance/presentation/request_clearance_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:police_com/core/enums/clearance_reason.dart';
 import 'package:police_com/core/enums/clearance_status.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/core/extensions/string_extension.dart';
 import 'package:police_com/features/clearance/data/clearance_repository.dart';
 import 'package:police_com/features/clearance/domain/clearance_request.dart';
@@ -45,14 +45,14 @@ class RequestClearanceScreen extends HookConsumerWidget {
               .read(clearanceRepositoryProvider)
               .submitClearanceRequest(request);
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Clearance request submitted successfully'),
-            ),
+            SnackBar(content: Text(context.lango.clearanceRequestSubmitted)),
           );
           Navigator.of(context).pop(true);
         } catch (e) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Failed to submit request: $e')),
+            SnackBar(
+              content: Text('${context.lango.failedToSubmitRequest}$e'),
+            ), // <-- REPLACED
           );
         } finally {
           isLoading.value = false;
@@ -61,7 +61,9 @@ class RequestClearanceScreen extends HookConsumerWidget {
     }
 
     return Scaffold(
-      appBar: const AppBarWidget(title: 'Request Clearance'),
+      appBar: AppBarWidget(
+        title: context.lango.requestClearance,
+      ), // <-- REPLACED & REMOVED CONST
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -70,7 +72,7 @@ class RequestClearanceScreen extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               AppDropdownField<ClearanceReason>(
-                labelText: 'Reason for Clearance',
+                labelText: context.lango.reasonForClearance, // <-- REPLACED
                 value: reason.value,
                 items:
                     ClearanceReason.values
@@ -83,23 +85,29 @@ class RequestClearanceScreen extends HookConsumerWidget {
                         .toList(),
                 onChanged: (value) => reason.value = value,
                 validator:
-                    (value) => value == null ? 'Please select a reason' : null,
+                    (value) =>
+                        value == null
+                            ? context.lango.pleaseSelectReason
+                            : null, // <-- REPLACED
               ),
               const SizedBox(height: 16),
               AppDateField(
-                labelText: 'Last Day of Work',
+                labelText: context.lango.lastDayOfWorkLabel, // <-- REPLACED
                 onDateSelected: (date) => lastDayOfWork.value = date,
                 validator:
                     (value) =>
                         lastDayOfWork.value == null
-                            ? 'Please select a date'
+                            ? context
+                                .lango
+                                .pleaseSelectDate // <-- REPLACED
                             : null,
               ),
               const SizedBox(height: 16),
               AppTextField(
                 controller: commentsController,
-                labelText: 'Comments (Optional)',
-                hintText: 'Provide any additional details.',
+                labelText: context.lango.commentsOptional, // <-- REPLACED
+                hintText:
+                    context.lango.provideAdditionalDetails, // <-- REPLACED
                 maxLines: 5,
               ),
               const SizedBox(height: 24),
@@ -108,7 +116,9 @@ class RequestClearanceScreen extends HookConsumerWidget {
                 child:
                     isLoading.value
                         ? const CircularProgressIndicator.adaptive()
-                        : const Text('Submit Request'),
+                        : Text(
+                          context.lango.submitRequest,
+                        ), // <-- REPLACED & REMOVED CONST
               ),
             ],
           ),

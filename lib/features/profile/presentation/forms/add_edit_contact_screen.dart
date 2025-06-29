@@ -1,7 +1,7 @@
-// lib/features/profile/presentation/forms/add_edit_contact_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:police_com/core/enums/all_enums.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/employee_profile/domain/employee_contact_model.dart';
 import 'package:police_com/features/widgets/app_dropdown_field.dart';
 import 'package:police_com/features/widgets/app_text_field.dart';
@@ -56,7 +56,7 @@ class AddEditContactScreen extends HookWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(initialContact == null ? 'Add Contact' : 'Edit Contact'),
+        title: Text(initialContact == null ? context.lango.addContact : context.lango.editContact), // <-- REPLACED
         actions: [
           IconButton(
             icon: const Icon(Icons.done),
@@ -73,12 +73,12 @@ class AddEditContactScreen extends HookWidget {
             children: [
               AppTextField(
                 controller: fullNameController,
-                labelText: 'Full Name *',
-                validator: (v) => v!.isEmpty ? 'Required' : null,
+                labelText: context.lango.fullNameLabel, // <-- REPLACED
+                validator: (v) => v!.isEmpty ? context.lango.requiredField : null, // <-- REPLACED
               ),
               const SizedBox(height: 16),
               AppDropdownField<RelationTypes>(
-                labelText: 'Relationship *',
+                labelText: context.lango.relationshipLabel, // <-- REPLACED
                 value: selectedRelationship.value,
                 items:
                     RelationTypes.values
@@ -94,32 +94,32 @@ class AddEditContactScreen extends HookWidget {
               const SizedBox(height: 16),
               AppTextField(
                 controller: phoneController,
-                labelText: 'Phone *',
+                labelText: context.lango.phoneLabelRequired, // <-- REPLACED
                 keyboardType: TextInputType.phone,
-                validator: (v) => v!.isEmpty ? 'Required' : null,
+                validator: (v) => v!.isEmpty ? context.lango.requiredField : null, // <-- REPLACED
               ),
               const SizedBox(height: 16),
               AppTextField(
                 controller: mobileController,
-                labelText: 'Mobile',
+                labelText: context.lango.mobile, // <-- REPLACED
                 keyboardType: TextInputType.phone,
               ),
               const SizedBox(height: 16),
               AppTextField(
                 controller: emailController,
-                labelText: 'Email',
+                labelText: context.lango.email, // <-- REPLACED
                 keyboardType: TextInputType.emailAddress,
               ),
               const SizedBox(height: 16),
               AppTextField(
                 controller: addressController,
-                labelText: 'Address',
+                labelText: context.lango.address, // <-- REPLACED
                 maxLines: 2,
               ),
               const SizedBox(height: 24),
               FilledButton(
                 onPressed: handleSaveChanges,
-                child: const Text('Save Changes'),
+                child: Text(context.lango.saveChanges), // <-- REPLACED
               ),
             ],
           ),

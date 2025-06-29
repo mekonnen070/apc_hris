@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/placement/application/available_placements_notifier.dart';
 import 'package:police_com/features/placement/presentation/placement_detail_screen.dart';
 import 'package:police_com/features/placement/presentation/widgets/placement_list_item_widget.dart';
@@ -33,7 +34,7 @@ class AvailablePlacementsScreen extends HookConsumerWidget {
     }, [scrollController]);
 
     return Scaffold(
-      appBar: const AppBarWidget(title: 'Available Placements'),
+      appBar: AppBarWidget(title: context.lango.availablePlacements), // <-- REPLACED & REMOVED CONST
       body: RefreshIndicator(
         onRefresh: () => notifier.fetchFirstPage(),
         child: state.isLoading

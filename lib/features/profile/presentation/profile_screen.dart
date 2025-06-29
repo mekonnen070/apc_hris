@@ -1,6 +1,6 @@
-// lib/features/profile/presentation/profile_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/profile/application/profile_notifier.dart';
 import 'package:police_com/features/profile/presentation/tabs/contacts_tab.dart';
 import 'package:police_com/features/profile/presentation/tabs/dependants_tab.dart';
@@ -29,12 +29,16 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     return state.when(
       loading:
           () => Scaffold(
-            appBar: AppBar(title: const Text('My Profile')),
+            appBar: AppBar(
+              title: Text(context.lango.myProfile),
+            ), // <-- REPLACED & REMOVED CONST
             body: const Center(child: CircularProgressIndicator()),
           ),
       error:
           (e, st) => Scaffold(
-            appBar: AppBar(title: const Text('My Profile')),
+            appBar: AppBar(
+              title: Text(context.lango.myProfile),
+            ), // <-- REPLACED & REMOVED CONST
             body: SomethingWentWrongWidget(
               onRetry: () => ref.invalidate(profileNotifierProvider('EMP-001')),
             ),
@@ -152,15 +156,15 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                         ),
                         indicatorColor: colorScheme.primary,
                         indicatorWeight: 3,
-                        tabs: const [
-                          Tab(text: 'Personal'),
-                          Tab(text: 'Dependants'),
-                          Tab(text: 'Contacts'),
-                          Tab(text: 'Spouse'),
-                          Tab(text: 'Education'),
-                          Tab(text: 'Experience'),
-                          Tab(text: 'Performance'),
-                          Tab(text: 'Documents'),
+                        tabs: [
+                          Tab(text: context.lango.personal), // <-- REPLACED
+                          Tab(text: context.lango.dependants), // <-- REPLACED
+                          Tab(text: context.lango.contacts), // <-- REPLACED
+                          Tab(text: context.lango.spouse), // <-- REPLACED
+                          Tab(text: context.lango.education), // <-- REPLACED
+                          Tab(text: context.lango.experience), // <-- REPLACED
+                          Tab(text: context.lango.performance), // <-- REPLACED
+                          Tab(text: context.lango.documents), // <-- REPLACED
                         ],
                       ),
                     ),

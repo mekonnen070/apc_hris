@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/training/application/available_trainings_notifier.dart';
 import 'package:police_com/features/training/presentation/training_detail_screen.dart';
 import 'package:police_com/features/training/presentation/widgets/training_list_item_widget.dart';
@@ -33,7 +34,9 @@ class AvailableTrainingsScreen extends HookConsumerWidget {
     }, [scrollController]);
 
     return Scaffold(
-      appBar: const AppBarWidget(title: 'Available Trainings'),
+      appBar: AppBarWidget(
+        title: context.lango.availableTrainings,
+      ), // <-- REPLACED & REMOVED CONST
       body: RefreshIndicator(
         onRefresh: () => notifier.fetchFirstPage(),
         child:

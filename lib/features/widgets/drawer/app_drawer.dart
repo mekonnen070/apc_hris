@@ -33,7 +33,7 @@ class AppDrawer extends ConsumerWidget {
               ListTile(
                 dense: true,
                 leading: Icon(subModule.icon),
-                title: Text(subModule.title),
+                title: Text(subModule.title(context)),
                 onTap: () {
                   ref.read(selectedSubModuleProvider.notifier).state = subModule;
                   Navigator.of(context).pop();

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/employee_profile/domain/employee_experience_model.dart';
 import 'package:police_com/features/employee_profile/domain/employee_info_model.dart';
 import 'package:police_com/features/profile/application/profile_notifier.dart';
@@ -34,27 +35,27 @@ class ExperienceTab extends ConsumerWidget {
 
       if (experience != null) {
         success = await notifier.updateExperience(result);
-        action = 'updated';
+        action = context.lango.updated; // <-- REPLACED
       } else {
         success = await notifier.addExperience(result);
-        action = 'added';
+        action = context.lango.added; // <-- REPLACED
       }
 
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(success
-                ? 'Experience successfully $action.'
-                : 'Failed to ${action.replaceAll('ed', '')} experience.'),
+                ? context.lango.experienceSuccess(action: action) // <-- REPLACED
+                : context.lango.failedToExperience(action: action.replaceAll('ed', ''))), // <-- REPLACED
           ),
         );
       }
     }
 
     return DynamicEntrySection<EmployeeExperienceModel>(
-      sectionTitle: 'Experience',
+      sectionTitle: context.lango.experience, // <-- REPLACED
       itemsData: experiences,
-      addNewButtonText: 'Add Experience',
+      addNewButtonText: context.lango.addExperience, // <-- REPLACED
       onAddNew: () => navigateToAddEdit(null),
       itemBuilder: (context, experience, index) {
         return EditableListItemCard(
@@ -67,15 +68,15 @@ class ExperienceTab extends ConsumerWidget {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(success
-                      ? 'Experience successfully deleted.'
-                      : 'Failed to delete experience.'),
+                      ? context.lango.experienceDeleted // <-- REPLACED
+                      : context.lango.failedToDeleteExperience), // <-- REPLACED
                 ),
               );
             }
           },
-          title: experience.position ?? 'N/A',
+          title: experience.position ?? context.lango.notAvailable, // <-- REPLACED
           subtitle:
-              '${experience.organization ?? 'N/A'}\n${DateFormat.yMMMd().format(experience.joinDate)} - ${experience.separationDate != null ? DateFormat.yMMMd().format(experience.separationDate!) : 'Present'}',
+              '${experience.organization ?? context.lango.notAvailable}\n${DateFormat.yMMMd().format(experience.joinDate)} - ${experience.separationDate != null ? DateFormat.yMMMd().format(experience.separationDate!) : context.lango.present}', // <-- REPLACED
           isThreeLine: true,
         );
       },

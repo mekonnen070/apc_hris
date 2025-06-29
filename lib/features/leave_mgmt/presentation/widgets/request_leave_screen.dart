@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/leave_mgmt/application/leave_request_form_notifier.dart';
 import 'package:police_com/features/leave_mgmt/domain/leave_balance.dart';
 import 'package:police_com/features/leave_mgmt/domain/leave_type.dart';
@@ -63,7 +64,7 @@ class RequestLeaveScreen extends HookConsumerWidget {
 
     final balanceInfo =
         selectedLeaveType.value == null
-            ? 'Select a leave type to see balance'
+            ? context.lango.selectLeaveTypeToSeeBalance // <-- REPLACED
             : () {
               LeaveBalance? balance;
               try {
@@ -76,14 +77,14 @@ class RequestLeaveScreen extends HookConsumerWidget {
               }
 
               if (balance == null) {
-                return 'Available: ${selectedLeaveType.value!.maximumDays} days';
+                return context.lango.availableDays(days: selectedLeaveType.value!.maximumDays); // <-- REPLACED
               }
               final remaining = balance.totalDays - balance.usedDays;
-              return 'Available: $remaining of ${balance.totalDays} days';
+              return context.lango.availableOfTotalDays(remaining: remaining, total: balance.totalDays); // <-- REPLACED
             }();
 
     return Scaffold(
-      appBar: const AppBarWidget(title: 'Request New Leave'),
+      appBar: AppBarWidget(title: context.lango.requestNewLeave), // <-- REPLACED & REMOVED CONST
       body:
           state.isLoading
               ? const Center(child: CircularProgressIndicator())
@@ -97,7 +98,7 @@ class RequestLeaveScreen extends HookConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       AppDropdownField<LeaveType>(
-                        labelText: 'Leave Type',
+                        labelText: context.lango.leaveType, // <-- REPLACED
                         isRequired: true,
                         value: selectedLeaveType.value,
                         items:
@@ -113,7 +114,7 @@ class RequestLeaveScreen extends HookConsumerWidget {
                         validator:
                             (value) =>
                                 value == null
-                                    ? 'Please select a leave type'
+                                    ? context.lango.pleaseSelectLeaveType // <-- REPLACED
                                     : null,
                       ),
                       Padding(
@@ -125,27 +126,27 @@ class RequestLeaveScreen extends HookConsumerWidget {
                       ),
                       const SizedBox(height: 16),
                       AppDateField(
-                        labelText: 'Start Date',
+                        labelText: context.lango.startDate, // <-- REPLACED
                         isRequired: true,
                         selectedDate: startDate.value,
                         onDateSelected: (date) => startDate.value = date,
                         validator:
                             (val) =>
                                 val == null
-                                    ? 'Please select a start date'
+                                    ? context.lango.pleaseSelectStartDate // <-- REPLACED
                                     : null,
                       ),
                       const SizedBox(height: 16),
                       AppDateField(
-                        labelText: 'End Date',
+                        labelText: context.lango.endDate, // <-- REPLACED
                         isRequired: true,
                         selectedDate: endDate.value,
                         onDateSelected: (date) => endDate.value = date,
                         validator: (val) {
-                          if (val == null) return 'Please select an end date';
+                          if (val == null) return context.lango.pleaseSelectEndDate; // <-- REPLACED
                           if (startDate.value != null &&
                               val.isBefore(startDate.value!)) {
-                            return 'End date must be after start date';
+                            return context.lango.endDateAfterStartDate; // <-- REPLACED
                           }
                           return null;
                         },
@@ -153,7 +154,7 @@ class RequestLeaveScreen extends HookConsumerWidget {
                       const SizedBox(height: 16),
                       AppTextField(
                         controller: reasonController,
-                        labelText: 'Reason for Leave',
+                        labelText: context.lango.reasonForLeave, // <-- REPLACED
                         isRequired: true,
                         maxLines: 4,
                         validator: FormBuilderValidators.required(),
@@ -168,7 +169,7 @@ class RequestLeaveScreen extends HookConsumerWidget {
                                     Colors.white,
                                   ),
                                 )
-                                : const Text('Submit Request'),
+                                : Text(context.lango.submitRequest), // <-- REPLACED & REMOVED CONST
                       ),
                     ],
                   ),

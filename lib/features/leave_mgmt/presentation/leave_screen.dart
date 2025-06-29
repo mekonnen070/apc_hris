@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/leave_mgmt/application/leave_notifier.dart';
 import 'package:police_com/features/leave_mgmt/domain/leave_balance.dart';
 import 'package:police_com/features/leave_mgmt/presentation/widgets/leave_balance_card_widget.dart';
@@ -47,7 +48,9 @@ class LeaveScreen extends HookConsumerWidget {
     final sickBalance = findBalance('Sick');
 
     return Scaffold(
-      appBar: const AppBarWidget(title: 'Leave Management'),
+      appBar: AppBarWidget(
+        title: context.lango.leaveManagement,
+      ), // <-- REPLACED & REMOVED CONST
       body: RefreshIndicator(
         onRefresh: notifier.fetchInitialData,
         child:
@@ -65,7 +68,7 @@ class LeaveScreen extends HookConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Leave Balance',
+                              context.lango.leaveBalance, // <-- REPLACED
                               style: Theme.of(context).textTheme.headlineSmall,
                             ),
                             const SizedBox(height: 16),
@@ -75,7 +78,10 @@ class LeaveScreen extends HookConsumerWidget {
                                 children: [
                                   if (annualBalance != null)
                                     LeaveBalanceCard(
-                                      title: 'Annual Leave',
+                                      title:
+                                          context
+                                              .lango
+                                              .annualLeave, // <-- REPLACED
                                       used: annualBalance.usedDays,
                                       allowed: annualBalance.totalDays,
                                       color: Colors.blue.shade700,
@@ -85,7 +91,10 @@ class LeaveScreen extends HookConsumerWidget {
                                     const SizedBox(width: 16),
                                   if (sickBalance != null)
                                     LeaveBalanceCard(
-                                      title: 'Sick Leave',
+                                      title:
+                                          context
+                                              .lango
+                                              .sickLeave, // <-- REPLACED
                                       used: sickBalance.usedDays,
                                       allowed: sickBalance.totalDays,
                                       color: Colors.red.shade700,
@@ -93,10 +102,12 @@ class LeaveScreen extends HookConsumerWidget {
                                 ],
                               )
                             else
-                              const Text('No balance information available.'),
+                              Text(
+                                context.lango.noBalanceInfoAvailable,
+                              ), // <-- REPLACED
                             const SizedBox(height: 24),
                             Text(
-                              'Request History',
+                              context.lango.requestHistory, // <-- REPLACED
                               style: Theme.of(context).textTheme.headlineSmall,
                             ),
                           ],
@@ -104,11 +115,13 @@ class LeaveScreen extends HookConsumerWidget {
                       ),
                     ),
                     if (state.leaveHistory.isEmpty && !state.isLoading)
-                      const SliverToBoxAdapter(
+                      SliverToBoxAdapter(
                         child: Center(
                           child: Padding(
-                            padding: EdgeInsets.all(32.0),
-                            child: Text('No leave history found.'),
+                            padding: const EdgeInsets.all(32.0),
+                            child: Text(
+                              context.lango.noLeaveHistoryFound,
+                            ), // <-- REPLACED
                           ),
                         ),
                       )
@@ -138,7 +151,9 @@ class LeaveScreen extends HookConsumerWidget {
             MaterialPageRoute(builder: (context) => const RequestLeaveScreen()),
           );
         },
-        label: const Text('New Leave Request'),
+        label: Text(
+          context.lango.newLeaveRequest,
+        ), // <-- REPLACED & REMOVED CONST
         icon: const Icon(Icons.add),
       ),
     );

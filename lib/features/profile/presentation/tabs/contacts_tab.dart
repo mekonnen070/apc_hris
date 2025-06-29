@@ -1,6 +1,6 @@
-// lib/features/profile/presentation/tabs/contacts_tab.dart
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/core/extensions/string_extension.dart';
 import 'package:police_com/features/employee_profile/domain/employee_contact_model.dart';
 import 'package:police_com/features/employee_profile/domain/employee_info_model.dart';
@@ -39,16 +39,16 @@ class ContactsTab extends ConsumerWidget {
     }
 
     return DynamicEntrySection<EmployeeContactModel>(
-      addNewButtonText: 'Add Emergency Contact',
-      sectionTitle: 'Emergency Contacts',
+      addNewButtonText: context.lango.addEmergencyContact, // <-- REPLACED
+      sectionTitle: context.lango.emergencyContacts, // <-- REPLACED
       onAddNew: () => navigateToAddEdit(null),
       itemsData: employee.employeeContacts,
-      emptyListMessage: 'No emergency contacts listed.',
+      emptyListMessage: context.lango.noEmergencyContactsListed, // <-- REPLACED
       itemBuilder: (context, contact, index) {
         return EditableListItemCard(
           title: contact.fullName,
           subtitle:
-              'Relation: ${contact.relationship.name.toDisplayCase()}\nPhone: ${contact.phone}',
+              '${context.lango.relationLabel(relation: contact.relationship.name.toDisplayCase())}\n${context.lango.phoneLabel(phone: contact.phone)}', // <-- REPLACED
           isThreeLine: true,
           onEdit: () => navigateToAddEdit(contact),
           onDelete:

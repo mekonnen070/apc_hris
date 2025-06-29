@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/training/domain/training.dart';
 import 'package:police_com/features/widgets/application_status_chip.dart';
 
@@ -68,7 +69,9 @@ class TrainingListItemWidget extends StatelessWidget {
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      '${training.trainingCenter} by ${training.organizedBy}',
+                      context.lango.trainingLocationAndOrganizer( // <-- REPLACED
+                          center: training.trainingCenter,
+                          organizer: training.organizedBy),
                       style: theme.textTheme.bodySmall,
                     ),
                   ),

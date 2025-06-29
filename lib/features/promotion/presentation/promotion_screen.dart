@@ -1,6 +1,6 @@
-// lib/features/promotion/presentation/promotion_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/promotion/application/promotion_providers.dart';
 import 'package:police_com/features/promotion/presentation/request_promotion_screen.dart';
 import 'package:police_com/features/promotion/presentation/widgets/promotion_list_item_widget.dart';
@@ -17,11 +17,11 @@ class PromotionScreen extends ConsumerWidget {
     );
 
     return Scaffold(
-      appBar: const AppBarWidget(title: 'Promotion Requests'),
+      appBar: AppBarWidget(title: context.lango.promotionRequests), // <-- REPLACED & REMOVED CONST
       body: asyncRequests.when(
         data: (requests) {
           if (requests.isEmpty) {
-            return const Center(child: Text('No promotion requests found.'));
+            return Center(child: Text(context.lango.noPromotionRequestsFound)); // <-- REPLACED & REMOVED CONST
           }
           return RefreshIndicator(
             onRefresh:
@@ -54,7 +54,7 @@ class PromotionScreen extends ConsumerWidget {
             ref.invalidate(myPromotionRequestsProvider);
           }
         },
-        tooltip: 'Request Promotion',
+        tooltip: context.lango.requestPromotion, // <-- REPLACED
         child: const Icon(Icons.trending_up),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 
 // A layout for individual steps in a multi-page form.
 // Designed to be used as a child page within a PageView managed by a host screen.
@@ -8,7 +9,7 @@ class FormStepLayout extends StatelessWidget {
   final VoidCallback? onPrevious; // Action for the "Previous" button
   final bool isNextLoading;
   final String? nextButtonText;
-  final String previousButtonText;
+  final String? previousButtonText; // <-- Made nullable
   final GlobalKey<FormState>? formKey;
   final bool isLastStep;
 
@@ -19,7 +20,7 @@ class FormStepLayout extends StatelessWidget {
     this.onPrevious,
     this.isNextLoading = false,
     this.nextButtonText, // Defaults handled below
-    this.previousButtonText = 'Previous',
+    this.previousButtonText, // <-- Made nullable
     this.formKey,
     this.isLastStep = false,
   });
@@ -56,7 +57,7 @@ class FormStepLayout extends StatelessWidget {
                       if (onPrevious != null)
                         OutlinedButton.icon(
                           icon: const Icon(Icons.arrow_back_ios_new, size: 16),
-                          label: Text(previousButtonText),
+                          label: Text(previousButtonText ?? context.lango.previous), // <-- REPLACED
                           onPressed: onPrevious,
                         ),
                       if (onNext != null && nextButtonText != null)
@@ -79,9 +80,9 @@ class FormStepLayout extends StatelessWidget {
                                   ),
                           label: Text(
                             isNextLoading
-                                ? 'Saving...'
+                                ? context.lango.saving // <-- REPLACED
                                 : (nextButtonText ??
-                                    (isLastStep ? 'Review' : 'Next')),
+                                    (isLastStep ? context.lango.review : context.lango.next)), // <-- REPLACED
                           ),
                           onPressed:
                               isNextLoading

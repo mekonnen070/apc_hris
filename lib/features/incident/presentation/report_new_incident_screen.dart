@@ -1,9 +1,9 @@
-// lib/features/grievance/presentation/report_new_incident_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:police_com/core/enums/incident_status.dart';
 import 'package:police_com/core/enums/incident_type.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/core/extensions/string_extension.dart';
 import 'package:police_com/features/incident/data/incident_repository.dart';
 import 'package:police_com/features/incident/domain/incident_report.dart';
@@ -43,14 +43,14 @@ class ReportNewIncidentScreen extends HookConsumerWidget {
               .read(incidentRepositoryProvider)
               .submitIncidentReport(report);
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Incident report submitted successfully'),
+            SnackBar( // <-- REMOVED CONST
+              content: Text(context.lango.incidentReportSubmitted), // <-- REPLACED
             ),
           );
           Navigator.of(context).pop(true);
         } catch (e) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Failed to submit report: $e')),
+            SnackBar(content: Text('${context.lango.failedToSubmitReport} $e')), // <-- REPLACED
           );
         } finally {
           isLoading.value = false;
@@ -59,7 +59,7 @@ class ReportNewIncidentScreen extends HookConsumerWidget {
     }
 
     return Scaffold(
-      appBar: const AppBarWidget(title: 'Report New Incident'),
+      appBar: AppBarWidget(title: context.lango.reportNewIncident), // <-- REPLACED
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -68,18 +68,18 @@ class ReportNewIncidentScreen extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               AppDateField(
-                labelText: 'Incident Date',
+                labelText: context.lango.incidentDate, // <-- REPLACED
                 onDateSelected: (date) => incidentDate.value = date,
                 validator:
                     (value) =>
                         incidentDate.value == null
-                            ? 'Please select the incident date'
+                            ? context.lango.pleaseSelectIncidentDate // <-- REPLACED
                             : null,
               ),
               const SizedBox(height: 16),
               AppDropdownField<IncidentType>(
                 value: incidentType.value,
-                labelText: 'Incident Type',
+                labelText: context.lango.incidentType, // <-- REPLACED
                 items:
                     IncidentType.values
                         .map(
@@ -92,19 +92,19 @@ class ReportNewIncidentScreen extends HookConsumerWidget {
                 onChanged: (value) => incidentType.value = value,
                 validator:
                     (value) =>
-                        value == null ? 'Please select an incident type' : null,
+                        value == null ? context.lango.pleaseSelectAnIncidentType : null, // <-- REPLACED
               ),
               const SizedBox(height: 16),
               AppTextField(
                 controller: descriptionController,
-                labelText: 'Description of Incident',
+                labelText: context.lango.descriptionOfIncident, // <-- REPLACED
                 hintText:
-                    'Please provide a clear and detailed description of the incident.',
+                    context.lango.provideClearDetailedDescription, // <-- REPLACED
                 maxLines: 7,
                 validator:
                     (value) =>
                         (value == null || value.isEmpty)
-                            ? 'Please enter a description'
+                            ? context.lango.pleaseEnterDescription // <-- REPLACED
                             : null,
               ),
               const SizedBox(height: 24),
@@ -113,7 +113,7 @@ class ReportNewIncidentScreen extends HookConsumerWidget {
                 child:
                     isLoading.value
                         ? const CircularProgressIndicator.adaptive()
-                        : const Text('Submit Report'),
+                        : Text(context.lango.submitReport), // <-- REPLACED & REMOVED CONST
               ),
             ],
           ),
@@ -121,4 +121,4 @@ class ReportNewIncidentScreen extends HookConsumerWidget {
       ),
     );
   }
-}
+} 

@@ -1,7 +1,7 @@
-// lib/features/profile/presentation/forms/add_edit_education_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:police_com/core/enums/all_enums.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/employee_profile/domain/employee_education_model.dart';
 import 'package:police_com/features/widgets/app_date_field.dart';
 import 'package:police_com/features/widgets/app_dropdown_field.dart';
@@ -58,7 +58,7 @@ class AddEditEducationScreen extends HookWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          initialEducation == null ? 'Add Education' : 'Edit Education',
+          initialEducation == null ? context.lango.addEducation : context.lango.editEducation, // <-- REPLACED
         ),
         actions: [
           IconButton(
@@ -75,7 +75,7 @@ class AddEditEducationScreen extends HookWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               AppDropdownField<EducationLevel>(
-                labelText: 'Education Level *',
+                labelText: context.lango.educationLevelLabel, // <-- REPLACED
                 value: selectedEducationLevel.value,
                 items:
                     EducationLevel.values
@@ -88,11 +88,11 @@ class AddEditEducationScreen extends HookWidget {
                     (val) =>
                         selectedEducationLevel.value =
                             val ?? EducationLevel.other,
-                validator: (val) => val == null ? 'Required' : null,
+                validator: (val) => val == null ? context.lango.requiredField : null, // <-- REPLACED
               ),
               const SizedBox(height: 16),
               AppDropdownField<EthiopianUniversity>(
-                labelText: 'University *',
+                labelText: context.lango.universityLabel, // <-- REPLACED
                 value: selectedUniversity.value,
                 items:
                     EthiopianUniversity.values
@@ -105,11 +105,11 @@ class AddEditEducationScreen extends HookWidget {
                     (val) =>
                         selectedUniversity.value =
                             val ?? EthiopianUniversity.other,
-                validator: (val) => val == null ? 'Required' : null,
+                validator: (val) => val == null ? context.lango.requiredField : null, // <-- REPLACED
               ),
               const SizedBox(height: 16),
               AppDropdownField<FieldOfStudy>(
-                labelText: 'Field Of Study *',
+                labelText: context.lango.fieldOfStudyLabel, // <-- REPLACED
                 value: selectedFieldOfStudy.value,
                 items:
                     FieldOfStudy.values
@@ -121,31 +121,31 @@ class AddEditEducationScreen extends HookWidget {
                 onChanged:
                     (val) =>
                         selectedFieldOfStudy.value = val ?? FieldOfStudy.other,
-                validator: (val) => val == null ? 'Required' : null,
+                validator: (val) => val == null ? context.lango.requiredField : null, // <-- REPLACED
               ),
               const SizedBox(height: 16),
               AppTextField(
                 controller: cgpaController,
-                labelText: 'CGPA',
+                labelText: context.lango.cgpa, // <-- REPLACED
                 keyboardType: TextInputType.number,
               ),
               const SizedBox(height: 16),
               AppDateField(
-                labelText: 'Start Date *',
+                labelText: context.lango.startDateLabel, // <-- REPLACED
                 selectedDate: selectedStartDate.value,
                 onDateSelected: (date) => selectedStartDate.value = date,
                 validator:
-                    (val) => val == null ? 'Start date is required' : null,
+                    (val) => val == null ? context.lango.startDateIsRequired : null, // <-- REPLACED
               ),
               const SizedBox(height: 16),
               AppDateField(
-                labelText: 'End Date',
+                labelText: context.lango.endDateLabel, // <-- REPLACED
                 selectedDate: selectedEndDate.value,
                 onDateSelected: (date) => selectedEndDate.value = date,
               ),
               const SizedBox(height: 16),
               AppDropdownField<EducationStatus>(
-                labelText: 'Education Status *',
+                labelText: context.lango.educationStatusLabel, // <-- REPLACED
                 value: selectedEducationStatus.value,
                 items:
                     EducationStatus.values
@@ -158,12 +158,12 @@ class AddEditEducationScreen extends HookWidget {
                     (val) =>
                         selectedEducationStatus.value =
                             val ?? EducationStatus.completed,
-                validator: (val) => val == null ? 'Required' : null,
+                validator: (val) => val == null ? context.lango.requiredField : null, // <-- REPLACED
               ),
               const SizedBox(height: 24),
               FilledButton(
                 onPressed: handleSaveChanges,
-                child: const Text('Save Changes'),
+                child: Text(context.lango.saveChanges), // <-- REPLACED
               ),
             ],
           ),

@@ -17,7 +17,7 @@ class HomePage extends ConsumerWidget {
     return ThemeSwitchingArea(
       child: Scaffold(
         appBar: AppBarWidget(
-          title: selectedSubModule.title,
+          title: selectedSubModule.title(context),
           actions: const [ThemeSwitcherWidget()],
         ),
         drawer: const AppDrawer(),

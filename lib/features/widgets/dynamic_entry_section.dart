@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 
 // A section for displaying a list of dynamic entries with an "Add New" button.
 class DynamicEntrySection<T> extends StatelessWidget {
   final String sectionTitle;
-  final String emptyListMessage;
+  final String? emptyListMessage; // <-- Made nullable
   final List<T> itemsData;
   // itemBuilder provides the context, specific item data, and its index.
   final Widget Function(BuildContext context, T itemData, int index)
-  itemBuilder;
+      itemBuilder;
   final VoidCallback onAddNew;
   final String addNewButtonText;
   final bool showDivider; // New: control divider visibility
@@ -15,7 +16,7 @@ class DynamicEntrySection<T> extends StatelessWidget {
   const DynamicEntrySection({
     super.key,
     required this.sectionTitle,
-    this.emptyListMessage = 'No items added yet.',
+    this.emptyListMessage, // <-- Made nullable
     required this.itemsData,
     required this.itemBuilder,
     required this.onAddNew,
@@ -64,7 +65,7 @@ class DynamicEntrySection<T> extends StatelessWidget {
                   vertical: 20.0,
                 ), // More padding for empty message
                 child: Text(
-                  emptyListMessage,
+                  emptyListMessage ?? context.lango.noItemsAdded, // <-- REPLACED
                   style: Theme.of(
                     context,
                   ).textTheme.bodyMedium?.copyWith(fontStyle: FontStyle.italic),

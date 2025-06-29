@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:police_com/core/enums/all_enums.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/core/extensions/string_extension.dart';
 import 'package:police_com/features/employee/new_recruite/application/my_recruits_notifier.dart';
 import 'package:police_com/features/employee/new_recruite/presentation/new_recruit_screen.dart';
@@ -54,12 +55,15 @@ class MyRecruitsScreen extends HookConsumerWidget {
                   child: Column(
                     children: [
                       Text(
-                        'Confirm Action',
+                        context.lango.confirmAction, // <-- REPLACED
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        'Are you sure you want to ${statusToApply.name} ${state.selectedRecruitIds.length} recruit(s)? This action cannot be undone.',
+                        context.lango.confirmRecruitAction( // <-- REPLACED
+                          status: statusToApply.name,
+                          count: state.selectedRecruitIds.length,
+                        ),
                         textAlign: TextAlign.center,
                       ),
                       if (selectedRecruits.isNotEmpty) ...[
@@ -100,7 +104,11 @@ class MyRecruitsScreen extends HookConsumerWidget {
                                     const SizedBox(width: 12),
                                     Flexible(
                                       child: Text(
-                                        '${recruit.firstName} ${recruit.middleName} (ID: ${recruit.id})',
+                                        context.lango.recruitIdentifier( // <-- REPLACED
+                                          firstName: recruit.firstName,
+                                          middleName: recruit.middleName,
+                                          id: recruit.id ?? 0,
+                                        ),
                                         style:
                                             Theme.of(
                                               context,
@@ -122,7 +130,7 @@ class MyRecruitsScreen extends HookConsumerWidget {
                           Expanded(
                             child: OutlinedButton(
                               onPressed: () => Navigator.of(ctx).pop(),
-                              child: const Text('Cancel'),
+                              child: Text(context.lango.cancel), // <-- REPLACED
                             ),
                           ),
                           const SizedBox(width: 16),
@@ -135,8 +143,8 @@ class MyRecruitsScreen extends HookConsumerWidget {
                                 if (success && context.mounted) {
                                   toastification.show(
                                     context: context,
-                                    title: const Text(
-                                      'Status updated successfully!',
+                                    title: Text( // <-- REMOVED CONST
+                                      context.lango.statusUpdatedSuccessfully, // <-- REPLACED
                                     ),
                                     type: ToastificationType.success,
                                   );
@@ -150,8 +158,8 @@ class MyRecruitsScreen extends HookConsumerWidget {
                               ),
                               child: Text(
                                 state.isUpdatingStatus
-                                    ? 'Processing...'
-                                    : 'Confirm ${statusToApply.name.toCapitalized()}',
+                                    ? context.lango.processing // <-- REPLACED
+                                    : context.lango.confirmStatus(status: statusToApply.name.toCapitalized()), // <-- REPLACED
                               ),
                             ),
                           ),
@@ -167,7 +175,7 @@ class MyRecruitsScreen extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBarWidget(
-        title: 'My Recruits',
+        title: context.lango.myRecruits, // <-- REPLACED
         actions:
             hasSelection
                 ? [
@@ -179,7 +187,7 @@ class MyRecruitsScreen extends HookConsumerWidget {
                               ? null
                               : () =>
                                   showConfirmationSheet(RecruitStatus.passed),
-                      child: const Text('Pass'),
+                      child: Text(context.lango.pass), // <-- REPLACED
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -192,7 +200,7 @@ class MyRecruitsScreen extends HookConsumerWidget {
                               : () =>
                                   showConfirmationSheet(RecruitStatus.failed),
                       child: Text(
-                        'Fail',
+                        context.lango.fail, // <-- REPLACED
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.error,
                         ),
@@ -240,20 +248,20 @@ class MyRecruitsScreen extends HookConsumerWidget {
                 children: [
                   Text(
                     hasSelection
-                        ? '${state.selectedRecruitIds.length} selected'
-                        : 'Select recruits to continue',
+                        ? context.lango.itemsSelected(count: state.selectedRecruitIds.length) // <-- REPLACED
+                        : context.lango.selectRecruitsToContinue, // <-- REPLACED
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   Row(
                     children: [
                       TextButton(
                         onPressed: notifier.selectAll,
-                        child: const Text('Mark All'),
+                        child: Text(context.lango.markAll), // <-- REPLACED
                       ),
                       const SizedBox(width: 8),
                       TextButton(
                         onPressed: notifier.unselectAll,
-                        child: const Text('Unmark All'),
+                        child: Text(context.lango.unmarkAll), // <-- REPLACED
                       ),
                     ],
                   ),
@@ -314,9 +322,9 @@ class MyRecruitsScreen extends HookConsumerWidget {
                     notifier.fetchFirstPage();
                   }
                 },
-                tooltip: 'Add New Recruit',
+                tooltip: context.lango.addNewRecruit, // <-- REPLACED
                 child: const Icon(Icons.add),
               ),
     );
   }
-}
+} 

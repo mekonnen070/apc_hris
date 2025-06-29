@@ -1,6 +1,6 @@
-// lib/features/promotion/presentation/widgets/promotion_list_item_widget.dart
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/promotion/domain/promotion_request.dart';
 import 'package:police_com/features/promotion/presentation/widgets/promotion_status_widget.dart';
 
@@ -29,7 +29,7 @@ class PromotionListItemWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Request for Promotion',
+                        context.lango.requestForPromotion, // <-- REPLACED
                         style: Theme.of(context).textTheme.titleSmall?.copyWith(
                           color: Colors.grey.shade600,
                         ),
@@ -52,9 +52,9 @@ class PromotionListItemWidget extends StatelessWidget {
               TextSpan(
                 style: Theme.of(context).textTheme.bodyMedium,
                 children: [
-                  const TextSpan(
-                    text: 'From: ',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  TextSpan(
+                    text: '${context.lango.fromLabel} ', // <-- REPLACED
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   TextSpan(text: request.currentPositionId),
                 ],
@@ -62,7 +62,7 @@ class PromotionListItemWidget extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              'Requested: ${DateFormat.yMMMd().format(request.requestDate)}',
+              context.lango.requestedLabel(date: DateFormat.yMMMd().format(request.requestDate)), // <-- REPLACED
             ),
             if (request.comments != null && request.comments!.isNotEmpty) ...[
               const SizedBox(height: 12),

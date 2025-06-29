@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 
 class LeaveBalanceCard extends StatelessWidget {
   final String title;
@@ -51,13 +52,13 @@ class LeaveBalanceCard extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const TextSpan(text: ' Days Left'),
+                    TextSpan(text: context.lango.daysLeft), // <-- REPLACED
                   ],
                 ),
               ),
               const SizedBox(height: 8),
               Text(
-                'Used: $used of $allowed',
+                context.lango.usedOf(used: used, allowed: allowed), // <-- REPLACED
                 style: theme.textTheme.bodyMedium?.copyWith(color: color),
               ),
             ],

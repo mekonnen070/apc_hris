@@ -1,6 +1,6 @@
-// lib/features/verification/presentation/widgets/verification_result_widget.dart
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/employee_profile/domain/employee_info_model.dart';
 
 class VerificationResultWidget extends StatelessWidget {
@@ -24,26 +24,30 @@ class VerificationResultWidget extends StatelessWidget {
               child: Column(
                 children: [
                   _buildDetailRow(
+                    context, // <-- ADDED
                     Icons.badge_outlined,
-                    'Employee ID',
+                    context.lango.employeeIdLabel, // <-- REPLACED
                     employee.employeeId,
                   ),
                   const Divider(),
                   _buildDetailRow(
+                    context, // <-- ADDED
                     Icons.work_outline,
-                    'Position',
+                    context.lango.position, // <-- REPLACED
                     employee.positionId,
                   ),
                   const Divider(),
                   _buildDetailRow(
+                    context, // <-- ADDED
                     Icons.business_outlined,
-                    'Department',
+                    context.lango.department, // <-- REPLACED
                     'Technology',
                   ), // Placeholder
                   const Divider(),
                   _buildDetailRow(
+                    context, // <-- ADDED
                     Icons.schedule_outlined,
-                    'Hired On',
+                    context.lango.hiredOn, // <-- REPLACED
                     DateFormat.yMMMd().format(employee.hiredDate),
                   ),
                 ],
@@ -97,9 +101,9 @@ class VerificationResultWidget extends StatelessWidget {
               color: Colors.green,
               size: 20,
             ),
-            label: const Text(
-              'VERIFIED',
-              style: TextStyle(
+            label: Text(
+              context.lango.verified.toUpperCase(), // <-- REPLACED
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.green,
               ),
@@ -111,7 +115,7 @@ class VerificationResultWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildDetailRow(IconData icon, String label, String value) {
+  Widget _buildDetailRow(BuildContext context, IconData icon, String label, String value) { // <-- Pass context
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(

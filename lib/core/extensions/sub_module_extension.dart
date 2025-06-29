@@ -1,6 +1,7 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart'; // <-- CHANGED from widgets.dart
 import 'package:police_com/core/enums/main_module_enum.dart';
 import 'package:police_com/core/enums/sub_module_enum.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/core/extensions/main_module_extension.dart';
 import 'package:police_com/features/clearance/presentation/clearance_screen.dart';
 import 'package:police_com/features/dashboard/presentation/dashboard_page.dart';
@@ -44,31 +45,31 @@ extension SubModuleExtension on SubModule {
     }
   }
 
-  String get title {
+  // MODIFIED: Changed from a getter to a method to access BuildContext
+  String title(BuildContext context) {
     switch (this) {
       case SubModule.dashboard:
-        return 'Dashboard';
+        return context.lango.dashboard; // <-- REPLACED
       case SubModule.profile:
-        return 'Profile';
+        return context.lango.profile; // <-- REPLACED
       case SubModule.newRecruit:
-        return 'New Recruit';
+        return context.lango.newRecruit; // <-- REPLACED
       case SubModule.transfer:
-        return 'Transfer';
+        return context.lango.transfer; // <-- REPLACED
       case SubModule.leave:
-        return 'Leave';
-      // Add other cases
+        return context.lango.leave; // <-- REPLACED
       case SubModule.training:
-        return 'Training';
+        return context.lango.training; // <-- REPLACED
       case SubModule.placement:
-        return 'Placement';
+        return context.lango.placement; // <-- REPLACED
       case SubModule.clearance:
-        return 'Clearance';
+        return context.lango.clearance; // <-- REPLACED
       case SubModule.incident:
-        return 'Incident';
+        return context.lango.incident; // <-- REPLACED
       case SubModule.promotion:
-        return 'Promotion';
+        return context.lango.promotion; // <-- REPLACED
       case SubModule.verification:
-        return 'Verification';
+        return context.lango.verification; // <-- REPLACED
     }
   }
 
@@ -95,7 +96,7 @@ extension SubModuleExtension on SubModule {
       case SubModule.clearance:
         return const ClearanceScreen();
       case SubModule.incident:
-        return const GrievanceScreen();
+        return const IncidentScreen();
       case SubModule.promotion:
         return const PromotionScreen();
       case SubModule.verification:

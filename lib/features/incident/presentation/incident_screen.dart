@@ -1,20 +1,22 @@
-// lib/features/grievance/presentation/grievance_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/incident/application/incident_notifier.dart';
 import 'package:police_com/features/incident/presentation/report_new_incident_screen.dart';
 import 'package:police_com/features/incident/presentation/widgets/incident_list_item_widget.dart';
 import 'package:police_com/features/widgets/app_bar_widget.dart';
 import 'package:police_com/features/widgets/something_went_wrong_widget.dart';
 
-class GrievanceScreen extends ConsumerStatefulWidget {
-  const GrievanceScreen({super.key});
+class IncidentScreen extends ConsumerStatefulWidget {
+  // <-- RENAMED
+  const IncidentScreen({super.key}); // <-- RENAMED
 
   @override
-  ConsumerState<GrievanceScreen> createState() => _GrievanceScreenState();
+  ConsumerState<IncidentScreen> createState() => _IncidentScreenState(); // <-- RENAMED
 }
 
-class _GrievanceScreenState extends ConsumerState<GrievanceScreen> {
+class _IncidentScreenState extends ConsumerState<IncidentScreen> {
+  // <-- RENAMED
   @override
   void initState() {
     super.initState();
@@ -30,12 +32,16 @@ class _GrievanceScreenState extends ConsumerState<GrievanceScreen> {
     final stateAsync = ref.watch(incidentNotifierProvider);
 
     return Scaffold(
-      appBar: const AppBarWidget(title: 'Incident & Grievance'),
+      appBar: AppBarWidget(
+        title: context.lango.incidentAndGrievance,
+      ), // <-- REPLACED & REMOVED CONST
       body: stateAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         data: (reports) {
           if (reports.isEmpty) {
-            return const Center(child: Text('No incidents to display.'));
+            return Center(
+              child: Text(context.lango.noIncidentsToDisplay),
+            ); // <-- REPLACED & REMOVED CONST
           }
           return RefreshIndicator(
             onRefresh:
@@ -73,7 +79,7 @@ class _GrievanceScreenState extends ConsumerState<GrievanceScreen> {
                 .getMyReportedIncidents('CURRENT_USER_ID');
           }
         },
-        tooltip: 'Report Incident',
+        tooltip: context.lango.reportIncident, // <-- REPLACED
         child: const Icon(Icons.report_problem_outlined),
       ),
     );

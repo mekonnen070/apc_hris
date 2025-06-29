@@ -1,7 +1,7 @@
-// lib/features/transfer/presentation/my_transfer_requests_screen.dart
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:police_com/core/enums/transfer_request_status.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/transfer/application/my_transfer_requests_notifier.dart';
 import 'package:police_com/features/transfer/application/my_transfer_requests_providers.dart';
 import 'package:police_com/features/transfer/domain/transfer_request_model.dart';
@@ -65,8 +65,8 @@ class MyTransferRequestsScreen extends HookConsumerWidget {
       }
       if (transferRequestsState.requests.isEmpty) {
         return EmptyListDisplayWidget(
-          message: 'You have not submitted any transfer requests yet.',
-          actionText: 'Refresh',
+          message: context.lango.noTransferRequestsYet, // <-- REPLACED
+          actionText: context.lango.refresh, // <-- REPLACED
           onActionPressed:
               () => transferRequestsNotifier.fetchMyTransferRequests(
                 isRefresh: true,
@@ -75,7 +75,7 @@ class MyTransferRequestsScreen extends HookConsumerWidget {
       }
 
       return Scaffold(
-        appBar: const AppBarWidget(title: 'My Transfer Requests'),
+        appBar: AppBarWidget(title: context.lango.myTransferRequests), // <-- REPLACED & REMOVED CONST
         floatingActionButton: FloatingActionButton(
           
           onPressed: () {
@@ -135,77 +135,77 @@ class MyTransferRequestsScreen extends HookConsumerWidget {
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
-          title: const Text('Transfer Request Details'),
+          title: Text(context.lango.transferRequestDetails), // <-- REPLACED
           content: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                _buildDetailRow(context, 'Request ID', request.id),
+                _buildDetailRow(context, context.lango.requestId, request.id), // <-- REPLACED
                 _buildDetailRow(
                   context,
-                  'Current Position',
+                  context.lango.currentPosition, // <-- REPLACED
                   request.currentPositionTitle,
                 ),
                 _buildDetailRow(
                   context,
-                  'Current Department',
+                  context.lango.currentDepartment, // <-- REPLACED
                   request.currentDepartment,
                 ),
                 _buildDetailRow(
                   context,
-                  'Current Location',
+                  context.lango.currentLocation, // <-- REPLACED
                   request.currentLocation,
                 ),
                 const Divider(),
                 _buildDetailRow(
                   context,
-                  'Requested Department',
+                  context.lango.requestedDepartment, // <-- REPLACED
                   request.requestedDepartment,
                 ),
                 _buildDetailRow(
                   context,
-                  'Requested Location',
+                  context.lango.requestedLocation, // <-- REPLACED
                   request.requestedLocation,
                 ),
                 if (request.requestedPositionTitle != null &&
                     request.requestedPositionTitle!.isNotEmpty)
                   _buildDetailRow(
                     context,
-                    'Requested Position',
+                    context.lango.requestedPosition, // <-- REPLACED
                     request.requestedPositionTitle!,
                   ),
-                _buildDetailRow(context, 'Reason', request.reasonForRequest),
+                _buildDetailRow(context, context.lango.reason, request.reasonForRequest), // <-- REPLACED
                 _buildDetailRow(
                   context,
-                  'Request Date',
+                  context.lango.requestDate, // <-- REPLACED
                   request.requestDate.toLocal().toString().split(' ')[0],
                 ),
                 _buildDetailRow(
                   context,
-                  'Status',
+                  context.lango.status, // <-- REPLACED
                   request.status.name,
                 ), // TODO: Use toDisplayString
                 if (request.managerComments != null &&
                     request.managerComments!.isNotEmpty)
                   _buildDetailRow(
                     context,
-                    'Manager Comments',
+                    context.lango.managerComments, // <-- REPLACED
                     request.managerComments!,
                   ),
                 if (request.hrComments != null &&
                     request.hrComments!.isNotEmpty)
-                  _buildDetailRow(context, 'HR Comments', request.hrComments!),
+                  _buildDetailRow(context, context.lango.hrComments, request.hrComments!), // <-- REPLACED
                 if (request.effectiveDate != null)
                   _buildDetailRow(
                     context,
-                    'Effective Date',
+                    context.lango.effectiveDate, // <-- REPLACED
                     request.effectiveDate!.toLocal().toString().split(' ')[0],
                   ),
                 if (request.lastUpdated != null)
                   _buildDetailRow(
                     context,
-                    'Last Updated',
+                    context.lango.lastUpdated, // <-- REPLACED
                     request.lastUpdated!.toLocal().toString().split(' ')[0],
                   ),
               ],
@@ -213,7 +213,7 @@ class MyTransferRequestsScreen extends HookConsumerWidget {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Close'),
+              child: Text(context.lango.close), // <-- REPLACED
               onPressed: () => Navigator.of(dialogContext).pop(),
             ),
           ],
@@ -231,13 +231,13 @@ class MyTransferRequestsScreen extends HookConsumerWidget {
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
-          title: const Text('Confirm Cancellation'),
+          title: Text(context.lango.confirmCancellation), // <-- REPLACED
           content: Text(
-            'Are you sure you want to cancel your transfer request to ${request.requestedLocation}?',
+            context.lango.confirmCancelTransferRequest(location: request.requestedLocation), // <-- REPLACED
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('No'),
+              child: Text(context.lango.no), // <-- REPLACED
               onPressed: () => Navigator.of(dialogContext).pop(),
             ),
             TextButton(
@@ -246,7 +246,7 @@ class MyTransferRequestsScreen extends HookConsumerWidget {
                 Navigator.of(dialogContext).pop();
                 notifier.cancelTransferRequest(request.id);
               },
-              child: const Text('Yes, Cancel'),
+              child: Text(context.lango.yesCancel), // <-- REPLACED
             ),
           ],
         );
@@ -306,7 +306,7 @@ class ErrorDisplayWidget extends StatelessWidget {
     return Column(
       children: [
         Text(message),
-        FilledButton(onPressed: onRetry, child: const Text('Retry')),
+        FilledButton(onPressed: onRetry, child: Text(context.lango.retry)), // <-- REPLACED
       ],
     );
   }

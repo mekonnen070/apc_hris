@@ -1,6 +1,6 @@
-// lib/features/profile/presentation/tabs/performance_tab.dart
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/employee_profile/domain/employee_info_model.dart';
 
 class PerformanceTab extends StatelessWidget {
@@ -12,8 +12,8 @@ class PerformanceTab extends StatelessWidget {
     final performances = employee.performances;
 
     if (performances.isEmpty) {
-      return const Center(
-        child: Text('No performance reviews available.'),
+      return Center(
+        child: Text(context.lango.noPerformanceReviews), // <-- REPLACED
       );
     }
 
@@ -25,9 +25,9 @@ class PerformanceTab extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: ListTile(
             title: Text(
-                'Review Date: ${DateFormat.yMMMd().format(performance.evaluationDate)}'),
+                context.lango.reviewDate(date: DateFormat.yMMMd().format(performance.evaluationDate))), // <-- REPLACED
             subtitle: Text(
-                'Rating: ${performance.rating} - ${performance.comments ?? 'No comments'}'),
+                context.lango.ratingAndComments(rating: performance.rating.toDouble(), comments: performance.comments ?? context.lango.noComments)), // <-- REPLACED
           ),
         );
       },

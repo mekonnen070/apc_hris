@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:police_com/core/enums/all_enums.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/core/extensions/string_extension.dart';
 import 'package:police_com/features/employee/new_recruite/application/new_recruit_notifier.dart';
 import 'package:police_com/features/employee/new_recruite/domain/recruit_info.dart';
@@ -107,7 +108,7 @@ class NewRecruitScreen extends HookConsumerWidget {
     }
 
     return Scaffold(
-      appBar: const AppBarWidget(title: 'New Recruit Application'),
+      appBar: AppBarWidget(title: context.lango.newRecruitApplication), // <-- REPLACED
       body:
           state.isLoading
               ? const Center(child: CircularProgressIndicator())
@@ -122,7 +123,7 @@ class NewRecruitScreen extends HookConsumerWidget {
                     children: [
                       AppDropdownField<int>(
                         fieldKey: formFieldKeys[0],
-                        labelText: 'Recruitment Announcement',
+                        labelText: context.lango.recruitmentAnnouncement, // <-- REPLACED
                         isRequired: true,
                         value: announcementId.value,
                         items:
@@ -141,7 +142,7 @@ class NewRecruitScreen extends HookConsumerWidget {
                       AppTextField(
                         fieldKey: formFieldKeys[1],
                         controller: firstNameController,
-                        labelText: 'First Name',
+                        labelText: context.lango.firstName, // <-- REPLACED
                         isRequired: true,
                         validator: FormBuilderValidators.required(),
                       ),
@@ -149,7 +150,7 @@ class NewRecruitScreen extends HookConsumerWidget {
                       AppTextField(
                         fieldKey: formFieldKeys[2],
                         controller: middleNameController,
-                        labelText: 'Middle Name',
+                        labelText: context.lango.middleName, // <-- REPLACED
                         isRequired: true,
                         validator: FormBuilderValidators.required(),
                       ),
@@ -157,14 +158,14 @@ class NewRecruitScreen extends HookConsumerWidget {
                       AppTextField(
                         fieldKey: formFieldKeys[3],
                         controller: lastNameController,
-                        labelText: 'Last Name',
+                        labelText: context.lango.lastName, // <-- REPLACED
                         isRequired: true,
                         validator: FormBuilderValidators.required(),
                       ),
                       const SizedBox(height: 16),
                       AppDateField(
                         fieldKey: formFieldKeys[4],
-                        labelText: 'Date of Birth',
+                        labelText: context.lango.dateOfBirth, // <-- REPLACED
                         isRequired: true,
                         selectedDate: dateOfBirth.value,
                         onDateSelected:
@@ -175,7 +176,7 @@ class NewRecruitScreen extends HookConsumerWidget {
                       AppTextField(
                         fieldKey: formFieldKeys[5],
                         controller: ageController,
-                        labelText: 'Age',
+                        labelText: context.lango.age, // <-- REPLACED
                         isRequired: true,
                         keyboardType: TextInputType.number,
                         validator: FormBuilderValidators.compose([
@@ -186,7 +187,7 @@ class NewRecruitScreen extends HookConsumerWidget {
                       const SizedBox(height: 16),
                       AppDropdownField<Gender>(
                         fieldKey: formFieldKeys[6],
-                        labelText: 'Gender',
+                        labelText: context.lango.gender, // <-- REPLACED
                         isRequired: true,
                         value: gender.value,
                         items:
@@ -204,7 +205,7 @@ class NewRecruitScreen extends HookConsumerWidget {
                       const SizedBox(height: 16),
                       AppDropdownField<MaritalStatus>(
                         fieldKey: formFieldKeys[7],
-                        labelText: 'Marital Status',
+                        labelText: context.lango.maritalStatus, // <-- REPLACED
                         isRequired: true,
                         value: maritalStatus.value,
                         items:
@@ -223,7 +224,7 @@ class NewRecruitScreen extends HookConsumerWidget {
                       AppTextField(
                         fieldKey: formFieldKeys[8],
                         controller: numberOfChildrenController,
-                        labelText: 'Number of Children',
+                        labelText: context.lango.numberOfChildren, // <-- REPLACED
                         isRequired: true,
                         keyboardType: TextInputType.number,
                         validator: FormBuilderValidators.compose([
@@ -235,14 +236,14 @@ class NewRecruitScreen extends HookConsumerWidget {
                       AppTextField(
                         fieldKey: formFieldKeys[9],
                         controller: nationalityController,
-                        labelText: 'Nationality',
+                        labelText: context.lango.nationality, // <-- REPLACED
                         isRequired: true,
                         validator: FormBuilderValidators.required(),
                       ),
                       const SizedBox(height: 16),
                       AppDropdownField<Religion>(
                         fieldKey: formFieldKeys[10],
-                        labelText: 'Religion',
+                        labelText: context.lango.religion, // <-- REPLACED
                         isRequired: true,
                         value: religion.value,
                         items:
@@ -260,7 +261,7 @@ class NewRecruitScreen extends HookConsumerWidget {
                       const SizedBox(height: 16),
                       AppDropdownField<BloodGroup>(
                         fieldKey: formFieldKeys[11],
-                        labelText: 'Blood Group',
+                        labelText: context.lango.bloodGroup, // <-- REPLACED
                         isRequired: true,
                         value: bloodGroup.value,
                         items:
@@ -284,7 +285,7 @@ class NewRecruitScreen extends HookConsumerWidget {
                       AppTextField(
                         fieldKey: formFieldKeys[12],
                         controller: woredaController,
-                        labelText: 'Woreda',
+                        labelText: context.lango.woreda, // <-- REPLACED
                         isRequired: true,
                         validator: FormBuilderValidators.required(),
                       ),
@@ -292,7 +293,7 @@ class NewRecruitScreen extends HookConsumerWidget {
                       AppTextField(
                         fieldKey: formFieldKeys[13],
                         controller: kebeleController,
-                        labelText: 'Kebele',
+                        labelText: context.lango.kebele, // <-- REPLACED
                         isRequired: true,
                         validator: FormBuilderValidators.required(),
                       ),
@@ -300,14 +301,14 @@ class NewRecruitScreen extends HookConsumerWidget {
                       AppTextField(
                         fieldKey: formFieldKeys[14],
                         controller: houseNumberController,
-                        labelText: 'House Number',
+                        labelText: context.lango.houseNumber, // <-- REPLACED
                         isRequired: true,
                         validator: FormBuilderValidators.required(),
                       ),
                       const SizedBox(height: 16),
                       AppTextField(
                         controller: phoneNumberController,
-                        labelText: 'Phone Number',
+                        labelText: context.lango.phoneNumber, // <-- REPLACED
                         isRequired: true,
                         keyboardType: TextInputType.phone,
                         validator: FormBuilderValidators.compose([
@@ -327,7 +328,7 @@ class NewRecruitScreen extends HookConsumerWidget {
                                     Colors.white,
                                   ),
                                 )
-                                : const Text('Submit'),
+                                : Text(context.lango.submit), // <-- REPLACED
                       ),
                     ],
                   ),
@@ -335,4 +336,4 @@ class NewRecruitScreen extends HookConsumerWidget {
               ),
     );
   }
-}
+} 

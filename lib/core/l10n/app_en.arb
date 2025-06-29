@@ -1,9 +1,769 @@
 {
-    "@@locale": "en",
-    "language": "Language",
-    "signInWithGoogle": "Sign in with Google",
-    "loginErrorMessage": "Failed to sign in. Please try again.",
-    "errorMessage": "Something went wrong. Please try again.",
-    "retry": "Retry",
-    "changeLanguage": "Change Language"
+  "@@locale": "en",
+  "forgotPassword": "Forgot Password",
+  "enterEmailForReset": "Enter your email to reset your password.",
+  "resetYourPassword": "Reset Your Password",
+  "enterEmailForPasswordReset": "Enter your email to receive password reset instructions.",
+  "email": "Email",
+  "emailIsRequired": "Email is required",
+  "enterAValidEmail": "Enter a valid email",
+  "resetPassword": "Reset Password",
+  "rememberedYourPassword": "Remembered your password?",
+  "login": "Login",
+  "passwordResetSent": "Password Reset Sent",
+  "checkEmailForResetInstructions": "Check your email for reset instructions.",
+  "passwordResetFailed": "Password Reset Failed",
+  "welcomeBack": "Welcome Back!",
+  "logInWithEmailAndPassword": "Log in with your email and password",
+  "password": "Password",
+  "passwordIsRequired": "Password is required",
+  "minimum6CharactersRequired": "Minimum 6 characters required",
+  "dontHaveAnAccount": "Don't have an account?",
+  "signUp": "Sign Up",
+  "loginSuccessful": "Login Successful",
+  "youHaveSuccessfullyLoggedIn": "You have successfully logged in.",
+  "loginFailed": "Login Failed",
+  "createAnAccount": "Create an Account",
+  "signUpWithEmailAndPassword": "Sign up with your email and password",
+  "fullName": "Full Name",
+  "fullNameIsRequired": "Full Name is required",
+  "address": "Address",
+  "addressIsRequired": "Address is required",
+  "phoneNumber": "Phone Number",
+  "phoneNumberIsRequired": "Phone number is required",
+  "dateOfBirth": "Date of Birth",
+  "birthDateIsRequired": "Birth date is required",
+  "gender": "Gender",
+  "maritalStatus": "Marital Status",
+  "selectYourMaritalStatus": "Select your marital status",
+  "signupSuccessful": "Signup Successful",
+  "youHaveSuccessfullySignedUp": "You have successfully signed up.",
+  "clearanceRequests": "Clearance Requests",
+  "noClearanceRequests": "No clearance requests found.",
+  "requestClearance": "Request Clearance",
+  "submitRequest": "Submit Request",
+  "reason": "Reason",
+  "reasonIsRequired": "Reason is required",
+  "description": "Description",
+  "descriptionIsRequired": "Description is required",
+  "requestDate": "Request Date",
+  "status": "Status",
+  "dashboard": "Dashboard",
+  "myRecruits": "My Recruits",
+  "noRecruitsFound": "No new recruits assigned to you.",
+  "newRecruit": "New Recruit",
+  "recruitmentDetails": "Recruitment Details",
+  "personalInformation": "Personal Information",
+  "emergencyContact": "Emergency Contact",
+  "documents": "Documents",
+  "submit": "Submit",
+  "documentManagement": "Document Management",
+  "employmentDetails": "Employment Details",
+  "recruitment": "Recruitment",
+  "retirement": "Retirement",
+  "incidentReports": "Incident Reports",
+  "noIncidentReports": "No incident reports found.",
+  "reportIncident": "Report Incident",
+  "incidentType": "Incident Type",
+  "selectIncidentType": "Select Incident Type",
+  "dateOfIncident": "Date of Incident",
+  "pleaseEnterDescription": "Please enter a description",
+  "incidentDate": "Incident Date",
+  "leaveManagement": "Leave Management",
+  "leaveHistory": "Leave History",
+  "requestLeave": "Request Leave",
+  "noLeaveHistory": "No leave history found.",
+  "leaveBalance": "Leave Balance",
+  "annual": "Annual",
+  "sick": "Sick",
+  "maternity": "Maternity",
+  "paternity": "Paternity",
+  "unpaid": "Unpaid",
+  "other": "Other",
+  "days": "Days",
+  "appliedOn": "Applied on",
+  "leaveType": "Leave Type",
+  "selectLeaveType": "Please select a leave type",
+  "startDate": "Start Date",
+  "endDate": "End Date",
+  "availablePlacements": "Available Placements",
+  "noPlacementsAvailable": "No placements available at the moment.",
+  "placementDetails": "Placement Details",
+  "postedOn": "Posted On",
+  "deadline": "Deadline",
+  "location": "Location",
+  "requiredExperience": "Required Experience",
+  "noApplicants": "No Applicants",
+  "noApplicantsForPlacement": "There are no applicants for this placement yet.",
+  "applicants": "Applicants",
+  "myProfile": "My Profile",
+  "addContact": "Add Contact",
+  "editContact": "Edit Contact",
+  "save": "Save",
+  "relationship": "Relationship",
+  "selectRelationship": "Select Relationship",
+  "city": "City",
+  "cityIsRequired": "City is required",
+  "addDependant": "Add Dependant",
+  "editDependant": "Edit Dependant",
+  "addEducation": "Add Education",
+  "editEducation": "Edit Education",
+  "institution": "Institution",
+  "institutionIsRequired": "Institution is required",
+  "fieldOfStudy": "Field of Study",
+  "selectFieldOfStudy": "Select Field of Study",
+  "gpa": "GPA",
+  "gpaIsRequired": "GPA is required",
+  "addExperience": "Add Experience",
+  "editExperience": "Edit Experience",
+  "company": "Company",
+  "companyIsRequired": "Company is required",
+  "jobTitle": "Job Title",
+  "jobTitleIsRequired": "Job Title is required",
+  "yearsOfExperience": "Years of Experience",
+  "yearsOfExpRequired": "Years of experience is required",
+  "addSpouse": "Add Spouse",
+  "editSpouse": "Edit Spouse",
+  "editPersonalInfo": "Edit Personal Info",
+  "contacts": "Contacts",
+  "noContactsAvailable": "No contacts available. Please add one.",
+  "addNewContact": "Add New Contact",
+  "dependants": "Dependants",
+  "noDependantsAvailable": "No dependants available. Please add one.",
+  "addNewDependant": "Add New Dependant",
+  "noDocumentsAvailable": "No documents available.",
+  "education": "Education",
+  "noEducationAvailable": "No education history available. Please add one.",
+  "addNewEducation": "Add New Education",
+  "experience": "Experience",
+  "noExperienceAvailable": "No work experience available. Please add one.",
+  "addNewExperience": "Add New Experience",
+  "performance": "Performance",
+  "noPerformanceData": "No performance data available.",
+  "middleName": "Middle Name",
+  "lastName": "Last Name",
+  "emailAddress": "Email Address",
+  "bloodGroup": "Blood Group",
+  "religion": "Religion",
+  "mobileNumber": "Mobile Number",
+  "edit": "Edit",
+  "spouse": "Spouse",
+  "noSpouseAvailable": "No spouse information available. Please add one.",
+  "addNewSpouse": "Add New Spouse",
+  "promotionRequests": "Promotion Requests",
+  "noPromotionRequests": "No promotion requests found.",
+  "requestPromotion": "Request Promotion",
+  "currentPosition": "Current Position",
+  "currentPositionIsRequired": "Current position is required",
+  "promotedPosition": "Position to be Promoted To",
+  "promotedPositionIsRequired": "Promoted position is required",
+  "promotionDate": "Promotion Date",
+  "availableTrainings": "Available Trainings",
+  "noTrainingsAvailable": "No trainings available at the moment.",
+  "trainingDetails": "Training Details",
+  "duration": "Duration",
+  "cost": "Cost",
+  "noApplicantsForTraining": "There are no applicants for this training yet.",
+  "myTransferRequests": "My Transfer Requests",
+  "noTransferRequests": "No transfer requests found.",
+  "requestTransfer": "Request Transfer",
+  "from": "From",
+  "fromDepartment": "From Department",
+  "fromDepartmentIsRequired": "From department is required",
+  "toDepartment": "To Department",
+  "toDepartmentIsRequired": "To department is required",
+  "requestDetails": "Request Details",
+  "employeeIdLabel": "Employee ID",
+  "transferDate": "Transfer Date",
+  "scanQrCode": "Scan QR Code",
+  "scanToVerify": "Scan a QR code to verify employee details",
+  "verification": "Verification",
+  "invalidQrCode": "Invalid QR Code",
+  "employeeDetails": "Employee Details",
+  "position": "Position",
+  "department": "Department",
+  "employmentDate": "Employment Date",
+  "verified": "Verified",
+  "notVerified": "Not Verified",
+  "home": "Home",
+  "profile": "Profile",
+  "language": "Language",
+  "logout": "Logout",
+  "areYouSureLogout": "Are you sure you want to logout?",
+  "cancel": "Cancel",
+  "add": "Add",
+  "delete": "Delete",
+  "areYouSureDelete": "Are you sure you want to delete this item?",
+  "selectDate": "Select Date",
+  "selectFile": "Select File",
+  "noFileSelected": "No file selected",
+  "applicationStatus": "Application Status",
+  "applied": "Applied",
+  "underReview": "Under Review",
+  "shortlisted": "Shortlisted",
+  "rejected": "Rejected",
+  "approved": "Approved",
+  "applyNow": "Apply Now",
+  "applicationDeadline": "Application Deadline",
+  "viewApplicants": "View Applicants",
+  "somethingWentWrong": "Something went wrong. Please try again.",
+  "retry": "Retry",
+  "english": "English",
+  "amharic": "Amharic",
+  "orContinueWith": "Or continue with",
+  "selectGender": "Select Gender",
+  "male": "Male",
+  "female": "Female",
+  "single": "Single",
+  "married": "Married",
+  "divorced": "Divorced",
+  "widowed": "Widowed",
+  "confirmDeleteItem": "Are you sure you want to delete {itemName}?",
+  "@confirmDeleteItem": {
+    "placeholders": {
+      "itemName": {
+        "type": "String"
+      }
+    }
+  },
+  "fileIsRequired": "File is required",
+  "pending": "Pending",
+  "completed": "Completed",
+  "cancelled": "Cancelled",
+  "accepted": "Accepted",
+  "clearanceRequestSubmitted": "Clearance request submitted successfully",
+  "failedToSubmitRequest": "Failed to submit request: ",
+  "reasonForClearance": "Reason for Clearance",
+  "pleaseSelectReason": "Please select a reason",
+  "lastDayOfWorkLabel": "Last Day of Work",
+  "lastDayOfWork": "Last Day of Work: {date}",
+  "@lastDayOfWork": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "pleaseSelectDate": "Please select a date",
+  "commentsOptional": "Comments (Optional)",
+  "provideAdditionalDetails": "Provide any additional details.",
+  "requestedOn": "Requested On: {date}",
+  "@requestedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "welcomeBackUser": "Welcome back, {name}!",
+  "@welcomeBackUser": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "totalEmployees": "Total Employees",
+  "pendingTasks": "Pending Tasks",
+  "quickActions": "Quick Actions",
+  "recentActivity": "Recent Activity",
+  "leaveRequestApproved": "Leave Request Approved",
+  "annualLeaveFor": "Annual leave for {name} from {dateRange}.",
+  "@annualLeaveFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "dateRange": {
+        "type": "String"
+      }
+    }
+  },
+  "newPromotionRequest": "New Promotion Request",
+  "fromToPosition": "From {currentRank} {name} for {newPosition} position.",
+  "@fromToPosition": {
+    "placeholders": {
+      "currentRank": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      },
+      "newPosition": {
+        "type": "String"
+      }
+    }
+  },
+  "resignationSubmitted": "Resignation Submitted",
+  "byEffective": "By {rank} {name}, effective {date}.",
+  "@byEffective": {
+    "placeholders": {
+      "rank": {
+        "type": "String"
+      },
+      "name": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "twoHoursAgo": "2h ago",
+  "eightHoursAgo": "8h ago",
+  "oneDayAgo": "1d ago",
+  "transfer": "Transfer",
+  "leave": "Leave",
+  "training": "Training",
+  "placement": "Placement",
+  "clearance": "Clearance",
+  "incident": "Incident",
+  "promotion": "Promotion",
+  "confirmAction": "Confirm Action",
+  "confirmRecruitAction": "Are you sure you want to {status} {count} recruit(s)? This action cannot be undone.",
+  "@confirmRecruitAction": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "recruitIdentifier": "{firstName} {middleName} (ID: {id})",
+  "@recruitIdentifier": {
+    "placeholders": {
+      "firstName": {
+        "type": "String"
+      },
+      "middleName": {
+        "type": "String"
+      },
+      "id": {
+        "type": "int"
+      }
+    }
+  },
+  "statusUpdatedSuccessfully": "Status updated successfully!",
+  "processing": "Processing...",
+  "confirmStatus": "Confirm {status}",
+  "@confirmStatus": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "pass": "Pass",
+  "fail": "Fail",
+  "itemsSelected": "{count} selected",
+  "@itemsSelected": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "selectRecruitsToContinue": "Select recruits to continue",
+  "markAll": "Mark All",
+  "unmarkAll": "Unmark All",
+  "addNewRecruit": "Add New Recruit",
+  "newRecruitApplication": "New Recruit Application",
+  "recruitmentAnnouncement": "Recruitment Announcement",
+  "firstName": "First Name",
+  "age": "Age",
+  "numberOfChildren": "Number of Children",
+  "nationality": "Nationality",
+  "woreda": "Woreda",
+  "kebele": "Kebele",
+  "houseNumber": "House Number",
+  "reportNewIncident": "Report New Incident",
+  "pleaseSelectIncidentDate": "Please select the incident date",
+  "pleaseSelectAnIncidentType": "Please select an incident type",
+  "descriptionOfIncident": "Description of Incident",
+  "provideClearDetailedDescription": "Please provide a clear and detailed description of the incident.",
+  "submitReport": "Submit Report",
+  "incidentReportSubmitted": "Incident report submitted successfully",
+  "failedToSubmitReport": "Failed to submit report:",
+  "incidentAndGrievance": "Incident & Grievance",
+  "noIncidentsToDisplay": "No incidents to display.",
+  "dateLabel": "Date: {date}",
+  "@dateLabel": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "annualLeave": "Annual Leave",
+  "sickLeave": "Sick Leave",
+  "noBalanceInfoAvailable": "No balance information available.",
+  "requestHistory": "Request History",
+  "newLeaveRequest": "New Leave Request",
+  "requestNewLeave": "Request New Leave",
+  "pleaseSelectLeaveType": "Please select a leave type",
+  "selectLeaveTypeToSeeBalance": "Select a leave type to see balance",
+  "availableDays": "Available: {days} days",
+  "@availableDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "availableOfTotalDays": "Available: {remaining} of {total} days",
+  "@availableOfTotalDays": {
+    "placeholders": {
+      "remaining": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "pleaseSelectStartDate": "Please select a start date",
+  "pleaseSelectEndDate": "Please select an end date",
+  "endDateAfterStartDate": "End date must be after start date",
+  "reasonForLeave": "Reason for Leave",
+  "leaveTitle": "{leaveType} Leave",
+  "@leaveTitle": {
+    "placeholders": {
+      "leaveType": {
+        "type": "String"
+      }
+    }
+  },
+  "fromLabel": "From:",
+  "toLabel": "To:",
+  "daysWithReason": "{days} Day(s) - {reason}",
+  "@daysWithReason": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "daysOnly": "{count} Day(s)",
+  "@daysOnly": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "daysLeft": " Days Left",
+  "usedOf": "Used: {used} of {allowed}",
+  "@usedOf": {
+    "placeholders": {
+      "used": {
+        "type": "int"
+      },
+      "allowed": {
+        "type": "int"
+      }
+    }
+  },
+  "applicationSubmittedSuccessfully": "Application submitted successfully!",
+  "submitAppeal": "Submit Appeal",
+  "reasonForAppeal": "Reason for Appeal",
+  "appealSubmitted": "Appeal submitted.",
+  "failedToSubmitAppeal": "Failed to submit appeal.",
+  "selectedApplicants": "Selected Applicants",
+  "placementNotFound": "Placement not found.",
+  "applyForThisPlacement": "Apply for this Placement",
+  "reasonForApplyingOptional": "Reason for Applying (Optional)",
+  "submitApplication": "Submit Application",
+  "noSelectedApplicantInfo": "No information on selected applicants is available.",
+  "notAvailable": "N/A",
+  "noPromotionRequestsFound": "No promotion requests found.",
+  "promotionRequestSubmitted": "Promotion request submitted successfully",
+  "requestedPositionForPromotion": "Requested Position for Promotion",
+  "thisFieldIsRequired": "This field is required",
+  "reasonForRequest": "Reason for Request",
+  "brieflyExplainPromotionReason": "Briefly explain why you are requesting this promotion.",
+  "pleaseProvideReason": "Please provide a reason",
+  "requestForPromotion": "Request for Promotion",
+  "requestedLabel": "Requested: {date}",
+  "@requestedLabel": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "trainingNotFound": "Training not found.",
+  "applyForThisTraining": "Apply for this Training",
+  "trainingLocationAndOrganizer": "{center} by {organizer}",
+  "@trainingLocationAndOrganizer": {
+    "placeholders": {
+      "center": {
+        "type": "String"
+      },
+      "organizer": {
+        "type": "String"
+      }
+    }
+  },
+  "noTransferRequestsYet": "You have not submitted any transfer requests yet.",
+  "refresh": "Refresh",
+  "transferRequestDetails": "Transfer Request Details",
+  "requestId": "Request ID",
+  "currentDepartment": "Current Department",
+  "currentLocation": "Current Location",
+  "requestedDepartment": "Requested Department",
+  "requestedLocation": "Requested Location",
+  "requestedPosition": "Requested Position",
+  "managerComments": "Manager Comments",
+  "hrComments": "HR Comments",
+  "effectiveDate": "Effective Date",
+  "lastUpdated": "Last Updated",
+  "close": "Close",
+  "confirmCancellation": "Confirm Cancellation",
+  "confirmCancelTransferRequest": "Are you sure you want to cancel your transfer request to {location}?",
+  "@confirmCancelTransferRequest": {
+    "placeholders": {
+      "location": {
+        "type": "String"
+      }
+    }
+  },
+  "no": "No",
+  "yesCancel": "Yes, Cancel",
+  "pleaseCorrectErrorsInForm": "Please correct the errors in the form.",
+  "currentEmployeeDetails": "Current Employee Details:",
+  "newTransferRequest": "New Transfer Request:",
+  "requestedDepartmentLabel": "Requested Department *",
+  "requestedDepartmentHint": "e.g., CID, Traffic Police, HR",
+  "requestedDepartmentRequired": "Requested department is required.",
+  "requestedLocationLabel": "Requested Location *",
+  "requestedLocationHint": "e.g., Gondar Zonal Office, Bahir Dar City",
+  "requestedLocationRequired": "Requested location is required.",
+  "requestedPositionTitleOptional": "Requested Position Title (Optional)",
+  "requestedPositionTitleHint": "e.g., Investigator, Trainer",
+  "reasonForRequestLabel": "Reason for Request *",
+  "reasonForRequestHint": "Provide a detailed reason for your transfer request.",
+  "reasonForRequestRequired": "Reason for request is required.",
+  "submitTransferRequest": "Submit Transfer Request",
+  "requestTo": "Request to: {department}",
+  "@requestTo": {
+    "placeholders": {
+      "department": {
+        "type": "String"
+      }
+    }
+  },
+  "submittedOn": "Submitted: {date}",
+  "@submittedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "verificationError": "Verification Error",
+  "enterEmployeeId": "Enter Employee ID",
+  "employeeIdHint": "e.g., EMP-001",
+  "qrCodeScanned": "QR Code Scanned",
+  "searchingForEmployee": "Searching for employee: {qrCode}",
+  "@searchingForEmployee": {
+    "placeholders": {
+      "qrCode": {
+        "type": "String"
+      }
+    }
+  },
+  "verifyNew": "Verify New",
+  "verifyingEmployee": "Verifying employee...",
+  "readyToVerify": "Ready to Verify",
+  "enterIdOrScanQr": "Enter an Employee ID or scan a QR code to begin.",
+  "retrySearch": "Retry Search",
+  "scanEmployeeId": "Scan Employee ID",
+  "hiredOn": "Hired On",
+  "clearFile": "Clear file",
+  "change": "Change",
+  "select": "Select",
+  "noItemsAdded": "No items added yet.",
+  "personal": "Personal",
+  "previous": "Previous",
+  "saving": "Saving...",
+  "review": "Review",
+  "next": "Next",
+  "comingSoon": "Coming soon",
+  "amharicNotAvailable": "Amharic language is not available yet",
+  "phone": "Phone",
+  "birthDate": "Birth Date",
+  "hiredDate": "Hired Date",
+  "employmentStatus": "Employment Status",
+  "editPersonalDetails": "Edit Personal Details",
+  "noPerformanceReviews": "No performance reviews available.",
+  "reviewDate": "Review Date: {date}",
+  "@reviewDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "ratingAndComments": "Rating: {rating} - {comments}",
+  "@ratingAndComments": {
+    "placeholders": {
+      "rating": {
+        "type": "double"
+      },
+      "comments": {
+        "type": "String"
+      }
+    }
+  },
+  "noComments": "No comments",
+  "spouseInformation": "Spouse Information",
+  "noSpouseInfoAvailable": "No spouse information available.",
+  "occupation": "Occupation: {occupation}",
+  "@occupation": {
+    "placeholders": {
+      "occupation": {
+        "type": "String"
+      }
+    }
+  },
+  "dobLabel": "DOB: {dob}",
+  "@dobLabel": {
+    "placeholders": {
+      "dob": {
+        "type": "String"
+      }
+    }
+  },
+  "updated": "updated",
+  "added": "added",
+  "present": "Present",
+  "experienceSuccess": "Experience successfully {action}.",
+  "@experienceSuccess": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "failedToExperience": "Failed to {action} experience.",
+  "@failedToExperience": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "experienceDeleted": "Experience successfully deleted.",
+  "failedToDeleteExperience": "Failed to delete experience.",
+  "educationSuccess": "Education successfully {action}.",
+  "@educationSuccess": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "failedToEducation": "Failed to {action} education.",
+  "@failedToEducation": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "educationDeleted": "Education successfully deleted.",
+  "failedToDeleteEducation": "Failed to delete education.",
+  "uploadedOn": "Uploaded: {date}",
+  "@uploadedOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "noDependantsListed": "No dependants listed.",
+  "relationLabel": "Relation: {relation}",
+  "@relationLabel": {
+    "placeholders": {
+      "relation": {
+        "type": "String"
+      }
+    }
+  },
+  "addEmergencyContact": "Add Emergency Contact",
+  "emergencyContacts": "Emergency Contacts",
+  "noEmergencyContactsListed": "No emergency contacts listed.",
+  "phoneLabel": "Phone: {phone}",
+  "@phoneLabel": {
+    "placeholders": {
+      "phone": {
+        "type": "String"
+      }
+    }
+  },
+  "profileUpdatedSuccessfully": "Profile updated successfully",
+  "saveChanges": "Save Changes",
+  "titleLabel": "Title (e.g., Mr., Mrs., Ms.) *",
+  "titleIsRequired": "Title is required",
+  "fullNameLabel": "Full Name *",
+  "genderLabel": "Gender *",
+  "genderIsRequired": "Gender is required",
+  "dateOfBirthLabel": "Date of Birth *",
+  "occupationLabel": "Occupation",
+  "mothersFullName": "Mother's Full Name",
+  "addressLabel": "Address *",
+  "anniversaryDate": "Anniversary Date",
+  "retirementNumber": "Retirement Number",
+  "tinNumber": "TIN Number",
+  "organizationLabel": "Organization *",
+  "requiredField": "Required",
+  "organizationTypeLabel": "Organization Type *",
+  "positionLabel": "Position *",
+  "responsibilitiesLabel": "Responsibilities",
+  "proficiencyLevelLabel": "Proficiency Level *",
+  "joinDateLabel": "Join Date *",
+  "iCurrentlyWorkHere": "I currently work here",
+  "separationDateLabel": "Separation Date",
+  "educationLevelLabel": "Education Level *",
+  "universityLabel": "University *",
+  "fieldOfStudyLabel": "Field Of Study *",
+  "cgpa": "CGPA",
+  "startDateLabel": "Start Date *",
+  "startDateIsRequired": "Start date is required",
+  "endDateLabel": "End Date",
+  "educationStatusLabel": "Education Status *",
+  "dependantsFullNameLabel": "Dependant's Full Name *",
+  "relationshipLabel": "Relationship *",
+  "phoneNumberLabel": "Phone Number *",
+  "regionLabel": "Region *",
+  "phoneLabelRequired": "Phone *",
+  "mobile": "Mobile",
+  "trainingAndDevelopment": "Training & Development",
+  "placementManagement": "Placement Management",
+  "employeeClearance": "Employee Clearance",
+  "incidentManagement": "Incident Management",
+  "promotionManagement": "Promotion Management",
+  "id": "ID {id}",
+  "@id": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "noLeaveHistoryFound": "No Leave History Found",
+  "employeeId": "Employee ID {id}",
+  "@employeeId": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "verificationFailed": "Verification Failed"
 }

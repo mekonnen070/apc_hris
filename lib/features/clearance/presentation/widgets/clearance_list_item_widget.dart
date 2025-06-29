@@ -1,6 +1,6 @@
-// lib/features/clearance/presentation/widgets/clearance_list_item_widget.dart
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/clearance/domain/clearance_request.dart';
 import 'package:police_com/features/profile/presentation/tabs/personal_info_tab.dart';
 import 'package:police_com/features/widgets/clearance_status_chip.dart';
@@ -31,11 +31,15 @@ class ClearanceListItemWidget extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              'Requested On: ${DateFormat.yMMMd().format(request.requestDate)}',
+              context.lango.requestedOn(
+                date: DateFormat.yMMMd().format(request.requestDate),
+              ), // <-- REPLACED
             ),
             const SizedBox(height: 4),
             Text(
-              'Last Day of Work: ${DateFormat.yMMMd().format(request.lastDayOfWork)}',
+              context.lango.lastDayOfWork(
+                date: DateFormat.yMMMd().format(request.lastDayOfWork),
+              ), // <-- REPLACED
             ),
             if (request.comments != null && request.comments!.isNotEmpty) ...[
               const Divider(height: 24),

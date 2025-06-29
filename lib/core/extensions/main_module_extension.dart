@@ -1,20 +1,24 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; // <-- CHANGED
 import 'package:police_com/core/enums/main_module_enum.dart';
 import 'package:police_com/core/enums/sub_module_enum.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 
 extension MainModuleX on MainModule {
-  String get title => switch (this) {
-    MainModule.dashboard => 'Dashboard',
-    MainModule.profile => 'Profile',
-    MainModule.transfer => 'Transfer',
-    MainModule.leave => 'Leave',
-    MainModule.training => 'Training & Development',
-    MainModule.placement => 'Placement Management',
-    MainModule.clearance => 'Employee Clearance',
-    MainModule.incident => 'Incident Management',
-    MainModule.promotion => 'Promotion Management',
-    MainModule.verification => 'Verification',
-  };
+  // MODIFIED: Changed from a getter to a method to access BuildContext
+  String title(BuildContext context) {
+    return switch (this) {
+      MainModule.dashboard => context.lango.dashboard,
+      MainModule.profile => context.lango.profile,
+      MainModule.transfer => context.lango.transfer,
+      MainModule.leave => context.lango.leave,
+      MainModule.training => context.lango.trainingAndDevelopment,
+      MainModule.placement => context.lango.placementManagement,
+      MainModule.clearance => context.lango.employeeClearance,
+      MainModule.incident => context.lango.incidentManagement,
+      MainModule.promotion => context.lango.promotionManagement,
+      MainModule.verification => context.lango.verification,
+    };
+  }
 
   IconData get icon => switch (this) {
     MainModule.dashboard => Icons.dashboard_rounded,

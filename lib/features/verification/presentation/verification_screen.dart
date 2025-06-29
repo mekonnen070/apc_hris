@@ -1,7 +1,7 @@
-// lib/features/verification/presentation/verification_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/verification/application/verification_providers.dart';
 import 'package:police_com/features/verification/data/verification_repository.dart';
 import 'package:police_com/features/verification/presentation/qr_scanner_screen.dart';
@@ -64,7 +64,7 @@ class VerificationScreen extends HookConsumerWidget {
           // Show toast notification for errors
           toastification.show(
             context: context,
-            title: const Text('Verification Error'),
+            title: Text(context.lango.verificationError), // <-- REPLACED
             description: Text(errorMessage),
             type: toastType,
             style: ToastificationStyle.fillColored,
@@ -91,13 +91,13 @@ class VerificationScreen extends HookConsumerWidget {
               child: TextField(
                 controller: searchController,
                 decoration: InputDecoration(
-                  labelText: 'Enter Employee ID',
-                  hintText: 'e.g., EMP-001',
+                  labelText: context.lango.enterEmployeeId, // <-- REPLACED
+                  hintText: context.lango.employeeIdHint, // <-- REPLACED
                   border: const OutlineInputBorder(),
                   prefixIcon: const Icon(Icons.badge_outlined),
                   suffixIcon: IconButton(
                     icon: const Icon(Icons.qr_code_scanner_rounded),
-                    tooltip: 'Scan QR Code',
+                    tooltip: context.lango.scanQrCode, // <-- REPLACED
                     onPressed: () async {
                       // Show QR scanner and process result
                       final String? qrCode = await Navigator.of(context).push(
@@ -113,8 +113,8 @@ class VerificationScreen extends HookConsumerWidget {
                         // Show scanning success toast
                         toastification.show(
                           context: context,
-                          title: const Text('QR Code Scanned'),
-                          description: Text('Searching for employee: $qrCode'),
+                          title: Text(context.lango.qrCodeScanned), // <-- REPLACED
+                          description: Text(context.lango.searchingForEmployee(qrCode: qrCode)), // <-- REPLACED
                           type: ToastificationType.info,
                           style: ToastificationStyle.minimal,
                           autoCloseDuration: const Duration(seconds: 2),
@@ -154,22 +154,22 @@ class VerificationScreen extends HookConsumerWidget {
                           notifier.clear();
                         },
                         icon: const Icon(Icons.refresh),
-                        label: const Text('Verify New'),
+                        label: Text(context.lango.verifyNew), // <-- REPLACED
                         style: FilledButton.styleFrom(),
                       ),
                     ],
                   );
                 },
                 loading:
-                    () => const Center(
+                    () => Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          CircularProgressIndicator(),
-                          SizedBox(height: 16),
+                          const CircularProgressIndicator(),
+                          const SizedBox(height: 16),
                           Text(
-                            'Verifying employee...',
-                            style: TextStyle(
+                            context.lango.verifyingEmployee, // <-- REPLACED
+                            style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
                             ),
@@ -200,21 +200,21 @@ class _InitialStatePrompt extends StatelessWidget {
   const _InitialStatePrompt();
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.search, size: 80, color: Colors.grey),
-          SizedBox(height: 16),
+          const Icon(Icons.search, size: 80, color: Colors.grey),
+          const SizedBox(height: 16),
           Text(
-            'Ready to Verify',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            context.lango.readyToVerify, // <-- REPLACED
+            style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
-            'Enter an Employee ID or scan a QR code to begin.',
+            context.lango.enterIdOrScanQr, // <-- REPLACED
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 16, color: Colors.grey),
+            style: const TextStyle(fontSize: 16, color: Colors.grey),
           ),
         ],
       ),
@@ -236,7 +236,7 @@ class _ErrorState extends StatelessWidget {
           const Icon(Icons.error_outline, size: 80, color: Colors.redAccent),
           const SizedBox(height: 16),
           Text(
-            'Verification Failed',
+            context.lango.verificationFailed, // <-- REPLACED
             style: Theme.of(context).textTheme.headlineSmall,
             textAlign: TextAlign.center,
           ),
@@ -247,7 +247,7 @@ class _ErrorState extends StatelessWidget {
             style: const TextStyle(fontSize: 16, color: Colors.grey),
           ),
           const SizedBox(height: 24),
-          ElevatedButton(onPressed: onRetry, child: const Text('Retry Search')),
+          ElevatedButton(onPressed: onRetry, child: Text(context.lango.retrySearch)), // <-- REPLACED
         ],
       ),
     );

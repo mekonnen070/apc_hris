@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:path/path.dart' as p;
 
 class AppFileUploadField extends StatelessWidget {
@@ -13,7 +14,7 @@ class AppFileUploadField extends StatelessWidget {
   final List<String>? allowedExtensions;
   final String? Function(File?)? validator;
   final AutovalidateMode? autovalidateMode;
-  final String noFileSelectedText;
+  final String? noFileSelectedText; // <-- Made nullable
   final bool enabled;
 
   const AppFileUploadField({
@@ -26,7 +27,7 @@ class AppFileUploadField extends StatelessWidget {
     this.allowedExtensions,
     this.validator,
     this.autovalidateMode,
-    this.noFileSelectedText = 'No file selected',
+    this.noFileSelectedText, // <-- Made nullable
     this.enabled = true,
   });
 
@@ -80,7 +81,7 @@ class AppFileUploadField extends StatelessWidget {
           final displayFileName =
               pickedFile != null
                   ? p.basename(pickedFile!.path)
-                  : noFileSelectedText;
+                  : noFileSelectedText ?? context.lango.noFileSelected; // <-- REPLACED
 
           return InputDecorator(
             decoration: InputDecoration(
@@ -107,14 +108,14 @@ class AppFileUploadField extends StatelessWidget {
                       onFileSelected(null);
                       field.didChange(null);
                     },
-                    tooltip: 'Clear file',
+                    tooltip: context.lango.clearFile, // <-- REPLACED
                     constraints: const BoxConstraints(),
                     padding: EdgeInsets.zero,
                   ),
                 const SizedBox(width: 8),
                 FilledButton.icon(
                   icon: const Icon(Icons.attach_file_outlined, size: 18),
-                  label: Text(pickedFile != null ? 'Change' : 'Select'),
+                  label: Text(pickedFile != null ? context.lango.change : context.lango.select), // <-- REPLACED
                   style: FilledButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 12,

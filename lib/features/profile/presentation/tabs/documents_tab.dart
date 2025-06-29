@@ -1,6 +1,6 @@
-// lib/features/profile/presentation/tabs/documents_tab.dart
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/employee_profile/domain/employee_info_model.dart';
 
 class DocumentsTab extends StatelessWidget {
@@ -12,8 +12,8 @@ class DocumentsTab extends StatelessWidget {
     final documents = employee.generalDocuments;
 
     if (documents.isEmpty) {
-      return const Center(
-        child: Text('No documents available.'),
+      return Center(
+        child: Text(context.lango.noDocumentsAvailable), // <-- REPLACED
       );
     }
 
@@ -27,7 +27,7 @@ class DocumentsTab extends StatelessWidget {
             leading: const Icon(Icons.article_outlined),
             title: Text(doc.documentName),
             subtitle: Text(
-                'Uploaded: ${doc.uploadDate != null ? DateFormat.yMMMd().format(doc.uploadDate!) : 'N/A'}'),
+                context.lango.uploadedOn(date: doc.uploadDate != null ? DateFormat.yMMMd().format(doc.uploadDate!) : context.lango.notAvailable)), // <-- REPLACED
             onTap: () {
               // TODO: Implement document viewing or downloading
             },

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 
 // A card to display an item with optional edit and delete actions.
 class EditableListItemCard extends StatelessWidget {
@@ -53,7 +54,7 @@ class EditableListItemCard extends StatelessWidget {
                           color: Theme.of(context).colorScheme.primary,
                           size: 20,
                         ),
-                        tooltip: 'Edit',
+                        tooltip: context.lango.edit, // <-- REPLACED
                         onPressed: onEdit,
                       ),
                     if (onDelete != null)
@@ -63,7 +64,7 @@ class EditableListItemCard extends StatelessWidget {
                           color: Theme.of(context).colorScheme.error,
                           size: 20,
                         ),
-                        tooltip: 'Delete',
+                        tooltip: context.lango.delete, // <-- REPLACED
                         onPressed: onDelete,
                       ),
                   ],

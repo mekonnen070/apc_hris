@@ -1,7 +1,7 @@
-// lib/features/transfer/presentation/widgets/transfer_request_list_item_widget.dart
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:police_com/core/enums/all_enums.dart'; // For TransferRequestStatus
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/core/extensions/enum_extension.dart'; // For toDisplayString
 import 'package:police_com/features/transfer/domain/transfer_request_model.dart';
 
@@ -75,7 +75,7 @@ class TransferRequestListItemWidget extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      'Request to: ${request.requestedDepartment}',
+                      context.lango.requestTo(department: request.requestedDepartment), // <-- REPLACED
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: theme.colorScheme.primary,
@@ -134,14 +134,14 @@ class TransferRequestListItemWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Submitted: ${DateFormat('dd MMM, yyyy').format(request.requestDate)}',
+                    context.lango.submittedOn(date: DateFormat('dd MMM, yyyy').format(request.requestDate)), // <-- REPLACED
                     style: theme.textTheme.bodySmall?.copyWith(fontStyle: FontStyle.italic),
                   ),
                   if (onCancel != null)
                     TextButton.icon(
                       onPressed: onCancel,
                       icon: const Icon(Icons.cancel_outlined, size: 18),
-                      label: const Text('Cancel'),
+                      label: Text(context.lango.cancel), // <-- REPLACED
                       style: TextButton.styleFrom(foregroundColor: theme.colorScheme.error),
                     ),
                 ],
@@ -153,4 +153,3 @@ class TransferRequestListItemWidget extends StatelessWidget {
     );
   }
 }
-

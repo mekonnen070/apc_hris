@@ -1,6 +1,6 @@
-// lib/features/verification/presentation/qr_scanner_screen.dart
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 
 class QRScannerScreen extends StatefulWidget {
   const QRScannerScreen({super.key});
@@ -9,11 +9,9 @@ class QRScannerScreen extends StatefulWidget {
   State<QRScannerScreen> createState() => _QRScannerScreenState();
 }
 
-class _QRScannerScreenState extends State<QRScannerScreen> with TickerProviderStateMixin {
-  final MobileScannerController controller = MobileScannerController(
-    detectionSpeed: DetectionSpeed.normal,
-    facing: CameraFacing.back,
-  );
+class _QRScannerScreenState extends State<QRScannerScreen>
+    with TickerProviderStateMixin {
+  final MobileScannerController controller = MobileScannerController();
   late AnimationController _animationController;
   bool _isProcessing = false;
 
@@ -40,10 +38,12 @@ class _QRScannerScreenState extends State<QRScannerScreen> with TickerProviderSt
       width: 250,
       height: 250,
     );
-    
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Scan Employee ID'),
+        title: Text(
+          context.lango.scanEmployeeId,
+        ), // <-- REPLACED & REMOVED CONST
         actions: [
           // Torch control button
           IconButton(

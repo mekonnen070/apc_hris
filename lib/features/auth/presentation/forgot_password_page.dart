@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/core/mixins/logger_mixin.dart';
 import 'package:police_com/features/auth/application/auth_controller.dart';
 import 'package:police_com/features/auth/presentation/log_in_page.dart';
@@ -36,8 +37,8 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage>
       );
 
       toastification.show(
-        title: const Text('Password Reset Sent'),
-        description: const Text('Check your email for reset instructions.'),
+        title: Text(context.lango.passwordResetSent), // <-- REPLACED
+        description: Text(context.lango.checkEmailForResetInstructions), // <-- REPLACED
         type: ToastificationType.success,
       );
     } catch (error, stack) {
@@ -47,7 +48,7 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage>
         stackTrace: stack,
       );
       toastification.show(
-        title: const Text('Password Reset Failed'),
+        title: Text(context.lango.passwordResetFailed), // <-- REPLACED
         description: Text('Error: $error'),
         type: ToastificationType.error,
       );
@@ -60,9 +61,9 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage>
   Widget build(BuildContext context) {
     return ThemeSwitchingArea(
       child: Scaffold(
-        appBar: const AppBarWidget(
-          title: 'Forgot Password',
-          actions: [ThemeSwitcherWidget()],
+        appBar: AppBarWidget( // <-- REMOVED CONST
+          title: context.lango.forgotPassword, // <-- REPLACED
+          actions: const [ThemeSwitcherWidget()],
         ),
         body: Center(
           child: SingleChildScrollView(
@@ -82,14 +83,14 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage>
                 const SizedBox(height: 24),
 
                 // Title
-                const Text(
-                  'Reset Your Password',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                Text( // <-- REMOVED CONST
+                  context.lango.resetYourPassword, // <-- REPLACED
+                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),
-                const Text(
-                  'Enter your email to receive password reset instructions.',
-                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                Text( // <-- REMOVED CONST
+                  context.lango.enterEmailForPasswordReset, // <-- REPLACED
+                  style: const TextStyle(fontSize: 16, color: Colors.grey),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 24),
@@ -103,7 +104,7 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage>
                       FormBuilderTextField(
                         name: 'email',
                         decoration: InputDecoration(
-                          labelText: 'Email',
+                          labelText: context.lango.email, // <-- REPLACED
                           prefixIcon: const Icon(Icons.email),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -112,10 +113,10 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage>
                         keyboardType: TextInputType.emailAddress,
                         validator: FormBuilderValidators.compose([
                           FormBuilderValidators.required(
-                            errorText: 'Email is required',
+                            errorText: context.lango.emailIsRequired, // <-- REPLACED
                           ),
                           FormBuilderValidators.email(
-                            errorText: 'Enter a valid email',
+                            errorText: context.lango.enterAValidEmail, // <-- REPLACED
                           ),
                         ]),
                       ),
@@ -135,9 +136,9 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage>
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                               ),
-                              child: const Text(
-                                'Reset Password',
-                                style: TextStyle(
+                              child: Text( // <-- REMOVED CONST
+                                context.lango.resetPassword, // <-- REPLACED
+                                style: const TextStyle(
                                   fontSize: 18,
                                   color: Colors.white,
                                 ),
@@ -149,7 +150,7 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage>
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text('Remembered your password?'),
+                          Text(context.lango.rememberedYourPassword), // <-- REPLACED
                           TextButton(
                             onPressed: () {
                               Navigator.of(context).pushReplacement(
@@ -159,7 +160,7 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage>
                               );
                             },
                             child: Text(
-                              'Login',
+                              context.lango.login, // <-- REPLACED
                               style: TextStyle(
                                 color: Theme.of(context).primaryColor,
                               ),

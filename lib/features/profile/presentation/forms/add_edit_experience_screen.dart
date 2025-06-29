@@ -1,7 +1,7 @@
-// lib/features/profile/presentation/forms/add_edit_experience_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:police_com/core/enums/all_enums.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/employee_profile/domain/employee_experience_model.dart';
 import 'package:police_com/features/widgets/app_date_field.dart';
 import 'package:police_com/features/widgets/app_dropdown_field.dart';
@@ -71,7 +71,7 @@ class AddEditExperienceScreen extends HookWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          initialExperience == null ? 'Add Experience' : 'Edit Experience',
+          initialExperience == null ? context.lango.addExperience : context.lango.editExperience, // <-- REPLACED
         ),
         actions: [
           IconButton(
@@ -89,12 +89,12 @@ class AddEditExperienceScreen extends HookWidget {
             children: [
               AppTextField(
                 controller: organizationController,
-                labelText: 'Organization *',
-                validator: (val) => val!.isEmpty ? 'Required' : null,
+                labelText: context.lango.organizationLabel, // <-- REPLACED
+                validator: (val) => val!.isEmpty ? context.lango.requiredField : null, // <-- REPLACED
               ),
               const SizedBox(height: 16),
               AppDropdownField<OrganizationType>(
-                labelText: 'Organization Type *',
+                labelText: context.lango.organizationTypeLabel, // <-- REPLACED
                 value: selectedOrgType.value,
                 items:
                     OrganizationType.values
@@ -110,18 +110,18 @@ class AddEditExperienceScreen extends HookWidget {
               const SizedBox(height: 16),
               AppTextField(
                 controller: positionController,
-                labelText: 'Position *',
-                validator: (val) => val!.isEmpty ? 'Required' : null,
+                labelText: context.lango.positionLabel, // <-- REPLACED
+                validator: (val) => val!.isEmpty ? context.lango.requiredField : null, // <-- REPLACED
               ),
               const SizedBox(height: 16),
               AppTextField(
                 controller: responsibilitiesController,
-                labelText: 'Responsibilities',
+                labelText: context.lango.responsibilitiesLabel, // <-- REPLACED
                 maxLines: 3,
               ),
               const SizedBox(height: 16),
               AppDropdownField<ProficiencyLevel>(
-                labelText: 'Proficiency Level *',
+                labelText: context.lango.proficiencyLevelLabel, // <-- REPLACED
                 value: selectedProficiency.value,
                 items:
                     ProficiencyLevel.values
@@ -137,26 +137,26 @@ class AddEditExperienceScreen extends HookWidget {
               ),
               const SizedBox(height: 16),
               AppDateField(
-                labelText: 'Join Date *',
+                labelText: context.lango.joinDateLabel, // <-- REPLACED
                 selectedDate: selectedJoinDate.value,
                 onDateSelected: (d) => selectedJoinDate.value = d,
-                validator: (d) => d == null ? 'Required' : null,
+                validator: (d) => d == null ? context.lango.requiredField : null, // <-- REPLACED
               ),
               CheckboxListTile(
-                title: const Text('I currently work here'),
+                title: Text(context.lango.iCurrentlyWorkHere), // <-- REPLACED
                 value: isCurrentJob.value,
                 onChanged: (val) => isCurrentJob.value = val ?? false,
               ),
               if (!isCurrentJob.value)
                 AppDateField(
-                  labelText: 'Separation Date',
+                  labelText: context.lango.separationDateLabel, // <-- REPLACED
                   selectedDate: selectedSeparationDate.value,
                   onDateSelected: (d) => selectedSeparationDate.value = d,
                 ),
               const SizedBox(height: 24),
               FilledButton(
                 onPressed: handleSaveChanges,
-                child: const Text('Save Changes'),
+                child: Text(context.lango.saveChanges), // <-- REPLACED
               ),
             ],
           ),

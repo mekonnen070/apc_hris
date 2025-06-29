@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 
 class SomethingWentWrongWidget extends ConsumerWidget {
   const SomethingWentWrongWidget({super.key, required this.onRetry});
@@ -13,9 +14,9 @@ class SomethingWentWrongWidget extends ConsumerWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text('Something went wrong'),
+          Text(context.lango.somethingWentWrong), // <-- REPLACED & REMOVED CONST
           const SizedBox(height: 16),
-          FilledButton(onPressed: onRetry, child: const Text('Retry')),
+          FilledButton(onPressed: onRetry, child: Text(context.lango.retry)), // <-- REPLACED & REMOVED CONST
         ],
       ),
     );

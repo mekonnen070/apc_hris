@@ -1,8 +1,8 @@
-// lib/features/promotion/presentation/request_promotion_screen.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:police_com/core/enums/promotion_status.dart';
+import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/features/promotion/application/data/promotion_repository.dart';
 import 'package:police_com/features/promotion/domain/promotion_request.dart';
 import 'package:police_com/features/widgets/app_bar_widget.dart';
@@ -40,8 +40,8 @@ class RequestPromotionScreen extends HookConsumerWidget {
               .submitPromotionRequest(request);
           if (context.mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Promotion request submitted successfully'),
+              SnackBar( // <-- REMOVED CONST
+                content: Text(context.lango.promotionRequestSubmitted), // <-- REPLACED
               ),
             );
             Navigator.of(context).pop(true);
@@ -49,7 +49,7 @@ class RequestPromotionScreen extends HookConsumerWidget {
         } catch (e) {
           if (context.mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Failed to submit request: $e')),
+              SnackBar(content: Text('${context.lango.failedToSubmitRequest} $e')), // <-- REPLACED
             );
           }
         } finally {
@@ -59,7 +59,7 @@ class RequestPromotionScreen extends HookConsumerWidget {
     }
 
     return Scaffold(
-      appBar: const AppBarWidget(title: 'Request Promotion'),
+      appBar: AppBarWidget(title: context.lango.requestPromotion), // <-- REPLACED & REMOVED CONST
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -69,31 +69,31 @@ class RequestPromotionScreen extends HookConsumerWidget {
             children: [
               AppTextField(
                 controller: currentPositionController,
-                labelText: 'Current Position',
+                labelText: context.lango.currentPosition, // <-- REPLACED
                 readOnly: true,
               ),
               const SizedBox(height: 16),
               // In a real app, this should be a searchable dropdown
               AppTextField(
                 controller: promotedPositionController,
-                labelText: 'Requested Position for Promotion',
+                labelText: context.lango.requestedPositionForPromotion, // <-- REPLACED
                 validator:
                     (value) =>
                         (value == null || value.isEmpty)
-                            ? 'This field is required'
+                            ? context.lango.thisFieldIsRequired // <-- REPLACED
                             : null,
               ),
               const SizedBox(height: 16),
               AppTextField(
                 controller: reasonController,
-                labelText: 'Reason for Request',
+                labelText: context.lango.reasonForRequest, // <-- REPLACED
                 hintText:
-                    'Briefly explain why you are requesting this promotion.',
+                    context.lango.brieflyExplainPromotionReason, // <-- REPLACED
                 maxLines: 6,
                 validator:
                     (value) =>
                         (value == null || value.isEmpty)
-                            ? 'Please provide a reason'
+                            ? context.lango.pleaseProvideReason // <-- REPLACED
                             : null,
               ),
               const SizedBox(height: 24),
@@ -102,7 +102,7 @@ class RequestPromotionScreen extends HookConsumerWidget {
                 child:
                     isLoading.value
                         ? const CircularProgressIndicator.adaptive()
-                        : const Text('Submit Request'),
+                        : Text(context.lango.submitRequest), // <-- REPLACED & REMOVED CONST
               ),
             ],
           ),
