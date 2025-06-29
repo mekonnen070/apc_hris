@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:police_com/core/enums/lango_enum.dart';
 import 'package:police_com/core/extensions/context_extension.dart';
 import 'package:police_com/core/l10n/language_controller.dart';
-import 'package:toastification/toastification.dart';
 
 class LanguageSwitcherWidget extends ConsumerWidget {
   const LanguageSwitcherWidget({super.key});
@@ -15,7 +14,7 @@ class LanguageSwitcherWidget extends ConsumerWidget {
 
     return IconButton(
       icon: const Icon(Icons.language, size: 32, color: Colors.white),
-      tooltip: context.lango.language, // <-- REPLACED (used 'language' key)
+      tooltip: context.lango.language,
       onPressed: () async {
         final selectedLanguage = await showAdaptiveDialog<Lango>(
           context: context,
@@ -47,7 +46,7 @@ class _LanguageDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog.adaptive(
-      title: Text(context.lango.language), // <-- REPLACED
+      title: Text(context.lango.language),
       content: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -60,23 +59,7 @@ class _LanguageDialog extends StatelessWidget {
                     dense: true,
                     groupValue: currentLanguage,
                     title: Text(lang.name),
-                    onChanged: (value) {
-                      /// If the selected lango is amharic, show a dialog
-                      if (value != null && value.code == Lango.am.code) {
-                        toastification.show(
-                          title: Text(context.lango.comingSoon), // <-- REPLACED
-                          description: Text(
-                            context.lango.amharicNotAvailable, // <-- REPLACED
-                          ),
-                          autoCloseDuration: const Duration(seconds: 2),
-                        );
-
-                        Navigator.of(context).pop();
-
-                        return;
-                      }
-                      Navigator.of(context).pop(value);
-                    },
+                    onChanged: (value) => Navigator.of(context).pop(value),
                   ),
                 );
               }).toList(),

@@ -1524,4 +1524,7 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get appealDecision => 'የይግባኝ ውሳኔ';
+
+  @override
+  String get ethiopian => 'ኢትዮጵያዊ';
 }

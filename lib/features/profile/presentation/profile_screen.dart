@@ -22,23 +22,18 @@ class ProfileScreen extends ConsumerStatefulWidget {
 class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    // In a real app, this employeeId would come from an auth provider.
     final state = ref.watch(profileNotifierProvider('EMP-001'));
     final colorScheme = Theme.of(context).colorScheme;
 
     return state.when(
       loading:
           () => Scaffold(
-            appBar: AppBar(
-              title: Text(context.lango.myProfile),
-            ), // <-- REPLACED & REMOVED CONST
+            appBar: AppBar(title: Text(context.lango.myProfile)),
             body: const Center(child: CircularProgressIndicator()),
           ),
       error:
           (e, st) => Scaffold(
-            appBar: AppBar(
-              title: Text(context.lango.myProfile),
-            ), // <-- REPLACED & REMOVED CONST
+            appBar: AppBar(title: Text(context.lango.myProfile)),
             body: SomethingWentWrongWidget(
               onRetry: () => ref.invalidate(profileNotifierProvider('EMP-001')),
             ),
@@ -59,7 +54,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                         background: Stack(
                           fit: StackFit.expand,
                           children: [
-                            // Background Image with Parallax Effect
                             Image.network(
                               employee.photoUrl ??
                                   'https://images.unsplash.com/photo-1599819188825-658b54b2d355?q=80&w=2670&auto=format&fit=crop',
@@ -69,7 +63,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                                     color: colorScheme.secondaryContainer,
                                   ),
                             ),
-                            // Soft Scrim for text readability
                             DecoratedBox(
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
@@ -84,12 +77,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                                 ),
                               ),
                             ),
-                            // Centered Content
                             Center(
                               child: Padding(
-                                padding: const EdgeInsets.only(
-                                  bottom: 50.0,
-                                ), // Space for TabBar
+                                padding: const EdgeInsets.only(bottom: 50.0),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
@@ -157,14 +147,14 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                         indicatorColor: colorScheme.primary,
                         indicatorWeight: 3,
                         tabs: [
-                          Tab(text: context.lango.personal), // <-- REPLACED
-                          Tab(text: context.lango.dependants), // <-- REPLACED
-                          Tab(text: context.lango.contacts), // <-- REPLACED
-                          Tab(text: context.lango.spouse), // <-- REPLACED
-                          Tab(text: context.lango.education), // <-- REPLACED
-                          Tab(text: context.lango.experience), // <-- REPLACED
-                          Tab(text: context.lango.performance), // <-- REPLACED
-                          Tab(text: context.lango.documents), // <-- REPLACED
+                          Tab(text: context.lango.personal),
+                          Tab(text: context.lango.dependants),
+                          Tab(text: context.lango.contacts),
+                          Tab(text: context.lango.spouse),
+                          Tab(text: context.lango.education),
+                          Tab(text: context.lango.experience),
+                          Tab(text: context.lango.performance),
+                          Tab(text: context.lango.documents),
                         ],
                       ),
                     ),

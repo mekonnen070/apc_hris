@@ -2980,6 +2980,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Appeal Decision'**
   String get appealDecision;
+
+  /// No description provided for @ethiopian.
+  ///
+  /// In en, this message translates to:
+  /// **'Ethiopian'**
+  String get ethiopian;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

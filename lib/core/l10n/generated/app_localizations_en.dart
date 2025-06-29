@@ -1524,4 +1524,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get appealDecision => 'Appeal Decision';
+
+  @override
+  String get ethiopian => 'Ethiopian';
 }
