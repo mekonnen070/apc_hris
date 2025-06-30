@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:police_com/core/enums/all_enums.dart';
-import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
+import 'package:police_com/core/extensions/context_extension.dart';
 import 'package:police_com/core/extensions/string_extension.dart';
 import 'package:police_com/features/employee/new_recruite/application/new_recruit_notifier.dart';
 import 'package:police_com/features/employee/new_recruite/domain/recruit_info.dart';
@@ -12,6 +12,7 @@ import 'package:police_com/features/widgets/app_date_field.dart';
 import 'package:police_com/features/widgets/app_dropdown_field.dart';
 import 'package:police_com/features/widgets/app_text_field.dart';
 import 'package:toastification/toastification.dart';
+import 'package:uuid/uuid.dart';
 
 class NewRecruitScreen extends HookConsumerWidget {
   const NewRecruitScreen({super.key});
@@ -22,320 +23,179 @@ class NewRecruitScreen extends HookConsumerWidget {
     final notifier = ref.watch(newRecruitNotifierProvider.notifier);
     final state = ref.watch(newRecruitNotifierProvider);
 
-    final formFieldKeys = useMemoized(
-      () => List.generate(15, (_) => GlobalKey<FormFieldState>()),
-    );
-
-    final announcementId = useState<int?>(null);
     final firstNameController = useTextEditingController();
-    final middleNameController = useTextEditingController();
-    final lastNameController = useTextEditingController();
-    final dateOfBirth = useState<DateTime?>(null);
-    final ageController = useTextEditingController();
-    final gender = useState<Gender?>(null);
-    final maritalStatus = useState<MaritalStatus?>(null);
-    final numberOfChildrenController = useTextEditingController();
-    final nationalityController = useTextEditingController(
-      text: context.lango.ethiopian,
-    );
-    final religion = useState<Religion?>(null);
-    final bloodGroup = useState<BloodGroup?>(null);
-    final woredaController = useTextEditingController();
-    final kebeleController = useTextEditingController();
-    final houseNumberController = useTextEditingController();
-    final phoneNumberController = useTextEditingController();
+    final fatherNameController = useTextEditingController();
+    final grandNameController = useTextEditingController();
+    final mobileController = useTextEditingController();
+    final emailController = useTextEditingController();
 
-    useEffect(() {
-      Future.microtask(() => notifier.initialize());
-      return null;
-    }, []);
+    final announcementId = useState<String?>(null);
+    final gender = useState<Gender>(Gender.male);
+    final birthDate = useState<DateTime?>(null);
 
-    void handleSubmit() async {
-      final navigator = Navigator.of(context);
-
-      if (formKey.currentState!.validate()) {
-        formKey.currentState!.save();
-        final recruitInfo = RecruitInfo(
-          announcementId: announcementId.value!,
-          firstName: firstNameController.text,
-          middleName: middleNameController.text,
-          lastName: lastNameController.text,
-          dateOfBirth: dateOfBirth.value!,
-          age: int.parse(ageController.text),
-          gender: gender.value!,
-          maritalStatus: maritalStatus.value!,
-          numberOfChildren: int.parse(numberOfChildrenController.text),
-          nationality: nationalityController.text,
-          religion: religion.value!,
-          bloodGroup: bloodGroup.value!,
-          photoPath: 'path/to/photo.jpg',
-          woreda: woredaController.text,
-          kebele: kebeleController.text,
-          houseNumber: houseNumberController.text,
-          phoneNumber: phoneNumberController.text,
+    // **THE FIX IS HERE:**
+    // This listener now only calls `clearMessages` AFTER a message has been handled,
+    // which prevents the infinite loop.
+    ref.listen(newRecruitNotifierProvider, (_, next) {
+      if (next.successMessage != null) {
+        toastification.show(
+          context: context,
+          title: Text(next.successMessage!),
+          type: ToastificationType.success,
+          autoCloseDuration: const Duration(seconds: 4),
         );
-        notifier.updateRecruitInfo(recruitInfo);
-        await notifier.submitNewRecruit();
-
-        final currentState = ref.read(newRecruitNotifierProvider);
-        if (currentState.successMessage != null) {
-          toastification.show(
-            context: context,
-            title: Text(currentState.successMessage!),
-            type: ToastificationType.success,
-            autoCloseDuration: const Duration(seconds: 4),
-          );
-          navigator.pop(true);
-        } else if (currentState.errorMessage != null) {
-          toastification.show(
-            context: context,
-            title: Text(currentState.errorMessage!),
-            type: ToastificationType.error,
-            autoCloseDuration: const Duration(seconds: 5),
-          );
-        }
-        ref.read(newRecruitNotifierProvider.notifier).clearMessages();
-      } else {
-        for (final key in formFieldKeys) {
-          if (key.currentState != null && key.currentState!.hasError) {
-            Scrollable.ensureVisible(
-              key.currentContext!,
-              duration: const Duration(milliseconds: 400),
-              curve: Curves.easeIn,
-            );
-            break;
-          }
-        }
+        Navigator.of(context).pop(true);
+        // Clear the message *after* it's been shown.
+        notifier.clearMessages();
+      } else if (next.errorMessage != null) {
+        toastification.show(
+          context: context,
+          title: Text(next.errorMessage!),
+          type: ToastificationType.error,
+          autoCloseDuration: const Duration(seconds: 5),
+        );
+        // Clear the message *after* it's been shown.
+        notifier.clearMessages();
       }
+    });
+
+    Future<void> handleSubmit() async {
+      if (formKey.currentState?.validate() ?? false) {
+        const uuid = Uuid();
+        final request = RecruitInfo(
+          recruitId: 'asdf',
+          announcementId: announcementId.value,
+          firstName: firstNameController.text,
+          fatherName: fatherNameController.text,
+          grandName:
+              grandNameController.text.isNotEmpty
+                  ? grandNameController.text
+                  : null,
+          gender: gender.value,
+          birthDate: birthDate.value!,
+          mobile: mobileController.text,
+          email: emailController.text.isNotEmpty ? emailController.text : null,
+        );
+        notifier.updateCreateRequest(request);
+        await notifier.submitNewRecruit(request);
+      }
+    }
+
+    if (state.isSubmitting) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator.adaptive()),
+      );
     }
 
     return Scaffold(
       appBar: AppBarWidget(title: context.lango.newRecruitApplication),
-      body:
-          state.isLoading
-              ? const Center(child: CircularProgressIndicator())
-              : state.errorMessage != null && state.announcements.isEmpty
-              ? Center(child: Text(state.errorMessage!))
-              : Form(
-                key: formKey,
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      AppDropdownField<int>(
-                        fieldKey: formFieldKeys[0],
-                        labelText: context.lango.recruitmentAnnouncement,
-                        isRequired: true,
-                        value: announcementId.value,
-                        items:
-                            state.announcements
-                                .map(
-                                  (ann) => DropdownMenuItem(
-                                    value: ann.id,
-                                    child: Text(ann.title),
-                                  ),
-                                )
-                                .toList(),
-                        onChanged: (value) => announcementId.value = value,
-                        validator: FormBuilderValidators.required(),
-                      ),
-                      const SizedBox(height: 16),
-                      AppTextField(
-                        fieldKey: formFieldKeys[1],
-                        controller: firstNameController,
-                        labelText: context.lango.firstName,
-                        isRequired: true,
-                        validator: FormBuilderValidators.required(),
-                      ),
-                      const SizedBox(height: 16),
-                      AppTextField(
-                        fieldKey: formFieldKeys[2],
-                        controller: middleNameController,
-                        labelText: context.lango.middleName,
-                        isRequired: true,
-                        validator: FormBuilderValidators.required(),
-                      ),
-                      const SizedBox(height: 16),
-                      AppTextField(
-                        fieldKey: formFieldKeys[3],
-                        controller: lastNameController,
-                        labelText: context.lango.lastName,
-                        isRequired: true,
-                        validator: FormBuilderValidators.required(),
-                      ),
-                      const SizedBox(height: 16),
-                      AppDateField(
-                        fieldKey: formFieldKeys[4],
-                        labelText: context.lango.dateOfBirth,
-                        isRequired: true,
-                        selectedDate: dateOfBirth.value,
-                        onDateSelected:
-                            (newDate) => dateOfBirth.value = newDate,
-                        validator: FormBuilderValidators.required(),
-                      ),
-                      const SizedBox(height: 16),
-                      AppTextField(
-                        fieldKey: formFieldKeys[5],
-                        controller: ageController,
-                        labelText: context.lango.age,
-                        isRequired: true,
-                        keyboardType: TextInputType.number,
-                        validator: FormBuilderValidators.compose([
-                          FormBuilderValidators.required(),
-                          FormBuilderValidators.numeric(),
-                        ]),
-                      ),
-                      const SizedBox(height: 16),
-                      AppDropdownField<Gender>(
-                        fieldKey: formFieldKeys[6],
-                        labelText: context.lango.gender,
-                        isRequired: true,
-                        value: gender.value,
-                        items:
-                            Gender.values
-                                .map(
-                                  (g) => DropdownMenuItem(
-                                    value: g,
-                                    child: Text(g.name.toDisplayCase()),
-                                  ),
-                                )
-                                .toList(),
-                        onChanged: (value) => gender.value = value,
-                        validator: FormBuilderValidators.required(),
-                      ),
-                      const SizedBox(height: 16),
-                      AppDropdownField<MaritalStatus>(
-                        fieldKey: formFieldKeys[7],
-                        labelText: context.lango.maritalStatus,
-                        isRequired: true,
-                        value: maritalStatus.value,
-                        items:
-                            MaritalStatus.values
-                                .map(
-                                  (ms) => DropdownMenuItem(
-                                    value: ms,
-                                    child: Text(ms.name.toDisplayCase()),
-                                  ),
-                                )
-                                .toList(),
-                        onChanged: (value) => maritalStatus.value = value,
-                        validator: FormBuilderValidators.required(),
-                      ),
-                      const SizedBox(height: 16),
-                      AppTextField(
-                        fieldKey: formFieldKeys[8],
-                        controller: numberOfChildrenController,
-                        labelText: context.lango.numberOfChildren,
-                        isRequired: true,
-                        keyboardType: TextInputType.number,
-                        validator: FormBuilderValidators.compose([
-                          FormBuilderValidators.required(),
-                          FormBuilderValidators.numeric(),
-                        ]),
-                      ),
-                      const SizedBox(height: 16),
-                      AppTextField(
-                        fieldKey: formFieldKeys[9],
-                        controller: nationalityController,
-                        labelText: context.lango.nationality,
-                        isRequired: true,
-                        validator: FormBuilderValidators.required(),
-                      ),
-                      const SizedBox(height: 16),
-                      AppDropdownField<Religion>(
-                        fieldKey: formFieldKeys[10],
-                        labelText: context.lango.religion,
-                        isRequired: true,
-                        value: religion.value,
-                        items:
-                            Religion.values
-                                .map(
-                                  (r) => DropdownMenuItem(
-                                    value: r,
-                                    child: Text(r.name.toDisplayCase()),
-                                  ),
-                                )
-                                .toList(),
-                        onChanged: (value) => religion.value = value,
-                        validator: FormBuilderValidators.required(),
-                      ),
-                      const SizedBox(height: 16),
-                      AppDropdownField<BloodGroup>(
-                        fieldKey: formFieldKeys[11],
-                        labelText: context.lango.bloodGroup,
-                        isRequired: true,
-                        value: bloodGroup.value,
-                        items:
-                            BloodGroup.values
-                                .map(
-                                  (bg) => DropdownMenuItem(
-                                    value: bg,
-                                    child: Text(
-                                      bg.name.toDisplayCase().replaceAll(
-                                        ' ',
-                                        '',
-                                      ),
-                                    ),
-                                  ),
-                                )
-                                .toList(),
-                        onChanged: (value) => bloodGroup.value = value,
-                        validator: FormBuilderValidators.required(),
-                      ),
-                      const SizedBox(height: 16),
-                      AppTextField(
-                        fieldKey: formFieldKeys[12],
-                        controller: woredaController,
-                        labelText: context.lango.woreda,
-                        isRequired: true,
-                        validator: FormBuilderValidators.required(),
-                      ),
-                      const SizedBox(height: 16),
-                      AppTextField(
-                        fieldKey: formFieldKeys[13],
-                        controller: kebeleController,
-                        labelText: context.lango.kebele,
-                        isRequired: true,
-                        validator: FormBuilderValidators.required(),
-                      ),
-                      const SizedBox(height: 16),
-                      AppTextField(
-                        fieldKey: formFieldKeys[14],
-                        controller: houseNumberController,
-                        labelText: context.lango.houseNumber,
-                        isRequired: true,
-                        validator: FormBuilderValidators.required(),
-                      ),
-                      const SizedBox(height: 16),
-                      AppTextField(
-                        controller: phoneNumberController,
-                        labelText: context.lango.phoneNumber,
-                        isRequired: true,
-                        keyboardType: TextInputType.phone,
-                        validator: FormBuilderValidators.compose([
-                          FormBuilderValidators.required(),
-                          FormBuilderValidators.numeric(),
-                          FormBuilderValidators.minLength(9),
-                          FormBuilderValidators.maxLength(10),
-                        ]),
-                      ),
-                      const SizedBox(height: 32),
-                      FilledButton(
-                        onPressed: state.isSubmitting ? null : handleSubmit,
-                        child:
-                            state.isSubmitting
-                                ? const CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    Colors.white,
-                                  ),
-                                )
-                                : Text(context.lango.submit),
-                      ),
-                    ],
-                  ),
-                ),
+      body: Form(
+        key: formKey,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              AppDropdownField<String>(
+                labelText: context.lango.recruitmentAnnouncement,
+                isRequired: true,
+                value: announcementId.value,
+                items:
+                    state.announcements
+                        .map(
+                          (ann) => DropdownMenuItem(
+                            value: ann.announcementId,
+                            child: Text(ann.announcementTitle ?? 'No Title'),
+                          ),
+                        )
+                        .toList(),
+                onChanged: (value) => announcementId.value = value,
+                validator: FormBuilderValidators.required(),
               ),
+              const SizedBox(height: 16),
+              AppTextField(
+                controller: firstNameController,
+                labelText: context.lango.firstName,
+                isRequired: true,
+                validator: FormBuilderValidators.required(),
+              ),
+              const SizedBox(height: 16),
+              AppTextField(
+                controller: fatherNameController,
+                labelText: context.lango.middleName,
+                isRequired: true,
+                validator: FormBuilderValidators.required(),
+              ),
+              const SizedBox(height: 16),
+              AppTextField(
+                controller: grandNameController,
+                labelText: context.lango.lastName,
+              ),
+              const SizedBox(height: 16),
+              AppDateField(
+                labelText: context.lango.dateOfBirth,
+                isRequired: true,
+                selectedDate: birthDate.value,
+                onDateSelected: (newDate) => birthDate.value = newDate,
+                validator: (val) {
+                  if (val == null) return 'This field cannot be empty.';
+                  return null;
+                },
+              ),
+              const SizedBox(height: 16),
+              AppDropdownField<Gender>(
+                labelText: context.lango.gender,
+                isRequired: true,
+                value: gender.value,
+                items:
+                    Gender.values
+                        .map(
+                          (g) => DropdownMenuItem(
+                            value: g,
+                            child: Text(g.name.toDisplayCase()),
+                          ),
+                        )
+                        .toList(),
+                onChanged: (value) {
+                  if (value != null) gender.value = value;
+                },
+                validator: FormBuilderValidators.required(),
+              ),
+              const SizedBox(height: 16),
+              AppTextField(
+                controller: mobileController,
+                labelText: context.lango.phoneNumber,
+                isRequired: true,
+                keyboardType: TextInputType.phone,
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.required(),
+                  FormBuilderValidators.numeric(),
+                ]),
+              ),
+              const SizedBox(height: 16),
+              AppTextField(
+                controller: emailController,
+                labelText: context.lango.email,
+                keyboardType: TextInputType.emailAddress,
+                validator: FormBuilderValidators.email(),
+              ),
+              const SizedBox(height: 32),
+              FilledButton(
+                onPressed: state.isSubmitting ? null : handleSubmit,
+                child:
+                    state.isSubmitting
+                        ? const CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            Colors.white,
+                          ),
+                        )
+                        : Text(context.lango.submit),
+              ),
+              const SizedBox(height: 16),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

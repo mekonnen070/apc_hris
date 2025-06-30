@@ -1,12 +1,15 @@
-/// Represents the status of an announcement in the system.
-///
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'announcement_status.g.dart';
+
+@JsonEnum(alwaysCreate: true)
 enum AnnouncementStatus {
-  /// The announcement has been created but not yet posted.
+  @JsonValue(0)
   created,
 
-  /// The announcement has been posted and is visible to users.
+  @JsonValue(1)
   posted,
 
-  /// The announcement has expired and is no longer active.
+  @JsonValue(2)
   expired,
 }

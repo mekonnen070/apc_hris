@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$NewRecruitState {
 
- bool get isLoading; bool get isSubmitting; String? get successMessage; String? get errorMessage; RecruitInfo? get recruitInfo; List<RecruitmentAnnouncement> get announcements;
+ bool get isLoading; bool get isSubmitting; String? get successMessage; String? get errorMessage; RecruitInfo? get createRequest; List<RecruitmentAnnouncement> get announcements;
 /// Create a copy of NewRecruitState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,16 @@ $NewRecruitStateCopyWith<NewRecruitState> get copyWith => _$NewRecruitStateCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NewRecruitState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isSubmitting, isSubmitting) || other.isSubmitting == isSubmitting)&&(identical(other.successMessage, successMessage) || other.successMessage == successMessage)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.recruitInfo, recruitInfo) || other.recruitInfo == recruitInfo)&&const DeepCollectionEquality().equals(other.announcements, announcements));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NewRecruitState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isSubmitting, isSubmitting) || other.isSubmitting == isSubmitting)&&(identical(other.successMessage, successMessage) || other.successMessage == successMessage)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.createRequest, createRequest) || other.createRequest == createRequest)&&const DeepCollectionEquality().equals(other.announcements, announcements));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,isSubmitting,successMessage,errorMessage,recruitInfo,const DeepCollectionEquality().hash(announcements));
+int get hashCode => Object.hash(runtimeType,isLoading,isSubmitting,successMessage,errorMessage,createRequest,const DeepCollectionEquality().hash(announcements));
 
 @override
 String toString() {
-  return 'NewRecruitState(isLoading: $isLoading, isSubmitting: $isSubmitting, successMessage: $successMessage, errorMessage: $errorMessage, recruitInfo: $recruitInfo, announcements: $announcements)';
+  return 'NewRecruitState(isLoading: $isLoading, isSubmitting: $isSubmitting, successMessage: $successMessage, errorMessage: $errorMessage, createRequest: $createRequest, announcements: $announcements)';
 }
 
 
@@ -46,11 +46,11 @@ abstract mixin class $NewRecruitStateCopyWith<$Res>  {
   factory $NewRecruitStateCopyWith(NewRecruitState value, $Res Function(NewRecruitState) _then) = _$NewRecruitStateCopyWithImpl;
 @useResult
 $Res call({
- bool isLoading, bool isSubmitting, String? successMessage, String? errorMessage, RecruitInfo? recruitInfo, List<RecruitmentAnnouncement> announcements
+ bool isLoading, bool isSubmitting, String? successMessage, String? errorMessage, RecruitInfo? createRequest, List<RecruitmentAnnouncement> announcements
 });
 
 
-$RecruitInfoCopyWith<$Res>? get recruitInfo;
+$RecruitInfoCopyWith<$Res>? get createRequest;
 
 }
 /// @nodoc
@@ -63,13 +63,13 @@ class _$NewRecruitStateCopyWithImpl<$Res>
 
 /// Create a copy of NewRecruitState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? isSubmitting = null,Object? successMessage = freezed,Object? errorMessage = freezed,Object? recruitInfo = freezed,Object? announcements = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? isSubmitting = null,Object? successMessage = freezed,Object? errorMessage = freezed,Object? createRequest = freezed,Object? announcements = null,}) {
   return _then(_self.copyWith(
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,isSubmitting: null == isSubmitting ? _self.isSubmitting : isSubmitting // ignore: cast_nullable_to_non_nullable
 as bool,successMessage: freezed == successMessage ? _self.successMessage : successMessage // ignore: cast_nullable_to_non_nullable
 as String?,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
-as String?,recruitInfo: freezed == recruitInfo ? _self.recruitInfo : recruitInfo // ignore: cast_nullable_to_non_nullable
+as String?,createRequest: freezed == createRequest ? _self.createRequest : createRequest // ignore: cast_nullable_to_non_nullable
 as RecruitInfo?,announcements: null == announcements ? _self.announcements : announcements // ignore: cast_nullable_to_non_nullable
 as List<RecruitmentAnnouncement>,
   ));
@@ -78,13 +78,13 @@ as List<RecruitmentAnnouncement>,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$RecruitInfoCopyWith<$Res>? get recruitInfo {
-    if (_self.recruitInfo == null) {
+$RecruitInfoCopyWith<$Res>? get createRequest {
+    if (_self.createRequest == null) {
     return null;
   }
 
-  return $RecruitInfoCopyWith<$Res>(_self.recruitInfo!, (value) {
-    return _then(_self.copyWith(recruitInfo: value));
+  return $RecruitInfoCopyWith<$Res>(_self.createRequest!, (value) {
+    return _then(_self.copyWith(createRequest: value));
   });
 }
 }
@@ -94,14 +94,14 @@ $RecruitInfoCopyWith<$Res>? get recruitInfo {
 
 
 class _NewRecruitState implements NewRecruitState {
-  const _NewRecruitState({this.isLoading = false, this.isSubmitting = false, this.successMessage, this.errorMessage, this.recruitInfo, final  List<RecruitmentAnnouncement> announcements = const []}): _announcements = announcements;
+  const _NewRecruitState({this.isLoading = false, this.isSubmitting = false, this.successMessage, this.errorMessage, this.createRequest, final  List<RecruitmentAnnouncement> announcements = const []}): _announcements = announcements;
   
 
 @override@JsonKey() final  bool isLoading;
 @override@JsonKey() final  bool isSubmitting;
 @override final  String? successMessage;
 @override final  String? errorMessage;
-@override final  RecruitInfo? recruitInfo;
+@override final  RecruitInfo? createRequest;
  final  List<RecruitmentAnnouncement> _announcements;
 @override@JsonKey() List<RecruitmentAnnouncement> get announcements {
   if (_announcements is EqualUnmodifiableListView) return _announcements;
@@ -120,16 +120,16 @@ _$NewRecruitStateCopyWith<_NewRecruitState> get copyWith => __$NewRecruitStateCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NewRecruitState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isSubmitting, isSubmitting) || other.isSubmitting == isSubmitting)&&(identical(other.successMessage, successMessage) || other.successMessage == successMessage)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.recruitInfo, recruitInfo) || other.recruitInfo == recruitInfo)&&const DeepCollectionEquality().equals(other._announcements, _announcements));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _NewRecruitState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isSubmitting, isSubmitting) || other.isSubmitting == isSubmitting)&&(identical(other.successMessage, successMessage) || other.successMessage == successMessage)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.createRequest, createRequest) || other.createRequest == createRequest)&&const DeepCollectionEquality().equals(other._announcements, _announcements));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,isSubmitting,successMessage,errorMessage,recruitInfo,const DeepCollectionEquality().hash(_announcements));
+int get hashCode => Object.hash(runtimeType,isLoading,isSubmitting,successMessage,errorMessage,createRequest,const DeepCollectionEquality().hash(_announcements));
 
 @override
 String toString() {
-  return 'NewRecruitState(isLoading: $isLoading, isSubmitting: $isSubmitting, successMessage: $successMessage, errorMessage: $errorMessage, recruitInfo: $recruitInfo, announcements: $announcements)';
+  return 'NewRecruitState(isLoading: $isLoading, isSubmitting: $isSubmitting, successMessage: $successMessage, errorMessage: $errorMessage, createRequest: $createRequest, announcements: $announcements)';
 }
 
 
@@ -140,11 +140,11 @@ abstract mixin class _$NewRecruitStateCopyWith<$Res> implements $NewRecruitState
   factory _$NewRecruitStateCopyWith(_NewRecruitState value, $Res Function(_NewRecruitState) _then) = __$NewRecruitStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool isLoading, bool isSubmitting, String? successMessage, String? errorMessage, RecruitInfo? recruitInfo, List<RecruitmentAnnouncement> announcements
+ bool isLoading, bool isSubmitting, String? successMessage, String? errorMessage, RecruitInfo? createRequest, List<RecruitmentAnnouncement> announcements
 });
 
 
-@override $RecruitInfoCopyWith<$Res>? get recruitInfo;
+@override $RecruitInfoCopyWith<$Res>? get createRequest;
 
 }
 /// @nodoc
@@ -157,13 +157,13 @@ class __$NewRecruitStateCopyWithImpl<$Res>
 
 /// Create a copy of NewRecruitState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? isSubmitting = null,Object? successMessage = freezed,Object? errorMessage = freezed,Object? recruitInfo = freezed,Object? announcements = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? isSubmitting = null,Object? successMessage = freezed,Object? errorMessage = freezed,Object? createRequest = freezed,Object? announcements = null,}) {
   return _then(_NewRecruitState(
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,isSubmitting: null == isSubmitting ? _self.isSubmitting : isSubmitting // ignore: cast_nullable_to_non_nullable
 as bool,successMessage: freezed == successMessage ? _self.successMessage : successMessage // ignore: cast_nullable_to_non_nullable
 as String?,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
-as String?,recruitInfo: freezed == recruitInfo ? _self.recruitInfo : recruitInfo // ignore: cast_nullable_to_non_nullable
+as String?,createRequest: freezed == createRequest ? _self.createRequest : createRequest // ignore: cast_nullable_to_non_nullable
 as RecruitInfo?,announcements: null == announcements ? _self._announcements : announcements // ignore: cast_nullable_to_non_nullable
 as List<RecruitmentAnnouncement>,
   ));
@@ -173,13 +173,13 @@ as List<RecruitmentAnnouncement>,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$RecruitInfoCopyWith<$Res>? get recruitInfo {
-    if (_self.recruitInfo == null) {
+$RecruitInfoCopyWith<$Res>? get createRequest {
+    if (_self.createRequest == null) {
     return null;
   }
 
-  return $RecruitInfoCopyWith<$Res>(_self.recruitInfo!, (value) {
-    return _then(_self.copyWith(recruitInfo: value));
+  return $RecruitInfoCopyWith<$Res>(_self.createRequest!, (value) {
+    return _then(_self.copyWith(createRequest: value));
   });
 }
 }

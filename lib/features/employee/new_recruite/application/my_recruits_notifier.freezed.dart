@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$MyRecruitsState {
 
- List<RecruitInfo> get recruits; Set<int> get selectedRecruitIds; bool get isLoading; bool get isFetchingMore; bool get isUpdatingStatus; bool get canFetchMore; int get page; RecruitStatus get filterStatus; String? get errorMessage;
+ List<RecruitInfo> get recruits; Set<String> get selectedRecruitIds; bool get isLoading; bool get isUpdatingStatus; NewRecruitStatus get filterStatus; String? get errorMessage;
 /// Create a copy of MyRecruitsState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,16 @@ $MyRecruitsStateCopyWith<MyRecruitsState> get copyWith => _$MyRecruitsStateCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MyRecruitsState&&const DeepCollectionEquality().equals(other.recruits, recruits)&&const DeepCollectionEquality().equals(other.selectedRecruitIds, selectedRecruitIds)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isFetchingMore, isFetchingMore) || other.isFetchingMore == isFetchingMore)&&(identical(other.isUpdatingStatus, isUpdatingStatus) || other.isUpdatingStatus == isUpdatingStatus)&&(identical(other.canFetchMore, canFetchMore) || other.canFetchMore == canFetchMore)&&(identical(other.page, page) || other.page == page)&&(identical(other.filterStatus, filterStatus) || other.filterStatus == filterStatus)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MyRecruitsState&&const DeepCollectionEquality().equals(other.recruits, recruits)&&const DeepCollectionEquality().equals(other.selectedRecruitIds, selectedRecruitIds)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isUpdatingStatus, isUpdatingStatus) || other.isUpdatingStatus == isUpdatingStatus)&&(identical(other.filterStatus, filterStatus) || other.filterStatus == filterStatus)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(recruits),const DeepCollectionEquality().hash(selectedRecruitIds),isLoading,isFetchingMore,isUpdatingStatus,canFetchMore,page,filterStatus,errorMessage);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(recruits),const DeepCollectionEquality().hash(selectedRecruitIds),isLoading,isUpdatingStatus,filterStatus,errorMessage);
 
 @override
 String toString() {
-  return 'MyRecruitsState(recruits: $recruits, selectedRecruitIds: $selectedRecruitIds, isLoading: $isLoading, isFetchingMore: $isFetchingMore, isUpdatingStatus: $isUpdatingStatus, canFetchMore: $canFetchMore, page: $page, filterStatus: $filterStatus, errorMessage: $errorMessage)';
+  return 'MyRecruitsState(recruits: $recruits, selectedRecruitIds: $selectedRecruitIds, isLoading: $isLoading, isUpdatingStatus: $isUpdatingStatus, filterStatus: $filterStatus, errorMessage: $errorMessage)';
 }
 
 
@@ -46,7 +46,7 @@ abstract mixin class $MyRecruitsStateCopyWith<$Res>  {
   factory $MyRecruitsStateCopyWith(MyRecruitsState value, $Res Function(MyRecruitsState) _then) = _$MyRecruitsStateCopyWithImpl;
 @useResult
 $Res call({
- List<RecruitInfo> recruits, Set<int> selectedRecruitIds, bool isLoading, bool isFetchingMore, bool isUpdatingStatus, bool canFetchMore, int page, RecruitStatus filterStatus, String? errorMessage
+ List<RecruitInfo> recruits, Set<String> selectedRecruitIds, bool isLoading, bool isUpdatingStatus, NewRecruitStatus filterStatus, String? errorMessage
 });
 
 
@@ -63,17 +63,14 @@ class _$MyRecruitsStateCopyWithImpl<$Res>
 
 /// Create a copy of MyRecruitsState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? recruits = null,Object? selectedRecruitIds = null,Object? isLoading = null,Object? isFetchingMore = null,Object? isUpdatingStatus = null,Object? canFetchMore = null,Object? page = null,Object? filterStatus = null,Object? errorMessage = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? recruits = null,Object? selectedRecruitIds = null,Object? isLoading = null,Object? isUpdatingStatus = null,Object? filterStatus = null,Object? errorMessage = freezed,}) {
   return _then(_self.copyWith(
 recruits: null == recruits ? _self.recruits : recruits // ignore: cast_nullable_to_non_nullable
 as List<RecruitInfo>,selectedRecruitIds: null == selectedRecruitIds ? _self.selectedRecruitIds : selectedRecruitIds // ignore: cast_nullable_to_non_nullable
-as Set<int>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
-as bool,isFetchingMore: null == isFetchingMore ? _self.isFetchingMore : isFetchingMore // ignore: cast_nullable_to_non_nullable
+as Set<String>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,isUpdatingStatus: null == isUpdatingStatus ? _self.isUpdatingStatus : isUpdatingStatus // ignore: cast_nullable_to_non_nullable
-as bool,canFetchMore: null == canFetchMore ? _self.canFetchMore : canFetchMore // ignore: cast_nullable_to_non_nullable
-as bool,page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
-as int,filterStatus: null == filterStatus ? _self.filterStatus : filterStatus // ignore: cast_nullable_to_non_nullable
-as RecruitStatus,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as bool,filterStatus: null == filterStatus ? _self.filterStatus : filterStatus // ignore: cast_nullable_to_non_nullable
+as NewRecruitStatus,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -85,7 +82,7 @@ as String?,
 
 
 class _MyRecruitsState implements MyRecruitsState {
-  const _MyRecruitsState({final  List<RecruitInfo> recruits = const [], final  Set<int> selectedRecruitIds = const {}, this.isLoading = true, this.isFetchingMore = false, this.isUpdatingStatus = false, this.canFetchMore = true, this.page = 1, this.filterStatus = RecruitStatus.noStatus, this.errorMessage}): _recruits = recruits,_selectedRecruitIds = selectedRecruitIds;
+  const _MyRecruitsState({final  List<RecruitInfo> recruits = const [], final  Set<String> selectedRecruitIds = const {}, this.isLoading = true, this.isUpdatingStatus = false, this.filterStatus = NewRecruitStatus.pending, this.errorMessage}): _recruits = recruits,_selectedRecruitIds = selectedRecruitIds;
   
 
  final  List<RecruitInfo> _recruits;
@@ -95,19 +92,16 @@ class _MyRecruitsState implements MyRecruitsState {
   return EqualUnmodifiableListView(_recruits);
 }
 
- final  Set<int> _selectedRecruitIds;
-@override@JsonKey() Set<int> get selectedRecruitIds {
+ final  Set<String> _selectedRecruitIds;
+@override@JsonKey() Set<String> get selectedRecruitIds {
   if (_selectedRecruitIds is EqualUnmodifiableSetView) return _selectedRecruitIds;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableSetView(_selectedRecruitIds);
 }
 
 @override@JsonKey() final  bool isLoading;
-@override@JsonKey() final  bool isFetchingMore;
 @override@JsonKey() final  bool isUpdatingStatus;
-@override@JsonKey() final  bool canFetchMore;
-@override@JsonKey() final  int page;
-@override@JsonKey() final  RecruitStatus filterStatus;
+@override@JsonKey() final  NewRecruitStatus filterStatus;
 @override final  String? errorMessage;
 
 /// Create a copy of MyRecruitsState
@@ -120,16 +114,16 @@ _$MyRecruitsStateCopyWith<_MyRecruitsState> get copyWith => __$MyRecruitsStateCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MyRecruitsState&&const DeepCollectionEquality().equals(other._recruits, _recruits)&&const DeepCollectionEquality().equals(other._selectedRecruitIds, _selectedRecruitIds)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isFetchingMore, isFetchingMore) || other.isFetchingMore == isFetchingMore)&&(identical(other.isUpdatingStatus, isUpdatingStatus) || other.isUpdatingStatus == isUpdatingStatus)&&(identical(other.canFetchMore, canFetchMore) || other.canFetchMore == canFetchMore)&&(identical(other.page, page) || other.page == page)&&(identical(other.filterStatus, filterStatus) || other.filterStatus == filterStatus)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MyRecruitsState&&const DeepCollectionEquality().equals(other._recruits, _recruits)&&const DeepCollectionEquality().equals(other._selectedRecruitIds, _selectedRecruitIds)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isUpdatingStatus, isUpdatingStatus) || other.isUpdatingStatus == isUpdatingStatus)&&(identical(other.filterStatus, filterStatus) || other.filterStatus == filterStatus)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_recruits),const DeepCollectionEquality().hash(_selectedRecruitIds),isLoading,isFetchingMore,isUpdatingStatus,canFetchMore,page,filterStatus,errorMessage);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_recruits),const DeepCollectionEquality().hash(_selectedRecruitIds),isLoading,isUpdatingStatus,filterStatus,errorMessage);
 
 @override
 String toString() {
-  return 'MyRecruitsState(recruits: $recruits, selectedRecruitIds: $selectedRecruitIds, isLoading: $isLoading, isFetchingMore: $isFetchingMore, isUpdatingStatus: $isUpdatingStatus, canFetchMore: $canFetchMore, page: $page, filterStatus: $filterStatus, errorMessage: $errorMessage)';
+  return 'MyRecruitsState(recruits: $recruits, selectedRecruitIds: $selectedRecruitIds, isLoading: $isLoading, isUpdatingStatus: $isUpdatingStatus, filterStatus: $filterStatus, errorMessage: $errorMessage)';
 }
 
 
@@ -140,7 +134,7 @@ abstract mixin class _$MyRecruitsStateCopyWith<$Res> implements $MyRecruitsState
   factory _$MyRecruitsStateCopyWith(_MyRecruitsState value, $Res Function(_MyRecruitsState) _then) = __$MyRecruitsStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<RecruitInfo> recruits, Set<int> selectedRecruitIds, bool isLoading, bool isFetchingMore, bool isUpdatingStatus, bool canFetchMore, int page, RecruitStatus filterStatus, String? errorMessage
+ List<RecruitInfo> recruits, Set<String> selectedRecruitIds, bool isLoading, bool isUpdatingStatus, NewRecruitStatus filterStatus, String? errorMessage
 });
 
 
@@ -157,17 +151,14 @@ class __$MyRecruitsStateCopyWithImpl<$Res>
 
 /// Create a copy of MyRecruitsState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? recruits = null,Object? selectedRecruitIds = null,Object? isLoading = null,Object? isFetchingMore = null,Object? isUpdatingStatus = null,Object? canFetchMore = null,Object? page = null,Object? filterStatus = null,Object? errorMessage = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? recruits = null,Object? selectedRecruitIds = null,Object? isLoading = null,Object? isUpdatingStatus = null,Object? filterStatus = null,Object? errorMessage = freezed,}) {
   return _then(_MyRecruitsState(
 recruits: null == recruits ? _self._recruits : recruits // ignore: cast_nullable_to_non_nullable
 as List<RecruitInfo>,selectedRecruitIds: null == selectedRecruitIds ? _self._selectedRecruitIds : selectedRecruitIds // ignore: cast_nullable_to_non_nullable
-as Set<int>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
-as bool,isFetchingMore: null == isFetchingMore ? _self.isFetchingMore : isFetchingMore // ignore: cast_nullable_to_non_nullable
+as Set<String>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,isUpdatingStatus: null == isUpdatingStatus ? _self.isUpdatingStatus : isUpdatingStatus // ignore: cast_nullable_to_non_nullable
-as bool,canFetchMore: null == canFetchMore ? _self.canFetchMore : canFetchMore // ignore: cast_nullable_to_non_nullable
-as bool,page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
-as int,filterStatus: null == filterStatus ? _self.filterStatus : filterStatus // ignore: cast_nullable_to_non_nullable
-as RecruitStatus,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as bool,filterStatus: null == filterStatus ? _self.filterStatus : filterStatus // ignore: cast_nullable_to_non_nullable
+as NewRecruitStatus,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

@@ -1,47 +1,10 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'recruit_info.dart';
+part of 'country.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
-
-_RecruitInfo _$RecruitInfoFromJson(Map<String, dynamic> json) => _RecruitInfo(
-  recruitId: json['recruitId'] as String?,
-  announcementId: json['announcementId'] as String?,
-  firstName: json['firstName'] as String?,
-  fatherName: json['fatherName'] as String?,
-  grandName: json['grandName'] as String?,
-  gender: $enumDecode(_$GenderEnumMap, json['gender']),
-  birthDate: DateTime.parse(json['birthDate'] as String),
-  motherName: json['motherName'] as String?,
-  mobile: json['mobile'] as String?,
-  email: json['email'] as String?,
-  nationality:
-      $enumDecodeNullable(_$CountryEnumMap, json['nationality']) ??
-      Country.ethiopia,
-  recruitStatus:
-      $enumDecodeNullable(_$NewRecruitStatusEnumMap, json['recruitStatus']) ??
-      NewRecruitStatus.pending,
-);
-
-Map<String, dynamic> _$RecruitInfoToJson(_RecruitInfo instance) =>
-    <String, dynamic>{
-      'recruitId': instance.recruitId,
-      'announcementId': instance.announcementId,
-      'firstName': instance.firstName,
-      'fatherName': instance.fatherName,
-      'grandName': instance.grandName,
-      'gender': _$GenderEnumMap[instance.gender]!,
-      'birthDate': instance.birthDate.toIso8601String(),
-      'motherName': instance.motherName,
-      'mobile': instance.mobile,
-      'email': instance.email,
-      'nationality': _$CountryEnumMap[instance.nationality]!,
-      'recruitStatus': _$NewRecruitStatusEnumMap[instance.recruitStatus]!,
-    };
-
-const _$GenderEnumMap = {Gender.male: 0, Gender.female: 1, Gender.other: 2};
 
 const _$CountryEnumMap = {
   Country.afghanistan: 0,
@@ -239,10 +202,4 @@ const _$CountryEnumMap = {
   Country.yemen: 192,
   Country.zambia: 193,
   Country.zimbabwe: 194,
-};
-
-const _$NewRecruitStatusEnumMap = {
-  NewRecruitStatus.pending: 0,
-  NewRecruitStatus.passed: 1,
-  NewRecruitStatus.failed: 2,
 };

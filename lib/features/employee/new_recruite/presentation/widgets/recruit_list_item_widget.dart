@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
+import 'package:police_com/core/extensions/context_extension.dart';
 import 'package:police_com/features/employee/new_recruite/domain/recruit_info.dart';
 
 class RecruitListItemWidget extends StatelessWidget {
@@ -16,8 +16,11 @@ class RecruitListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fullName =
-        '${recruit.firstName} ${recruit.middleName} ${recruit.lastName}';
+    // Construct the full name from the new fields, handling potential nulls.
+    final fullName = '${recruit.firstName ?? ''} ${recruit.fatherName ?? ''}';
+    final initial = (recruit.firstName?.isNotEmpty ?? false)
+        ? recruit.firstName![0].toUpperCase()
+        : '?';
 
     return Container(
       decoration: BoxDecoration(
@@ -29,20 +32,15 @@ class RecruitListItemWidget extends StatelessWidget {
         dense: true,
         value: isSelected,
         onChanged: onChanged,
+        // The secondary widget no longer uses a photo path.
         secondary: CircleAvatar(
-          // Assuming photoPath is a network URL. Provide a fallback.
-          backgroundImage:
-              recruit.photoPath.isNotEmpty
-                  ? NetworkImage(recruit.photoPath)
-                  : null,
-          onBackgroundImageError:
-              recruit.photoPath.isNotEmpty ? (e, s) {} : null,
-          child: recruit.photoPath.isEmpty ? Text(recruit.firstName[0]) : null,
+          child: Text(initial),
         ),
-        title: Text(fullName),
+        title: Text(fullName.trim()),
         subtitle: Text(
-          context.lango.id(id: recruit.id.toString()),
-        ), // <-- REPLACED
+          // Use the new recruitId and handle null case.
+          context.lango.id(id: recruit.recruitId ?? 'N/A'),
+        ),
       ),
     );
   }

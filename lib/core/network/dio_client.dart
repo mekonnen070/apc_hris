@@ -11,24 +11,20 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:police_com/core/config/app_config.dart';
 import 'package:police_com/core/network/auth_interceptor.dart';
-import 'package:police_com/core/network/redirect_interceptor.dart'; // Import the new interceptor
+import 'package:police_com/core/network/redirect_interceptor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// --- Providers (No changes needed here) ---
 final sharedPreferencesProvider = Provider<SharedPreferences>((ref) {
-  throw UnimplementedError('SharedPreferences must be provided in main.dart');
+  throw UnimplementedError();
 });
-
 final cookieJarProvider = Provider<CookieJar>((ref) {
-  throw UnimplementedError('CookieJar must be provided in main.dart');
+  throw UnimplementedError();
 });
-
 final dioClientProvider = Provider<DioClient>((ref) {
-  final cookieJar = ref.watch(cookieJarProvider);
-  return DioClient(ref, cookieJar);
+  final cj = ref.watch(cookieJarProvider);
+  return DioClient(ref, cj);
 });
 
-// --- DioClient Implementation ---
 class DioClient {
   final Dio dio;
 
@@ -37,7 +33,7 @@ class DioClient {
         BaseOptions(
           baseUrl: AppConfig.baseUrl,
           connectTimeout: const Duration(seconds: 20),
-          validateStatus: (status) => status != null && status < 500,
+          validateStatus: (s) => s != null && s < 500,
         ),
       ) {
     dio.interceptors.addAll([
@@ -47,39 +43,62 @@ class DioClient {
         logPrint: (obj) => developer.log(obj.toString()),
       ),
       CookieManager(cookieJar),
-      // Add the RedirectInterceptor to catch HTML responses.
       RedirectInterceptor(),
-      // The AuthInterceptor will handle explicit 401s if the server ever sends them.
       AuthInterceptor(ref),
     ]);
 
     if (kDebugMode) {
       (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
         final client = HttpClient();
-        client.badCertificateCallback = (cert, host, port) => true;
+        client.badCertificateCallback = (_, __, ___) => true;
         return client;
       };
     }
   }
-  // --- Public API Methods (No changes needed) ---
+
   Future<Response> get(String path, {Map<String, dynamic>? queryParameters}) =>
       dio.get(path, queryParameters: queryParameters);
 
+  /// Default to JSON. Set [isMultipart] to true for FormData bodies.
   Future<Response> post(
     String path, {
     dynamic data,
     Map<String, dynamic>? queryParameters,
-  }) => dio.post(path, data: data, queryParameters: queryParameters);
+    bool isMultipart = false,
+  }) {
+    return dio.post(
+      path,
+      data: data,
+      queryParameters: queryParameters,
+      options: isMultipart ? Options(contentType: 'multipart/form-data') : null,
+    );
+  }
 
   Future<Response> put(
     String path, {
     dynamic data,
     Map<String, dynamic>? queryParameters,
-  }) => dio.put(path, data: data, queryParameters: queryParameters);
+    bool isMultipart = false,
+  }) {
+    return dio.put(
+      path,
+      data: data,
+      queryParameters: queryParameters,
+      options: isMultipart ? Options(contentType: 'multipart/form-data') : null,
+    );
+  }
 
   Future<Response> delete(
     String path, {
     dynamic data,
     Map<String, dynamic>? queryParameters,
-  }) => dio.delete(path, data: data, queryParameters: queryParameters);
+    bool isMultipart = false,
+  }) {
+    return dio.delete(
+      path,
+      data: data,
+      queryParameters: queryParameters,
+      options: isMultipart ? Options(contentType: 'multipart/form-data') : null,
+    );
+  }
 }

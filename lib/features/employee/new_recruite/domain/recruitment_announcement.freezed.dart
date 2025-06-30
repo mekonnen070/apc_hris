@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RecruitmentAnnouncement {
 
- int get id; String get title; String get content; DateTime get startDate; DateTime get endDate;
+ String? get announcementId; String? get announcementTitle; String? get announcementDescription; int get requiredApplicants; String? get round; DateTime? get createdDate; String? get createdBy; DateTime? get expiryDate; AnnouncementStatus get status; DateTime? get postedDate; String? get postedBy;
 /// Create a copy of RecruitmentAnnouncement
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $RecruitmentAnnouncementCopyWith<RecruitmentAnnouncement> get copyWith => _$Recr
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RecruitmentAnnouncement&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.content, content) || other.content == content)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&(identical(other.endDate, endDate) || other.endDate == endDate));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RecruitmentAnnouncement&&(identical(other.announcementId, announcementId) || other.announcementId == announcementId)&&(identical(other.announcementTitle, announcementTitle) || other.announcementTitle == announcementTitle)&&(identical(other.announcementDescription, announcementDescription) || other.announcementDescription == announcementDescription)&&(identical(other.requiredApplicants, requiredApplicants) || other.requiredApplicants == requiredApplicants)&&(identical(other.round, round) || other.round == round)&&(identical(other.createdDate, createdDate) || other.createdDate == createdDate)&&(identical(other.createdBy, createdBy) || other.createdBy == createdBy)&&(identical(other.expiryDate, expiryDate) || other.expiryDate == expiryDate)&&(identical(other.status, status) || other.status == status)&&(identical(other.postedDate, postedDate) || other.postedDate == postedDate)&&(identical(other.postedBy, postedBy) || other.postedBy == postedBy));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,title,content,startDate,endDate);
+int get hashCode => Object.hash(runtimeType,announcementId,announcementTitle,announcementDescription,requiredApplicants,round,createdDate,createdBy,expiryDate,status,postedDate,postedBy);
 
 @override
 String toString() {
-  return 'RecruitmentAnnouncement(id: $id, title: $title, content: $content, startDate: $startDate, endDate: $endDate)';
+  return 'RecruitmentAnnouncement(announcementId: $announcementId, announcementTitle: $announcementTitle, announcementDescription: $announcementDescription, requiredApplicants: $requiredApplicants, round: $round, createdDate: $createdDate, createdBy: $createdBy, expiryDate: $expiryDate, status: $status, postedDate: $postedDate, postedBy: $postedBy)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $RecruitmentAnnouncementCopyWith<$Res>  {
   factory $RecruitmentAnnouncementCopyWith(RecruitmentAnnouncement value, $Res Function(RecruitmentAnnouncement) _then) = _$RecruitmentAnnouncementCopyWithImpl;
 @useResult
 $Res call({
- int id, String title, String content, DateTime startDate, DateTime endDate
+ String? announcementId, String? announcementTitle, String? announcementDescription, int requiredApplicants, String? round, DateTime? createdDate, String? createdBy, DateTime? expiryDate, AnnouncementStatus status, DateTime? postedDate, String? postedBy
 });
 
 
@@ -66,14 +66,20 @@ class _$RecruitmentAnnouncementCopyWithImpl<$Res>
 
 /// Create a copy of RecruitmentAnnouncement
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? content = null,Object? startDate = null,Object? endDate = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? announcementId = freezed,Object? announcementTitle = freezed,Object? announcementDescription = freezed,Object? requiredApplicants = null,Object? round = freezed,Object? createdDate = freezed,Object? createdBy = freezed,Object? expiryDate = freezed,Object? status = null,Object? postedDate = freezed,Object? postedBy = freezed,}) {
   return _then(_self.copyWith(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as String,content: null == content ? _self.content : content // ignore: cast_nullable_to_non_nullable
-as String,startDate: null == startDate ? _self.startDate : startDate // ignore: cast_nullable_to_non_nullable
-as DateTime,endDate: null == endDate ? _self.endDate : endDate // ignore: cast_nullable_to_non_nullable
-as DateTime,
+announcementId: freezed == announcementId ? _self.announcementId : announcementId // ignore: cast_nullable_to_non_nullable
+as String?,announcementTitle: freezed == announcementTitle ? _self.announcementTitle : announcementTitle // ignore: cast_nullable_to_non_nullable
+as String?,announcementDescription: freezed == announcementDescription ? _self.announcementDescription : announcementDescription // ignore: cast_nullable_to_non_nullable
+as String?,requiredApplicants: null == requiredApplicants ? _self.requiredApplicants : requiredApplicants // ignore: cast_nullable_to_non_nullable
+as int,round: freezed == round ? _self.round : round // ignore: cast_nullable_to_non_nullable
+as String?,createdDate: freezed == createdDate ? _self.createdDate : createdDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,createdBy: freezed == createdBy ? _self.createdBy : createdBy // ignore: cast_nullable_to_non_nullable
+as String?,expiryDate: freezed == expiryDate ? _self.expiryDate : expiryDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as AnnouncementStatus,postedDate: freezed == postedDate ? _self.postedDate : postedDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,postedBy: freezed == postedBy ? _self.postedBy : postedBy // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -84,14 +90,20 @@ as DateTime,
 @JsonSerializable()
 
 class _RecruitmentAnnouncement implements RecruitmentAnnouncement {
-  const _RecruitmentAnnouncement({required this.id, required this.title, required this.content, required this.startDate, required this.endDate});
+  const _RecruitmentAnnouncement({required this.announcementId, required this.announcementTitle, required this.announcementDescription, required this.requiredApplicants, required this.round, required this.createdDate, this.createdBy, required this.expiryDate, this.status = AnnouncementStatus.created, this.postedDate, this.postedBy});
   factory _RecruitmentAnnouncement.fromJson(Map<String, dynamic> json) => _$RecruitmentAnnouncementFromJson(json);
 
-@override final  int id;
-@override final  String title;
-@override final  String content;
-@override final  DateTime startDate;
-@override final  DateTime endDate;
+@override final  String? announcementId;
+@override final  String? announcementTitle;
+@override final  String? announcementDescription;
+@override final  int requiredApplicants;
+@override final  String? round;
+@override final  DateTime? createdDate;
+@override final  String? createdBy;
+@override final  DateTime? expiryDate;
+@override@JsonKey() final  AnnouncementStatus status;
+@override final  DateTime? postedDate;
+@override final  String? postedBy;
 
 /// Create a copy of RecruitmentAnnouncement
 /// with the given fields replaced by the non-null parameter values.
@@ -106,16 +118,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RecruitmentAnnouncement&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.content, content) || other.content == content)&&(identical(other.startDate, startDate) || other.startDate == startDate)&&(identical(other.endDate, endDate) || other.endDate == endDate));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RecruitmentAnnouncement&&(identical(other.announcementId, announcementId) || other.announcementId == announcementId)&&(identical(other.announcementTitle, announcementTitle) || other.announcementTitle == announcementTitle)&&(identical(other.announcementDescription, announcementDescription) || other.announcementDescription == announcementDescription)&&(identical(other.requiredApplicants, requiredApplicants) || other.requiredApplicants == requiredApplicants)&&(identical(other.round, round) || other.round == round)&&(identical(other.createdDate, createdDate) || other.createdDate == createdDate)&&(identical(other.createdBy, createdBy) || other.createdBy == createdBy)&&(identical(other.expiryDate, expiryDate) || other.expiryDate == expiryDate)&&(identical(other.status, status) || other.status == status)&&(identical(other.postedDate, postedDate) || other.postedDate == postedDate)&&(identical(other.postedBy, postedBy) || other.postedBy == postedBy));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,title,content,startDate,endDate);
+int get hashCode => Object.hash(runtimeType,announcementId,announcementTitle,announcementDescription,requiredApplicants,round,createdDate,createdBy,expiryDate,status,postedDate,postedBy);
 
 @override
 String toString() {
-  return 'RecruitmentAnnouncement(id: $id, title: $title, content: $content, startDate: $startDate, endDate: $endDate)';
+  return 'RecruitmentAnnouncement(announcementId: $announcementId, announcementTitle: $announcementTitle, announcementDescription: $announcementDescription, requiredApplicants: $requiredApplicants, round: $round, createdDate: $createdDate, createdBy: $createdBy, expiryDate: $expiryDate, status: $status, postedDate: $postedDate, postedBy: $postedBy)';
 }
 
 
@@ -126,7 +138,7 @@ abstract mixin class _$RecruitmentAnnouncementCopyWith<$Res> implements $Recruit
   factory _$RecruitmentAnnouncementCopyWith(_RecruitmentAnnouncement value, $Res Function(_RecruitmentAnnouncement) _then) = __$RecruitmentAnnouncementCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String title, String content, DateTime startDate, DateTime endDate
+ String? announcementId, String? announcementTitle, String? announcementDescription, int requiredApplicants, String? round, DateTime? createdDate, String? createdBy, DateTime? expiryDate, AnnouncementStatus status, DateTime? postedDate, String? postedBy
 });
 
 
@@ -143,14 +155,20 @@ class __$RecruitmentAnnouncementCopyWithImpl<$Res>
 
 /// Create a copy of RecruitmentAnnouncement
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? content = null,Object? startDate = null,Object? endDate = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? announcementId = freezed,Object? announcementTitle = freezed,Object? announcementDescription = freezed,Object? requiredApplicants = null,Object? round = freezed,Object? createdDate = freezed,Object? createdBy = freezed,Object? expiryDate = freezed,Object? status = null,Object? postedDate = freezed,Object? postedBy = freezed,}) {
   return _then(_RecruitmentAnnouncement(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as String,content: null == content ? _self.content : content // ignore: cast_nullable_to_non_nullable
-as String,startDate: null == startDate ? _self.startDate : startDate // ignore: cast_nullable_to_non_nullable
-as DateTime,endDate: null == endDate ? _self.endDate : endDate // ignore: cast_nullable_to_non_nullable
-as DateTime,
+announcementId: freezed == announcementId ? _self.announcementId : announcementId // ignore: cast_nullable_to_non_nullable
+as String?,announcementTitle: freezed == announcementTitle ? _self.announcementTitle : announcementTitle // ignore: cast_nullable_to_non_nullable
+as String?,announcementDescription: freezed == announcementDescription ? _self.announcementDescription : announcementDescription // ignore: cast_nullable_to_non_nullable
+as String?,requiredApplicants: null == requiredApplicants ? _self.requiredApplicants : requiredApplicants // ignore: cast_nullable_to_non_nullable
+as int,round: freezed == round ? _self.round : round // ignore: cast_nullable_to_non_nullable
+as String?,createdDate: freezed == createdDate ? _self.createdDate : createdDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,createdBy: freezed == createdBy ? _self.createdBy : createdBy // ignore: cast_nullable_to_non_nullable
+as String?,expiryDate: freezed == expiryDate ? _self.expiryDate : expiryDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as AnnouncementStatus,postedDate: freezed == postedDate ? _self.postedDate : postedDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,postedBy: freezed == postedBy ? _self.postedBy : postedBy // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

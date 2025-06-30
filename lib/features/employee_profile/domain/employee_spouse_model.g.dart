@@ -44,8 +44,4 @@ Map<String, dynamic> _$EmployeeSpouseModelToJson(
   'tin': instance.tin,
 };
 
-const _$GenderEnumMap = {
-  Gender.male: 'male',
-  Gender.female: 'female',
-  Gender.other: 'other',
-};
+const _$GenderEnumMap = {Gender.male: 0, Gender.female: 1, Gender.other: 2};
