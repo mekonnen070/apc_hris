@@ -28,8 +28,7 @@ class EducationTab extends ConsumerWidget {
       );
       if (result == null || !context.mounted) return;
 
-      final notifier =
-          ref.read(profileNotifierProvider(employee.employeeId).notifier);
+      final notifier = ref.read(profileNotifierProvider.notifier);
       final bool success;
       final String action;
 
@@ -62,7 +61,7 @@ class EducationTab extends ConsumerWidget {
           onTap: () => navigateToAddEdit(education),
           onDelete: () async {
             final success = await ref
-                .read(profileNotifierProvider(employee.employeeId).notifier)
+                .read(profileNotifierProvider.notifier)
                 .deleteEducation(education.educationId!);
             if (context.mounted) {
               ScaffoldMessenger.of(context).showSnackBar(

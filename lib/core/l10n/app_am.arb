@@ -13,7 +13,7 @@
     "passwordResetSent": "የይለፍ ቃል ዳግም ማስጀመሪያ ተልኳል",
     "checkEmailForResetInstructions": "ለዳግም ማስጀመሪያ መመሪያዎች ኢሜልዎን ያረጋግጡ።",
     "passwordResetFailed": "የይለፍ ቃል ዳግም ማስጀመር አልተሳካም",
-    "welcomeBack": "እንኳን ደህና መመለስ!",
+    "welcomeBack": "እንኳን ደህና መጣህ/ሽ",
     "logInWithEmailAndPassword": "በኢሜልዎ እና በይለፍ ቃልዎ ይግቡ",
     "password": "የይለፍ ቃል",
     "passwordIsRequired": "የይለፍ ቃል ያስፈልጋል",
@@ -779,5 +779,6 @@
     "yourAppealIsUnderReview": "ይግባኝዎ በግምገማ ላይ ነው።",
     "viewSelected": "የተመረጡትን ይመልከቱ",
     "appealDecision": "የይግባኝ ውሳኔ",
-    "ethiopian": "ኢትዮጵያዊ"
+    "ethiopian": "ኢትዮጵያዊ",
+    "noPlacementsFound": "ምንም የሥራ መደቦች አልተገኙም።"
 }

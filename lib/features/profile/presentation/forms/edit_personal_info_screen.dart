@@ -38,13 +38,13 @@ class EditPersonalInfoScreen extends HookConsumerWidget {
           maritalStatus: maritalStatus.value,
         );
 
-        await ref
-            .read(profileNotifierProvider(employeeInfo.employeeId).notifier)
-            .updatePersonalInfo(updatedInfo);
+        await ref.read(profileNotifierProvider.notifier).updatePersonalInfo(updatedInfo);
 
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(context.lango.profileUpdatedSuccessfully)), // <-- REPLACED
+            SnackBar(
+              content: Text(context.lango.profileUpdatedSuccessfully),
+            ), // <-- REPLACED
           );
           Navigator.of(context).pop();
         }

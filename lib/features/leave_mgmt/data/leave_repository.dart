@@ -1,17 +1,17 @@
-import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:police_com/core/config/app_config.dart';
 import 'package:police_com/core/constants/api_endpoints.dart';
 import 'package:police_com/core/enums/all_enums.dart';
+import 'package:police_com/core/network/dio_client.dart';
 import 'package:police_com/features/leave_mgmt/domain/leave_balance.dart';
 import 'package:police_com/features/leave_mgmt/domain/leave_request.dart';
 import 'package:police_com/features/leave_mgmt/domain/leave_type.dart';
 
 final leaveRepositoryProvider = Provider<ILeaveRepository>((ref) {
-  const useMockData = true;
-  if (useMockData) {
+  if (AppConfig.useMockData) {
     return MockLeaveRepository();
   }
-  // return LeaveRepository(ref.watch(dioClientProvider));
+  return LeaveRepository(ref.watch(dioClientProvider));
 });
 
 abstract class ILeaveRepository {
@@ -25,7 +25,7 @@ abstract class ILeaveRepository {
 }
 
 class LeaveRepository implements ILeaveRepository {
-  final Dio _dio;
+  final DioClient _dio;
   LeaveRepository(this._dio);
 
   @override

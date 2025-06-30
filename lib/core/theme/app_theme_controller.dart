@@ -36,8 +36,7 @@ class ThemeControllerProvider extends ChangeNotifier {
     ),
   ).copyWith(cardTheme: const CardTheme(color: AppColors.cardColorDark));
 
-  Future<ThemeData> initialize() async {
-    final prefs = await SharedPreferences.getInstance();
+  Future<ThemeData> initialize(SharedPreferences prefs) async {
     _themeMode = _appPref.getThemeMode(prefs);
     notifyListeners();
     return currentThemeData;

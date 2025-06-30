@@ -13,7 +13,7 @@ class LanguageSwitcherWidget extends ConsumerWidget {
     final List<Lango> languages = List.from(Lango.values);
 
     return IconButton(
-      icon: const Icon(Icons.language, size: 32, color: Colors.white),
+      icon: const Icon(Icons.language, size: 32),
       tooltip: context.lango.language,
       onPressed: () async {
         final selectedLanguage = await showAdaptiveDialog<Lango>(
@@ -28,6 +28,8 @@ class LanguageSwitcherWidget extends ConsumerWidget {
           await ref
               .read(languageControllerProvider.notifier)
               .updateLanguage(selectedLanguage);
+
+          
         }
       },
     );

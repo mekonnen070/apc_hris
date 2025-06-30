@@ -17,8 +17,12 @@ class AppDrawer extends ConsumerWidget {
         child: ListView(
           children: [
             UserAccountsDrawerHeader(
-              accountName: Text(context.lango.userNamePlaceholder), // <-- REPLACED
-              accountEmail: Text(context.lango.userEmailPlaceholder), // <-- REPLACED
+              accountName: Text(
+                context.lango.userNamePlaceholder,
+              ), // <-- REPLACED
+              accountEmail: Text(
+                context.lango.userEmailPlaceholder,
+              ), // <-- REPLACED
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.white,
                 child: Text(
@@ -36,12 +40,13 @@ class AppDrawer extends ConsumerWidget {
                 leading: Icon(subModule.icon),
                 title: Text(subModule.title(context)),
                 onTap: () {
-                  ref.read(selectedSubModuleProvider.notifier).state = subModule;
+                  ref.read(selectedSubModuleProvider.notifier).state =
+                      subModule;
                   Navigator.of(context).pop();
                 },
               ),
             const Divider(),
-            const LogOutPage(),
+            const LogoutButton(),
             const SizedBox(height: 20),
           ],
         ),

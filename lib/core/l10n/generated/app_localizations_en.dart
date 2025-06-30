@@ -1527,4 +1527,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ethiopian => 'Ethiopian';
+
+  @override
+  String get noPlacementsFound => 'No Placements Found';
 }

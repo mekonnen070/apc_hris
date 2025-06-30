@@ -1,18 +1,19 @@
-import 'dart:math';
+import 'dart:developer';
+import 'dart:math' show Random;
 
-import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:police_com/core/config/app_config.dart';
 import 'package:police_com/core/constants/api_endpoints.dart';
 import 'package:police_com/core/enums/all_enums.dart';
+import 'package:police_com/core/network/dio_client.dart';
 import 'package:police_com/features/employee/new_recruite/domain/recruit_info.dart';
 import 'package:police_com/features/employee/new_recruite/domain/recruitment_announcement.dart';
 
 final newRecruitRepositoryProvider = Provider<INewRecruitRepository>((ref) {
-  const useMockData = true;
-  if (useMockData) {
+  if (AppConfig.useMockData) {
     return MockNewRecruitRepository();
   }
-  // return NewRecruitRepository(ref.watch(dioClientProvider));
+  return NewRecruitRepository(ref.watch(dioClientProvider));
 });
 
 abstract class INewRecruitRepository {
@@ -30,14 +31,13 @@ abstract class INewRecruitRepository {
 }
 
 class NewRecruitRepository implements INewRecruitRepository {
-  final Dio _dio;
+  final DioClient _dio;
   NewRecruitRepository(this._dio);
 
   @override
   Future<List<RecruitmentAnnouncement>> getRecruitmentAnnouncements() async {
-    final response = await _dio.get(
-      ApiEndpoints.recruitmentAnnouncements,
-    );
+    final response = await _dio.get(ApiEndpoints.recruitmentAnnouncements);
+    log(response.requestOptions.uri.toString());
     return (response.data as List)
         .map((e) => RecruitmentAnnouncement.fromJson(e))
         .toList();
@@ -55,13 +55,14 @@ class NewRecruitRepository implements INewRecruitRepository {
     required RecruitStatus status,
   }) async {
     final response = await _dio.get(
-      ApiEndpoints.myRecruits,
+      ApiEndpoints.recruits,
       queryParameters: {
         'page': page,
         'pageSize': pageSize,
         'status': status.name,
       },
     );
+    log(response.data.toString());
     return (response.data as List).map((e) => RecruitInfo.fromJson(e)).toList();
   }
 

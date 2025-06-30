@@ -48,7 +48,7 @@ class AppLocalizationsAm extends AppLocalizations {
   String get passwordResetFailed => 'የይለፍ ቃል ዳግም ማስጀመር አልተሳካም';
 
   @override
-  String get welcomeBack => 'እንኳን ደህና መመለስ!';
+  String get welcomeBack => 'እንኳን ደህና መጣህ/ሽ';
 
   @override
   String get logInWithEmailAndPassword => 'በኢሜልዎ እና በይለፍ ቃልዎ ይግቡ';
@@ -1527,4 +1527,7 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get ethiopian => 'ኢትዮጵያዊ';
+
+  @override
+  String get noPlacementsFound => 'ምንም የሥራ መደቦች አልተገኙም።';
 }

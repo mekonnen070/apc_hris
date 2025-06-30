@@ -1,38 +1,42 @@
+// lib/features/auth/presentation/widgets/logout_button.dart
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
-import 'package:police_com/features/auth/application/auth_controller.dart';
-import 'package:police_com/features/auth/presentation/log_in_page.dart';
+import 'package:police_com/core/extensions/context_extension.dart';
+import 'package:police_com/features/auth/application/auth_notifier.dart';
 
-class LogOutPage extends ConsumerStatefulWidget {
-  const LogOutPage({super.key});
-
-  @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _LogOutPageState();
-}
-
-class _LogOutPageState extends ConsumerState<LogOutPage> {
-  bool _isLoading = false;
+// The Architect's Note:
+// This is no longer a page but a compliant, reusable widget.
+// It is a ConsumerWidget that derives its state from the central authNotifierProvider.
+// It has a single responsibility: to initiate the logout process.
+class LogoutButton extends ConsumerWidget {
+  const LogoutButton({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Watch the auth state to show a loading indicator when logging out.
+    final authState = ref.watch(authNotifierProvider);
+
     return ListTile(
       leading: const Icon(Icons.logout),
-      title:
-          _isLoading
-              ? const Center(child: CircularProgressIndicator.adaptive())
-              : Text(context.lango.logout), // <-- REPLACED
-      onTap: () async {
-        setState(() => _isLoading = true);
-
-        await Future.delayed(const Duration(seconds: 2));
-        await ref.read(authControllerProvider).logout();
-
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const LogInPage()),
-        );
-      },
+      title: Text(context.lango.logout),
+      // The Architect's Note:
+      // The UI state is handled declaratively. If authState is loading,
+      // a progress indicator is shown in the trailing position.
+      trailing:
+          authState.isLoading
+              ? const SizedBox(
+                height: 20,
+                width: 20,
+                child: CircularProgressIndicator.adaptive(strokeWidth: 2),
+              )
+              : null,
+      // The onTap handler's only job is to call the notifier's method.
+      // It is disabled during the logout process to prevent multiple calls.
+      onTap:
+          authState.isLoading
+              ? null
+              : () => ref.read(authNotifierProvider.notifier).logout(),
     );
   }
 }

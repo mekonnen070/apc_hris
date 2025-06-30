@@ -27,13 +27,9 @@ class ContactsTab extends ConsumerWidget {
       );
       if (result != null) {
         if (contact != null) {
-          ref
-              .read(profileNotifierProvider(employee.employeeId).notifier)
-              .updateContact(result);
+          ref.read(profileNotifierProvider.notifier).updateContact(result);
         } else {
-          ref
-              .read(profileNotifierProvider(employee.employeeId).notifier)
-              .addContact(result);
+          ref.read(profileNotifierProvider.notifier).addContact(result);
         }
       }
     }
@@ -53,7 +49,7 @@ class ContactsTab extends ConsumerWidget {
           onEdit: () => navigateToAddEdit(contact),
           onDelete:
               () => ref
-                  .read(profileNotifierProvider(employee.employeeId).notifier)
+                  .read(profileNotifierProvider.notifier)
                   .deleteContact(contact.contactId!),
         );
       },

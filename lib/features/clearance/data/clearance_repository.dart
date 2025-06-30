@@ -6,7 +6,7 @@ import 'package:police_com/core/network/dio_client.dart';
 import 'package:police_com/features/clearance/domain/clearance_request.dart';
 
 final clearanceRepositoryProvider = Provider(
-  (ref) => ClearanceRepository(ref.read(dioClientProvider)),
+  (ref) => ClearanceRepository(ref.watch(dioClientProvider)),
 );
 
 class ClearanceRepository {

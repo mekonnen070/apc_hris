@@ -23,7 +23,7 @@ class MyRecruitsScreen extends HookConsumerWidget {
     useEffect(() {
       Future.microtask(() => notifier.fetchFirstPage());
       return null;
-    }, const []);
+    }, const [],);
 
     useEffect(() {
       void listener() {
@@ -35,7 +35,7 @@ class MyRecruitsScreen extends HookConsumerWidget {
 
       scrollController.addListener(listener);
       return () => scrollController.removeListener(listener);
-    }, [scrollController]);
+    }, [scrollController],);
 
     void showConfirmationSheet(RecruitStatus statusToApply) {
       final selectedRecruits =
@@ -246,11 +246,13 @@ class MyRecruitsScreen extends HookConsumerWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    hasSelection
-                        ? context.lango.itemsSelected(count: state.selectedRecruitIds.length) // <-- REPLACED
-                        : context.lango.selectRecruitsToContinue, // <-- REPLACED
-                    style: Theme.of(context).textTheme.bodySmall,
+                  Flexible(
+                    child: Text(
+                      hasSelection
+                          ? context.lango.itemsSelected(count: state.selectedRecruitIds.length) // <-- REPLACED
+                          : context.lango.selectRecruitsToContinue, // <-- REPLACED
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
                   ),
                   Row(
                     children: [
@@ -276,7 +278,7 @@ class MyRecruitsScreen extends HookConsumerWidget {
                       ? Center(
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
-                          child: Text(state.errorMessage!),
+                          child: Text(context.lango.noRecruitsFound),
                         ),
                       )
                       : ListView.builder(

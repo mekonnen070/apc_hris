@@ -35,7 +35,9 @@ class NewRecruitScreen extends HookConsumerWidget {
     final gender = useState<Gender?>(null);
     final maritalStatus = useState<MaritalStatus?>(null);
     final numberOfChildrenController = useTextEditingController();
-    final nationalityController = useTextEditingController(text: 'Ethiopian');
+    final nationalityController = useTextEditingController(
+      text: context.lango.ethiopian,
+    );
     final religion = useState<Religion?>(null);
     final bloodGroup = useState<BloodGroup?>(null);
     final woredaController = useTextEditingController();
@@ -66,7 +68,7 @@ class NewRecruitScreen extends HookConsumerWidget {
           nationality: nationalityController.text,
           religion: religion.value!,
           bloodGroup: bloodGroup.value!,
-          photoPath: 'path/to/photo.jpg', // Placeholder
+          photoPath: 'path/to/photo.jpg',
           woreda: woredaController.text,
           kebele: kebeleController.text,
           houseNumber: houseNumberController.text,

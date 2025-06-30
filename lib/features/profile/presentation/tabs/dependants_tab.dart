@@ -28,9 +28,9 @@ class DependantsTab extends ConsumerWidget {
       );
       if (result != null) {
         if (dependant != null) {
-          ref.read(profileNotifierProvider(employee.employeeId).notifier).updateDependant(result);
+          ref.read(profileNotifierProvider.notifier).updateDependant(result);
         } else {
-          ref.read(profileNotifierProvider(employee.employeeId).notifier).addDependant(result);
+          ref.read(profileNotifierProvider.notifier).addDependant(result);
         }
       }
     }
@@ -49,9 +49,7 @@ class DependantsTab extends ConsumerWidget {
           isThreeLine: true,
           onEdit: () => navigateToAddEdit(dependant),
           onDelete:
-              () => ref
-                  .read(profileNotifierProvider(employee.employeeId).notifier)
-                  .deleteDependant(dependant.dependantId!),
+              () => ref.read(profileNotifierProvider.notifier).deleteDependant(dependant.dependantId!),
         );
       },
     );

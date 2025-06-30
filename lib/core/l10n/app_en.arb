@@ -779,5 +779,6 @@
   "yourAppealIsUnderReview": "Your appeal is under review.",
   "viewSelected": "View Selected",
   "appealDecision": "Appeal Decision",
-  "ethiopian": "Ethiopian"
+  "ethiopian": "Ethiopian",
+  "noPlacementsFound": "No Placements Found"
 }

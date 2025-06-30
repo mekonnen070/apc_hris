@@ -28,11 +28,11 @@ class SpouseTab extends ConsumerWidget {
       if (result != null) {
         if (spouse != null) {
           ref
-              .read(profileNotifierProvider(employee.employeeId).notifier)
+              .read(profileNotifierProvider.notifier)
               .updateSpouse(result);
         } else {
           ref
-              .read(profileNotifierProvider(employee.employeeId).notifier)
+              .read(profileNotifierProvider.notifier)
               .addSpouse(result);
         }
       }
@@ -55,7 +55,7 @@ class SpouseTab extends ConsumerWidget {
           },
           onDelete: () {
             ref
-                .read(profileNotifierProvider(employee.employeeId).notifier)
+                .read(profileNotifierProvider.notifier)
                 .deleteSpouse(spouse.spouseId!);
           },
         );

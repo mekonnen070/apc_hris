@@ -34,46 +34,51 @@ class AvailablePlacementsScreen extends HookConsumerWidget {
     }, [scrollController]);
 
     return Scaffold(
-      appBar: AppBarWidget(title: context.lango.availablePlacements), // <-- REPLACED & REMOVED CONST
+      appBar: AppBarWidget(
+        title: context.lango.availablePlacements,
+      ), // <-- REPLACED & REMOVED CONST
       body: RefreshIndicator(
         onRefresh: () => notifier.fetchFirstPage(),
-        child: state.isLoading
-            ? const Center(child: CircularProgressIndicator())
-            : state.errorMessage != null && state.placements.isEmpty
+        child:
+            state.isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : state.errorMessage != null && state.placements.isEmpty
                 ? Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text(state.errorMessage!),
-                    ),
-                  )
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(context.lango.noPlacementsFound),
+                  ),
+                )
                 : ListView.builder(
-                    controller: scrollController,
-                    itemCount: state.placements.length +
-                        (state.isFetchingMore ? 1 : 0),
-                    itemBuilder: (context, index) {
-                      if (index == state.placements.length) {
-                        return const Center(
-                          child: Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: CircularProgressIndicator(),
+                  controller: scrollController,
+                  itemCount:
+                      state.placements.length + (state.isFetchingMore ? 1 : 0),
+                  itemBuilder: (context, index) {
+                    if (index == state.placements.length) {
+                      return const Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    }
+                    final placement = state.placements[index];
+                    return PlacementListItemWidget(
+                      placement: placement,
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder:
+                                (_) => PlacementDetailScreen(
+                                  placementId:
+                                      placement.placementAnnouncementId,
+                                ),
                           ),
                         );
-                      }
-                      final placement = state.placements[index];
-                      return PlacementListItemWidget(
-                        placement: placement,
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (_) => PlacementDetailScreen(
-                                placementId: placement.placementAnnouncementId,
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                  ),
+                      },
+                    );
+                  },
+                ),
       ),
     );
   }

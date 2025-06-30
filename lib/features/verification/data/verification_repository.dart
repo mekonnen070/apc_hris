@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:police_com/core/network/dio_client.dart';
 import 'package:police_com/features/employee_profile/domain/employee_info_model.dart';
+import 'package:police_com/features/profile/data/i_profile_repository.dart';
 import 'package:police_com/features/profile/data/profile_repository.dart'; // Re-using for mock data access
 
 /// Custom exception types for better error handling
@@ -38,7 +39,7 @@ final verificationRepositoryProvider = Provider((ref) {
 
 class VerificationRepository {
   final DioClient _dioClient;
-  final ProfileRepository
+  final IProfileRepository
   _profileRepository; // Using this to access mock user data
 
   VerificationRepository(this._dioClient, this._profileRepository);
@@ -81,7 +82,7 @@ class VerificationRepository {
 
       if (employeeId.toUpperCase() == '1') {
         // For demonstration, we successfully find the user from the profile repository
-        return _profileRepository.getEmployeeProfile(employeeId);
+        return _profileRepository.getEmployeeProfile(employeeId: employeeId);
       } else if (employeeId.toUpperCase() == '2') {
         // Simulate unauthorized access
         throw VerificationException(

@@ -1,18 +1,18 @@
 import 'dart:math';
 
-import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:police_com/core/config/app_config.dart';
 import 'package:police_com/core/constants/api_endpoints.dart';
 import 'package:police_com/core/enums/applicant_status.dart';
+import 'package:police_com/core/network/dio_client.dart';
 import 'package:police_com/features/placement/domain/placement.dart';
 import 'package:police_com/features/placement/domain/placement_applicant.dart';
 
 final placementRepositoryProvider = Provider<IPlacementRepository>((ref) {
-  const useMockData = true;
-  if (useMockData) {
+  if (AppConfig.useMockData) {
     return MockPlacementRepository();
   }
-  // return PlacementRepository(ref.watch(dioClientProvider));
+  return PlacementRepository(ref.watch(dioClientProvider));
 });
 
 abstract class IPlacementRepository {
@@ -38,7 +38,7 @@ abstract class IPlacementRepository {
 }
 
 class PlacementRepository implements IPlacementRepository {
-  final Dio _dio;
+  final DioClient _dio;
   PlacementRepository(this._dio);
 
   @override

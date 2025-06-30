@@ -22,7 +22,7 @@ class ProfileScreen extends ConsumerStatefulWidget {
 class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(profileNotifierProvider('EMP-001'));
+    final state = ref.watch(profileNotifierProvider);
     final colorScheme = Theme.of(context).colorScheme;
 
     return state.when(
@@ -35,7 +35,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           (e, st) => Scaffold(
             appBar: AppBar(title: Text(context.lango.myProfile)),
             body: SomethingWentWrongWidget(
-              onRetry: () => ref.invalidate(profileNotifierProvider('EMP-001')),
+              onRetry: () => ref.invalidate(profileNotifierProvider),
             ),
           ),
       data:

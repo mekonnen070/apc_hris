@@ -1,18 +1,18 @@
 import 'dart:math';
 
-import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:police_com/core/config/app_config.dart';
 import 'package:police_com/core/constants/api_endpoints.dart';
 import 'package:police_com/core/enums/applicant_status.dart';
+import 'package:police_com/core/network/dio_client.dart';
 import 'package:police_com/features/training/domain/training.dart';
 import 'package:police_com/features/training/domain/training_applicant.dart';
 
 final trainingRepositoryProvider = Provider<ITrainingRepository>((ref) {
-  const useMockData = true;
-  if (useMockData) {
+  if (AppConfig.useMockData) {
     return MockTrainingRepository();
   }
-  // return TrainingRepository(ref.watch(dioClientProvider));
+  return TrainingRepository(ref.watch(dioClientProvider));
 });
 
 abstract class ITrainingRepository {
@@ -38,7 +38,7 @@ abstract class ITrainingRepository {
 }
 
 class TrainingRepository implements ITrainingRepository {
-  final Dio _dio;
+  final DioClient _dio;
   TrainingRepository(this._dio);
 
   @override

@@ -1,6 +1,10 @@
 // lib/features/profile/data/profile_repository.dart
+
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:police_com/core/enums/all_enums.dart';
+import 'package:police_com/core/config/app_config.dart';
+import 'package:police_com/core/constants/api_endpoints.dart';
+import 'package:police_com/core/mixins/logger_mixin.dart';
 import 'package:police_com/core/network/dio_client.dart';
 import 'package:police_com/features/employee_profile/domain/employee_contact_model.dart';
 import 'package:police_com/features/employee_profile/domain/employee_dependant_model.dart';
@@ -8,115 +12,228 @@ import 'package:police_com/features/employee_profile/domain/employee_education_m
 import 'package:police_com/features/employee_profile/domain/employee_experience_model.dart';
 import 'package:police_com/features/employee_profile/domain/employee_info_model.dart';
 import 'package:police_com/features/employee_profile/domain/employee_spouse_model.dart';
-import 'package:uuid/uuid.dart';
+import 'package:police_com/features/profile/data/i_profile_repository.dart';
+import 'package:police_com/features/profile/data/mock_profile_repository.dart';
 
-final profileRepositoryProvider = Provider(
-  (ref) => ProfileRepository(ref.read(dioClientProvider)),
-);
+final profileRepositoryProvider = Provider<IProfileRepository>((ref) {
+  if (AppConfig.useMockData) {
+    return MockProfileRepository();
+  }
+  return ProfileRepository(ref.watch(dioClientProvider));
+});
 
-class ProfileRepository {
+class ProfileRepository with LoggerMixin implements IProfileRepository {
   final DioClient _dioClient;
-
   ProfileRepository(this._dioClient);
 
-  Future<EmployeeInfoModel> getEmployeeProfile(String employeeId) async {
-    await Future.delayed(const Duration(milliseconds: 800));
-    const uuid = Uuid();
-    return EmployeeInfoModel(
-      employeeId: employeeId,
-      title: 'Sgt.',
-      firstName: 'Abe',
-      fatherName: 'Assefa',
-      grandName: 'Tessema',
-      gender: Gender.male,
-      birthDate: DateTime(1988, 5, 21),
-      photoUrl:
-          'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      motherName: 'Yeshi Emebet',
-      positionId: 'Lead Developer', // Using title instead of ID for display
-      managerId: 'MGR-CTO',
-      address1: 'Kebele 04, Addis Ababa',
-      phone: '+251911223344',
-      mobile: '+251911223344',
-      email: 'abe.a@police.gov.et',
-      bloodGroup: BloodGroup.oPositive,
-      religion: Religion.christianity,
-      medicalStatus: MedicalStatus.fit,
-      maritalStatus: MaritalStatus.married,
-      hiredDate: DateTime(2010, 1, 15),
-      employeeEducations: [
-        EmployeeEducationModel(
-          educationId: uuid.v4(),
-          employeeId: employeeId,
-          educationLevel: EducationLevel.bachelorsDegree,
-          university: EthiopianUniversity.addisAbabaUniversity,
-          fieldOfStudy: FieldOfStudy.computerScience,
-          startDate: DateTime(2006, 9),
-          endDate: DateTime(2010, 7),
-          educationStatus: EducationStatus.completed,
-          isApproved: true,
-        ),
-      ],
-      employeeExperiences: [
-        EmployeeExperienceModel(
-          experienceId: uuid.v4(),
-          employeeId: employeeId,
-          organization: 'Federal Police',
-          organizationType: OrganizationType.govermental,
-          position: 'Junior Officer',
-          responsibilities: 'Patrol and community support',
-          joinDate: DateTime(2010, 8),
-          separationDate: DateTime(2015),
-        ),
-        EmployeeExperienceModel(
-          experienceId: uuid.v4(),
-          employeeId: employeeId,
-          organization: 'Federal Police',
-          organizationType: OrganizationType.govermental,
-          position: 'Sergeant',
-          responsibilities: 'Squad lead and field operations management.',
-          joinDate: DateTime(2015, 1, 2),
-        ),
-      ],
-      employeeSpouse: [
-        EmployeeSpouseModel(
-          spouseId: uuid.v4(),
-          employeeId: employeeId,
-          title: 'Mrs.',
-          spouseFullName: 'Almaz Gebre',
-          gender: Gender.female,
-          spouseBirthDate: DateTime(1990, 2, 14),
-          spouseOccupation: 'Nurse',
-          address: 'Kebele 04, Addis Ababa',
-        ),
-      ],
-      employeeContacts: [
-        EmployeeContactModel(
-          contactId: uuid.v4(),
-          employeeId: employeeId,
-          fullName: 'Almaz Gebre',
-          relationship: RelationTypes.spouse,
-          phone: '+251911556677',
-          address: 'Kebele 04, Addis Ababa',
-        ),
-      ],
-      employeeDependants: [
-        EmployeeDependantModel(
-          dependantId: uuid.v4(),
-          employeeId: employeeId,
-          dependantFullName: 'Lia Abe',
-          relation: RelationTypes.child,
-          gender: Gender.female,
-          birthDate: DateTime(2015, 10, 2),
-          region: EthiopianRegion.addisAbaba,
-          phoneNumber: '+251911223344',
-        ),
-      ],
+  @override
+  Future<EmployeeInfoModel> getEmployeeProfile({
+    required String employeeId,
+  }) async {
+    try {
+      final response = await _dioClient.get(
+        ApiEndpoints.getEmployeeProfile(employeeId: employeeId),
+      );
+      return EmployeeInfoModel.fromJson(response.data);
+    } on DioException catch (e, stackTrace) {
+      logError(
+        'Failed to fetch employee profile for ID: $employeeId',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      rethrow;
+    }
+  }
+
+  // The Architect's Note: ADDED - The missing concrete implementation.
+  @override
+  Future<void> updateEmployeeProfile(EmployeeInfoModel employeeInfo) async {
+    try {
+      // Typically, updating a full object uses a PUT request.
+      await _dioClient.put(
+        ApiEndpoints.getEmployeeProfile(
+          employeeId: employeeInfo.employeeId,
+        ), // Assumes PUT to the specific user URL
+        data: employeeInfo.toJson(),
+      );
+    } on DioException catch (e, stackTrace) {
+      logError(
+        'Failed to update employee profile for ID: ${employeeInfo.employeeId}',
+        error: e,
+        stackTrace: stackTrace,
+      );
+      rethrow;
+    }
+  }
+
+  // --- Education ---
+  @override
+  Future<void> addEducation(
+    String employeeId,
+    EmployeeEducationModel education,
+  ) async {
+    await _dioClient.post(
+      ApiEndpoints.education(employeeId: employeeId),
+      data: education.toJson(),
     );
   }
 
-  Future<void> updateEmployeeProfile(EmployeeInfoModel employeeInfo) async {
-    await Future.delayed(const Duration(seconds: 1));
-    print('Updating employee profile: ${employeeInfo.toJson()}');
+  @override
+  Future<void> updateEducation(
+    String employeeId,
+    EmployeeEducationModel education,
+  ) async {
+    await _dioClient.put(
+      ApiEndpoints.educationById(
+        employeeId: employeeId,
+        educationId: education.educationId!,
+      ),
+      data: education.toJson(),
+    );
+  }
+
+  @override
+  Future<void> deleteEducation(String employeeId, String educationId) async {
+    await _dioClient.delete(
+      ApiEndpoints.educationById(
+        employeeId: employeeId,
+        educationId: educationId,
+      ),
+    );
+  }
+
+  // --- Experience ---
+  @override
+  Future<void> addExperience(
+    String employeeId,
+    EmployeeExperienceModel experience,
+  ) async {
+    await _dioClient.post(
+      ApiEndpoints.experience(employeeId: employeeId),
+      data: experience.toJson(),
+    );
+  }
+
+  @override
+  Future<void> updateExperience(
+    String employeeId,
+    EmployeeExperienceModel experience,
+  ) async {
+    await _dioClient.put(
+      ApiEndpoints.experienceById(
+        employeeId: employeeId,
+        experienceId: experience.experienceId!,
+      ),
+      data: experience.toJson(),
+    );
+  }
+
+  @override
+  Future<void> deleteExperience(String employeeId, String experienceId) async {
+    await _dioClient.delete(
+      ApiEndpoints.experienceById(
+        employeeId: employeeId,
+        experienceId: experienceId,
+      ),
+    );
+  }
+
+  // --- Dependant ---
+  @override
+  Future<void> addDependant(
+    String employeeId,
+    EmployeeDependantModel dependant,
+  ) async {
+    await _dioClient.post(
+      ApiEndpoints.dependant(employeeId: employeeId),
+      data: dependant.toJson(),
+    );
+  }
+
+  @override
+  Future<void> updateDependant(
+    String employeeId,
+    EmployeeDependantModel dependant,
+  ) async {
+    await _dioClient.put(
+      ApiEndpoints.dependantById(
+        employeeId: employeeId,
+        dependantId: dependant.dependantId!,
+      ),
+      data: dependant.toJson(),
+    );
+  }
+
+  @override
+  Future<void> deleteDependant(String employeeId, String dependantId) async {
+    await _dioClient.delete(
+      ApiEndpoints.dependantById(
+        employeeId: employeeId,
+        dependantId: dependantId,
+      ),
+    );
+  }
+
+  // --- Contact ---
+  @override
+  Future<void> addContact(
+    String employeeId,
+    EmployeeContactModel contact,
+  ) async {
+    await _dioClient.post(
+      ApiEndpoints.contact(employeeId: employeeId),
+      data: contact.toJson(),
+    );
+  }
+
+  @override
+  Future<void> updateContact(
+    String employeeId,
+    EmployeeContactModel contact,
+  ) async {
+    await _dioClient.put(
+      ApiEndpoints.contactById(
+        employeeId: employeeId,
+        contactId: contact.contactId!,
+      ),
+      data: contact.toJson(),
+    );
+  }
+
+  @override
+  Future<void> deleteContact(String employeeId, String contactId) async {
+    await _dioClient.delete(
+      ApiEndpoints.contactById(employeeId: employeeId, contactId: contactId),
+    );
+  }
+
+  // --- Spouse ---
+  @override
+  Future<void> addSpouse(String employeeId, EmployeeSpouseModel spouse) async {
+    await _dioClient.post(
+      ApiEndpoints.spouse(employeeId: employeeId),
+      data: spouse.toJson(),
+    );
+  }
+
+  @override
+  Future<void> updateSpouse(
+    String employeeId,
+    EmployeeSpouseModel spouse,
+  ) async {
+    await _dioClient.put(
+      ApiEndpoints.spouseById(
+        employeeId: employeeId,
+        spouseId: spouse.spouseId!,
+      ),
+      data: spouse.toJson(),
+    );
+  }
+
+  @override
+  Future<void> deleteSpouse(String employeeId, String spouseId) async {
+    await _dioClient.delete(
+      ApiEndpoints.spouseById(employeeId: employeeId, spouseId: spouseId),
+    );
   }
 }

@@ -2986,6 +2986,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Ethiopian'**
   String get ethiopian;
+
+  /// No description provided for @noPlacementsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No Placements Found'**
+  String get noPlacementsFound;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
