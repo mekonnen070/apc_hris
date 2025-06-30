@@ -31,7 +31,7 @@ Map<String, dynamic> _$PromotionRequestToJson(_PromotionRequest instance) =>
     };
 
 const _$PromotionStatusEnumMap = {
-  PromotionStatus.pending: 'pending',
-  PromotionStatus.approved: 'approved',
-  PromotionStatus.rejected: 'rejected',
+  PromotionStatus.pending: 0,
+  PromotionStatus.approved: 1,
+  PromotionStatus.rejected: 2,
 };

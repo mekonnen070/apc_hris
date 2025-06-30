@@ -2992,6 +2992,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No Placements Found'**
   String get noPlacementsFound;
+
+  /// No description provided for @transferTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Transfer To: {location}'**
+  String transferTo({required String location});
+
+  /// No description provided for @approvalDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Approval Date'**
+  String get approvalDate;
+
+  /// No description provided for @approvedBy.
+  ///
+  /// In en, this message translates to:
+  /// **'Approved By'**
+  String get approvedBy;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -1,21 +1,28 @@
 /// Represents the general status for workflows, approvals, or processes in the system.
 ///
+library;
+
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'general_status.g.dart';
+
+@JsonEnum(alwaysCreate: true)
 enum GeneralStatus {
-  /// The item is pending and awaiting action.
+  @JsonValue(0)
   pending,
 
-  /// The item has been submitted for review or processing.
+  @JsonValue(1)
   submitted,
 
-  /// The item has been approved.
+  @JsonValue(2)
   approved,
 
-  /// The item has been rejected.
+  @JsonValue(3)
   rejected,
 
-  /// The process or item is completed.
+  @JsonValue(4)
   completed,
 
-  /// The process or item has been canceled.
+  @JsonValue(5)
   canceled,
 }

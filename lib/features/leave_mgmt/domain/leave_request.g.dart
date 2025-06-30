@@ -43,8 +43,8 @@ Map<String, dynamic> _$LeaveRequestToJson(_LeaveRequest instance) =>
     };
 
 const _$LeaveRequestStatusEnumMap = {
-  LeaveRequestStatus.pending: 'pending',
-  LeaveRequestStatus.approved: 'approved',
-  LeaveRequestStatus.rejected: 'rejected',
-  LeaveRequestStatus.cancelled: 'cancelled',
+  LeaveRequestStatus.pending: 0,
+  LeaveRequestStatus.approved: 1,
+  LeaveRequestStatus.rejected: 2,
+  LeaveRequestStatus.cancelled: 3,
 };

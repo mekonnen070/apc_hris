@@ -33,17 +33,17 @@ Map<String, dynamic> _$ClearanceRequestToJson(_ClearanceRequest instance) =>
     };
 
 const _$ClearanceReasonEnumMap = {
-  ClearanceReason.resignation: 'resignation',
-  ClearanceReason.endOfContract: 'endOfContract',
-  ClearanceReason.retirement: 'retirement',
-  ClearanceReason.longTermLeave: 'longTermLeave',
-  ClearanceReason.other: 'other',
+  ClearanceReason.resignation: 0,
+  ClearanceReason.endOfContract: 1,
+  ClearanceReason.retirement: 2,
+  ClearanceReason.longTermLeave: 3,
+  ClearanceReason.other: 4,
 };
 
 const _$ClearanceStatusEnumMap = {
-  ClearanceStatus.pending: 'pending',
-  ClearanceStatus.approved: 'approved',
-  ClearanceStatus.rejected: 'rejected',
-  ClearanceStatus.processing: 'processing',
-  ClearanceStatus.completed: 'completed',
+  ClearanceStatus.pending: 0,
+  ClearanceStatus.approved: 1,
+  ClearanceStatus.rejected: 2,
+  ClearanceStatus.processing: 3,
+  ClearanceStatus.completed: 4,
 };

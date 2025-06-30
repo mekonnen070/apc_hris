@@ -4,7 +4,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'my_transfer_requests_state.dart';
+part of 'my_transfer_requests_notifier.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$MyTransferRequestsState {
 
- List<TransferRequestModel> get requests; bool get isLoading; String? get errorMessage; String? get successMessage;
+ bool get isLoading; List<TransferRequest> get requests; String? get errorMessage; String? get successMessage;
 /// Create a copy of MyTransferRequestsState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,16 @@ $MyTransferRequestsStateCopyWith<MyTransferRequestsState> get copyWith => _$MyTr
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MyTransferRequestsState&&const DeepCollectionEquality().equals(other.requests, requests)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.successMessage, successMessage) || other.successMessage == successMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MyTransferRequestsState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&const DeepCollectionEquality().equals(other.requests, requests)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.successMessage, successMessage) || other.successMessage == successMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(requests),isLoading,errorMessage,successMessage);
+int get hashCode => Object.hash(runtimeType,isLoading,const DeepCollectionEquality().hash(requests),errorMessage,successMessage);
 
 @override
 String toString() {
-  return 'MyTransferRequestsState(requests: $requests, isLoading: $isLoading, errorMessage: $errorMessage, successMessage: $successMessage)';
+  return 'MyTransferRequestsState(isLoading: $isLoading, requests: $requests, errorMessage: $errorMessage, successMessage: $successMessage)';
 }
 
 
@@ -46,7 +46,7 @@ abstract mixin class $MyTransferRequestsStateCopyWith<$Res>  {
   factory $MyTransferRequestsStateCopyWith(MyTransferRequestsState value, $Res Function(MyTransferRequestsState) _then) = _$MyTransferRequestsStateCopyWithImpl;
 @useResult
 $Res call({
- List<TransferRequestModel> requests, bool isLoading, String? errorMessage, String? successMessage
+ bool isLoading, List<TransferRequest> requests, String? errorMessage, String? successMessage
 });
 
 
@@ -63,11 +63,11 @@ class _$MyTransferRequestsStateCopyWithImpl<$Res>
 
 /// Create a copy of MyTransferRequestsState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? requests = null,Object? isLoading = null,Object? errorMessage = freezed,Object? successMessage = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? requests = null,Object? errorMessage = freezed,Object? successMessage = freezed,}) {
   return _then(_self.copyWith(
-requests: null == requests ? _self.requests : requests // ignore: cast_nullable_to_non_nullable
-as List<TransferRequestModel>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
-as bool,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as bool,requests: null == requests ? _self.requests : requests // ignore: cast_nullable_to_non_nullable
+as List<TransferRequest>,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,successMessage: freezed == successMessage ? _self.successMessage : successMessage // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
@@ -80,17 +80,17 @@ as String?,
 
 
 class _MyTransferRequestsState implements MyTransferRequestsState {
-  const _MyTransferRequestsState({final  List<TransferRequestModel> requests = const [], this.isLoading = false, this.errorMessage, this.successMessage}): _requests = requests;
+  const _MyTransferRequestsState({this.isLoading = true, final  List<TransferRequest> requests = const [], this.errorMessage, this.successMessage}): _requests = requests;
   
 
- final  List<TransferRequestModel> _requests;
-@override@JsonKey() List<TransferRequestModel> get requests {
+@override@JsonKey() final  bool isLoading;
+ final  List<TransferRequest> _requests;
+@override@JsonKey() List<TransferRequest> get requests {
   if (_requests is EqualUnmodifiableListView) return _requests;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_requests);
 }
 
-@override@JsonKey() final  bool isLoading;
 @override final  String? errorMessage;
 @override final  String? successMessage;
 
@@ -104,16 +104,16 @@ _$MyTransferRequestsStateCopyWith<_MyTransferRequestsState> get copyWith => __$M
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MyTransferRequestsState&&const DeepCollectionEquality().equals(other._requests, _requests)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.successMessage, successMessage) || other.successMessage == successMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MyTransferRequestsState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&const DeepCollectionEquality().equals(other._requests, _requests)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.successMessage, successMessage) || other.successMessage == successMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_requests),isLoading,errorMessage,successMessage);
+int get hashCode => Object.hash(runtimeType,isLoading,const DeepCollectionEquality().hash(_requests),errorMessage,successMessage);
 
 @override
 String toString() {
-  return 'MyTransferRequestsState(requests: $requests, isLoading: $isLoading, errorMessage: $errorMessage, successMessage: $successMessage)';
+  return 'MyTransferRequestsState(isLoading: $isLoading, requests: $requests, errorMessage: $errorMessage, successMessage: $successMessage)';
 }
 
 
@@ -124,7 +124,7 @@ abstract mixin class _$MyTransferRequestsStateCopyWith<$Res> implements $MyTrans
   factory _$MyTransferRequestsStateCopyWith(_MyTransferRequestsState value, $Res Function(_MyTransferRequestsState) _then) = __$MyTransferRequestsStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<TransferRequestModel> requests, bool isLoading, String? errorMessage, String? successMessage
+ bool isLoading, List<TransferRequest> requests, String? errorMessage, String? successMessage
 });
 
 
@@ -141,11 +141,11 @@ class __$MyTransferRequestsStateCopyWithImpl<$Res>
 
 /// Create a copy of MyTransferRequestsState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? requests = null,Object? isLoading = null,Object? errorMessage = freezed,Object? successMessage = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? requests = null,Object? errorMessage = freezed,Object? successMessage = freezed,}) {
   return _then(_MyTransferRequestsState(
-requests: null == requests ? _self._requests : requests // ignore: cast_nullable_to_non_nullable
-as List<TransferRequestModel>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
-as bool,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as bool,requests: null == requests ? _self._requests : requests // ignore: cast_nullable_to_non_nullable
+as List<TransferRequest>,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,successMessage: freezed == successMessage ? _self.successMessage : successMessage // ignore: cast_nullable_to_non_nullable
 as String?,
   ));

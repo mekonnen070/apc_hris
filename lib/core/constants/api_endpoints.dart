@@ -49,18 +49,20 @@ class ApiEndpoints {
       '$_transfer/InitiateSelection'; // GET
 
   // Base feature paths to avoid repetition
-  static const String _newRecruit = '/NewRecruit';
+  static const String _newRecruit = '/newRecruit';
   static const String _leave = '/leave';
   static const String _training = '/training';
   static const String _placement = '/placement';
-  static const String _recruitment = '/RecruitAnnouncement';
+  static const String _recruitment = '/recruitAnnouncement';
 
   // --- Recruit/My Recruits Endpoints ---
   static const String recruits = '$_newRecruit/recruits';
+
   /// POST  /api/NewRecruit/Create
   static const String createRecruit = '$_newRecruit/create';
+
   /// POST  /api/NewRecruit/Edit
-  static const String editRecruit = '$_newRecruit/Edit';
+  static const String editRecruit = '$_newRecruit/edit';
 
   // --- Recruitment Announcements Endpoints ---
   static const String recruitmentAnnouncements = '$_recruitment/announcements';

@@ -1,222 +1,182 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:police_com/core/enums/transfer_request_status.dart';
-import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
+import 'package:intl/intl.dart';
+import 'package:police_com/core/enums/transfer_status.dart';
+import 'package:police_com/core/extensions/context_extension.dart';
+import 'package:police_com/core/extensions/string_extension.dart';
 import 'package:police_com/features/transfer/application/my_transfer_requests_notifier.dart';
-import 'package:police_com/features/transfer/application/my_transfer_requests_providers.dart';
-import 'package:police_com/features/transfer/domain/transfer_request_model.dart';
+import 'package:police_com/features/transfer/domain/transfer_request.dart';
 import 'package:police_com/features/transfer/presentation/request_transfer_screen.dart';
 import 'package:police_com/features/transfer/presentation/widgets/transfer_request_list_item_widget.dart';
 import 'package:police_com/features/widgets/app_bar_widget.dart';
 import 'package:toastification/toastification.dart';
 
-class MyTransferRequestsScreen extends HookConsumerWidget {
+class MyTransferRequestsScreen extends ConsumerWidget {
   const MyTransferRequestsScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final transferRequestsState = ref.watch(myTransferRequestsNotifierProvider);
-    final transferRequestsNotifier = ref.read(
-      myTransferRequestsNotifierProvider.notifier,
-    );
+    final state = ref.watch(myTransferRequestsNotifierProvider);
+    final notifier = ref.read(myTransferRequestsNotifierProvider.notifier);
 
-    // Listen for success/error messages for operations like cancellation
-    ref.listen<String?>(
-      myTransferRequestsNotifierProvider.select((s) => s.successMessage),
-      (prev, next) {
-        if (next != null) {
-          Toastification().show(
-            context: context,
-            title: Text(next),
-            type: ToastificationType.success,
-            autoCloseDuration: const Duration(seconds: 3),
-          );
-        }
-      },
-    );
-    ref.listen<String?>(
-      myTransferRequestsNotifierProvider.select((s) => s.errorMessage),
-      (prev, next) {
-        if (next != null) {
-          Toastification().show(
-            context: context,
-            title: Text(next),
-            type: ToastificationType.error,
-            autoCloseDuration: const Duration(seconds: 5),
-          );
-        }
-      },
-    );
-
-    Widget buildBody() {
-      if (transferRequestsState.isLoading &&
-          transferRequestsState.requests.isEmpty) {
-        return const CenteredLoadingIndicator();
-      }
-      if (transferRequestsState.errorMessage != null &&
-          transferRequestsState.requests.isEmpty) {
-        return ErrorDisplayWidget(
-          message: transferRequestsState.errorMessage!,
-          onRetry:
-              () => transferRequestsNotifier.fetchMyTransferRequests(
-                isRefresh: true,
-              ),
+    ref.listen(myTransferRequestsNotifierProvider, (previous, next) {
+      if (next.successMessage != null) {
+        Toastification().show(
+          context: context,
+          title: Text(next.successMessage!),
+          type: ToastificationType.success,
         );
       }
-      if (transferRequestsState.requests.isEmpty) {
-        return EmptyListDisplayWidget(
-          message: context.lango.noTransferRequestsYet, // <-- REPLACED
-          actionText: context.lango.refresh, // <-- REPLACED
-          onActionPressed:
-              () => transferRequestsNotifier.fetchMyTransferRequests(
-                isRefresh: true,
-              ),
+      if (next.errorMessage != null) {
+        Toastification().show(
+          context: context,
+          title: Text(next.errorMessage!),
+          type: ToastificationType.error,
         );
       }
+    });
 
-      return Scaffold(
-        appBar: AppBarWidget(title: context.lango.myTransferRequests), // <-- REPLACED & REMOVED CONST
-        floatingActionButton: FloatingActionButton(
-          
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const RequestTransferScreen(),
-              ),
-            );
-          },
-          child: const Icon(Icons.add),
-        ),
-        body: RefreshIndicator(
-          onRefresh:
-              () => transferRequestsNotifier.fetchMyTransferRequests(
-                isRefresh: true,
-              ),
-          child: ListView.builder(
-            padding: const EdgeInsets.all(8.0),
-            itemCount: transferRequestsState.requests.length,
-            itemBuilder: (context, index) {
-              final request = transferRequestsState.requests[index];
-              return TransferRequestListItemWidget(
-                request: request,
-                onTap: () {
-                  // Show full details of the request in a dialog
-                  _showTransferRequestDetailDialog(context, request);
-                },
-                onCancel:
-                    request.status ==
-                                TransferRequestStatus.pendingManagerApproval ||
-                            request.status ==
-                                TransferRequestStatus.pendingHRApproval
-                        ? () {
-                          _confirmCancelRequest(
-                            context,
-                            transferRequestsNotifier,
-                            request,
-                          );
-                        }
-                        : null,
-              );
-            },
-          ),
+    return Scaffold(
+      appBar: AppBarWidget(title: context.lango.myTransferRequests),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          final result = await Navigator.of(context).push<bool>(
+            MaterialPageRoute(builder: (_) => const RequestTransferScreen()),
+          );
+          if (result == true) {
+            notifier.fetchMyTransferRequests(isRefresh: true);
+          }
+        },
+        child: const Icon(Icons.add),
+      ),
+      body: RefreshIndicator(
+        onRefresh: () => notifier.fetchMyTransferRequests(isRefresh: true),
+        child: _buildBody(context, state, notifier),
+      ),
+    );
+  }
+
+  Widget _buildBody(
+    BuildContext context,
+    MyTransferRequestsState state,
+    MyTransferRequestsNotifier notifier,
+  ) {
+    if (state.isLoading && state.requests.isEmpty) {
+      return const Center(child: CircularProgressIndicator());
+    }
+    if (state.errorMessage != null && state.requests.isEmpty) {
+      return Center(child: Text(context.lango.somethingWentWrong));
+    }
+    if (state.requests.isEmpty) {
+      return Center(
+        child: Text(
+          context.lango.noTransferRequestsYet,
+          style: Theme.of(context).textTheme.bodyLarge,
         ),
       );
     }
-
-    return Scaffold(body: buildBody());
+    return ListView.builder(
+      padding: const EdgeInsets.all(8.0),
+      itemCount: state.requests.length,
+      itemBuilder: (context, index) {
+        final request = state.requests[index];
+        return TransferRequestListItemWidget(
+          request: request,
+          onTap: () => _showTransferRequestDetailDialog(context, request),
+          onDelete:
+              request.status == TransferStatus.pending ||
+                      request.status == TransferStatus.submitted
+                  ? () => _confirmCancelRequest(context, notifier, request)
+                  : null,
+        );
+      },
+    );
   }
 
   void _showTransferRequestDetailDialog(
     BuildContext context,
-    TransferRequestModel request,
+    TransferRequest request,
   ) {
-    showDialog(
+    showModalBottomSheet(
       context: context,
-      builder: (BuildContext dialogContext) {
-        return AlertDialog(
-          title: Text(context.lango.transferRequestDetails), // <-- REPLACED
-          content: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                _buildDetailRow(context, context.lango.requestId, request.id), // <-- REPLACED
+      useSafeArea: true,
+      isScrollControlled: true,
+      showDragHandle: true,
+      builder: (ctx) {
+        return SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildDetailRow(
+                context,
+                context.lango.requestId,
+                request.transferRequestId.toString(),
+              ),
+              _buildDetailRow(
+                context,
+                context.lango.status,
+                request.status.name.toDisplayCase(),
+              ),
+              _buildDetailRow(
+                context,
+                context.lango.requestDate,
+                DateFormat.yMMMd().format(request.requestDate),
+              ),
+              const Divider(height: 24),
+              _buildDetailRow(
+                context,
+                context.lango.currentPosition,
+                request.currentPosition ?? 'N/A',
+              ),
+              _buildDetailRow(
+                context,
+                context.lango.currentDepartment,
+                request.currentDepartment ?? 'N/A',
+              ),
+              _buildDetailRow(
+                context,
+                context.lango.currentLocation,
+                request.currentLocation ?? 'N/A',
+              ),
+              const Divider(height: 24),
+              _buildDetailRow(
+                context,
+                context.lango.requestedPosition,
+                request.requestedPositionTitle ?? 'N/A',
+              ),
+              _buildDetailRow(
+                context,
+                context.lango.requestedDepartment,
+                request.requestedDepartment ?? 'N/A',
+              ),
+              _buildDetailRow(
+                context,
+                context.lango.requestedLocation,
+                request.requestedLocation ?? 'N/A',
+              ),
+              const Divider(height: 24),
+              _buildDetailRow(
+                context,
+                context.lango.reason,
+                request.reasonForRequest?.name.toDisplayCase() ?? 'N/A',
+              ),
+              if (request.approvalDate != null)
                 _buildDetailRow(
                   context,
-                  context.lango.currentPosition, // <-- REPLACED
-                  request.currentPositionTitle,
+                  context.lango.approvalDate,
+                  DateFormat.yMMMd().format(request.approvalDate!),
                 ),
+              if (request.approvedBy != null)
                 _buildDetailRow(
                   context,
-                  context.lango.currentDepartment, // <-- REPLACED
-                  request.currentDepartment,
+                  context.lango.approvedBy,
+                  request.approvedBy!,
                 ),
-                _buildDetailRow(
-                  context,
-                  context.lango.currentLocation, // <-- REPLACED
-                  request.currentLocation,
-                ),
-                const Divider(),
-                _buildDetailRow(
-                  context,
-                  context.lango.requestedDepartment, // <-- REPLACED
-                  request.requestedDepartment,
-                ),
-                _buildDetailRow(
-                  context,
-                  context.lango.requestedLocation, // <-- REPLACED
-                  request.requestedLocation,
-                ),
-                if (request.requestedPositionTitle != null &&
-                    request.requestedPositionTitle!.isNotEmpty)
-                  _buildDetailRow(
-                    context,
-                    context.lango.requestedPosition, // <-- REPLACED
-                    request.requestedPositionTitle!,
-                  ),
-                _buildDetailRow(context, context.lango.reason, request.reasonForRequest), // <-- REPLACED
-                _buildDetailRow(
-                  context,
-                  context.lango.requestDate, // <-- REPLACED
-                  request.requestDate.toLocal().toString().split(' ')[0],
-                ),
-                _buildDetailRow(
-                  context,
-                  context.lango.status, // <-- REPLACED
-                  request.status.name,
-                ), // TODO: Use toDisplayString
-                if (request.managerComments != null &&
-                    request.managerComments!.isNotEmpty)
-                  _buildDetailRow(
-                    context,
-                    context.lango.managerComments, // <-- REPLACED
-                    request.managerComments!,
-                  ),
-                if (request.hrComments != null &&
-                    request.hrComments!.isNotEmpty)
-                  _buildDetailRow(context, context.lango.hrComments, request.hrComments!), // <-- REPLACED
-                if (request.effectiveDate != null)
-                  _buildDetailRow(
-                    context,
-                    context.lango.effectiveDate, // <-- REPLACED
-                    request.effectiveDate!.toLocal().toString().split(' ')[0],
-                  ),
-                if (request.lastUpdated != null)
-                  _buildDetailRow(
-                    context,
-                    context.lango.lastUpdated, // <-- REPLACED
-                    request.lastUpdated!.toLocal().toString().split(' ')[0],
-                  ),
-              ],
-            ),
+              const Divider(height: 36),
+            ],
           ),
-          actions: <Widget>[
-            TextButton(
-              child: Text(context.lango.close), // <-- REPLACED
-              onPressed: () => Navigator.of(dialogContext).pop(),
-            ),
-          ],
         );
       },
     );
@@ -225,32 +185,37 @@ class MyTransferRequestsScreen extends HookConsumerWidget {
   void _confirmCancelRequest(
     BuildContext context,
     MyTransferRequestsNotifier notifier,
-    TransferRequestModel request,
+    TransferRequest request,
   ) {
     showDialog(
       context: context,
-      builder: (BuildContext dialogContext) {
-        return AlertDialog(
-          title: Text(context.lango.confirmCancellation), // <-- REPLACED
-          content: Text(
-            context.lango.confirmCancelTransferRequest(location: request.requestedLocation), // <-- REPLACED
+      builder:
+          (ctx) => AlertDialog(
+            title: Text(context.lango.delete),
+            content: Text(
+              context.lango.confirmDeleteItem(
+                itemName: request.requestedLocation ?? 'N/A',
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text(context.lango.no),
+                onPressed: () => Navigator.of(ctx).pop(),
+              ),
+              TextButton(
+                style: TextButton.styleFrom(
+                  foregroundColor: Theme.of(context).colorScheme.error,
+                ),
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                  notifier.deleteTransferRequest(
+                    request.transferRequestId.toString(),
+                  );
+                },
+                child: Text(context.lango.delete),
+              ),
+            ],
           ),
-          actions: <Widget>[
-            TextButton(
-              child: Text(context.lango.no), // <-- REPLACED
-              onPressed: () => Navigator.of(dialogContext).pop(),
-            ),
-            TextButton(
-              style: TextButton.styleFrom(foregroundColor: Colors.red),
-              onPressed: () {
-                Navigator.of(dialogContext).pop();
-                notifier.cancelTransferRequest(request.id);
-              },
-              child: Text(context.lango.yesCancel), // <-- REPLACED
-            ),
-          ],
-        );
-      },
     );
   }
 
@@ -260,78 +225,10 @@ class MyTransferRequestsScreen extends HookConsumerWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            flex: 2,
-            child: Text(
-              '$label:',
-              style: Theme.of(
-                context,
-              ).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
-            ),
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            flex: 3,
-            child: Text(value, style: Theme.of(context).textTheme.bodyLarge),
-          ),
+          Text('$label: ', style: const TextStyle(fontWeight: FontWeight.bold)),
+          Expanded(child: Text(value)),
         ],
       ),
-    );
-  }
-}
-
-// CenteredLoadingIndicator
-class CenteredLoadingIndicator extends StatelessWidget {
-  const CenteredLoadingIndicator({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(child: CircularProgressIndicator.adaptive());
-  }
-}
-
-// ErrorDisplayWidget
-class ErrorDisplayWidget extends StatelessWidget {
-  final String message;
-  final VoidCallback onRetry;
-
-  const ErrorDisplayWidget({
-    required this.message,
-    required this.onRetry,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(message),
-        FilledButton(onPressed: onRetry, child: Text(context.lango.retry)), // <-- REPLACED
-      ],
-    );
-  }
-}
-
-// EmptyListDisplayWidget
-class EmptyListDisplayWidget extends StatelessWidget {
-  final String message;
-  final String actionText;
-  final VoidCallback onActionPressed;
-
-  const EmptyListDisplayWidget({
-    required this.message,
-    required this.actionText,
-    required this.onActionPressed,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(message),
-        FilledButton(onPressed: onActionPressed, child: Text(actionText)),
-      ],
     );
   }
 }

@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 mixin _$TransferRequestFormState {
 
 // The transfer request data being built by the user.
- TransferRequestModel get transferRequestData;// True if the form is currently being submitted to the backend.
+ TransferRequest get transferRequestData;// True if the form is currently being submitted to the backend.
  bool get isSubmitting;// Any error message from the last submission attempt.
  String? get errorMessage;// Message for successful submission.
  String? get successMessage;
@@ -50,11 +50,11 @@ abstract mixin class $TransferRequestFormStateCopyWith<$Res>  {
   factory $TransferRequestFormStateCopyWith(TransferRequestFormState value, $Res Function(TransferRequestFormState) _then) = _$TransferRequestFormStateCopyWithImpl;
 @useResult
 $Res call({
- TransferRequestModel transferRequestData, bool isSubmitting, String? errorMessage, String? successMessage
+ TransferRequest transferRequestData, bool isSubmitting, String? errorMessage, String? successMessage
 });
 
 
-$TransferRequestModelCopyWith<$Res> get transferRequestData;
+$TransferRequestCopyWith<$Res> get transferRequestData;
 
 }
 /// @nodoc
@@ -70,7 +70,7 @@ class _$TransferRequestFormStateCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') @override $Res call({Object? transferRequestData = null,Object? isSubmitting = null,Object? errorMessage = freezed,Object? successMessage = freezed,}) {
   return _then(_self.copyWith(
 transferRequestData: null == transferRequestData ? _self.transferRequestData : transferRequestData // ignore: cast_nullable_to_non_nullable
-as TransferRequestModel,isSubmitting: null == isSubmitting ? _self.isSubmitting : isSubmitting // ignore: cast_nullable_to_non_nullable
+as TransferRequest,isSubmitting: null == isSubmitting ? _self.isSubmitting : isSubmitting // ignore: cast_nullable_to_non_nullable
 as bool,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,successMessage: freezed == successMessage ? _self.successMessage : successMessage // ignore: cast_nullable_to_non_nullable
 as String?,
@@ -80,9 +80,9 @@ as String?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$TransferRequestModelCopyWith<$Res> get transferRequestData {
+$TransferRequestCopyWith<$Res> get transferRequestData {
   
-  return $TransferRequestModelCopyWith<$Res>(_self.transferRequestData, (value) {
+  return $TransferRequestCopyWith<$Res>(_self.transferRequestData, (value) {
     return _then(_self.copyWith(transferRequestData: value));
   });
 }
@@ -97,7 +97,7 @@ class _TransferRequestFormState implements TransferRequestFormState {
   
 
 // The transfer request data being built by the user.
-@override final  TransferRequestModel transferRequestData;
+@override final  TransferRequest transferRequestData;
 // True if the form is currently being submitted to the backend.
 @override@JsonKey() final  bool isSubmitting;
 // Any error message from the last submission attempt.
@@ -135,11 +135,11 @@ abstract mixin class _$TransferRequestFormStateCopyWith<$Res> implements $Transf
   factory _$TransferRequestFormStateCopyWith(_TransferRequestFormState value, $Res Function(_TransferRequestFormState) _then) = __$TransferRequestFormStateCopyWithImpl;
 @override @useResult
 $Res call({
- TransferRequestModel transferRequestData, bool isSubmitting, String? errorMessage, String? successMessage
+ TransferRequest transferRequestData, bool isSubmitting, String? errorMessage, String? successMessage
 });
 
 
-@override $TransferRequestModelCopyWith<$Res> get transferRequestData;
+@override $TransferRequestCopyWith<$Res> get transferRequestData;
 
 }
 /// @nodoc
@@ -155,7 +155,7 @@ class __$TransferRequestFormStateCopyWithImpl<$Res>
 @override @pragma('vm:prefer-inline') $Res call({Object? transferRequestData = null,Object? isSubmitting = null,Object? errorMessage = freezed,Object? successMessage = freezed,}) {
   return _then(_TransferRequestFormState(
 transferRequestData: null == transferRequestData ? _self.transferRequestData : transferRequestData // ignore: cast_nullable_to_non_nullable
-as TransferRequestModel,isSubmitting: null == isSubmitting ? _self.isSubmitting : isSubmitting // ignore: cast_nullable_to_non_nullable
+as TransferRequest,isSubmitting: null == isSubmitting ? _self.isSubmitting : isSubmitting // ignore: cast_nullable_to_non_nullable
 as bool,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String?,successMessage: freezed == successMessage ? _self.successMessage : successMessage // ignore: cast_nullable_to_non_nullable
 as String?,
@@ -166,9 +166,9 @@ as String?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$TransferRequestModelCopyWith<$Res> get transferRequestData {
+$TransferRequestCopyWith<$Res> get transferRequestData {
   
-  return $TransferRequestModelCopyWith<$Res>(_self.transferRequestData, (value) {
+  return $TransferRequestCopyWith<$Res>(_self.transferRequestData, (value) {
     return _then(_self.copyWith(transferRequestData: value));
   });
 }

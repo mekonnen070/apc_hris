@@ -39,6 +39,6 @@ export 'relation_types.dart';
 export 'religion.dart';
 export 'task_assignee_type.dart';
 // New Enum for Employee Transfer
-export 'transfer_request_status.dart';
+export 'transfer_status.dart';
 // Enums for Recruitment (Vacancy)
 export 'vacancy_status.dart';

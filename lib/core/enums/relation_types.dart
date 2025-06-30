@@ -1,11 +1,33 @@
-// Defines the nature of the relationship for an employee contact or dependant.
-// TODO: Populate with actual enum values from your backend's RelationTypes definition.
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'relation_types.g.dart';
+
+@JsonEnum(alwaysCreate: true)
 enum RelationTypes {
-  spouse,
+  @JsonValue(0)
+  husband,
+
+  @JsonValue(1)
+  wife,
+
+  @JsonValue(2)
   child,
-  parent,
-  sibling,
+
+  @JsonValue(3)
+  father,
+
+  @JsonValue(4)
+  mother,
+
+  @JsonValue(5)
+  brother,
+
+  @JsonValue(6)
+  sister,
+
+  @JsonValue(7)
   guardian,
-  emergencyContact,
+
+  @JsonValue(8)
   other,
 }

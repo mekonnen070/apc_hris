@@ -42,15 +42,15 @@ Map<String, dynamic> _$EmployeeUploadModelToJson(
 };
 
 const _$DocumentTypeEnumMap = {
-  DocumentType.cv: 'cv',
-  DocumentType.contract: 'contract',
-  DocumentType.id: 'id',
-  DocumentType.passport: 'passport',
-  DocumentType.drivingLicense: 'drivingLicense',
-  DocumentType.academicCertificate: 'academicCertificate',
-  DocumentType.trainingCertificate: 'trainingCertificate',
-  DocumentType.paySlip: 'paySlip',
-  DocumentType.taxDocument: 'taxDocument',
-  DocumentType.medicalReport: 'medicalReport',
-  DocumentType.other: 'other',
+  DocumentType.cv: 0,
+  DocumentType.contract: 1,
+  DocumentType.id: 2,
+  DocumentType.passport: 3,
+  DocumentType.drivingLicense: 4,
+  DocumentType.academicCertificate: 5,
+  DocumentType.trainingCertificate: 6,
+  DocumentType.paySlip: 7,
+  DocumentType.taxDocument: 8,
+  DocumentType.medicalReport: 9,
+  DocumentType.other: 10,
 };

@@ -780,5 +780,15 @@
     "viewSelected": "የተመረጡትን ይመልከቱ",
     "appealDecision": "የይግባኝ ውሳኔ",
     "ethiopian": "ኢትዮጵያዊ",
-    "noPlacementsFound": "ምንም የሥራ መደቦች አልተገኙም።"
+    "noPlacementsFound": "ምንም የሥራ መደቦች አልተገኙም።",
+    "transferTo": "ዝውውር ወደ: {location}",
+    "@transferTo": {
+        "placeholders": {
+            "location": {
+                "type": "String"
+            }
+        }
+    },
+    "approvalDate": "የተፈቀደበት ቀን",
+    "approvedBy": "የጸደቀው በ"
 }

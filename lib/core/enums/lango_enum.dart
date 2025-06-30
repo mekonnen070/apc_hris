@@ -3,7 +3,7 @@ enum Lango {
   am;
 
   String get name => switch (this) {
-    Lango.en => 'English', // English
+    Lango.en => 'English',
     Lango.am => 'Amharic',
   };
 

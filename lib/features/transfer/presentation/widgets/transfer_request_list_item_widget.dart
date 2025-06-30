@@ -1,53 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:police_com/core/enums/all_enums.dart'; // For TransferRequestStatus
-import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
-import 'package:police_com/core/extensions/enum_extension.dart'; // For toDisplayString
-import 'package:police_com/features/transfer/domain/transfer_request_model.dart';
+import 'package:police_com/core/enums/transfer_status.dart';
+import 'package:police_com/core/extensions/context_extension.dart';
+import 'package:police_com/core/extensions/string_extension.dart';
+import 'package:police_com/features/transfer/domain/transfer_request.dart';
 
 class TransferRequestListItemWidget extends StatelessWidget {
-  final TransferRequestModel request;
+  final TransferRequest request;
   final VoidCallback onTap;
-  final VoidCallback? onCancel; // Optional callback for cancellation
+  final VoidCallback? onDelete;
 
   const TransferRequestListItemWidget({
     super.key,
     required this.request,
     required this.onTap,
-    this.onCancel,
+    this.onDelete,
   });
 
-  Color _getStatusColor(TransferRequestStatus status, ThemeData theme) {
+  Color _getStatusColor(BuildContext context, TransferStatus status) {
     switch (status) {
-      case TransferRequestStatus.pendingManagerApproval:
-      case TransferRequestStatus.pendingHRApproval:
-        return Colors.orange.shade700;
-      case TransferRequestStatus.approved:
-      case TransferRequestStatus.completed:
+      case TransferStatus.approved:
+      case TransferStatus.passed:
         return Colors.green.shade700;
-      case TransferRequestStatus.rejectedByManager:
-      case TransferRequestStatus.rejectedByHR:
-      case TransferRequestStatus.cancelledByEmployee:
-        return theme.colorScheme.error;
+      case TransferStatus.rejected:
+        return Theme.of(context).colorScheme.error;
+      case TransferStatus.pending:
+      case TransferStatus.submitted:
+        return Colors.orange.shade800;
       default:
-        return theme.textTheme.bodySmall?.color ?? Colors.grey;
+        return Theme.of(context).colorScheme.secondary;
     }
   }
 
-  IconData _getStatusIcon(TransferRequestStatus status) {
+  IconData _getStatusIcon(TransferStatus status) {
     switch (status) {
-      case TransferRequestStatus.pendingManagerApproval:
-      case TransferRequestStatus.pendingHRApproval:
-        return Icons.hourglass_empty_rounded;
-      case TransferRequestStatus.approved:
+      case TransferStatus.approved:
+      case TransferStatus.passed:
         return Icons.check_circle_outline_rounded;
-      case TransferRequestStatus.completed:
-        return Icons.done_all_rounded;
-      case TransferRequestStatus.rejectedByManager:
-      case TransferRequestStatus.rejectedByHR:
+      case TransferStatus.rejected:
         return Icons.cancel_outlined;
-      case TransferRequestStatus.cancelledByEmployee:
-        return Icons.do_not_disturb_on_rounded;
+      case TransferStatus.pending:
+      case TransferStatus.submitted:
+        return Icons.hourglass_empty_rounded;
       default:
         return Icons.info_outline_rounded;
     }
@@ -56,15 +50,16 @@ class TransferRequestListItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final statusColor = _getStatusColor(request.status, theme);
+    final statusColor = _getStatusColor(context, request.status);
+    final statusText = request.status.name.toDisplayCase();
 
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 6.0),
-      elevation: 2.0,
+      margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
+      elevation: 1.0,
+      clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(12.0),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -75,12 +70,11 @@ class TransferRequestListItemWidget extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      context.lango.requestTo(
-                        department: request.requestedDepartment,
-                      ), // <-- REPLACED
+                      context.lango.transferTo(
+                        location: request.requestedLocation ?? 'N/A',
+                      ),
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: theme.colorScheme.primary,
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -88,84 +82,34 @@ class TransferRequestListItemWidget extends StatelessWidget {
                   Chip(
                     avatar: Icon(
                       _getStatusIcon(request.status),
-                      size: 18,
+                      size: 16,
                       color: statusColor,
                     ),
-                    label: Text(
-                      request.status.toDisplayString,
-                      style: TextStyle(
-                        color: statusColor,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                      ),
+                    label: Text(statusText),
+                    labelStyle: TextStyle(
+                      color: statusColor,
+                      fontWeight: FontWeight.bold,
                     ),
-                    backgroundColor: statusColor.withValues(alpha: 0.1),
+                    backgroundColor: statusColor.withOpacity(0.1),
                     side: BorderSide.none,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8.0,
-                      vertical: 2.0,
-                    ),
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
-              Row(
-                children: [
-                  Icon(
-                    Icons.location_on_outlined,
-                    size: 16,
-                    color: theme.textTheme.bodySmall?.color,
-                  ),
-                  const SizedBox(width: 6),
-                  Expanded(
-                    child: Text(
-                      request.requestedLocation,
-                      style: theme.textTheme.bodyMedium,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
-              ),
-              if (request.requestedPositionTitle != null &&
-                  request.requestedPositionTitle!.isNotEmpty) ...[
-                const SizedBox(height: 4),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.work_outline,
-                      size: 16,
-                      color: theme.textTheme.bodySmall?.color,
-                    ),
-                    const SizedBox(width: 6),
-                    Expanded(
-                      child: Text(
-                        request.requestedPositionTitle!,
-                        style: theme.textTheme.bodyMedium,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-              const SizedBox(height: 10),
+              const SizedBox(height: 12),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     context.lango.submittedOn(
-                      date: DateFormat(
-                        'dd MMM, yyyy',
-                      ).format(request.requestDate),
-                    ), // <-- REPLACED
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      fontStyle: FontStyle.italic,
+                      date: DateFormat.yMMMd().format(request.requestDate),
                     ),
+                    style: theme.textTheme.bodySmall,
                   ),
-                  if (onCancel != null)
+                  if (onDelete != null)
                     TextButton.icon(
-                      onPressed: onCancel,
-                      icon: const Icon(Icons.cancel_outlined, size: 18),
-                      label: Text(context.lango.cancel), // <-- REPLACED
+                      onPressed: onDelete,
+                      icon: const Icon(Icons.delete, size: 18),
+                      label: Text(context.lango.delete),
                       style: TextButton.styleFrom(
                         foregroundColor: theme.colorScheme.error,
                       ),

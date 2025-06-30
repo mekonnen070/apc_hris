@@ -364,15 +364,12 @@ const _$BloodGroupEnumMap = {
 };
 
 const _$ReligionEnumMap = {
-  Religion.christianity: 'christianity',
-  Religion.islam: 'islam',
-  Religion.hinduism: 'hinduism',
-  Religion.buddhism: 'buddhism',
-  Religion.judaism: 'judaism',
-  Religion.traditional: 'traditional',
-  Religion.atheist: 'atheist',
-  Religion.other: 'other',
-  Religion.unknown: 'unknown',
+  Religion.islam: 0,
+  Religion.christianity: 1,
+  Religion.hinduism: 2,
+  Religion.buddhism: 3,
+  Religion.judaism: 4,
+  Religion.other: 5,
 };
 
 const _$MedicalStatusEnumMap = {
@@ -383,23 +380,23 @@ const _$MedicalStatusEnumMap = {
 };
 
 const _$MaritalStatusEnumMap = {
-  MaritalStatus.single: 'single',
-  MaritalStatus.married: 'married',
-  MaritalStatus.divorced: 'divorced',
-  MaritalStatus.widowed: 'widowed',
-  MaritalStatus.separated: 'separated',
+  MaritalStatus.single: 0,
+  MaritalStatus.married: 1,
+  MaritalStatus.divorced: 2,
+  MaritalStatus.widowed: 3,
+  MaritalStatus.separated: 4,
 };
 
 const _$EmploymentStatusEnumMap = {
-  EmploymentStatus.active: 'active',
-  EmploymentStatus.eligible: 'eligible',
-  EmploymentStatus.noticeGiven: 'noticeGiven',
-  EmploymentStatus.rejected: 'rejected',
-  EmploymentStatus.processing: 'processing',
-  EmploymentStatus.retired: 'retired',
+  EmploymentStatus.active: 0,
+  EmploymentStatus.eligible: 1,
+  EmploymentStatus.noticeGiven: 2,
+  EmploymentStatus.rejected: 3,
+  EmploymentStatus.processing: 4,
+  EmploymentStatus.retired: 5,
 };
 
 const _$EmployeeTypeEnumMap = {
-  EmployeeType.military: 'military',
-  EmployeeType.civilian: 'civilian',
+  EmployeeType.military: 0,
+  EmployeeType.civilian: 1,
 };

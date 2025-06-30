@@ -1,13 +1,24 @@
-// Represents religious affiliations.
-// TODO: Populate with actual values from your backend's Religions enum.
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'religion.g.dart';
+
+@JsonEnum(alwaysCreate: true)
 enum Religion {
-  christianity,
+  @JsonValue(0)
   islam,
+
+  @JsonValue(1)
+  christianity,
+
+  @JsonValue(2)
   hinduism,
+
+  @JsonValue(3)
   buddhism,
+
+  @JsonValue(4)
   judaism,
-  traditional,
-  atheist,
-  other, // Matches C# default in EmployeeInfo
-  unknown, // Common to have an unknown option
+
+  @JsonValue(5)
+  other,
 }

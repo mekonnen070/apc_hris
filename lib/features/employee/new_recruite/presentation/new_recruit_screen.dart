@@ -63,7 +63,7 @@ class NewRecruitScreen extends HookConsumerWidget {
       if (formKey.currentState?.validate() ?? false) {
         const uuid = Uuid();
         final request = RecruitInfo(
-          recruitId: 'asdf',
+          recruitId: uuid.v4(),
           announcementId: announcementId.value,
           firstName: firstNameController.text,
           fatherName: fatherNameController.text,

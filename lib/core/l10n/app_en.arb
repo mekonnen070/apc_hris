@@ -780,5 +780,15 @@
   "viewSelected": "View Selected",
   "appealDecision": "Appeal Decision",
   "ethiopian": "Ethiopian",
-  "noPlacementsFound": "No Placements Found"
+  "noPlacementsFound": "No Placements Found",
+  "transferTo": "Transfer To: {location}",
+  "@transferTo": {
+    "placeholders": {
+      "location": {
+        "type": "String"
+      }
+    }
+  },  
+  "approvalDate": "Approval Date",
+  "approvedBy": "Approved By"
 }

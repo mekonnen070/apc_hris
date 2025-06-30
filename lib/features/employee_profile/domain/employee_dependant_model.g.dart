@@ -56,13 +56,15 @@ Map<String, dynamic> _$EmployeeDependantModelToJson(
 };
 
 const _$RelationTypesEnumMap = {
-  RelationTypes.spouse: 'spouse',
-  RelationTypes.child: 'child',
-  RelationTypes.parent: 'parent',
-  RelationTypes.sibling: 'sibling',
-  RelationTypes.guardian: 'guardian',
-  RelationTypes.emergencyContact: 'emergencyContact',
-  RelationTypes.other: 'other',
+  RelationTypes.husband: 0,
+  RelationTypes.wife: 1,
+  RelationTypes.child: 2,
+  RelationTypes.father: 3,
+  RelationTypes.mother: 4,
+  RelationTypes.brother: 5,
+  RelationTypes.sister: 6,
+  RelationTypes.guardian: 7,
+  RelationTypes.other: 8,
 };
 
 const _$GenderEnumMap = {Gender.male: 0, Gender.female: 1, Gender.other: 2};

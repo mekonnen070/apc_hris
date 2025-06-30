@@ -36,17 +36,17 @@ Map<String, dynamic> _$IncidentReportToJson(_IncidentReport instance) =>
     };
 
 const _$IncidentTypeEnumMap = {
-  IncidentType.safety: 'safety',
-  IncidentType.conduct: 'conduct',
-  IncidentType.harassment: 'harassment',
-  IncidentType.theft: 'theft',
-  IncidentType.grievance: 'grievance',
-  IncidentType.other: 'other',
+  IncidentType.safety: 0,
+  IncidentType.conduct: 1,
+  IncidentType.harassment: 2,
+  IncidentType.theft: 3,
+  IncidentType.grievance: 4,
+  IncidentType.other: 5,
 };
 
 const _$IncidentStatusEnumMap = {
-  IncidentStatus.submitted: 'submitted',
-  IncidentStatus.underReview: 'underReview',
-  IncidentStatus.resolved: 'resolved',
-  IncidentStatus.closed: 'closed',
+  IncidentStatus.submitted: 0,
+  IncidentStatus.underReview: 1,
+  IncidentStatus.resolved: 2,
+  IncidentStatus.closed: 3,
 };

@@ -92,7 +92,7 @@ class MockProfileRepository implements IProfileRepository {
           contactId: uuid.v4(),
           employeeId: employeeId,
           fullName: 'Almaz Gebre',
-          relationship: RelationTypes.spouse,
+          relationship: RelationTypes.wife,
           phone: '+251911556677',
           address: 'Kebele 04, Addis Ababa',
         ),

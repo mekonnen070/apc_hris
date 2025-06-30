@@ -1530,4 +1530,15 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get noPlacementsFound => 'ምንም የሥራ መደቦች አልተገኙም።';
+
+  @override
+  String transferTo({required String location}) {
+    return 'ዝውውር ወደ: $location';
+  }
+
+  @override
+  String get approvalDate => 'የተፈቀደበት ቀን';
+
+  @override
+  String get approvedBy => 'የጸደቀው በ';
 }

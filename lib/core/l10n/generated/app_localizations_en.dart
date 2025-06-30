@@ -1530,4 +1530,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noPlacementsFound => 'No Placements Found';
+
+  @override
+  String transferTo({required String location}) {
+    return 'Transfer To: $location';
+  }
+
+  @override
+  String get approvalDate => 'Approval Date';
+
+  @override
+  String get approvedBy => 'Approved By';
 }
