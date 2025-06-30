@@ -8,5 +8,5 @@ class AppConfig {
 
   // The Architect's Note:
   // THE PROTOCOL MUST BE 'https'. THIS IS NON-NEGOTIABLE.
-  static const String baseUrl = 'https://192.168.8.130:7153/api';
+  static const String baseUrl = 'https://192.168.8.172:7153/api';
 }

@@ -66,8 +66,7 @@ class AppPreferences {
   }
 
   /// sets user login status
-  Future<void> setUserLoginStatus(bool isLoggedIn) async {
-    final prefs = await SharedPreferences.getInstance();
+  Future<void> setUserLoginStatus(bool isLoggedIn, SharedPreferences prefs) async {
     await prefs.setBool(AppConstants.isLoggedInKey, isLoggedIn);
   }
 

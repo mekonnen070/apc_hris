@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:police_com/features/auth/application/auth_notifier.dart';
+import 'package:police_com/features/auth/domain/auth_state.dart';
 import 'package:police_com/features/auth/presentation/log_in_page.dart';
 import 'package:police_com/features/home/presentation/home_page.dart';
 import 'package:police_com/features/widgets/splash_screen.dart'; // Using the refactored splash screen
@@ -26,9 +27,9 @@ class AuthWrapper extends ConsumerWidget {
         return const LogInPage();
       },
       // Once data is available, route accordingly.
-      data: (isLoggedIn) {
-        log('Is logged in: $isLoggedIn');
-        if (isLoggedIn) {
+      data: (state) {
+        log('Is logged in: $state');
+        if (state == const AuthState.authenticated()) {
           return const HomePage();
         } else {
           return const LogInPage();

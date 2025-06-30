@@ -57,8 +57,10 @@ class ApiEndpoints {
 
   // --- Recruit/My Recruits Endpoints ---
   static const String recruits = '$_newRecruit/recruits';
-  // static const String myRecruits = '$_newRecruit/new_recruits';
-  static const String updateRecruitsStatus = '$_newRecruit/update-status';
+  /// POST  /api/NewRecruit/Create
+  static const String createRecruit = '$_newRecruit/Create';
+  /// POST  /api/NewRecruit/Edit
+  static const String editRecruit = '$_newRecruit/Edit';
 
   // --- Recruitment Announcements Endpoints ---
   static const String recruitmentAnnouncements = '$_recruitment/announcements';

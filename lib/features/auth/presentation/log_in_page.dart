@@ -33,21 +33,10 @@ class _LogInPageState extends ConsumerState<LogInPage> {
     final authNotifier = ref.read(authNotifierProvider.notifier);
 
     // 2. Call the login method. The notifier and wrapper handle state and navigation.
-    final success = await authNotifier.login(
+    await authNotifier.login(
       email: fields['email']!.value as String,
       password: fields['password']!.value as String,
     );
-
-    // 3. The Architect's Mandate: Check if the widget is still mounted *before*
-    //    using its context. This prevents the crash.
-    if (mounted && !success) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(context.lango.loginFailed), // Shows "Login Failed"
-          backgroundColor: Theme.of(context).colorScheme.error,
-        ),
-      );
-    }
   }
 
   @override

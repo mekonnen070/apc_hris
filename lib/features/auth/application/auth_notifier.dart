@@ -1,35 +1,56 @@
 // lib/features/auth/application/auth_notifier.dart
 
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:police_com/core/app_preferences.dart';
-import 'package:police_com/core/network/dio_client.dart'; // For sharedPreferencesProvider
+import 'package:police_com/core/network/dio_client.dart';
 import 'package:police_com/features/auth/data/auth_repository.dart';
 import 'package:police_com/features/auth/data/i_auth_repository.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:police_com/features/auth/domain/auth_state.dart';
 
 final currentEmployeeIdProvider = Provider<String?>((ref) {
   final prefs = ref.watch(sharedPreferencesProvider);
-  return ref.watch(appPreferencesProvider).getEmployeeId(prefs);
+  final appPreferences = ref.watch(appPreferencesProvider);
+  return appPreferences.getEmployeeId(prefs);
 });
 
-final authNotifierProvider = AsyncNotifierProvider<AuthNotifier, bool>(() {
-  return AuthNotifier();
-}, dependencies: [authRepositoryProvider, sharedPreferencesProvider]);
+final authNotifierProvider = AsyncNotifierProvider<AuthNotifier, AuthState>(
+  AuthNotifier.new,
+);
 
-class AuthNotifier extends AsyncNotifier<bool> {
+class AuthNotifier extends AsyncNotifier<AuthState> {
   late IAuthRepository _authRepository;
-  late AppPreferences _appPreferences;
-  late SharedPreferences _prefs;
 
   @override
-  FutureOr<bool> build() {
+  FutureOr<AuthState> build() {
     _authRepository = ref.watch(authRepositoryProvider);
-    _appPreferences = ref.watch(appPreferencesProvider);
-    _prefs = ref.watch(sharedPreferencesProvider);
-    return _appPreferences.getUserLoginStatus(_prefs);
+    return _authRepository.checkAuthState();
+  }
+
+  Future<void> login({required String email, required String password}) async {
+    state = const AsyncLoading();
+    try {
+      final success = await _authRepository.login(
+        email: email,
+        password: password,
+      );
+      if (success) {
+        ref.invalidate(currentEmployeeIdProvider);
+        state = const AsyncData(AuthState.authenticated());
+      } else {
+        state = const AsyncData(AuthState.unauthenticated());
+      }
+    } catch (e, st) {
+      state = AsyncError(e, st);
+    }
+  }
+
+  Future<void> logout() async {
+    state = const AsyncLoading();
+    await _authRepository.logout();
+    ref.invalidate(currentEmployeeIdProvider);
+    state = const AsyncData(AuthState.unauthenticated());
   }
 
   Future<bool> signUp({
@@ -56,21 +77,6 @@ class AuthNotifier extends AsyncNotifier<bool> {
     } catch (e) {
       return false;
     }
-  }
-
-  Future<bool> login({required String email, required String password}) async {
-    state = const AsyncValue.loading();
-    state = await AsyncValue.guard(() async {
-      return await _authRepository.login(email: email, password: password);
-    });
-    log('Login state: ${state.value}');
-    return state.hasValue && state.value == true;
-  }
-
-  Future<void> logout() async {
-    state = const AsyncValue.loading();
-    await _authRepository.logout();
-    state = const AsyncValue.data(false);
   }
 
   Future<bool> forgotPassword({required String email}) async {

@@ -31,7 +31,7 @@ export 'medical_status.dart';
 export 'onboarding_task_status.dart';
 export 'organization_type.dart';
 export 'proficiency_level.dart';
-export 'recruit_status.dart'; // New
+export 'new_recruit_status.dart'; // New
 // Enums for Recruitment (Application)
 export 'recruitment_status.dart';
 export 'recuritment_type.dart';
