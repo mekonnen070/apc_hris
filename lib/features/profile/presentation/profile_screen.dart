@@ -56,21 +56,12 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           children: [
                             if (employee.photoUrl != null)
                               Image.network(
-                                employee.photoUrl!,
+                                employee.photoUrl ?? '',
                                 fit: BoxFit.cover,
                                 errorBuilder:
                                     (context, error, stackTrace) => Container(
                                       color: colorScheme.secondaryContainer,
                                     ),
-                              ),
-                            if (employee.photoUrl == null)
-                              Container(
-                                color: colorScheme.secondaryContainer,
-                                child: Icon(
-                                  Icons.person,
-                                  size: 60,
-                                  color: colorScheme.onSecondaryContainer,
-                                ),
                               ),
                             DecoratedBox(
                               decoration: BoxDecoration(
