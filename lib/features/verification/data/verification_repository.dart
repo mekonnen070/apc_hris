@@ -44,8 +44,8 @@ class VerificationRepository implements IVerificationRepository {
         );
       }
       throw VerificationException(
-        type: VerificationErrorType.networkError,
-        message: 'A network error occurred. Please try again.',
+        type: VerificationErrorType.notFound,
+        message: 'Couldn\'t find employee with the specified ID.',
       );
     } catch (e, st) {
       log(
