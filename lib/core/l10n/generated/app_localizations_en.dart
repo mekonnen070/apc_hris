@@ -1541,4 +1541,41 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get approvedBy => 'Approved By';
+
+  @override
+  String years({required int count}) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count years',
+      one: '$count year',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get expiresOn => 'Expires on';
+
+  @override
+  String get closed => 'Closed';
+
+  @override
+  String get confirmApplication => 'Confirm Application';
+
+  @override
+  String confirmPlacementApplication({required String position}) {
+    return 'Are you sure you want to apply for the position of $position?';
+  }
+
+  @override
+  String get confirmAndApply => 'Confirm & Apply';
+
+  @override
+  String get myPlacementApplications => 'My Placement Applications';
+
+  @override
+  String get noApplicationsSubmitted => 'You have not submitted any placement applications yet.';
+
+  @override
+  String get error => 'Error';
 }

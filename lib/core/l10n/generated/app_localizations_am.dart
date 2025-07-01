@@ -1541,4 +1541,35 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get approvedBy => 'የጸደቀው በ';
+
+  @override
+  String years({required int count}) {
+    return '$count ዓመታት';
+  }
+
+  @override
+  String get expiresOn => 'የሚያበቃበት ቀን';
+
+  @override
+  String get closed => 'ተዘግቷል';
+
+  @override
+  String get confirmApplication => 'ማመልከቻ ያረጋግጡ';
+
+  @override
+  String confirmPlacementApplication({required String position}) {
+    return 'ለ $position የሥራ መደብ ማመልከትዎን እርግጠኛ ነዎት?';
+  }
+
+  @override
+  String get confirmAndApply => 'አረጋግጥ እና ላክ';
+
+  @override
+  String get myPlacementApplications => 'የእኔ የዝውውር ማመልከቻዎች';
+
+  @override
+  String get noApplicationsSubmitted => 'እስካሁን ምንም የዝውውር ማመልከቻ አላስገቡም።';
+
+  @override
+  String get error => 'ስህተት';
 }

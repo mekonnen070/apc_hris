@@ -790,5 +790,33 @@
         }
     },
     "approvalDate": "የተፈቀደበት ቀን",
-    "approvedBy": "የጸደቀው በ"
+    "approvedBy": "የጸደቀው በ",
+    "years": "{count} ዓመታት",
+    "@years": {
+        "description": "የሥራ ልምድ ዓመታትን የሚያሳይ ሐረግ።",
+        "placeholders": {
+            "count": {
+                "type": "int",
+                "example": "2"
+            }
+        }
+    },
+    "expiresOn": "የሚያበቃበት ቀን",
+    "closed": "ተዘግቷል",
+    "confirmApplication": "ማመልከቻ ያረጋግጡ",
+    "confirmPlacementApplication": "ለ {position} የሥራ መደብ ማመልከትዎን እርግጠኛ ነዎት?",
+    "@confirmPlacementApplication": {
+        "description": "ለዝውውር ማመልከቻ ማረጋገጫ መልዕክት።",
+        "placeholders": {
+            "position": {
+                "type": "String",
+                "example": "ከፍተኛ የኔትወርክ መሐንዲስ"
+            }
+        }
+    },
+    "confirmAndApply": "አረጋግጥ እና ላክ",
+    "myPlacementApplications": "የእኔ የዝውውር ማመልከቻዎች",
+    "noApplicationsSubmitted": "እስካሁን ምንም የዝውውር ማመልከቻ አላስገቡም።",
+    "announcement": "ማስታወቂያ",
+    "error": "ስህተት"
 }

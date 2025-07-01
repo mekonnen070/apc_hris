@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:police_com/core/enums/sub_module_enum.dart';
 import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/core/extensions/sub_module_extension.dart';
+import 'package:police_com/features/auth/application/current_employee_provider.dart';
 import 'package:police_com/providers/drawer_selection_provider.dart';
 
 class DashboardPage extends ConsumerWidget {
@@ -20,11 +23,7 @@ class DashboardPage extends ConsumerWidget {
         crossAxisAlignment:
             CrossAxisAlignment.start, // <-- Note: Changed for header alignment
         children: [
-          _buildWelcomeHeader(
-            context,
-            textTheme,
-            colorScheme,
-          ), // <-- Pass context
+          const _WelcomeHeader(), // <-- Pass context
           const SizedBox(height: 24),
           _buildQuickStats(context, colorScheme, textTheme), // <-- Pass context
           const SizedBox(height: 24),
@@ -46,34 +45,34 @@ class DashboardPage extends ConsumerWidget {
     );
   }
 
-  Widget _buildWelcomeHeader(
-    BuildContext context,
-    TextTheme textTheme,
-    ColorScheme colorScheme,
-  ) {
-    // <-- Pass context
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          DateFormat('EEEE, d MMMM').format(DateTime.now()),
-          textAlign: TextAlign.left,
-          style: textTheme.bodyMedium?.copyWith(
-            color: colorScheme.onSurfaceVariant,
-          ),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          context.lango.welcomeBackUser(name: 'Abe'), // <-- REPLACED
-          textAlign: TextAlign.left,
-          style: textTheme.headlineMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: colorScheme.onSurface,
-          ),
-        ),
-      ],
-    );
-  }
+  // Widget _buildWelcomeHeader(
+  //   BuildContext context,
+  //   TextTheme textTheme,
+  //   ColorScheme colorScheme,
+  // ) {
+  //   // <-- Pass context
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: [
+  //       Text(
+  //         DateFormat('EEEE, d MMMM').format(DateTime.now()),
+  //         textAlign: TextAlign.left,
+  //         style: textTheme.bodyMedium?.copyWith(
+  //           color: colorScheme.onSurfaceVariant,
+  //         ),
+  //       ),
+  //       const SizedBox(height: 4),
+  //       Text(
+  //         context.lango.welcomeBackUser(name: 'Abe'), // <-- REPLACED
+  //         textAlign: TextAlign.left,
+  //         style: textTheme.headlineMedium?.copyWith(
+  //           fontWeight: FontWeight.bold,
+  //           color: colorScheme.onSurface,
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 
   Widget _buildQuickStats(
     BuildContext context,
@@ -302,6 +301,69 @@ class _ActivityListItem extends StatelessWidget {
       subtitle: Text(subtitle, maxLines: 2, overflow: TextOverflow.ellipsis),
       trailing: Text(time, style: Theme.of(context).textTheme.bodySmall),
       onTap: () {},
+    );
+  }
+}
+
+class _WelcomeHeader extends ConsumerWidget {
+  const _WelcomeHeader({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final employeeState = ref.watch(currentEmployeeProvider);
+
+    return employeeState.when(
+      data: (employee) {
+        if (employee != null) {
+          log(employee.toString());
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                DateFormat('EEEE, d MMMM').format(DateTime.now()),
+                textAlign: TextAlign.left,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                context.lango.welcomeBackUser(name: employee.firstName),
+                textAlign: TextAlign.left,
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+              ),
+            ],
+          );
+        }
+
+        /// show a hello message with the date
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              DateFormat('EEEE, d MMMM').format(DateTime.now()),
+              textAlign: TextAlign.left,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              context.lango.welcomeBack,
+            textAlign: TextAlign.left,
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
+            ),
+          ],
+        );
+      },
+      loading: () => const SizedBox.shrink(),
+      error: (error, stack) => const SizedBox.shrink(),
     );
   }
 }

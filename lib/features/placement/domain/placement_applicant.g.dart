@@ -8,40 +8,39 @@ part of 'placement_applicant.dart';
 
 _PlacementApplicant _$PlacementApplicantFromJson(Map<String, dynamic> json) =>
     _PlacementApplicant(
-      placementApplicantId: (json['placementApplicantId'] as num).toInt(),
-      placementAnnouncementId: (json['placementAnnouncementId'] as num).toInt(),
+      applicantId: (json['applicantId'] as num).toInt(),
+      pAnnouncementId: (json['pAnnouncementId'] as num).toInt(),
       employeeId: json['employeeId'] as String,
-      employeeFullName: json['employeeFullName'] as String?,
-      employeePhotoPath: json['employeePhotoPath'] as String?,
-      appliedDate: DateTime.parse(json['appliedDate'] as String),
-      status: $enumDecode(_$ApplicantStatusEnumMap, json['status']),
-      reasonForRejection: json['reasonForRejection'] as String?,
-      appealReason: json['appealReason'] as String?,
-      appealDate:
-          json['appealDate'] == null
-              ? null
-              : DateTime.parse(json['appealDate'] as String),
+      entryDate: DateTime.parse(json['entryDate'] as String),
+      entryBy: json['entryBy'] as String,
+      policeTitle: (json['policeTitle'] as num).toInt(),
+      applicantStatus: $enumDecode(
+        _$ApplicantStatusEnumMap,
+        json['applicantStatus'],
+      ),
     );
 
 Map<String, dynamic> _$PlacementApplicantToJson(_PlacementApplicant instance) =>
     <String, dynamic>{
-      'placementApplicantId': instance.placementApplicantId,
-      'placementAnnouncementId': instance.placementAnnouncementId,
+      'applicantId': instance.applicantId,
+      'pAnnouncementId': instance.pAnnouncementId,
       'employeeId': instance.employeeId,
-      'employeeFullName': instance.employeeFullName,
-      'employeePhotoPath': instance.employeePhotoPath,
-      'appliedDate': instance.appliedDate.toIso8601String(),
-      'status': _$ApplicantStatusEnumMap[instance.status]!,
-      'reasonForRejection': instance.reasonForRejection,
-      'appealReason': instance.appealReason,
-      'appealDate': instance.appealDate?.toIso8601String(),
+      'entryDate': instance.entryDate.toIso8601String(),
+      'entryBy': instance.entryBy,
+      'policeTitle': instance.policeTitle,
+      'applicantStatus': _$ApplicantStatusEnumMap[instance.applicantStatus]!,
     };
 
 const _$ApplicantStatusEnumMap = {
-  ApplicantStatus.applied: 'applied',
-  ApplicantStatus.underReview: 'underReview',
-  ApplicantStatus.selected: 'selected',
-  ApplicantStatus.notSelected: 'notSelected',
-  ApplicantStatus.appealed: 'appealed',
-  ApplicantStatus.withdrawn: 'withdrawn',
+  ApplicantStatus.pending: 0,
+  ApplicantStatus.submitted: 1,
+  ApplicantStatus.selected: 2,
+  ApplicantStatus.rejected: 3,
+  ApplicantStatus.underReview: 4,
+  ApplicantStatus.passed: 5,
+  ApplicantStatus.readyForApproval: 6,
+  ApplicantStatus.offered: 7,
+  ApplicantStatus.completed: 8,
+  ApplicantStatus.progress: 9,
+  ApplicantStatus.withdrawn: 10,
 };

@@ -43,7 +43,7 @@ class TrainingDetailNotifier extends StateNotifier<TrainingDetailState> {
       );
       state = state.copyWith(myApplication: myApplication);
 
-      if (myApplication.status == ApplicantStatus.notSelected) {
+      if (myApplication.status == ApplicantStatus.rejected) {
         final selected = await _repository.getSelectedApplicants(
           trainingId: trainingId,
         );

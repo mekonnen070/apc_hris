@@ -7,16 +7,13 @@ part 'placement_applicant.g.dart';
 @freezed
 abstract class PlacementApplicant with _$PlacementApplicant {
   const factory PlacementApplicant({
-    required int placementApplicantId,
-    required int placementAnnouncementId,
+    required int applicantId,
+    required int pAnnouncementId,
     required String employeeId,
-    String? employeeFullName,
-    String? employeePhotoPath,
-    required DateTime appliedDate,
-    required ApplicantStatus status,
-    String? reasonForRejection,
-    String? appealReason,
-    DateTime? appealDate,
+    required DateTime entryDate,
+    required String entryBy,
+    required int policeTitle,
+    required ApplicantStatus applicantStatus,
   }) = _PlacementApplicant;
 
   factory PlacementApplicant.fromJson(Map<String, dynamic> json) =>

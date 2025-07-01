@@ -788,7 +788,34 @@
         "type": "String"
       }
     }
-  },  
+  },
   "approvalDate": "Approval Date",
-  "approvedBy": "Approved By"
+  "approvedBy": "Approved By",
+  "years": "{count, plural, =1{{count} year} other{{count} years}}",
+  "@years": {
+    "description": "A phrase indicating a number of years of experience.",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "expiresOn": "Expires on",
+  "closed": "Closed",
+  "confirmApplication": "Confirm Application",
+  "confirmPlacementApplication": "Are you sure you want to apply for the position of {position}?",
+  "@confirmPlacementApplication": {
+    "description": "Confirmation message for applying to a placement.",
+    "placeholders": {
+      "position": {
+        "type": "String",
+        "example": "Senior Network Engineer"
+      }
+    }
+  },
+  "confirmAndApply": "Confirm & Apply",
+  "myPlacementApplications": "My Placement Applications",
+  "noApplicationsSubmitted": "You have not submitted any placement applications yet.",
+  "error": "Error"
 }

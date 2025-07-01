@@ -38,10 +38,15 @@ Map<String, dynamic> _$TrainingApplicantToJson(_TrainingApplicant instance) =>
     };
 
 const _$ApplicantStatusEnumMap = {
-  ApplicantStatus.applied: 'applied',
-  ApplicantStatus.underReview: 'underReview',
-  ApplicantStatus.selected: 'selected',
-  ApplicantStatus.notSelected: 'notSelected',
-  ApplicantStatus.appealed: 'appealed',
-  ApplicantStatus.withdrawn: 'withdrawn',
+  ApplicantStatus.pending: 0,
+  ApplicantStatus.submitted: 1,
+  ApplicantStatus.selected: 2,
+  ApplicantStatus.rejected: 3,
+  ApplicantStatus.underReview: 4,
+  ApplicantStatus.passed: 5,
+  ApplicantStatus.readyForApproval: 6,
+  ApplicantStatus.offered: 7,
+  ApplicantStatus.completed: 8,
+  ApplicantStatus.progress: 9,
+  ApplicantStatus.withdrawn: 10,
 };

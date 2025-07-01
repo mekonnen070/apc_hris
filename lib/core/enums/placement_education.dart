@@ -1,39 +1,39 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'applicant_status.g.dart';
+part 'placement_education.g.dart';
 
 @JsonEnum(alwaysCreate: true)
-enum ApplicantStatus {
+enum PlacementEducation {
   @JsonValue(0)
-  pending,
+  fifthGrade,
 
   @JsonValue(1)
-  submitted,
+  sixthAndSeventh,
 
   @JsonValue(2)
-  selected,
+  eighthAndNinth,
 
   @JsonValue(3)
-  rejected,
+  tenthComplete,
 
   @JsonValue(4)
-  underReview,
+  certificateLevelOne,
 
   @JsonValue(5)
-  passed,
+  certificateLevelTwo,
 
   @JsonValue(6)
-  readyForApproval,
+  diploma,
 
   @JsonValue(7)
-  offered,
+  higherDiploma,
 
   @JsonValue(8)
-  completed,
+  firstDegree,
 
   @JsonValue(9)
-  progress,
+  secondDegree,
 
   @JsonValue(10)
-  withdrawn,
+  phd,
 }

@@ -52,7 +52,8 @@ class ApiEndpoints {
   static const String _newRecruit = '/newRecruit';
   static const String _leave = '/leave';
   static const String _training = '/training';
-  static const String _placement = '/placement';
+  static const String _placementAnnouncement = '/placementAnnounce';
+  static const String _placementApplication = '/placementApplication';
   static const String _recruitment = '/recruitAnnouncement';
 
   // --- Recruit/My Recruits Endpoints ---
@@ -83,18 +84,19 @@ class ApiEndpoints {
   static const String submitTrainingAppeal = '$_training/appeal'; // Append /:id
 
   // --- Placement Endpoints ---
-  static const String availablePlacements = '$_placement/available';
-  static const String placementDetails = '$_placement/details'; // Append /:id
-  static const String applyForPlacement = '$_placement/apply'; // Append /:id
-  static const String myPlacementApplications = '$_placement/my-applications';
-  static const String placementSelectedApplicants =
-      '$_placement/selected-applicants'; // Append /:id
-  static const String submitPlacementAppeal =
-      '$_placement/appeal'; // Append /:id
+  // PlacementAnnounce_PlacementaAnnouncement
+  static const String placementAnnouncements =
+      '$_placementAnnouncement/placementAnnouncement';
+  static const String createPlacementApplication =
+      '$_placementApplication/create';
+  static const String placementAnnouncementDetail =
+      '$_placementAnnouncement/detail';
+  static const String myPlacementApplications =
+      '$_placementApplication/applicationByEmployee';
 
   // =======================================================================
   // Profile Module
-  // =======================================================================
+  // ==============================================§=========================
   static const String _profile = '/Profile';
   static String getEmployeeProfile({required String employeeId}) =>
       '$_profile/$employeeId';

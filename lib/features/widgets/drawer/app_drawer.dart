@@ -29,7 +29,7 @@ class AppDrawer extends ConsumerWidget {
                     accountName: Text(employee.firstName ?? 'N/A'),
                     accountEmail: Text(employee.email ?? 'N/A'),
                     currentAccountPicture: CircleAvatar(
-                      backgroundColor: Colors.white,  
+                      backgroundColor: Colors.grey,
                       backgroundImage:
                           employee.photoUrl != null
                               ? NetworkImage(employee.photoUrl!)
@@ -52,7 +52,6 @@ class AppDrawer extends ConsumerWidget {
                   accountName: Text(context.lango.userNamePlaceholder),
                   accountEmail: Text(context.lango.userEmailPlaceholder),
                   currentAccountPicture: CircleAvatar(
-                    backgroundColor: Colors.white,
                     child: Text(
                       context.lango.userInitialsPlaceholder,
                       style: const TextStyle(fontSize: 40.0),
@@ -65,21 +64,24 @@ class AppDrawer extends ConsumerWidget {
               loading:
                   () => const SizedBox(
                     height: 180,
-                    child: Center(child: CircularProgressIndicator()),
+                    child: Center(child: CircularProgressIndicator.adaptive()),
                   ),
               // Show an error message inside the header on failure.
-              error:
-                  (error, stack) => SizedBox(
-                    height: 180,
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'Error loading profile: ${error.toString()}',
-                        ),
-                      ),
+              error: (error, stack) {
+                // show a default placeholder
+                return UserAccountsDrawerHeader(
+                  accountName: Text(context.lango.userNamePlaceholder),
+                  accountEmail: Text(context.lango.userEmailPlaceholder),
+                  currentAccountPicture: CircleAvatar(
+                    backgroundColor: Colors.grey,
+                    child: Text(
+                      context.lango.userInitialsPlaceholder,
+                      style: const TextStyle(fontSize: 40.0),
                     ),
                   ),
+                  otherAccountsPictures: const [LanguageSwitcherWidget()],
+                );
+              },
             ),
 
             // The rest of the drawer remains the same.

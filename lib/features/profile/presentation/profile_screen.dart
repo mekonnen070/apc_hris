@@ -54,15 +54,24 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                         background: Stack(
                           fit: StackFit.expand,
                           children: [
-                            Image.network(
-                              employee.photoUrl ??
-                                  'https://images.unsplash.com/photo-1599819188825-658b54b2d355?q=80&w=2670&auto=format&fit=crop',
-                              fit: BoxFit.cover,
-                              errorBuilder:
-                                  (context, error, stackTrace) => Container(
-                                    color: colorScheme.secondaryContainer,
-                                  ),
-                            ),
+                            if (employee.photoUrl != null)
+                              Image.network(
+                                employee.photoUrl!,
+                                fit: BoxFit.cover,
+                                errorBuilder:
+                                    (context, error, stackTrace) => Container(
+                                      color: colorScheme.secondaryContainer,
+                                    ),
+                              ),
+                            if (employee.photoUrl == null)
+                              Container(
+                                color: colorScheme.secondaryContainer,
+                                child: Icon(
+                                  Icons.person,
+                                  size: 60,
+                                  color: colorScheme.onSecondaryContainer,
+                                ),
+                              ),
                             DecoratedBox(
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(

@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$PlacementApplicant {
 
- int get placementApplicantId; int get placementAnnouncementId; String get employeeId; String? get employeeFullName; String? get employeePhotoPath; DateTime get appliedDate; ApplicantStatus get status; String? get reasonForRejection; String? get appealReason; DateTime? get appealDate;
+ int get applicantId; int get pAnnouncementId; String get employeeId; DateTime get entryDate; String get entryBy; int get policeTitle; ApplicantStatus get applicantStatus;
 /// Create a copy of PlacementApplicant
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $PlacementApplicantCopyWith<PlacementApplicant> get copyWith => _$PlacementAppli
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PlacementApplicant&&(identical(other.placementApplicantId, placementApplicantId) || other.placementApplicantId == placementApplicantId)&&(identical(other.placementAnnouncementId, placementAnnouncementId) || other.placementAnnouncementId == placementAnnouncementId)&&(identical(other.employeeId, employeeId) || other.employeeId == employeeId)&&(identical(other.employeeFullName, employeeFullName) || other.employeeFullName == employeeFullName)&&(identical(other.employeePhotoPath, employeePhotoPath) || other.employeePhotoPath == employeePhotoPath)&&(identical(other.appliedDate, appliedDate) || other.appliedDate == appliedDate)&&(identical(other.status, status) || other.status == status)&&(identical(other.reasonForRejection, reasonForRejection) || other.reasonForRejection == reasonForRejection)&&(identical(other.appealReason, appealReason) || other.appealReason == appealReason)&&(identical(other.appealDate, appealDate) || other.appealDate == appealDate));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PlacementApplicant&&(identical(other.applicantId, applicantId) || other.applicantId == applicantId)&&(identical(other.pAnnouncementId, pAnnouncementId) || other.pAnnouncementId == pAnnouncementId)&&(identical(other.employeeId, employeeId) || other.employeeId == employeeId)&&(identical(other.entryDate, entryDate) || other.entryDate == entryDate)&&(identical(other.entryBy, entryBy) || other.entryBy == entryBy)&&(identical(other.policeTitle, policeTitle) || other.policeTitle == policeTitle)&&(identical(other.applicantStatus, applicantStatus) || other.applicantStatus == applicantStatus));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,placementApplicantId,placementAnnouncementId,employeeId,employeeFullName,employeePhotoPath,appliedDate,status,reasonForRejection,appealReason,appealDate);
+int get hashCode => Object.hash(runtimeType,applicantId,pAnnouncementId,employeeId,entryDate,entryBy,policeTitle,applicantStatus);
 
 @override
 String toString() {
-  return 'PlacementApplicant(placementApplicantId: $placementApplicantId, placementAnnouncementId: $placementAnnouncementId, employeeId: $employeeId, employeeFullName: $employeeFullName, employeePhotoPath: $employeePhotoPath, appliedDate: $appliedDate, status: $status, reasonForRejection: $reasonForRejection, appealReason: $appealReason, appealDate: $appealDate)';
+  return 'PlacementApplicant(applicantId: $applicantId, pAnnouncementId: $pAnnouncementId, employeeId: $employeeId, entryDate: $entryDate, entryBy: $entryBy, policeTitle: $policeTitle, applicantStatus: $applicantStatus)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $PlacementApplicantCopyWith<$Res>  {
   factory $PlacementApplicantCopyWith(PlacementApplicant value, $Res Function(PlacementApplicant) _then) = _$PlacementApplicantCopyWithImpl;
 @useResult
 $Res call({
- int placementApplicantId, int placementAnnouncementId, String employeeId, String? employeeFullName, String? employeePhotoPath, DateTime appliedDate, ApplicantStatus status, String? reasonForRejection, String? appealReason, DateTime? appealDate
+ int applicantId, int pAnnouncementId, String employeeId, DateTime entryDate, String entryBy, int policeTitle, ApplicantStatus applicantStatus
 });
 
 
@@ -66,19 +66,16 @@ class _$PlacementApplicantCopyWithImpl<$Res>
 
 /// Create a copy of PlacementApplicant
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? placementApplicantId = null,Object? placementAnnouncementId = null,Object? employeeId = null,Object? employeeFullName = freezed,Object? employeePhotoPath = freezed,Object? appliedDate = null,Object? status = null,Object? reasonForRejection = freezed,Object? appealReason = freezed,Object? appealDate = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? applicantId = null,Object? pAnnouncementId = null,Object? employeeId = null,Object? entryDate = null,Object? entryBy = null,Object? policeTitle = null,Object? applicantStatus = null,}) {
   return _then(_self.copyWith(
-placementApplicantId: null == placementApplicantId ? _self.placementApplicantId : placementApplicantId // ignore: cast_nullable_to_non_nullable
-as int,placementAnnouncementId: null == placementAnnouncementId ? _self.placementAnnouncementId : placementAnnouncementId // ignore: cast_nullable_to_non_nullable
+applicantId: null == applicantId ? _self.applicantId : applicantId // ignore: cast_nullable_to_non_nullable
+as int,pAnnouncementId: null == pAnnouncementId ? _self.pAnnouncementId : pAnnouncementId // ignore: cast_nullable_to_non_nullable
 as int,employeeId: null == employeeId ? _self.employeeId : employeeId // ignore: cast_nullable_to_non_nullable
-as String,employeeFullName: freezed == employeeFullName ? _self.employeeFullName : employeeFullName // ignore: cast_nullable_to_non_nullable
-as String?,employeePhotoPath: freezed == employeePhotoPath ? _self.employeePhotoPath : employeePhotoPath // ignore: cast_nullable_to_non_nullable
-as String?,appliedDate: null == appliedDate ? _self.appliedDate : appliedDate // ignore: cast_nullable_to_non_nullable
-as DateTime,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as ApplicantStatus,reasonForRejection: freezed == reasonForRejection ? _self.reasonForRejection : reasonForRejection // ignore: cast_nullable_to_non_nullable
-as String?,appealReason: freezed == appealReason ? _self.appealReason : appealReason // ignore: cast_nullable_to_non_nullable
-as String?,appealDate: freezed == appealDate ? _self.appealDate : appealDate // ignore: cast_nullable_to_non_nullable
-as DateTime?,
+as String,entryDate: null == entryDate ? _self.entryDate : entryDate // ignore: cast_nullable_to_non_nullable
+as DateTime,entryBy: null == entryBy ? _self.entryBy : entryBy // ignore: cast_nullable_to_non_nullable
+as String,policeTitle: null == policeTitle ? _self.policeTitle : policeTitle // ignore: cast_nullable_to_non_nullable
+as int,applicantStatus: null == applicantStatus ? _self.applicantStatus : applicantStatus // ignore: cast_nullable_to_non_nullable
+as ApplicantStatus,
   ));
 }
 
@@ -89,19 +86,16 @@ as DateTime?,
 @JsonSerializable()
 
 class _PlacementApplicant implements PlacementApplicant {
-  const _PlacementApplicant({required this.placementApplicantId, required this.placementAnnouncementId, required this.employeeId, this.employeeFullName, this.employeePhotoPath, required this.appliedDate, required this.status, this.reasonForRejection, this.appealReason, this.appealDate});
+  const _PlacementApplicant({required this.applicantId, required this.pAnnouncementId, required this.employeeId, required this.entryDate, required this.entryBy, required this.policeTitle, required this.applicantStatus});
   factory _PlacementApplicant.fromJson(Map<String, dynamic> json) => _$PlacementApplicantFromJson(json);
 
-@override final  int placementApplicantId;
-@override final  int placementAnnouncementId;
+@override final  int applicantId;
+@override final  int pAnnouncementId;
 @override final  String employeeId;
-@override final  String? employeeFullName;
-@override final  String? employeePhotoPath;
-@override final  DateTime appliedDate;
-@override final  ApplicantStatus status;
-@override final  String? reasonForRejection;
-@override final  String? appealReason;
-@override final  DateTime? appealDate;
+@override final  DateTime entryDate;
+@override final  String entryBy;
+@override final  int policeTitle;
+@override final  ApplicantStatus applicantStatus;
 
 /// Create a copy of PlacementApplicant
 /// with the given fields replaced by the non-null parameter values.
@@ -116,16 +110,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PlacementApplicant&&(identical(other.placementApplicantId, placementApplicantId) || other.placementApplicantId == placementApplicantId)&&(identical(other.placementAnnouncementId, placementAnnouncementId) || other.placementAnnouncementId == placementAnnouncementId)&&(identical(other.employeeId, employeeId) || other.employeeId == employeeId)&&(identical(other.employeeFullName, employeeFullName) || other.employeeFullName == employeeFullName)&&(identical(other.employeePhotoPath, employeePhotoPath) || other.employeePhotoPath == employeePhotoPath)&&(identical(other.appliedDate, appliedDate) || other.appliedDate == appliedDate)&&(identical(other.status, status) || other.status == status)&&(identical(other.reasonForRejection, reasonForRejection) || other.reasonForRejection == reasonForRejection)&&(identical(other.appealReason, appealReason) || other.appealReason == appealReason)&&(identical(other.appealDate, appealDate) || other.appealDate == appealDate));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PlacementApplicant&&(identical(other.applicantId, applicantId) || other.applicantId == applicantId)&&(identical(other.pAnnouncementId, pAnnouncementId) || other.pAnnouncementId == pAnnouncementId)&&(identical(other.employeeId, employeeId) || other.employeeId == employeeId)&&(identical(other.entryDate, entryDate) || other.entryDate == entryDate)&&(identical(other.entryBy, entryBy) || other.entryBy == entryBy)&&(identical(other.policeTitle, policeTitle) || other.policeTitle == policeTitle)&&(identical(other.applicantStatus, applicantStatus) || other.applicantStatus == applicantStatus));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,placementApplicantId,placementAnnouncementId,employeeId,employeeFullName,employeePhotoPath,appliedDate,status,reasonForRejection,appealReason,appealDate);
+int get hashCode => Object.hash(runtimeType,applicantId,pAnnouncementId,employeeId,entryDate,entryBy,policeTitle,applicantStatus);
 
 @override
 String toString() {
-  return 'PlacementApplicant(placementApplicantId: $placementApplicantId, placementAnnouncementId: $placementAnnouncementId, employeeId: $employeeId, employeeFullName: $employeeFullName, employeePhotoPath: $employeePhotoPath, appliedDate: $appliedDate, status: $status, reasonForRejection: $reasonForRejection, appealReason: $appealReason, appealDate: $appealDate)';
+  return 'PlacementApplicant(applicantId: $applicantId, pAnnouncementId: $pAnnouncementId, employeeId: $employeeId, entryDate: $entryDate, entryBy: $entryBy, policeTitle: $policeTitle, applicantStatus: $applicantStatus)';
 }
 
 
@@ -136,7 +130,7 @@ abstract mixin class _$PlacementApplicantCopyWith<$Res> implements $PlacementApp
   factory _$PlacementApplicantCopyWith(_PlacementApplicant value, $Res Function(_PlacementApplicant) _then) = __$PlacementApplicantCopyWithImpl;
 @override @useResult
 $Res call({
- int placementApplicantId, int placementAnnouncementId, String employeeId, String? employeeFullName, String? employeePhotoPath, DateTime appliedDate, ApplicantStatus status, String? reasonForRejection, String? appealReason, DateTime? appealDate
+ int applicantId, int pAnnouncementId, String employeeId, DateTime entryDate, String entryBy, int policeTitle, ApplicantStatus applicantStatus
 });
 
 
@@ -153,19 +147,16 @@ class __$PlacementApplicantCopyWithImpl<$Res>
 
 /// Create a copy of PlacementApplicant
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? placementApplicantId = null,Object? placementAnnouncementId = null,Object? employeeId = null,Object? employeeFullName = freezed,Object? employeePhotoPath = freezed,Object? appliedDate = null,Object? status = null,Object? reasonForRejection = freezed,Object? appealReason = freezed,Object? appealDate = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? applicantId = null,Object? pAnnouncementId = null,Object? employeeId = null,Object? entryDate = null,Object? entryBy = null,Object? policeTitle = null,Object? applicantStatus = null,}) {
   return _then(_PlacementApplicant(
-placementApplicantId: null == placementApplicantId ? _self.placementApplicantId : placementApplicantId // ignore: cast_nullable_to_non_nullable
-as int,placementAnnouncementId: null == placementAnnouncementId ? _self.placementAnnouncementId : placementAnnouncementId // ignore: cast_nullable_to_non_nullable
+applicantId: null == applicantId ? _self.applicantId : applicantId // ignore: cast_nullable_to_non_nullable
+as int,pAnnouncementId: null == pAnnouncementId ? _self.pAnnouncementId : pAnnouncementId // ignore: cast_nullable_to_non_nullable
 as int,employeeId: null == employeeId ? _self.employeeId : employeeId // ignore: cast_nullable_to_non_nullable
-as String,employeeFullName: freezed == employeeFullName ? _self.employeeFullName : employeeFullName // ignore: cast_nullable_to_non_nullable
-as String?,employeePhotoPath: freezed == employeePhotoPath ? _self.employeePhotoPath : employeePhotoPath // ignore: cast_nullable_to_non_nullable
-as String?,appliedDate: null == appliedDate ? _self.appliedDate : appliedDate // ignore: cast_nullable_to_non_nullable
-as DateTime,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as ApplicantStatus,reasonForRejection: freezed == reasonForRejection ? _self.reasonForRejection : reasonForRejection // ignore: cast_nullable_to_non_nullable
-as String?,appealReason: freezed == appealReason ? _self.appealReason : appealReason // ignore: cast_nullable_to_non_nullable
-as String?,appealDate: freezed == appealDate ? _self.appealDate : appealDate // ignore: cast_nullable_to_non_nullable
-as DateTime?,
+as String,entryDate: null == entryDate ? _self.entryDate : entryDate // ignore: cast_nullable_to_non_nullable
+as DateTime,entryBy: null == entryBy ? _self.entryBy : entryBy // ignore: cast_nullable_to_non_nullable
+as String,policeTitle: null == policeTitle ? _self.policeTitle : policeTitle // ignore: cast_nullable_to_non_nullable
+as int,applicantStatus: null == applicantStatus ? _self.applicantStatus : applicantStatus // ignore: cast_nullable_to_non_nullable
+as ApplicantStatus,
   ));
 }
 

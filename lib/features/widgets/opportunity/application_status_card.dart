@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:police_com/core/enums/applicant_status.dart';
-import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
+import 'package:police_com/core/extensions/context_extension.dart';
 import 'package:police_com/features/widgets/application_status_chip.dart';
 
+/// A card that displays the user's current application status and provides
+/// relevant actions like appealing a decision or viewing selected candidates.
 class ApplicationStatusCard extends StatelessWidget {
   final ApplicantStatus status;
   final String? reasonForRejection;
@@ -20,8 +22,13 @@ class ApplicationStatusCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final bool isRejected = status == ApplicantStatus.rejected;
+    final bool isUnderReview = status == ApplicantStatus.underReview;
+
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      elevation: 2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -30,27 +37,32 @@ class ApplicationStatusCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(context.lango.yourStatus, style: theme.textTheme.titleMedium), // <-- REPLACED
+                Text(
+                  context.lango.yourStatus,
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 ApplicationStatusChip(status: status),
               ],
             ),
-            if (status == ApplicantStatus.notSelected ||
-                status == ApplicantStatus.appealed) ...[
+            // Show the action section only for relevant statuses.
+            if (isRejected || isUnderReview) ...[
               const Divider(height: 24),
-              if (status == ApplicantStatus.notSelected) ...[
+              if (isRejected) ...[
                 Text(
-                  context.lango.reasonForNonSelection, // <-- REPLACED
+                  context.lango.reasonForNonSelection,
                   style: theme.textTheme.labelLarge,
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  reasonForRejection ?? context.lango.noReasonProvided, // <-- REPLACED
+                  reasonForRejection ?? context.lango.noReasonProvided,
                   style: theme.textTheme.bodyMedium,
                 ),
               ],
-              if (status == ApplicantStatus.appealed) ...[
+              if (isUnderReview) ...[
                 Text(
-                  context.lango.yourAppealIsUnderReview, // <-- REPLACED
+                  context.lango.yourAppealIsUnderReview,
                   style: theme.textTheme.bodyMedium?.copyWith(
                     fontStyle: FontStyle.italic,
                   ),
@@ -63,14 +75,15 @@ class ApplicationStatusCard extends StatelessWidget {
                   if (onViewSelected != null)
                     TextButton(
                       onPressed: onViewSelected,
-                      child: Text(context.lango.viewSelected), // <-- REPLACED
+                      child: Text(context.lango.viewSelected),
                     ),
-                  if (onAppeal != null &&
-                      status == ApplicantStatus.notSelected) ...[
+                  // The appeal button should only show if the status is 'rejected'.
+                  if (onAppeal != null && isRejected) ...[
                     const SizedBox(width: 8),
-                    FilledButton(
+                    FilledButton.icon(
                       onPressed: onAppeal,
-                      child: Text(context.lango.appealDecision), // <-- REPLACED
+                      icon: const Icon(Icons.policy_outlined),
+                      label: Text(context.lango.appealDecision),
                     ),
                   ],
                 ],

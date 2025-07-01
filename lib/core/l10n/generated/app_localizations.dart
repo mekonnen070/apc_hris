@@ -3010,6 +3010,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Approved By'**
   String get approvedBy;
+
+  /// A phrase indicating a number of years of experience.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{{count} year} other{{count} years}}'**
+  String years({required int count});
+
+  /// No description provided for @expiresOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Expires on'**
+  String get expiresOn;
+
+  /// No description provided for @closed.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed'**
+  String get closed;
+
+  /// No description provided for @confirmApplication.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Application'**
+  String get confirmApplication;
+
+  /// Confirmation message for applying to a placement.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to apply for the position of {position}?'**
+  String confirmPlacementApplication({required String position});
+
+  /// No description provided for @confirmAndApply.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm & Apply'**
+  String get confirmAndApply;
+
+  /// No description provided for @myPlacementApplications.
+  ///
+  /// In en, this message translates to:
+  /// **'My Placement Applications'**
+  String get myPlacementApplications;
+
+  /// No description provided for @noApplicationsSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'You have not submitted any placement applications yet.'**
+  String get noApplicationsSubmitted;
+
+  /// No description provided for @error.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get error;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

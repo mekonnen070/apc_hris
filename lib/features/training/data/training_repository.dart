@@ -109,9 +109,9 @@ class TrainingRepository implements ITrainingRepository {
 class MockTrainingRepository implements ITrainingRepository {
   final _availableTrainings = List.generate(40, (index) {
     ApplicantStatus? status;
-    if (index % 5 == 0) status = ApplicantStatus.applied;
-    if (index % 5 == 1) status = ApplicantStatus.notSelected;
-    if (index % 5 == 2) status = ApplicantStatus.appealed;
+    if (index % 5 == 0) status = ApplicantStatus.pending;
+    if (index % 5 == 1) status = ApplicantStatus.readyForApproval;
+    if (index % 5 == 2) status = ApplicantStatus.rejected;
 
     return Training(
       trainingId: index + 1,
@@ -165,7 +165,7 @@ class MockTrainingRepository implements ITrainingRepository {
     );
     final index = _availableTrainings.indexOf(training);
     _availableTrainings[index] = training.copyWith(
-      currentUserApplicationStatus: ApplicantStatus.applied,
+      currentUserApplicationStatus: ApplicantStatus.pending,
     );
   }
 
@@ -191,7 +191,7 @@ class MockTrainingRepository implements ITrainingRepository {
         appliedDate: DateTime.now().subtract(const Duration(days: 5)),
         status: training.currentUserApplicationStatus!,
         reasonForRejection:
-            training.currentUserApplicationStatus == ApplicantStatus.notSelected
+            training.currentUserApplicationStatus == ApplicantStatus.pending
                 ? 'Candidate did not meet the physical fitness requirements for this advanced course.'
                 : null,
       ),
@@ -233,7 +233,7 @@ class MockTrainingRepository implements ITrainingRepository {
     final application = _myApplications[trainingId];
     if (application != null) {
       _myApplications[trainingId] = application.copyWith(
-        status: ApplicantStatus.appealed,
+        status: ApplicantStatus.pending,
         appealReason: appealReason,
         appealDate: DateTime.now(),
       );
