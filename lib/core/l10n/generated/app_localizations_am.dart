@@ -725,7 +725,7 @@ class AppLocalizationsAm extends AppLocalizations {
   String get totalEmployees => 'ጠቅላላ ሰራተኞች';
 
   @override
-  String get pendingTasks => 'በሂደት ላይ ያሉ ተግባራት';
+  String get pendingTasks => 'በሂደት ያሉ ተግባራት';
 
   @override
   String get quickActions => 'ፈጣን እርምጃዎች';
@@ -964,7 +964,7 @@ class AppLocalizationsAm extends AppLocalizations {
   }
 
   @override
-  String get daysLeft => ' ቀናት ቀርተዋል';
+  String get daysLeft => ' ቀናት አሉዎት';
 
   @override
   String usedOf({required int used, required int allowed}) {

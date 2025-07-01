@@ -264,7 +264,7 @@
         }
     },
     "totalEmployees": "ጠቅላላ ሰራተኞች",
-    "pendingTasks": "በሂደት ላይ ያሉ ተግባራት",
+    "pendingTasks": "በሂደት ያሉ ተግባራት",
     "quickActions": "ፈጣን እርምጃዎች",
     "recentActivity": "የቅርብ ጊዜ እንቅስቃሴ",
     "leaveRequestApproved": "የእረፍት ጥያቄ ጸድቋል",
@@ -456,7 +456,7 @@
             }
         }
     },
-    "daysLeft": " ቀናት ቀርተዋል",
+    "daysLeft": " ቀናት አሉዎት",
     "usedOf": "ያገለገለ: {used} ከ {allowed}",
     "@usedOf": {
         "placeholders": {

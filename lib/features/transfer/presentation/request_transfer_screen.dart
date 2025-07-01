@@ -106,14 +106,17 @@ class RequestTransferScreen extends HookConsumerWidget {
                 validator: FormBuilderValidators.required(),
               ),
               const SizedBox(height: 32),
-              FilledButton(
-                onPressed: state.isSubmitting ? null : handleSubmit,
-                child:
-                    state.isSubmitting
-                        ? const CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation(Colors.white),
-                        )
-                        : Text(context.lango.submitRequest),
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton(
+                  onPressed: state.isSubmitting ? null : handleSubmit,
+                  child:
+                      state.isSubmitting
+                          ? const CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation(Colors.white),
+                          )
+                          : Text(context.lango.submitRequest),
+                ),
               ),
             ],
           ),

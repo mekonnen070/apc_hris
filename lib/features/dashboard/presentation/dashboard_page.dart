@@ -45,35 +45,6 @@ class DashboardPage extends ConsumerWidget {
     );
   }
 
-  // Widget _buildWelcomeHeader(
-  //   BuildContext context,
-  //   TextTheme textTheme,
-  //   ColorScheme colorScheme,
-  // ) {
-  //   // <-- Pass context
-  //   return Column(
-  //     crossAxisAlignment: CrossAxisAlignment.start,
-  //     children: [
-  //       Text(
-  //         DateFormat('EEEE, d MMMM').format(DateTime.now()),
-  //         textAlign: TextAlign.left,
-  //         style: textTheme.bodyMedium?.copyWith(
-  //           color: colorScheme.onSurfaceVariant,
-  //         ),
-  //       ),
-  //       const SizedBox(height: 4),
-  //       Text(
-  //         context.lango.welcomeBackUser(name: 'Abe'), // <-- REPLACED
-  //         textAlign: TextAlign.left,
-  //         style: textTheme.headlineMedium?.copyWith(
-  //           fontWeight: FontWeight.bold,
-  //           color: colorScheme.onSurface,
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
-
   Widget _buildQuickStats(
     BuildContext context,
     ColorScheme colorScheme,
@@ -353,7 +324,7 @@ class _WelcomeHeader extends ConsumerWidget {
             const SizedBox(height: 4),
             Text(
               context.lango.welcomeBack,
-            textAlign: TextAlign.left,
+              textAlign: TextAlign.left,
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: Theme.of(context).colorScheme.onSurface,
