@@ -20,6 +20,7 @@ import 'package:police_com/core/enums/organization_type.dart';
 import 'package:police_com/core/enums/proficiency_level.dart';
 import 'package:police_com/core/enums/relation_types.dart';
 import 'package:police_com/core/enums/religion.dart';
+import 'package:police_com/core/enums/staff_title.dart';
 import 'package:police_com/features/employee_profile/application/states/employee_creation_state.dart';
 import 'package:police_com/features/employee_profile/domain/employee_contact_model.dart';
 import 'package:police_com/features/employee_profile/domain/employee_dependant_model.dart';
@@ -94,7 +95,7 @@ class EmployeeCreationNotifier extends StateNotifier<EmployeeCreationState> {
         firstName: 'Alemayehu',
         fatherName: 'Tesfaye',
         grandName: 'Bekele',
-        title: 'Sergeant', // Police rank as title
+        title: StaffTitle.sergeant,
         gender: Gender.male,
         birthDate: DateTime(1988, 7, 15),
         photoUrl: 'https://i.pravatar.cc/150?u=$employeeId',
@@ -209,7 +210,7 @@ class EmployeeCreationNotifier extends StateNotifier<EmployeeCreationState> {
           EmployeeSpouseModel(
             spouseId: 'SP1-$employeeId',
             employeeId: employeeId,
-            title: 'W/ro',
+            title: StaffTitle.wro,
             spouseFullName: 'Hana Gebre',
             gender: Gender.female,
             spouseBirthDate: DateTime(1990),
@@ -296,7 +297,7 @@ class EmployeeCreationNotifier extends StateNotifier<EmployeeCreationState> {
 
   void updateCoreInfo({
     String? employeeId,
-    String? title,
+    StaffTitle? title,
     String? firstName,
     String? fatherName,
     String? grandName,

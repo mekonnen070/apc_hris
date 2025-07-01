@@ -10,7 +10,7 @@ _EmployeeInfoModel _$EmployeeInfoModelFromJson(
   Map<String, dynamic> json,
 ) => _EmployeeInfoModel(
   employeeId: json['employeeId'] as String,
-  title: json['title'] as String?,
+  title: $enumDecodeNullable(_$StaffTitleEnumMap, json['title']),
   firstName: json['firstName'] as String,
   fatherName: json['fatherName'] as String?,
   grandName: json['grandName'] as String?,
@@ -111,7 +111,7 @@ _EmployeeInfoModel _$EmployeeInfoModelFromJson(
 Map<String, dynamic> _$EmployeeInfoModelToJson(_EmployeeInfoModel instance) =>
     <String, dynamic>{
       'employeeId': instance.employeeId,
-      'title': instance.title,
+      'title': _$StaffTitleEnumMap[instance.title],
       'firstName': instance.firstName,
       'fatherName': instance.fatherName,
       'grandName': instance.grandName,
@@ -150,6 +150,25 @@ Map<String, dynamic> _$EmployeeInfoModelToJson(_EmployeeInfoModel instance) =>
       'employeeSpouse': instance.employeeSpouse,
       'generalDocuments': instance.generalDocuments,
     };
+
+const _$StaffTitleEnumMap = {
+  StaffTitle.commissioner: 0,
+  StaffTitle.deputyCommissioner: 1,
+  StaffTitle.assistantCommissioner: 2,
+  StaffTitle.commander: 3,
+  StaffTitle.deputyCommander: 4,
+  StaffTitle.chiefInspector: 5,
+  StaffTitle.inspector: 6,
+  StaffTitle.deputyInspector: 7,
+  StaffTitle.assistantInspector: 8,
+  StaffTitle.chiefSergeant: 9,
+  StaffTitle.sergeant: 10,
+  StaffTitle.deputySergeant: 11,
+  StaffTitle.assistantSergeant: 12,
+  StaffTitle.constable: 13,
+  StaffTitle.ato: 14,
+  StaffTitle.wro: 15,
+};
 
 const _$GenderEnumMap = {Gender.male: 0, Gender.female: 1, Gender.other: 2};
 
@@ -352,15 +371,15 @@ const _$CountryEnumMap = {
 };
 
 const _$BloodGroupEnumMap = {
-  BloodGroup.aPositive: 'aPositive',
-  BloodGroup.aNegative: 'aNegative',
-  BloodGroup.bPositive: 'bPositive',
-  BloodGroup.bNegative: 'bNegative',
-  BloodGroup.abPositive: 'abPositive',
-  BloodGroup.abNegative: 'abNegative',
-  BloodGroup.oPositive: 'oPositive',
-  BloodGroup.oNegative: 'oNegative',
-  BloodGroup.unknown: 'unknown',
+  BloodGroup.aPositive: 0,
+  BloodGroup.aNegative: 1,
+  BloodGroup.bPositive: 2,
+  BloodGroup.bNegative: 3,
+  BloodGroup.abPositive: 4,
+  BloodGroup.abNegative: 5,
+  BloodGroup.oPositive: 6,
+  BloodGroup.oNegative: 7,
+  BloodGroup.unknown: 8,
 };
 
 const _$ReligionEnumMap = {
@@ -373,10 +392,10 @@ const _$ReligionEnumMap = {
 };
 
 const _$MedicalStatusEnumMap = {
-  MedicalStatus.fit: 'fit',
-  MedicalStatus.unfit: 'unfit',
-  MedicalStatus.pending: 'pending',
-  MedicalStatus.other: 'other',
+  MedicalStatus.fit: 0,
+  MedicalStatus.unfit: 1,
+  MedicalStatus.pending: 2,
+  MedicalStatus.other: 3,
 };
 
 const _$MaritalStatusEnumMap = {

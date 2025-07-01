@@ -1,6 +1,7 @@
 // lib/features/profile/data/mock_profile_repository.dart
 
 import 'package:police_com/core/enums/all_enums.dart';
+import 'package:police_com/core/enums/staff_title.dart';
 import 'package:police_com/features/employee_profile/domain/employee_contact_model.dart';
 import 'package:police_com/features/employee_profile/domain/employee_dependant_model.dart';
 import 'package:police_com/features/employee_profile/domain/employee_education_model.dart';
@@ -21,7 +22,7 @@ class MockProfileRepository implements IProfileRepository {
     const uuid = Uuid();
     return EmployeeInfoModel(
       employeeId: employeeId,
-      title: 'Sgt.',
+      title: StaffTitle.sergeant,
       firstName: 'Abe',
       fatherName: 'Assefa',
       grandName: 'Tessema',
@@ -79,7 +80,7 @@ class MockProfileRepository implements IProfileRepository {
         EmployeeSpouseModel(
           spouseId: uuid.v4(),
           employeeId: employeeId,
-          title: 'Mrs.',
+          title: StaffTitle.commissioner,
           spouseFullName: 'Almaz Gebre',
           gender: Gender.female,
           spouseBirthDate: DateTime(1990, 2, 14),

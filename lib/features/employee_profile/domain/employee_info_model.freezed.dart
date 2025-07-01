@@ -18,7 +18,7 @@ mixin _$EmployeeInfoModel {
 
 // Identifying Information
  String get employeeId;// Primary Key, C# [Required]
- String? get title; String get firstName; String? get fatherName; String? get grandName;// Personal Details
+ StaffTitle? get title; String get firstName; String? get fatherName; String? get grandName;// Personal Details
  Gender get gender; DateTime get birthDate;// C# [Required] & [AgeValidation]
 @JsonKey(includeFromJson: false, includeToJson: false) File? get photoFile;// Local file for upload
  String? get photoUrl;// Corresponds to C# PhotoPath, stores URL from backend
@@ -74,7 +74,7 @@ abstract mixin class $EmployeeInfoModelCopyWith<$Res>  {
   factory $EmployeeInfoModelCopyWith(EmployeeInfoModel value, $Res Function(EmployeeInfoModel) _then) = _$EmployeeInfoModelCopyWithImpl;
 @useResult
 $Res call({
- String employeeId, String? title, String firstName, String? fatherName, String? grandName, Gender gender, DateTime birthDate,@JsonKey(includeFromJson: false, includeToJson: false) File? photoFile, String? photoUrl, String? motherName, String positionId, String? managerId, String address1, String? address2, String? houseNumber, String phone, String mobile, String email, Country nationality, BloodGroup bloodGroup, Religion religion, MedicalStatus medicalStatus, String? retirementNumber, String? tin, MaritalStatus maritalStatus, EmploymentStatus employmentStatus, bool isManager, EmployeeType employeeType, DateTime hiredDate, DateTime? retirementEligibilityDate, String? entryBy, DateTime? entryDate, List<EmployeeContactModel> employeeContacts, List<EmployeeDependantModel> employeeDependants, List<EmployeeEducationModel> employeeEducations, List<EmployeeExperienceModel> employeeExperiences, List<EmployeePerformanceModel> performances, List<EmployeeSpouseModel> employeeSpouse, List<EmployeeUploadModel> generalDocuments
+ String employeeId, StaffTitle? title, String firstName, String? fatherName, String? grandName, Gender gender, DateTime birthDate,@JsonKey(includeFromJson: false, includeToJson: false) File? photoFile, String? photoUrl, String? motherName, String positionId, String? managerId, String address1, String? address2, String? houseNumber, String phone, String mobile, String email, Country nationality, BloodGroup bloodGroup, Religion religion, MedicalStatus medicalStatus, String? retirementNumber, String? tin, MaritalStatus maritalStatus, EmploymentStatus employmentStatus, bool isManager, EmployeeType employeeType, DateTime hiredDate, DateTime? retirementEligibilityDate, String? entryBy, DateTime? entryDate, List<EmployeeContactModel> employeeContacts, List<EmployeeDependantModel> employeeDependants, List<EmployeeEducationModel> employeeEducations, List<EmployeeExperienceModel> employeeExperiences, List<EmployeePerformanceModel> performances, List<EmployeeSpouseModel> employeeSpouse, List<EmployeeUploadModel> generalDocuments
 });
 
 
@@ -95,7 +95,7 @@ class _$EmployeeInfoModelCopyWithImpl<$Res>
   return _then(_self.copyWith(
 employeeId: null == employeeId ? _self.employeeId : employeeId // ignore: cast_nullable_to_non_nullable
 as String,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as String?,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
+as StaffTitle?,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
 as String,fatherName: freezed == fatherName ? _self.fatherName : fatherName // ignore: cast_nullable_to_non_nullable
 as String?,grandName: freezed == grandName ? _self.grandName : grandName // ignore: cast_nullable_to_non_nullable
 as String?,gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
@@ -149,7 +149,7 @@ class _EmployeeInfoModel extends EmployeeInfoModel {
 // Identifying Information
 @override final  String employeeId;
 // Primary Key, C# [Required]
-@override final  String? title;
+@override final  StaffTitle? title;
 @override final  String firstName;
 @override final  String? fatherName;
 @override final  String? grandName;
@@ -288,7 +288,7 @@ abstract mixin class _$EmployeeInfoModelCopyWith<$Res> implements $EmployeeInfoM
   factory _$EmployeeInfoModelCopyWith(_EmployeeInfoModel value, $Res Function(_EmployeeInfoModel) _then) = __$EmployeeInfoModelCopyWithImpl;
 @override @useResult
 $Res call({
- String employeeId, String? title, String firstName, String? fatherName, String? grandName, Gender gender, DateTime birthDate,@JsonKey(includeFromJson: false, includeToJson: false) File? photoFile, String? photoUrl, String? motherName, String positionId, String? managerId, String address1, String? address2, String? houseNumber, String phone, String mobile, String email, Country nationality, BloodGroup bloodGroup, Religion religion, MedicalStatus medicalStatus, String? retirementNumber, String? tin, MaritalStatus maritalStatus, EmploymentStatus employmentStatus, bool isManager, EmployeeType employeeType, DateTime hiredDate, DateTime? retirementEligibilityDate, String? entryBy, DateTime? entryDate, List<EmployeeContactModel> employeeContacts, List<EmployeeDependantModel> employeeDependants, List<EmployeeEducationModel> employeeEducations, List<EmployeeExperienceModel> employeeExperiences, List<EmployeePerformanceModel> performances, List<EmployeeSpouseModel> employeeSpouse, List<EmployeeUploadModel> generalDocuments
+ String employeeId, StaffTitle? title, String firstName, String? fatherName, String? grandName, Gender gender, DateTime birthDate,@JsonKey(includeFromJson: false, includeToJson: false) File? photoFile, String? photoUrl, String? motherName, String positionId, String? managerId, String address1, String? address2, String? houseNumber, String phone, String mobile, String email, Country nationality, BloodGroup bloodGroup, Religion religion, MedicalStatus medicalStatus, String? retirementNumber, String? tin, MaritalStatus maritalStatus, EmploymentStatus employmentStatus, bool isManager, EmployeeType employeeType, DateTime hiredDate, DateTime? retirementEligibilityDate, String? entryBy, DateTime? entryDate, List<EmployeeContactModel> employeeContacts, List<EmployeeDependantModel> employeeDependants, List<EmployeeEducationModel> employeeEducations, List<EmployeeExperienceModel> employeeExperiences, List<EmployeePerformanceModel> performances, List<EmployeeSpouseModel> employeeSpouse, List<EmployeeUploadModel> generalDocuments
 });
 
 
@@ -309,7 +309,7 @@ class __$EmployeeInfoModelCopyWithImpl<$Res>
   return _then(_EmployeeInfoModel(
 employeeId: null == employeeId ? _self.employeeId : employeeId // ignore: cast_nullable_to_non_nullable
 as String,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as String?,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
+as StaffTitle?,firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
 as String,fatherName: freezed == fatherName ? _self.fatherName : fatherName // ignore: cast_nullable_to_non_nullable
 as String?,grandName: freezed == grandName ? _self.grandName : grandName // ignore: cast_nullable_to_non_nullable
 as String?,gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable

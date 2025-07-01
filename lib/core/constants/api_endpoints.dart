@@ -134,4 +134,8 @@ class ApiEndpoints {
     required String employeeId,
     required String spouseId,
   }) => '$_profile/$employeeId/spouse/$spouseId';
+
+  // EmpProfile Module
+  static const String _empProfile = '/empProfile';
+  static String employeeDetails = '$_empProfile/details';
 }

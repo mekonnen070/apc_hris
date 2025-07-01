@@ -17,7 +17,7 @@ T _$identity<T>(T value) => value;
 mixin _$EmployeeSpouseModel {
 
  String? get spouseId;// C# is not nullable but has Guid.NewGuid().ToString() in comment
- String get employeeId; String get title;// Title of spouse (e.g., Mr., Mrs.)
+ String get employeeId; StaffTitle? get title;// Title of spouse (e.g., Mr., Mrs.)
  String get spouseFullName; Gender get gender;// Added based on C# properties
  DateTime get spouseBirthDate; String? get spousePhone;// C# is not nullable, made nullable as it might be optional
  String? get spouseOccupation;// C# is not nullable, made nullable
@@ -57,7 +57,7 @@ abstract mixin class $EmployeeSpouseModelCopyWith<$Res>  {
   factory $EmployeeSpouseModelCopyWith(EmployeeSpouseModel value, $Res Function(EmployeeSpouseModel) _then) = _$EmployeeSpouseModelCopyWithImpl;
 @useResult
 $Res call({
- String? spouseId, String employeeId, String title, String spouseFullName, Gender gender, DateTime spouseBirthDate, String? spousePhone, String? spouseOccupation, String? motherName, String address, DateTime? anniversaryDate, String? retirementNumber, String? tin
+ String? spouseId, String employeeId, StaffTitle? title, String spouseFullName, Gender gender, DateTime spouseBirthDate, String? spousePhone, String? spouseOccupation, String? motherName, String address, DateTime? anniversaryDate, String? retirementNumber, String? tin
 });
 
 
@@ -74,12 +74,12 @@ class _$EmployeeSpouseModelCopyWithImpl<$Res>
 
 /// Create a copy of EmployeeSpouseModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? spouseId = freezed,Object? employeeId = null,Object? title = null,Object? spouseFullName = null,Object? gender = null,Object? spouseBirthDate = null,Object? spousePhone = freezed,Object? spouseOccupation = freezed,Object? motherName = freezed,Object? address = null,Object? anniversaryDate = freezed,Object? retirementNumber = freezed,Object? tin = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? spouseId = freezed,Object? employeeId = null,Object? title = freezed,Object? spouseFullName = null,Object? gender = null,Object? spouseBirthDate = null,Object? spousePhone = freezed,Object? spouseOccupation = freezed,Object? motherName = freezed,Object? address = null,Object? anniversaryDate = freezed,Object? retirementNumber = freezed,Object? tin = freezed,}) {
   return _then(_self.copyWith(
 spouseId: freezed == spouseId ? _self.spouseId : spouseId // ignore: cast_nullable_to_non_nullable
 as String?,employeeId: null == employeeId ? _self.employeeId : employeeId // ignore: cast_nullable_to_non_nullable
-as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as String,spouseFullName: null == spouseFullName ? _self.spouseFullName : spouseFullName // ignore: cast_nullable_to_non_nullable
+as String,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as StaffTitle?,spouseFullName: null == spouseFullName ? _self.spouseFullName : spouseFullName // ignore: cast_nullable_to_non_nullable
 as String,gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
 as Gender,spouseBirthDate: null == spouseBirthDate ? _self.spouseBirthDate : spouseBirthDate // ignore: cast_nullable_to_non_nullable
 as DateTime,spousePhone: freezed == spousePhone ? _self.spousePhone : spousePhone // ignore: cast_nullable_to_non_nullable
@@ -100,13 +100,13 @@ as String?,
 @JsonSerializable()
 
 class _EmployeeSpouseModel implements EmployeeSpouseModel {
-  const _EmployeeSpouseModel({this.spouseId, required this.employeeId, required this.title, required this.spouseFullName, required this.gender, required this.spouseBirthDate, this.spousePhone, this.spouseOccupation, this.motherName, required this.address, this.anniversaryDate, this.retirementNumber, this.tin});
+  const _EmployeeSpouseModel({this.spouseId, required this.employeeId, this.title, required this.spouseFullName, required this.gender, required this.spouseBirthDate, this.spousePhone, this.spouseOccupation, this.motherName, required this.address, this.anniversaryDate, this.retirementNumber, this.tin});
   factory _EmployeeSpouseModel.fromJson(Map<String, dynamic> json) => _$EmployeeSpouseModelFromJson(json);
 
 @override final  String? spouseId;
 // C# is not nullable but has Guid.NewGuid().ToString() in comment
 @override final  String employeeId;
-@override final  String title;
+@override final  StaffTitle? title;
 // Title of spouse (e.g., Mr., Mrs.)
 @override final  String spouseFullName;
 @override final  Gender gender;
@@ -158,7 +158,7 @@ abstract mixin class _$EmployeeSpouseModelCopyWith<$Res> implements $EmployeeSpo
   factory _$EmployeeSpouseModelCopyWith(_EmployeeSpouseModel value, $Res Function(_EmployeeSpouseModel) _then) = __$EmployeeSpouseModelCopyWithImpl;
 @override @useResult
 $Res call({
- String? spouseId, String employeeId, String title, String spouseFullName, Gender gender, DateTime spouseBirthDate, String? spousePhone, String? spouseOccupation, String? motherName, String address, DateTime? anniversaryDate, String? retirementNumber, String? tin
+ String? spouseId, String employeeId, StaffTitle? title, String spouseFullName, Gender gender, DateTime spouseBirthDate, String? spousePhone, String? spouseOccupation, String? motherName, String address, DateTime? anniversaryDate, String? retirementNumber, String? tin
 });
 
 
@@ -175,12 +175,12 @@ class __$EmployeeSpouseModelCopyWithImpl<$Res>
 
 /// Create a copy of EmployeeSpouseModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? spouseId = freezed,Object? employeeId = null,Object? title = null,Object? spouseFullName = null,Object? gender = null,Object? spouseBirthDate = null,Object? spousePhone = freezed,Object? spouseOccupation = freezed,Object? motherName = freezed,Object? address = null,Object? anniversaryDate = freezed,Object? retirementNumber = freezed,Object? tin = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? spouseId = freezed,Object? employeeId = null,Object? title = freezed,Object? spouseFullName = null,Object? gender = null,Object? spouseBirthDate = null,Object? spousePhone = freezed,Object? spouseOccupation = freezed,Object? motherName = freezed,Object? address = null,Object? anniversaryDate = freezed,Object? retirementNumber = freezed,Object? tin = freezed,}) {
   return _then(_EmployeeSpouseModel(
 spouseId: freezed == spouseId ? _self.spouseId : spouseId // ignore: cast_nullable_to_non_nullable
 as String?,employeeId: null == employeeId ? _self.employeeId : employeeId // ignore: cast_nullable_to_non_nullable
-as String,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as String,spouseFullName: null == spouseFullName ? _self.spouseFullName : spouseFullName // ignore: cast_nullable_to_non_nullable
+as String,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as StaffTitle?,spouseFullName: null == spouseFullName ? _self.spouseFullName : spouseFullName // ignore: cast_nullable_to_non_nullable
 as String,gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
 as Gender,spouseBirthDate: null == spouseBirthDate ? _self.spouseBirthDate : spouseBirthDate // ignore: cast_nullable_to_non_nullable
 as DateTime,spousePhone: freezed == spousePhone ? _self.spousePhone : spousePhone // ignore: cast_nullable_to_non_nullable

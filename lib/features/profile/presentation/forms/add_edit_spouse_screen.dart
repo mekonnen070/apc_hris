@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:police_com/core/enums/all_enums.dart';
+import 'package:police_com/core/enums/staff_title.dart';
 import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 import 'package:police_com/core/extensions/string_extension.dart';
 import 'package:police_com/features/employee_profile/domain/employee_spouse_model.dart';
@@ -23,7 +24,7 @@ class AddEditSpouseScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final formKey = useMemoized(() => GlobalKey<FormState>());
     final titleController = useTextEditingController(
-      text: initialSpouse?.title ?? '',
+      text: initialSpouse?.title?.name ?? '',
     );
     final fullNameController = useTextEditingController(
       text: initialSpouse?.spouseFullName ?? '',
@@ -57,7 +58,9 @@ class AddEditSpouseScreen extends HookConsumerWidget {
         final spouse = EmployeeSpouseModel(
           spouseId: initialSpouse?.spouseId,
           employeeId: employeeId,
-          title: titleController.text,
+          title: StaffTitle.values.firstWhere(
+            (e) => e.name == titleController.text,
+          ),
           spouseFullName: fullNameController.text,
           gender: selectedGender.value,
           spouseBirthDate: birthDate.value!,
@@ -75,7 +78,11 @@ class AddEditSpouseScreen extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(initialSpouse == null ? context.lango.addSpouse : context.lango.editSpouse), // <-- REPLACED
+        title: Text(
+          initialSpouse == null
+              ? context.lango.addSpouse
+              : context.lango.editSpouse,
+        ), // <-- REPLACED
         actions: [
           IconButton(
             icon: const Icon(Icons.done),
@@ -96,7 +103,9 @@ class AddEditSpouseScreen extends HookConsumerWidget {
                 validator:
                     (val) =>
                         (val == null || val.isEmpty)
-                            ? context.lango.titleIsRequired // <-- REPLACED
+                            ? context
+                                .lango
+                                .titleIsRequired // <-- REPLACED
                             : null,
               ),
               const SizedBox(height: 16),
@@ -106,7 +115,9 @@ class AddEditSpouseScreen extends HookConsumerWidget {
                 validator:
                     (val) =>
                         (val == null || val.isEmpty)
-                            ? context.lango.fullNameIsRequired // <-- REPLACED
+                            ? context
+                                .lango
+                                .fullNameIsRequired // <-- REPLACED
                             : null,
               ),
               const SizedBox(height: 16),
@@ -121,7 +132,11 @@ class AddEditSpouseScreen extends HookConsumerWidget {
                       );
                     }).toList(),
                 onChanged: (val) => selectedGender.value = val ?? Gender.other,
-                validator: (val) => val == null ? context.lango.genderIsRequired : null, // <-- REPLACED
+                validator:
+                    (val) =>
+                        val == null
+                            ? context.lango.genderIsRequired
+                            : null, // <-- REPLACED
               ),
               const SizedBox(height: 16),
               AppDateField(
@@ -129,7 +144,10 @@ class AddEditSpouseScreen extends HookConsumerWidget {
                 selectedDate: birthDate.value,
                 onDateSelected: (date) => birthDate.value = date,
                 validator:
-                    (val) => val == null ? context.lango.birthDateIsRequired : null, // <-- REPLACED
+                    (val) =>
+                        val == null
+                            ? context.lango.birthDateIsRequired
+                            : null, // <-- REPLACED
               ),
               const SizedBox(height: 16),
               AppTextField(
@@ -154,7 +172,9 @@ class AddEditSpouseScreen extends HookConsumerWidget {
                 validator:
                     (val) =>
                         (val == null || val.isEmpty)
-                            ? context.lango.addressIsRequired // <-- REPLACED
+                            ? context
+                                .lango
+                                .addressIsRequired // <-- REPLACED
                             : null,
               ),
               const SizedBox(height: 16),
@@ -169,7 +189,10 @@ class AddEditSpouseScreen extends HookConsumerWidget {
                 labelText: context.lango.retirementNumber, // <-- REPLACED
               ),
               const SizedBox(height: 16),
-              AppTextField(controller: tinController, labelText: context.lango.tinNumber), // <-- REPLACED
+              AppTextField(
+                controller: tinController,
+                labelText: context.lango.tinNumber,
+              ), // <-- REPLACED
               const SizedBox(height: 24),
               FilledButton(
                 onPressed: handleSaveChanges,

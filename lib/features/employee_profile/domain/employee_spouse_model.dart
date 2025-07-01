@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:police_com/core/enums/gender.dart';
+import 'package:police_com/core/enums/staff_title.dart';
+
 // C# EmployeeSpouse does not directly use MaritalStatus enum for spouse,
 // but it's implied the Employee's MaritalStatus would be 'Married'.
 
@@ -9,13 +11,15 @@ part 'employee_spouse_model.g.dart';
 @freezed
 abstract class EmployeeSpouseModel with _$EmployeeSpouseModel {
   const factory EmployeeSpouseModel({
-    String? spouseId, // C# is not nullable but has Guid.NewGuid().ToString() in comment
+    String?
+    spouseId, // C# is not nullable but has Guid.NewGuid().ToString() in comment
     required String employeeId,
-    required String title, // Title of spouse (e.g., Mr., Mrs.)
+    StaffTitle? title, // Title of spouse (e.g., Mr., Mrs.)
     required String spouseFullName,
     required Gender gender, // Added based on C# properties
     required DateTime spouseBirthDate,
-    String? spousePhone, // C# is not nullable, made nullable as it might be optional
+    String?
+    spousePhone, // C# is not nullable, made nullable as it might be optional
     String? spouseOccupation, // C# is not nullable, made nullable
     String? motherName, // C# is not nullable, made nullable
     required String address,
