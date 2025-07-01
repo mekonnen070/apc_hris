@@ -1,10 +1,9 @@
-// lib/features/auth/application/auth_notifier.dart
-
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:police_com/core/app_preferences.dart';
 import 'package:police_com/core/network/dio_client.dart';
+import 'package:police_com/features/auth/application/current_employee_provider.dart';
 import 'package:police_com/features/auth/data/auth_repository.dart';
 import 'package:police_com/features/auth/data/i_auth_repository.dart';
 import 'package:police_com/features/auth/domain/auth_state.dart';
@@ -36,7 +35,9 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
         password: password,
       );
       if (success) {
+        // Invalidate both providers to ensure all user data is refreshed.
         ref.invalidate(currentEmployeeIdProvider);
+        ref.invalidate(currentEmployeeProvider);
         state = const AsyncData(AuthState.authenticated());
       } else {
         state = const AsyncData(AuthState.unauthenticated());
@@ -49,7 +50,9 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
   Future<void> logout() async {
     state = const AsyncLoading();
     await _authRepository.logout();
+    // Invalidate both providers to clear all user data.
     ref.invalidate(currentEmployeeIdProvider);
+    ref.invalidate(currentEmployeeProvider);
     state = const AsyncData(AuthState.unauthenticated());
   }
 

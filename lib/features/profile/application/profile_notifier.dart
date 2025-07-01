@@ -20,7 +20,7 @@ part 'profile_notifier.g.dart';
 // This is the final, correct provider. It is now parameter-less.
 // It discovers the logged-in user's ID internally, making it a self-sufficient
 // component that UI elements can simply "watch" without needing to know the user's ID.
-@riverpod
+@Riverpod(keepAlive: true)
 class ProfileNotifier extends _$ProfileNotifier {
   final _uuid = const Uuid();
 

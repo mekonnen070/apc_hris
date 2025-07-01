@@ -87,28 +87,39 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                                       radius: 52,
                                       backgroundColor: colorScheme.primary
                                           .withValues(alpha: 0.8),
-                                      child: CircleAvatar(
-                                        radius: 50,
-                                        backgroundImage:
-                                            (employee.photoUrl != null)
-                                                ? NetworkImage(
-                                                  employee.photoUrl!,
-                                                )
-                                                : null,
-                                        onBackgroundImageError: (e, s) {},
-                                        backgroundColor:
-                                            colorScheme.secondaryContainer,
-                                        child:
-                                            (employee.photoUrl == null)
-                                                ? Icon(
-                                                  Icons.person,
-                                                  size: 60,
-                                                  color:
-                                                      colorScheme
-                                                          .onSecondaryContainer,
-                                                )
-                                                : null,
-                                      ),
+                                      child:
+                                          employee.photoUrl == null
+                                              ? Icon(
+                                                Icons.person,
+                                                size: 60,
+                                                color:
+                                                    colorScheme
+                                                        .onSecondaryContainer,
+                                              )
+                                              : CircleAvatar(
+                                                radius: 50,
+                                                backgroundImage:
+                                                    (employee.photoUrl != null)
+                                                        ? NetworkImage(
+                                                          employee.photoUrl!,
+                                                        )
+                                                        : null,
+                                                onBackgroundImageError:
+                                                    (e, s) {},
+                                                backgroundColor:
+                                                    colorScheme
+                                                        .secondaryContainer,
+                                                child:
+                                                    (employee.photoUrl == null)
+                                                        ? Icon(
+                                                          Icons.person,
+                                                          size: 60,
+                                                          color:
+                                                              colorScheme
+                                                                  .onSecondaryContainer,
+                                                        )
+                                                        : null,
+                                              ),
                                     ),
                                     const SizedBox(height: 8),
                                     Text(

@@ -1,5 +1,3 @@
-// lib/features/auth/data/auth_repository.dart
-
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:police_com/core/app_preferences.dart';
@@ -12,7 +10,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'i_auth_repository.dart';
 
-// The provider is now clean, with no `dependencies` list needed.
 final authRepositoryProvider = Provider<IAuthRepository>((ref) {
   if (AppConfig.useMockData) {
     throw UnimplementedError('MockAuthRepository is not yet implemented.');
@@ -41,7 +38,6 @@ class AuthRepository with LoggerMixin implements IAuthRepository {
     return const AuthState.unauthenticated();
   }
 
-  // ... rest of the AuthRepository code remains the same
   @override
   Future<bool> login({required String email, required String password}) async {
     final data = {'userName': email, 'password': password, 'rememberMe': true};
@@ -51,17 +47,13 @@ class AuthRepository with LoggerMixin implements IAuthRepository {
       if (response.statusCode == 200) {
         await _appPreferences.setUserLoginStatus(true, _prefs);
 
-        final token = response.data?['token'] as String?;
-        final employeeId = response.data?['employeeId'] as String?;
+        String? employeeId = response.data?['employeeId'] as String?;
 
-        if (token != null) {
-          await _appPreferences.setToken(token, _prefs);
-        }
-        if (employeeId != null) {
-          await _appPreferences.setEmployeeId(employeeId, _prefs);
-        }
+        // FIX: If the backend doesn't return an employeeId, use the default "EMP-001".
+        employeeId ??= 'EMP-001';
 
-        logInfo('Login successful.');
+        await _appPreferences.setEmployeeId(employeeId, _prefs);
+        logInfo('Login successful. Employee ID: $employeeId');
         return true;
       }
       logError('Login failed: Status code ${response.statusCode}');
@@ -83,6 +75,7 @@ class AuthRepository with LoggerMixin implements IAuthRepository {
         stackTrace: st,
       );
     } finally {
+      // This will clear the login status and the stored employeeId.
       await _appPreferences.clearAuthData(_prefs);
     }
   }

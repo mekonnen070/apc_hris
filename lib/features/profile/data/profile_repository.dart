@@ -32,8 +32,10 @@ class ProfileRepository with LoggerMixin implements IProfileRepository {
   }) async {
     try {
       final response = await _dioClient.get(
-        ApiEndpoints.getEmployeeProfile(employeeId: employeeId),
+        ApiEndpoints.employeeDetails,
+        queryParameters: {'EmpId': employeeId},
       );
+
       return EmployeeInfoModel.fromJson(response.data);
     } on DioException catch (e, stackTrace) {
       logError(
