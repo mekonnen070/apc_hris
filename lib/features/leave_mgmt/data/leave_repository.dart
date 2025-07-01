@@ -15,7 +15,9 @@ final leaveRepositoryProvider = Provider<ILeaveRepository>((ref) {
 });
 
 abstract class ILeaveRepository {
-  Future<List<LeaveBalance>> getLeaveBalance();
+  Future<List<LeaveBalance>> getLeaveBalanceByEmployee({
+    required String employeeId,
+  });
   Future<List<LeaveRequest>> getLeaveRequests({
     required int page,
     required int pageSize,
@@ -29,8 +31,13 @@ class LeaveRepository implements ILeaveRepository {
   LeaveRepository(this._dio);
 
   @override
-  Future<List<LeaveBalance>> getLeaveBalance() async {
-    final response = await _dio.get(ApiEndpoints.leaveBalance);
+  Future<List<LeaveBalance>> getLeaveBalanceByEmployee({
+    required String employeeId,
+  }) async {
+    final response = await _dio.get(
+      ApiEndpoints.leaveBalanceByEmployee,
+      queryParameters: {'employeeId': employeeId},
+    );
     return (response.data as List)
         .map((e) => LeaveBalance.fromJson(e))
         .toList();
@@ -64,32 +71,37 @@ class LeaveRepository implements ILeaveRepository {
 
 class MockLeaveRepository implements ILeaveRepository {
   @override
-  Future<List<LeaveBalance>> getLeaveBalance() async {
+  Future<List<LeaveBalance>> getLeaveBalanceByEmployee({
+    required String employeeId,
+  }) async {
     await Future.delayed(const Duration(seconds: 1));
-    return const [
-      LeaveBalance(
+    return [
+      const LeaveBalance(
         leaveBalanceId: 1,
         employeeId: '1',
         leaveTypeId: 'Annual',
         budgetYear: 2024,
         totalDays: 20,
         usedDays: 5,
+        balance: 15,
       ),
-      LeaveBalance(
+      const LeaveBalance(
         leaveBalanceId: 2,
         employeeId: '1',
         leaveTypeId: 'Sick',
         budgetYear: 2024,
         totalDays: 10,
         usedDays: 2,
+        balance: 8,
       ),
-      LeaveBalance(
+      const LeaveBalance(
         leaveBalanceId: 3,
         employeeId: '1',
         leaveTypeId: 'Maternity',
         budgetYear: 2024,
         totalDays: 90,
         usedDays: 0,
+        balance: 90,
       ),
     ];
   }
@@ -136,35 +148,17 @@ class MockLeaveRepository implements ILeaveRepository {
   Future<List<LeaveType>> getLeaveTypes() async {
     await Future.delayed(const Duration(milliseconds: 500));
     return [
-      const LeaveType(
-        leaveTypeId: 1,
-        leaveTypeName: 'Annual',
-        isPaid: true,
-        maximumDays: 20,
-      ),
-      const LeaveType(
-        leaveTypeId: 2,
-        leaveTypeName: 'Sick',
-        isPaid: true,
-        maximumDays: 10,
-      ),
-      const LeaveType(
-        leaveTypeId: 3,
-        leaveTypeName: 'Maternity',
-        isPaid: true,
-        maximumDays: 90,
-      ),
-      const LeaveType(
-        leaveTypeId: 4,
-        leaveTypeName: 'Paternity',
-        isPaid: true,
-        maximumDays: 5,
-      ),
-      const LeaveType(
-        leaveTypeId: 5,
-        leaveTypeName: 'Unpaid',
-        isPaid: false,
-        maximumDays: 30,
+      LeaveType(
+        typeId: 'L01',
+        typeName: 'Annual Leave',
+        minimumLeave: 20,
+        increment: 1,
+        incrementingByYear: 1,
+        maximumLeave: 30,
+        enabled: true,
+        entryBy: 'Peeragetech@gmail.com',
+        entryDate: DateTime.now(),
+        leaves: [],
       ),
     ];
   }

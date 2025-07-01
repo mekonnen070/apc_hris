@@ -50,7 +50,9 @@ class ApiEndpoints {
 
   // Base feature paths to avoid repetition
   static const String _newRecruit = '/newRecruit';
-  static const String _leave = '/leave';
+  static const String _leave = '/leaveRequest';
+  static const String _leaveBalance = '/LvBalance';
+  static const String _leaveTypes = '/LvType';
   static const String _training = '/training';
   static const String _placementAnnouncement = '/placementAnnounce';
   static const String _placementApplication = '/placementApplication';
@@ -69,10 +71,11 @@ class ApiEndpoints {
   static const String recruitmentAnnouncements = '$_recruitment/announcements';
 
   // --- Leave Endpoints ---
-  static const String leaveBalance = '$_leave/balance';
   static const String leaveRequests = '$_leave/requests';
-  static const String leaveTypes = '$_leave/types';
   static const String applyForLeave = '$_leave/apply';
+  static const String leaveBalanceByEmployee =
+      '$_leaveBalance/balanceByEmployee';
+  static const String leaveTypes = '$_leaveTypes/leaveTypes';
 
   // --- Training Endpoints ---
   static const String availableTrainings = '$_training/available';

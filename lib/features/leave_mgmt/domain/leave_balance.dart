@@ -12,6 +12,7 @@ abstract class LeaveBalance with _$LeaveBalance {
     required int budgetYear,
     required int totalDays,
     required int usedDays,
+    required int balance,
   }) = _LeaveBalance;
 
   factory LeaveBalance.fromJson(Map<String, dynamic> json) =>

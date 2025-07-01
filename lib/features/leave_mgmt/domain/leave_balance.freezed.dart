@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$LeaveBalance {
 
- int get leaveBalanceId; String get employeeId; String get leaveTypeId; int get budgetYear; int get totalDays; int get usedDays;
+ int get leaveBalanceId; String get employeeId; String get leaveTypeId; int get budgetYear; int get totalDays; int get usedDays; int get balance;
 /// Create a copy of LeaveBalance
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $LeaveBalanceCopyWith<LeaveBalance> get copyWith => _$LeaveBalanceCopyWithImpl<L
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LeaveBalance&&(identical(other.leaveBalanceId, leaveBalanceId) || other.leaveBalanceId == leaveBalanceId)&&(identical(other.employeeId, employeeId) || other.employeeId == employeeId)&&(identical(other.leaveTypeId, leaveTypeId) || other.leaveTypeId == leaveTypeId)&&(identical(other.budgetYear, budgetYear) || other.budgetYear == budgetYear)&&(identical(other.totalDays, totalDays) || other.totalDays == totalDays)&&(identical(other.usedDays, usedDays) || other.usedDays == usedDays));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LeaveBalance&&(identical(other.leaveBalanceId, leaveBalanceId) || other.leaveBalanceId == leaveBalanceId)&&(identical(other.employeeId, employeeId) || other.employeeId == employeeId)&&(identical(other.leaveTypeId, leaveTypeId) || other.leaveTypeId == leaveTypeId)&&(identical(other.budgetYear, budgetYear) || other.budgetYear == budgetYear)&&(identical(other.totalDays, totalDays) || other.totalDays == totalDays)&&(identical(other.usedDays, usedDays) || other.usedDays == usedDays)&&(identical(other.balance, balance) || other.balance == balance));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,leaveBalanceId,employeeId,leaveTypeId,budgetYear,totalDays,usedDays);
+int get hashCode => Object.hash(runtimeType,leaveBalanceId,employeeId,leaveTypeId,budgetYear,totalDays,usedDays,balance);
 
 @override
 String toString() {
-  return 'LeaveBalance(leaveBalanceId: $leaveBalanceId, employeeId: $employeeId, leaveTypeId: $leaveTypeId, budgetYear: $budgetYear, totalDays: $totalDays, usedDays: $usedDays)';
+  return 'LeaveBalance(leaveBalanceId: $leaveBalanceId, employeeId: $employeeId, leaveTypeId: $leaveTypeId, budgetYear: $budgetYear, totalDays: $totalDays, usedDays: $usedDays, balance: $balance)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $LeaveBalanceCopyWith<$Res>  {
   factory $LeaveBalanceCopyWith(LeaveBalance value, $Res Function(LeaveBalance) _then) = _$LeaveBalanceCopyWithImpl;
 @useResult
 $Res call({
- int leaveBalanceId, String employeeId, String leaveTypeId, int budgetYear, int totalDays, int usedDays
+ int leaveBalanceId, String employeeId, String leaveTypeId, int budgetYear, int totalDays, int usedDays, int balance
 });
 
 
@@ -66,7 +66,7 @@ class _$LeaveBalanceCopyWithImpl<$Res>
 
 /// Create a copy of LeaveBalance
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? leaveBalanceId = null,Object? employeeId = null,Object? leaveTypeId = null,Object? budgetYear = null,Object? totalDays = null,Object? usedDays = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? leaveBalanceId = null,Object? employeeId = null,Object? leaveTypeId = null,Object? budgetYear = null,Object? totalDays = null,Object? usedDays = null,Object? balance = null,}) {
   return _then(_self.copyWith(
 leaveBalanceId: null == leaveBalanceId ? _self.leaveBalanceId : leaveBalanceId // ignore: cast_nullable_to_non_nullable
 as int,employeeId: null == employeeId ? _self.employeeId : employeeId // ignore: cast_nullable_to_non_nullable
@@ -74,6 +74,7 @@ as String,leaveTypeId: null == leaveTypeId ? _self.leaveTypeId : leaveTypeId // 
 as String,budgetYear: null == budgetYear ? _self.budgetYear : budgetYear // ignore: cast_nullable_to_non_nullable
 as int,totalDays: null == totalDays ? _self.totalDays : totalDays // ignore: cast_nullable_to_non_nullable
 as int,usedDays: null == usedDays ? _self.usedDays : usedDays // ignore: cast_nullable_to_non_nullable
+as int,balance: null == balance ? _self.balance : balance // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }
@@ -85,7 +86,7 @@ as int,
 @JsonSerializable()
 
 class _LeaveBalance implements LeaveBalance {
-  const _LeaveBalance({required this.leaveBalanceId, required this.employeeId, required this.leaveTypeId, required this.budgetYear, required this.totalDays, required this.usedDays});
+  const _LeaveBalance({required this.leaveBalanceId, required this.employeeId, required this.leaveTypeId, required this.budgetYear, required this.totalDays, required this.usedDays, required this.balance});
   factory _LeaveBalance.fromJson(Map<String, dynamic> json) => _$LeaveBalanceFromJson(json);
 
 @override final  int leaveBalanceId;
@@ -94,6 +95,7 @@ class _LeaveBalance implements LeaveBalance {
 @override final  int budgetYear;
 @override final  int totalDays;
 @override final  int usedDays;
+@override final  int balance;
 
 /// Create a copy of LeaveBalance
 /// with the given fields replaced by the non-null parameter values.
@@ -108,16 +110,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LeaveBalance&&(identical(other.leaveBalanceId, leaveBalanceId) || other.leaveBalanceId == leaveBalanceId)&&(identical(other.employeeId, employeeId) || other.employeeId == employeeId)&&(identical(other.leaveTypeId, leaveTypeId) || other.leaveTypeId == leaveTypeId)&&(identical(other.budgetYear, budgetYear) || other.budgetYear == budgetYear)&&(identical(other.totalDays, totalDays) || other.totalDays == totalDays)&&(identical(other.usedDays, usedDays) || other.usedDays == usedDays));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LeaveBalance&&(identical(other.leaveBalanceId, leaveBalanceId) || other.leaveBalanceId == leaveBalanceId)&&(identical(other.employeeId, employeeId) || other.employeeId == employeeId)&&(identical(other.leaveTypeId, leaveTypeId) || other.leaveTypeId == leaveTypeId)&&(identical(other.budgetYear, budgetYear) || other.budgetYear == budgetYear)&&(identical(other.totalDays, totalDays) || other.totalDays == totalDays)&&(identical(other.usedDays, usedDays) || other.usedDays == usedDays)&&(identical(other.balance, balance) || other.balance == balance));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,leaveBalanceId,employeeId,leaveTypeId,budgetYear,totalDays,usedDays);
+int get hashCode => Object.hash(runtimeType,leaveBalanceId,employeeId,leaveTypeId,budgetYear,totalDays,usedDays,balance);
 
 @override
 String toString() {
-  return 'LeaveBalance(leaveBalanceId: $leaveBalanceId, employeeId: $employeeId, leaveTypeId: $leaveTypeId, budgetYear: $budgetYear, totalDays: $totalDays, usedDays: $usedDays)';
+  return 'LeaveBalance(leaveBalanceId: $leaveBalanceId, employeeId: $employeeId, leaveTypeId: $leaveTypeId, budgetYear: $budgetYear, totalDays: $totalDays, usedDays: $usedDays, balance: $balance)';
 }
 
 
@@ -128,7 +130,7 @@ abstract mixin class _$LeaveBalanceCopyWith<$Res> implements $LeaveBalanceCopyWi
   factory _$LeaveBalanceCopyWith(_LeaveBalance value, $Res Function(_LeaveBalance) _then) = __$LeaveBalanceCopyWithImpl;
 @override @useResult
 $Res call({
- int leaveBalanceId, String employeeId, String leaveTypeId, int budgetYear, int totalDays, int usedDays
+ int leaveBalanceId, String employeeId, String leaveTypeId, int budgetYear, int totalDays, int usedDays, int balance
 });
 
 
@@ -145,7 +147,7 @@ class __$LeaveBalanceCopyWithImpl<$Res>
 
 /// Create a copy of LeaveBalance
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? leaveBalanceId = null,Object? employeeId = null,Object? leaveTypeId = null,Object? budgetYear = null,Object? totalDays = null,Object? usedDays = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? leaveBalanceId = null,Object? employeeId = null,Object? leaveTypeId = null,Object? budgetYear = null,Object? totalDays = null,Object? usedDays = null,Object? balance = null,}) {
   return _then(_LeaveBalance(
 leaveBalanceId: null == leaveBalanceId ? _self.leaveBalanceId : leaveBalanceId // ignore: cast_nullable_to_non_nullable
 as int,employeeId: null == employeeId ? _self.employeeId : employeeId // ignore: cast_nullable_to_non_nullable
@@ -153,6 +155,7 @@ as String,leaveTypeId: null == leaveTypeId ? _self.leaveTypeId : leaveTypeId // 
 as String,budgetYear: null == budgetYear ? _self.budgetYear : budgetYear // ignore: cast_nullable_to_non_nullable
 as int,totalDays: null == totalDays ? _self.totalDays : totalDays // ignore: cast_nullable_to_non_nullable
 as int,usedDays: null == usedDays ? _self.usedDays : usedDays // ignore: cast_nullable_to_non_nullable
+as int,balance: null == balance ? _self.balance : balance // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }

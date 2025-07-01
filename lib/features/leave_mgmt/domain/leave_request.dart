@@ -1,12 +1,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:police_com/core/enums/all_enums.dart';
+import 'package:police_com/core/enums/leave_request_status.dart';
 
 part 'leave_request.freezed.dart';
 part 'leave_request.g.dart';
 
 @freezed
 abstract class LeaveRequest with _$LeaveRequest {
-  const factory LeaveRequest({
+  factory LeaveRequest({
     required int leaveRequestId,
     required String leaveTypeId,
     required String employeeId,

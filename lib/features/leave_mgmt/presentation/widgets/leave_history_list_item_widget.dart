@@ -1,37 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:police_com/core/enums/all_enums.dart';
-import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
+import 'package:police_com/core/extensions/context_extension.dart';
 import 'package:police_com/core/extensions/string_extension.dart';
 import 'package:police_com/features/leave_mgmt/domain/leave_request.dart';
 
 class LeaveHistoryListItem extends StatelessWidget {
   final LeaveRequest request;
-  const LeaveHistoryListItem({super.key, required this.request});
+  final String leaveTypeName;
 
-  Color _getStatusColor(LeaveRequestStatus status, BuildContext context) {
-    switch (status) {
-      case LeaveRequestStatus.approved:
-        return Colors.green;
-      case LeaveRequestStatus.rejected:
-        return Theme.of(context).colorScheme.error;
-      case LeaveRequestStatus.cancelled:
-        return Colors.grey;
-      case LeaveRequestStatus.pending:
-        return Colors.orange;
-    }
-  }
+  const LeaveHistoryListItem({
+    super.key,
+    required this.request,
+    required this.leaveTypeName,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final statusColor = _getStatusColor(request.requestStatus, context);
+    final theme = Theme.of(context);
     final formattedStartDate = DateFormat.yMMMd().format(request.startDate);
     final formattedEndDate = DateFormat.yMMMd().format(request.endDate);
 
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       child: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -39,64 +31,34 @@ class LeaveHistoryListItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  context.lango.leaveTitle(
-                    leaveType: request.leaveTypeId.toCapitalized(),
-                  ), // <-- REPLACED
-                  style: Theme.of(context).textTheme.titleMedium,
+                  leaveTypeName,
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 4,
-                  ),
-                  decoration: BoxDecoration(
-                    color: statusColor.withValues(alpha: 0.2),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Text(
-                    request.requestStatus.name.toCapitalized(),
-                    style: Theme.of(
-                      context,
-                    ).textTheme.bodySmall?.copyWith(color: statusColor),
-                  ),
+                // We can use a generic status chip if the enums are compatible
+                // For now, we'll display the text directly.
+                Chip(
+                  label: Text(request.requestStatus.name.toDisplayCase()),
+                  backgroundColor: theme.colorScheme.secondaryContainer
+                      .withOpacity(0.5),
+                  side: BorderSide.none,
                 ),
               ],
             ),
             const Divider(height: 20),
-            Text.rich(
-              TextSpan(
-                style: Theme.of(context).textTheme.bodyMedium,
-                children: [
-                  TextSpan(
-                    text: '${context.lango.fromLabel} ', // <-- REPLACED
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  TextSpan(text: formattedStartDate),
-                  TextSpan(
-                    text: '  ${context.lango.toLabel} ', // <-- REPLACED
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  TextSpan(text: formattedEndDate),
-                ],
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('${context.lango.fromLabel}: $formattedStartDate'),
+                Text('${context.lango.toLabel}: $formattedEndDate'),
+              ],
             ),
             const SizedBox(height: 8),
-            if (request.requestReason != null &&
-                request.requestReason!.isNotEmpty)
-              Text(
-                context.lango.daysWithReason(
-                  days: request.numOfDays,
-                  reason: request.requestReason!,
-                ), // <-- REPLACED
-                style: Theme.of(context).textTheme.bodySmall,
-              )
-            else
-              Text(
-                context.lango.daysOnly(
-                  count: request.numOfDays,
-                ), // <-- REPLACED
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
+            Text(
+              context.lango.daysOnly(count: request.numOfDays),
+              style: theme.textTheme.bodySmall,
+            ),
           ],
         ),
       ),

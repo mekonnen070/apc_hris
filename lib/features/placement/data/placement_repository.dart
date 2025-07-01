@@ -92,7 +92,10 @@ class PlacementRepository implements IPlacementRepository {
         queryParameters: {'employeeId': employeeId},
       );
       final data = response.data as List;
-      return data.map((item) => PlacementApplicant.fromJson(item)).toList();
+      final applications =
+          data.map((item) => PlacementApplicant.fromJson(item)).toList();
+
+      return applications;
     } catch (e, st) {
       log(
         'Failed to fetch applications for employee: $employeeId',

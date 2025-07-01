@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$LeaveType {
 
- int get leaveTypeId; String get leaveTypeName; bool get isPaid; int get maximumDays;
+ String get typeId; String get typeName; int get minimumLeave; int get increment; int get incrementingByYear; int get maximumLeave; bool get enabled; String get entryBy; DateTime get entryDate; List<dynamic> get leaves;
 /// Create a copy of LeaveType
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $LeaveTypeCopyWith<LeaveType> get copyWith => _$LeaveTypeCopyWithImpl<LeaveType>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LeaveType&&(identical(other.leaveTypeId, leaveTypeId) || other.leaveTypeId == leaveTypeId)&&(identical(other.leaveTypeName, leaveTypeName) || other.leaveTypeName == leaveTypeName)&&(identical(other.isPaid, isPaid) || other.isPaid == isPaid)&&(identical(other.maximumDays, maximumDays) || other.maximumDays == maximumDays));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LeaveType&&(identical(other.typeId, typeId) || other.typeId == typeId)&&(identical(other.typeName, typeName) || other.typeName == typeName)&&(identical(other.minimumLeave, minimumLeave) || other.minimumLeave == minimumLeave)&&(identical(other.increment, increment) || other.increment == increment)&&(identical(other.incrementingByYear, incrementingByYear) || other.incrementingByYear == incrementingByYear)&&(identical(other.maximumLeave, maximumLeave) || other.maximumLeave == maximumLeave)&&(identical(other.enabled, enabled) || other.enabled == enabled)&&(identical(other.entryBy, entryBy) || other.entryBy == entryBy)&&(identical(other.entryDate, entryDate) || other.entryDate == entryDate)&&const DeepCollectionEquality().equals(other.leaves, leaves));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,leaveTypeId,leaveTypeName,isPaid,maximumDays);
+int get hashCode => Object.hash(runtimeType,typeId,typeName,minimumLeave,increment,incrementingByYear,maximumLeave,enabled,entryBy,entryDate,const DeepCollectionEquality().hash(leaves));
 
 @override
 String toString() {
-  return 'LeaveType(leaveTypeId: $leaveTypeId, leaveTypeName: $leaveTypeName, isPaid: $isPaid, maximumDays: $maximumDays)';
+  return 'LeaveType(typeId: $typeId, typeName: $typeName, minimumLeave: $minimumLeave, increment: $increment, incrementingByYear: $incrementingByYear, maximumLeave: $maximumLeave, enabled: $enabled, entryBy: $entryBy, entryDate: $entryDate, leaves: $leaves)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $LeaveTypeCopyWith<$Res>  {
   factory $LeaveTypeCopyWith(LeaveType value, $Res Function(LeaveType) _then) = _$LeaveTypeCopyWithImpl;
 @useResult
 $Res call({
- int leaveTypeId, String leaveTypeName, bool isPaid, int maximumDays
+ String typeId, String typeName, int minimumLeave, int increment, int incrementingByYear, int maximumLeave, bool enabled, String entryBy, DateTime entryDate, List<dynamic> leaves
 });
 
 
@@ -66,13 +66,19 @@ class _$LeaveTypeCopyWithImpl<$Res>
 
 /// Create a copy of LeaveType
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? leaveTypeId = null,Object? leaveTypeName = null,Object? isPaid = null,Object? maximumDays = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? typeId = null,Object? typeName = null,Object? minimumLeave = null,Object? increment = null,Object? incrementingByYear = null,Object? maximumLeave = null,Object? enabled = null,Object? entryBy = null,Object? entryDate = null,Object? leaves = null,}) {
   return _then(_self.copyWith(
-leaveTypeId: null == leaveTypeId ? _self.leaveTypeId : leaveTypeId // ignore: cast_nullable_to_non_nullable
-as int,leaveTypeName: null == leaveTypeName ? _self.leaveTypeName : leaveTypeName // ignore: cast_nullable_to_non_nullable
-as String,isPaid: null == isPaid ? _self.isPaid : isPaid // ignore: cast_nullable_to_non_nullable
-as bool,maximumDays: null == maximumDays ? _self.maximumDays : maximumDays // ignore: cast_nullable_to_non_nullable
-as int,
+typeId: null == typeId ? _self.typeId : typeId // ignore: cast_nullable_to_non_nullable
+as String,typeName: null == typeName ? _self.typeName : typeName // ignore: cast_nullable_to_non_nullable
+as String,minimumLeave: null == minimumLeave ? _self.minimumLeave : minimumLeave // ignore: cast_nullable_to_non_nullable
+as int,increment: null == increment ? _self.increment : increment // ignore: cast_nullable_to_non_nullable
+as int,incrementingByYear: null == incrementingByYear ? _self.incrementingByYear : incrementingByYear // ignore: cast_nullable_to_non_nullable
+as int,maximumLeave: null == maximumLeave ? _self.maximumLeave : maximumLeave // ignore: cast_nullable_to_non_nullable
+as int,enabled: null == enabled ? _self.enabled : enabled // ignore: cast_nullable_to_non_nullable
+as bool,entryBy: null == entryBy ? _self.entryBy : entryBy // ignore: cast_nullable_to_non_nullable
+as String,entryDate: null == entryDate ? _self.entryDate : entryDate // ignore: cast_nullable_to_non_nullable
+as DateTime,leaves: null == leaves ? _self.leaves : leaves // ignore: cast_nullable_to_non_nullable
+as List<dynamic>,
   ));
 }
 
@@ -83,13 +89,25 @@ as int,
 @JsonSerializable()
 
 class _LeaveType implements LeaveType {
-  const _LeaveType({required this.leaveTypeId, required this.leaveTypeName, required this.isPaid, required this.maximumDays});
+   _LeaveType({required this.typeId, required this.typeName, required this.minimumLeave, required this.increment, required this.incrementingByYear, required this.maximumLeave, required this.enabled, required this.entryBy, required this.entryDate, required final  List<dynamic> leaves}): _leaves = leaves;
   factory _LeaveType.fromJson(Map<String, dynamic> json) => _$LeaveTypeFromJson(json);
 
-@override final  int leaveTypeId;
-@override final  String leaveTypeName;
-@override final  bool isPaid;
-@override final  int maximumDays;
+@override final  String typeId;
+@override final  String typeName;
+@override final  int minimumLeave;
+@override final  int increment;
+@override final  int incrementingByYear;
+@override final  int maximumLeave;
+@override final  bool enabled;
+@override final  String entryBy;
+@override final  DateTime entryDate;
+ final  List<dynamic> _leaves;
+@override List<dynamic> get leaves {
+  if (_leaves is EqualUnmodifiableListView) return _leaves;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_leaves);
+}
+
 
 /// Create a copy of LeaveType
 /// with the given fields replaced by the non-null parameter values.
@@ -104,16 +122,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LeaveType&&(identical(other.leaveTypeId, leaveTypeId) || other.leaveTypeId == leaveTypeId)&&(identical(other.leaveTypeName, leaveTypeName) || other.leaveTypeName == leaveTypeName)&&(identical(other.isPaid, isPaid) || other.isPaid == isPaid)&&(identical(other.maximumDays, maximumDays) || other.maximumDays == maximumDays));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LeaveType&&(identical(other.typeId, typeId) || other.typeId == typeId)&&(identical(other.typeName, typeName) || other.typeName == typeName)&&(identical(other.minimumLeave, minimumLeave) || other.minimumLeave == minimumLeave)&&(identical(other.increment, increment) || other.increment == increment)&&(identical(other.incrementingByYear, incrementingByYear) || other.incrementingByYear == incrementingByYear)&&(identical(other.maximumLeave, maximumLeave) || other.maximumLeave == maximumLeave)&&(identical(other.enabled, enabled) || other.enabled == enabled)&&(identical(other.entryBy, entryBy) || other.entryBy == entryBy)&&(identical(other.entryDate, entryDate) || other.entryDate == entryDate)&&const DeepCollectionEquality().equals(other._leaves, _leaves));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,leaveTypeId,leaveTypeName,isPaid,maximumDays);
+int get hashCode => Object.hash(runtimeType,typeId,typeName,minimumLeave,increment,incrementingByYear,maximumLeave,enabled,entryBy,entryDate,const DeepCollectionEquality().hash(_leaves));
 
 @override
 String toString() {
-  return 'LeaveType(leaveTypeId: $leaveTypeId, leaveTypeName: $leaveTypeName, isPaid: $isPaid, maximumDays: $maximumDays)';
+  return 'LeaveType(typeId: $typeId, typeName: $typeName, minimumLeave: $minimumLeave, increment: $increment, incrementingByYear: $incrementingByYear, maximumLeave: $maximumLeave, enabled: $enabled, entryBy: $entryBy, entryDate: $entryDate, leaves: $leaves)';
 }
 
 
@@ -124,7 +142,7 @@ abstract mixin class _$LeaveTypeCopyWith<$Res> implements $LeaveTypeCopyWith<$Re
   factory _$LeaveTypeCopyWith(_LeaveType value, $Res Function(_LeaveType) _then) = __$LeaveTypeCopyWithImpl;
 @override @useResult
 $Res call({
- int leaveTypeId, String leaveTypeName, bool isPaid, int maximumDays
+ String typeId, String typeName, int minimumLeave, int increment, int incrementingByYear, int maximumLeave, bool enabled, String entryBy, DateTime entryDate, List<dynamic> leaves
 });
 
 
@@ -141,13 +159,19 @@ class __$LeaveTypeCopyWithImpl<$Res>
 
 /// Create a copy of LeaveType
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? leaveTypeId = null,Object? leaveTypeName = null,Object? isPaid = null,Object? maximumDays = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? typeId = null,Object? typeName = null,Object? minimumLeave = null,Object? increment = null,Object? incrementingByYear = null,Object? maximumLeave = null,Object? enabled = null,Object? entryBy = null,Object? entryDate = null,Object? leaves = null,}) {
   return _then(_LeaveType(
-leaveTypeId: null == leaveTypeId ? _self.leaveTypeId : leaveTypeId // ignore: cast_nullable_to_non_nullable
-as int,leaveTypeName: null == leaveTypeName ? _self.leaveTypeName : leaveTypeName // ignore: cast_nullable_to_non_nullable
-as String,isPaid: null == isPaid ? _self.isPaid : isPaid // ignore: cast_nullable_to_non_nullable
-as bool,maximumDays: null == maximumDays ? _self.maximumDays : maximumDays // ignore: cast_nullable_to_non_nullable
-as int,
+typeId: null == typeId ? _self.typeId : typeId // ignore: cast_nullable_to_non_nullable
+as String,typeName: null == typeName ? _self.typeName : typeName // ignore: cast_nullable_to_non_nullable
+as String,minimumLeave: null == minimumLeave ? _self.minimumLeave : minimumLeave // ignore: cast_nullable_to_non_nullable
+as int,increment: null == increment ? _self.increment : increment // ignore: cast_nullable_to_non_nullable
+as int,incrementingByYear: null == incrementingByYear ? _self.incrementingByYear : incrementingByYear // ignore: cast_nullable_to_non_nullable
+as int,maximumLeave: null == maximumLeave ? _self.maximumLeave : maximumLeave // ignore: cast_nullable_to_non_nullable
+as int,enabled: null == enabled ? _self.enabled : enabled // ignore: cast_nullable_to_non_nullable
+as bool,entryBy: null == entryBy ? _self.entryBy : entryBy // ignore: cast_nullable_to_non_nullable
+as String,entryDate: null == entryDate ? _self.entryDate : entryDate // ignore: cast_nullable_to_non_nullable
+as DateTime,leaves: null == leaves ? _self._leaves : leaves // ignore: cast_nullable_to_non_nullable
+as List<dynamic>,
   ));
 }
 

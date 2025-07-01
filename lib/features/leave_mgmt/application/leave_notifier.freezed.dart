@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$LeaveState {
 
- List<LeaveBalance> get leaveBalances; List<LeaveRequest> get leaveHistory; bool get isLoading; bool get isFetchingMore; bool get canFetchMore; int get page; String? get errorMessage;
+ bool get isLoading; bool get isFetchingMore; bool get canFetchMore; int get page; String? get errorMessage; List<LeaveBalance> get leaveBalances; List<LeaveRequest> get leaveHistory; List<LeaveType> get leaveTypes;
 /// Create a copy of LeaveState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,16 @@ $LeaveStateCopyWith<LeaveState> get copyWith => _$LeaveStateCopyWithImpl<LeaveSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LeaveState&&const DeepCollectionEquality().equals(other.leaveBalances, leaveBalances)&&const DeepCollectionEquality().equals(other.leaveHistory, leaveHistory)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isFetchingMore, isFetchingMore) || other.isFetchingMore == isFetchingMore)&&(identical(other.canFetchMore, canFetchMore) || other.canFetchMore == canFetchMore)&&(identical(other.page, page) || other.page == page)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LeaveState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isFetchingMore, isFetchingMore) || other.isFetchingMore == isFetchingMore)&&(identical(other.canFetchMore, canFetchMore) || other.canFetchMore == canFetchMore)&&(identical(other.page, page) || other.page == page)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&const DeepCollectionEquality().equals(other.leaveBalances, leaveBalances)&&const DeepCollectionEquality().equals(other.leaveHistory, leaveHistory)&&const DeepCollectionEquality().equals(other.leaveTypes, leaveTypes));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(leaveBalances),const DeepCollectionEquality().hash(leaveHistory),isLoading,isFetchingMore,canFetchMore,page,errorMessage);
+int get hashCode => Object.hash(runtimeType,isLoading,isFetchingMore,canFetchMore,page,errorMessage,const DeepCollectionEquality().hash(leaveBalances),const DeepCollectionEquality().hash(leaveHistory),const DeepCollectionEquality().hash(leaveTypes));
 
 @override
 String toString() {
-  return 'LeaveState(leaveBalances: $leaveBalances, leaveHistory: $leaveHistory, isLoading: $isLoading, isFetchingMore: $isFetchingMore, canFetchMore: $canFetchMore, page: $page, errorMessage: $errorMessage)';
+  return 'LeaveState(isLoading: $isLoading, isFetchingMore: $isFetchingMore, canFetchMore: $canFetchMore, page: $page, errorMessage: $errorMessage, leaveBalances: $leaveBalances, leaveHistory: $leaveHistory, leaveTypes: $leaveTypes)';
 }
 
 
@@ -46,7 +46,7 @@ abstract mixin class $LeaveStateCopyWith<$Res>  {
   factory $LeaveStateCopyWith(LeaveState value, $Res Function(LeaveState) _then) = _$LeaveStateCopyWithImpl;
 @useResult
 $Res call({
- List<LeaveBalance> leaveBalances, List<LeaveRequest> leaveHistory, bool isLoading, bool isFetchingMore, bool canFetchMore, int page, String? errorMessage
+ bool isLoading, bool isFetchingMore, bool canFetchMore, int page, String? errorMessage, List<LeaveBalance> leaveBalances, List<LeaveRequest> leaveHistory, List<LeaveType> leaveTypes
 });
 
 
@@ -63,16 +63,17 @@ class _$LeaveStateCopyWithImpl<$Res>
 
 /// Create a copy of LeaveState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? leaveBalances = null,Object? leaveHistory = null,Object? isLoading = null,Object? isFetchingMore = null,Object? canFetchMore = null,Object? page = null,Object? errorMessage = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? isFetchingMore = null,Object? canFetchMore = null,Object? page = null,Object? errorMessage = freezed,Object? leaveBalances = null,Object? leaveHistory = null,Object? leaveTypes = null,}) {
   return _then(_self.copyWith(
-leaveBalances: null == leaveBalances ? _self.leaveBalances : leaveBalances // ignore: cast_nullable_to_non_nullable
-as List<LeaveBalance>,leaveHistory: null == leaveHistory ? _self.leaveHistory : leaveHistory // ignore: cast_nullable_to_non_nullable
-as List<LeaveRequest>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,isFetchingMore: null == isFetchingMore ? _self.isFetchingMore : isFetchingMore // ignore: cast_nullable_to_non_nullable
 as bool,canFetchMore: null == canFetchMore ? _self.canFetchMore : canFetchMore // ignore: cast_nullable_to_non_nullable
 as bool,page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
 as int,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,leaveBalances: null == leaveBalances ? _self.leaveBalances : leaveBalances // ignore: cast_nullable_to_non_nullable
+as List<LeaveBalance>,leaveHistory: null == leaveHistory ? _self.leaveHistory : leaveHistory // ignore: cast_nullable_to_non_nullable
+as List<LeaveRequest>,leaveTypes: null == leaveTypes ? _self.leaveTypes : leaveTypes // ignore: cast_nullable_to_non_nullable
+as List<LeaveType>,
   ));
 }
 
@@ -83,9 +84,14 @@ as String?,
 
 
 class _LeaveState implements LeaveState {
-  const _LeaveState({final  List<LeaveBalance> leaveBalances = const [], final  List<LeaveRequest> leaveHistory = const [], this.isLoading = true, this.isFetchingMore = false, this.canFetchMore = true, this.page = 1, this.errorMessage}): _leaveBalances = leaveBalances,_leaveHistory = leaveHistory;
+  const _LeaveState({this.isLoading = true, this.isFetchingMore = false, this.canFetchMore = true, this.page = 1, this.errorMessage, final  List<LeaveBalance> leaveBalances = const [], final  List<LeaveRequest> leaveHistory = const [], final  List<LeaveType> leaveTypes = const []}): _leaveBalances = leaveBalances,_leaveHistory = leaveHistory,_leaveTypes = leaveTypes;
   
 
+@override@JsonKey() final  bool isLoading;
+@override@JsonKey() final  bool isFetchingMore;
+@override@JsonKey() final  bool canFetchMore;
+@override@JsonKey() final  int page;
+@override final  String? errorMessage;
  final  List<LeaveBalance> _leaveBalances;
 @override@JsonKey() List<LeaveBalance> get leaveBalances {
   if (_leaveBalances is EqualUnmodifiableListView) return _leaveBalances;
@@ -100,11 +106,13 @@ class _LeaveState implements LeaveState {
   return EqualUnmodifiableListView(_leaveHistory);
 }
 
-@override@JsonKey() final  bool isLoading;
-@override@JsonKey() final  bool isFetchingMore;
-@override@JsonKey() final  bool canFetchMore;
-@override@JsonKey() final  int page;
-@override final  String? errorMessage;
+ final  List<LeaveType> _leaveTypes;
+@override@JsonKey() List<LeaveType> get leaveTypes {
+  if (_leaveTypes is EqualUnmodifiableListView) return _leaveTypes;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_leaveTypes);
+}
+
 
 /// Create a copy of LeaveState
 /// with the given fields replaced by the non-null parameter values.
@@ -116,16 +124,16 @@ _$LeaveStateCopyWith<_LeaveState> get copyWith => __$LeaveStateCopyWithImpl<_Lea
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LeaveState&&const DeepCollectionEquality().equals(other._leaveBalances, _leaveBalances)&&const DeepCollectionEquality().equals(other._leaveHistory, _leaveHistory)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isFetchingMore, isFetchingMore) || other.isFetchingMore == isFetchingMore)&&(identical(other.canFetchMore, canFetchMore) || other.canFetchMore == canFetchMore)&&(identical(other.page, page) || other.page == page)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LeaveState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isFetchingMore, isFetchingMore) || other.isFetchingMore == isFetchingMore)&&(identical(other.canFetchMore, canFetchMore) || other.canFetchMore == canFetchMore)&&(identical(other.page, page) || other.page == page)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&const DeepCollectionEquality().equals(other._leaveBalances, _leaveBalances)&&const DeepCollectionEquality().equals(other._leaveHistory, _leaveHistory)&&const DeepCollectionEquality().equals(other._leaveTypes, _leaveTypes));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_leaveBalances),const DeepCollectionEquality().hash(_leaveHistory),isLoading,isFetchingMore,canFetchMore,page,errorMessage);
+int get hashCode => Object.hash(runtimeType,isLoading,isFetchingMore,canFetchMore,page,errorMessage,const DeepCollectionEquality().hash(_leaveBalances),const DeepCollectionEquality().hash(_leaveHistory),const DeepCollectionEquality().hash(_leaveTypes));
 
 @override
 String toString() {
-  return 'LeaveState(leaveBalances: $leaveBalances, leaveHistory: $leaveHistory, isLoading: $isLoading, isFetchingMore: $isFetchingMore, canFetchMore: $canFetchMore, page: $page, errorMessage: $errorMessage)';
+  return 'LeaveState(isLoading: $isLoading, isFetchingMore: $isFetchingMore, canFetchMore: $canFetchMore, page: $page, errorMessage: $errorMessage, leaveBalances: $leaveBalances, leaveHistory: $leaveHistory, leaveTypes: $leaveTypes)';
 }
 
 
@@ -136,7 +144,7 @@ abstract mixin class _$LeaveStateCopyWith<$Res> implements $LeaveStateCopyWith<$
   factory _$LeaveStateCopyWith(_LeaveState value, $Res Function(_LeaveState) _then) = __$LeaveStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<LeaveBalance> leaveBalances, List<LeaveRequest> leaveHistory, bool isLoading, bool isFetchingMore, bool canFetchMore, int page, String? errorMessage
+ bool isLoading, bool isFetchingMore, bool canFetchMore, int page, String? errorMessage, List<LeaveBalance> leaveBalances, List<LeaveRequest> leaveHistory, List<LeaveType> leaveTypes
 });
 
 
@@ -153,16 +161,17 @@ class __$LeaveStateCopyWithImpl<$Res>
 
 /// Create a copy of LeaveState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? leaveBalances = null,Object? leaveHistory = null,Object? isLoading = null,Object? isFetchingMore = null,Object? canFetchMore = null,Object? page = null,Object? errorMessage = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? isFetchingMore = null,Object? canFetchMore = null,Object? page = null,Object? errorMessage = freezed,Object? leaveBalances = null,Object? leaveHistory = null,Object? leaveTypes = null,}) {
   return _then(_LeaveState(
-leaveBalances: null == leaveBalances ? _self._leaveBalances : leaveBalances // ignore: cast_nullable_to_non_nullable
-as List<LeaveBalance>,leaveHistory: null == leaveHistory ? _self._leaveHistory : leaveHistory // ignore: cast_nullable_to_non_nullable
-as List<LeaveRequest>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,isFetchingMore: null == isFetchingMore ? _self.isFetchingMore : isFetchingMore // ignore: cast_nullable_to_non_nullable
 as bool,canFetchMore: null == canFetchMore ? _self.canFetchMore : canFetchMore // ignore: cast_nullable_to_non_nullable
 as bool,page: null == page ? _self.page : page // ignore: cast_nullable_to_non_nullable
 as int,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,leaveBalances: null == leaveBalances ? _self._leaveBalances : leaveBalances // ignore: cast_nullable_to_non_nullable
+as List<LeaveBalance>,leaveHistory: null == leaveHistory ? _self._leaveHistory : leaveHistory // ignore: cast_nullable_to_non_nullable
+as List<LeaveRequest>,leaveTypes: null == leaveTypes ? _self._leaveTypes : leaveTypes // ignore: cast_nullable_to_non_nullable
+as List<LeaveType>,
   ));
 }
 

@@ -9,7 +9,7 @@ import 'package:police_com/features/training/domain/training.dart';
 import 'package:police_com/features/training/domain/training_applicant.dart';
 
 final trainingRepositoryProvider = Provider<ITrainingRepository>((ref) {
-  if (AppConfig.useMockData) {
+  if (!AppConfig.useMockData) {
     return MockTrainingRepository();
   }
   return TrainingRepository(ref.watch(dioClientProvider));

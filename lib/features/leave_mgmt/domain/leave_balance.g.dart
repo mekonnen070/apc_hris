@@ -14,6 +14,7 @@ _LeaveBalance _$LeaveBalanceFromJson(Map<String, dynamic> json) =>
       budgetYear: (json['budgetYear'] as num).toInt(),
       totalDays: (json['totalDays'] as num).toInt(),
       usedDays: (json['usedDays'] as num).toInt(),
+      balance: (json['balance'] as num).toInt(),
     );
 
 Map<String, dynamic> _$LeaveBalanceToJson(_LeaveBalance instance) =>
@@ -24,4 +25,5 @@ Map<String, dynamic> _$LeaveBalanceToJson(_LeaveBalance instance) =>
       'budgetYear': instance.budgetYear,
       'totalDays': instance.totalDays,
       'usedDays': instance.usedDays,
+      'balance': instance.balance,
     };

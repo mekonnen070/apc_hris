@@ -50,6 +50,7 @@ class AddEditContactScreen extends HookWidget {
           mobile: mobileController.text,
           email: emailController.text,
         );
+        
         Navigator.of(context).pop(contact);
       }
     }

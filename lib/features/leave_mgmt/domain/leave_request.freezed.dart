@@ -89,7 +89,7 @@ as DateTime?,
 @JsonSerializable()
 
 class _LeaveRequest implements LeaveRequest {
-  const _LeaveRequest({required this.leaveRequestId, required this.leaveTypeId, required this.employeeId, required this.startDate, required this.endDate, required this.numOfDays, this.requestReason, this.requestStatus = LeaveRequestStatus.pending, this.comment, this.actionedDate});
+   _LeaveRequest({required this.leaveRequestId, required this.leaveTypeId, required this.employeeId, required this.startDate, required this.endDate, required this.numOfDays, this.requestReason, this.requestStatus = LeaveRequestStatus.pending, this.comment, this.actionedDate});
   factory _LeaveRequest.fromJson(Map<String, dynamic> json) => _$LeaveRequestFromJson(json);
 
 @override final  int leaveRequestId;
