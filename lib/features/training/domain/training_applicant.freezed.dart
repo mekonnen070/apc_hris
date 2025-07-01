@@ -16,9 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TrainingApplicant {
 
- int get trainingApplicantId; int get trainingId; String get employeeId; String? get employeeFullName;// For display purposes
- String? get employeePhotoPath;// For display purposes
- DateTime get appliedDate; ApplicantStatus get status; String? get reasonForRejection; String? get appealReason; DateTime? get appealDate;
+ int get trainingApplicantId; int get trainingId; String get employeeId; String? get employeeFullName; String? get employeePhotoPath; DateTime get appliedDate; ApplicantStatus get status; String? get reasonForRejection; String? get appealReason; DateTime? get appealDate;
 /// Create a copy of TrainingApplicant
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -98,9 +96,7 @@ class _TrainingApplicant implements TrainingApplicant {
 @override final  int trainingId;
 @override final  String employeeId;
 @override final  String? employeeFullName;
-// For display purposes
 @override final  String? employeePhotoPath;
-// For display purposes
 @override final  DateTime appliedDate;
 @override final  ApplicantStatus status;
 @override final  String? reasonForRejection;

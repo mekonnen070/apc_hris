@@ -1499,13 +1499,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get alreadyHaveAnAccount => 'Already have an account?';
 
   @override
-  String get userNamePlaceholder => 'John Doe';
+  String get userNamePlaceholder => 'Dawit Worku';
 
   @override
-  String get userEmailPlaceholder => 'john.doe@example.com';
+  String get userEmailPlaceholder => 'dawit.worku@gmil.com';
 
   @override
-  String get userInitialsPlaceholder => 'JD';
+  String get userInitialsPlaceholder => 'DD';
 
   @override
   String get yourStatus => 'Your Status';

@@ -2930,19 +2930,19 @@ abstract class AppLocalizations {
   /// No description provided for @userNamePlaceholder.
   ///
   /// In en, this message translates to:
-  /// **'John Doe'**
+  /// **'Dawit Worku'**
   String get userNamePlaceholder;
 
   /// No description provided for @userEmailPlaceholder.
   ///
   /// In en, this message translates to:
-  /// **'john.doe@example.com'**
+  /// **'dawit.worku@gmil.com'**
   String get userEmailPlaceholder;
 
   /// No description provided for @userInitialsPlaceholder.
   ///
   /// In en, this message translates to:
-  /// **'JD'**
+  /// **'DD'**
   String get userInitialsPlaceholder;
 
   /// No description provided for @yourStatus.

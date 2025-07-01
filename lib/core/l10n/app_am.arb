@@ -96,7 +96,7 @@
     "noApplicants": "ምንም አመልካቾች የሉም",
     "noApplicantsForPlacement": "ለዚህ የሥራ መደብ እስካሁን ምንም አመልካቾች የሉም።",
     "applicants": "አመልካቾች",
-    "myProfile": "የግል መገለጫ",
+    "myProfile": "የግል ፕሮፋይል",
     "addContact": "ተጠሪ ጨምር",
     "editContact": "ተጠሪ አርትዕ",
     "save": "አስቀምጥ",
@@ -177,7 +177,7 @@
     "transferDate": "የዝውውር ቀን",
     "scanQrCode": "QR ኮድ ይቃኙ",
     "scanToVerify": "የሰራተኛን ዝርዝር ለማረጋገጥ QR ኮድ ይቃኙ",
-    "verification": "ማረጋገጫ",
+    "verification": "የመታወቂያ ማረጋገጫ",
     "invalidQrCode": "የማይሰራ QR ኮድ",
     "employeeDetails": "የሰራተኛ ዝርዝሮች",
     "position": "የሥራ መደብ",
@@ -186,7 +186,7 @@
     "verified": "የተረጋገጠ",
     "notVerified": "ያልተረጋገጠ",
     "home": "ዋና ገጽ",
-    "profile": "መገለጫ",
+    "profile": "ፕሮፋይል",
     "language": "ቋንቋ",
     "logout": "ውጣ",
     "areYouSureLogout": "ለመውጣት እርግጠኛ ነዎት?",
@@ -565,7 +565,7 @@
             }
         }
     },
-    "verificationError": "የማረጋገጫ ስህተት",
+    "verificationError": "የመታወቂያ ማረጋገጫ ስህተት",
     "enterEmployeeId": "የሰራተኛ መለያ ያስገቡ",
     "employeeIdHint": "ለምሳሌ: EMP-001",
     "qrCodeScanned": "QR ኮድ ተቃኝቷል",
@@ -706,7 +706,7 @@
             }
         }
     },
-    "profileUpdatedSuccessfully": "መገለጫ በተሳካ ሁኔታ ተዘምኗል",
+    "profileUpdatedSuccessfully": "የግል ፕሮፋይል በተሳካ ሁኔታ ተዘምኗል",
     "saveChanges": "ለውጦችን አስቀምጥ",
     "titleLabel": "ማዕረግ (ለምሳሌ: አቶ, ወ/ሮ, ወ/ሪት) *",
     "titleIsRequired": "ማዕረግ ያስፈልጋል",
@@ -765,14 +765,14 @@
             }
         }
     },
-    "verificationFailed": "ማረጋገጥ አልተሳካም",
+    "verificationFailed": "የመታወቂያ ማረጋገጫ አልተሳካም",
     "googleSignInNotImplemented": "የጉግል መግቢያ ገና አልተተገበረም። በምትኩ ኢሜል ይጠቀሙ።",
     "signInWithGoogle": "በGoogle ይግቡ",
     "signupFailed": "መመዝገብ አልተሳካም",
     "alreadyHaveAnAccount": "አካውንት አለዎት?",
-    "userNamePlaceholder": "ለምሳሌ አበበ ከበደ",
-    "userEmailPlaceholder": "abebe.kebede@example.com",
-    "userInitialsPlaceholder": "አከ",
+    "userNamePlaceholder": " Dawit Worku",
+    "userEmailPlaceholder": "dawit.worku@gmil.com",
+    "userInitialsPlaceholder": "D",
     "yourStatus": "የእርስዎ ሁኔታ",
     "reasonForNonSelection": "ያልተመረጡበት ምክንያት:",
     "noReasonProvided": "ምክንያት አልቀረበም።",

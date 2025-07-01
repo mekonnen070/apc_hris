@@ -35,20 +35,14 @@ extension MainModuleX on MainModule {
 
   List<SubModule> get subModules => switch (this) {
     MainModule.dashboard => [SubModule.dashboard],
-    MainModule.profile => [
-      SubModule.profile, // << UPDATED from profilePersonalInfo
-      // Consider adding a "View/Search Employees" sub-module here as the first item
-      // SubModule.viewEmployees, (e.g., leading to an employee list screen)
-      SubModule.newRecruit,
-    ],
+    MainModule.profile => [SubModule.profile, SubModule.newRecruit],
     MainModule.transfer => [SubModule.transfer],
     MainModule.leave => [SubModule.leave],
-    // Define sub-modules for these as they are developed
     MainModule.training => [SubModule.training],
     MainModule.placement => [SubModule.placement],
     MainModule.clearance => [SubModule.clearance],
     MainModule.incident => [SubModule.incident],
-    MainModule.promotion => [SubModule.promotion],
     MainModule.verification => [SubModule.verification],
+    MainModule.promotion => [SubModule.promotion],
   };
 }

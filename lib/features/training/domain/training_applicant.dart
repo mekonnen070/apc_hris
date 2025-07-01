@@ -10,8 +10,8 @@ abstract class TrainingApplicant with _$TrainingApplicant {
     required int trainingApplicantId,
     required int trainingId,
     required String employeeId,
-    String? employeeFullName, // For display purposes
-    String? employeePhotoPath, // For display purposes
+    String? employeeFullName,
+    String? employeePhotoPath,
     required DateTime appliedDate,
     required ApplicantStatus status,
     String? reasonForRejection,

@@ -297,7 +297,7 @@ class AppLocalizationsAm extends AppLocalizations {
   String get applicants => 'አመልካቾች';
 
   @override
-  String get myProfile => 'የግል መገለጫ';
+  String get myProfile => 'የግል ፕሮፋይል';
 
   @override
   String get addContact => 'ተጠሪ ጨምር';
@@ -540,7 +540,7 @@ class AppLocalizationsAm extends AppLocalizations {
   String get scanToVerify => 'የሰራተኛን ዝርዝር ለማረጋገጥ QR ኮድ ይቃኙ';
 
   @override
-  String get verification => 'ማረጋገጫ';
+  String get verification => 'የመታወቂያ ማረጋገጫ';
 
   @override
   String get invalidQrCode => 'የማይሰራ QR ኮድ';
@@ -567,7 +567,7 @@ class AppLocalizationsAm extends AppLocalizations {
   String get home => 'ዋና ገጽ';
 
   @override
-  String get profile => 'መገለጫ';
+  String get profile => 'ፕሮፋይል';
 
   @override
   String get language => 'ቋንቋ';
@@ -1159,7 +1159,7 @@ class AppLocalizationsAm extends AppLocalizations {
   }
 
   @override
-  String get verificationError => 'የማረጋገጫ ስህተት';
+  String get verificationError => 'የመታወቂያ ማረጋገጫ ስህተት';
 
   @override
   String get enterEmployeeId => 'የሰራተኛ መለያ ያስገቡ';
@@ -1345,7 +1345,7 @@ class AppLocalizationsAm extends AppLocalizations {
   }
 
   @override
-  String get profileUpdatedSuccessfully => 'መገለጫ በተሳካ ሁኔታ ተዘምኗል';
+  String get profileUpdatedSuccessfully => 'የግል ፕሮፋይል በተሳካ ሁኔታ ተዘምኗል';
 
   @override
   String get saveChanges => 'ለውጦችን አስቀምጥ';
@@ -1484,7 +1484,7 @@ class AppLocalizationsAm extends AppLocalizations {
   }
 
   @override
-  String get verificationFailed => 'ማረጋገጥ አልተሳካም';
+  String get verificationFailed => 'የመታወቂያ ማረጋገጫ አልተሳካም';
 
   @override
   String get googleSignInNotImplemented => 'የጉግል መግቢያ ገና አልተተገበረም። በምትኩ ኢሜል ይጠቀሙ።';
@@ -1499,13 +1499,13 @@ class AppLocalizationsAm extends AppLocalizations {
   String get alreadyHaveAnAccount => 'አካውንት አለዎት?';
 
   @override
-  String get userNamePlaceholder => 'ለምሳሌ አበበ ከበደ';
+  String get userNamePlaceholder => ' Dawit Worku';
 
   @override
-  String get userEmailPlaceholder => 'abebe.kebede@example.com';
+  String get userEmailPlaceholder => 'dawit.worku@gmil.com';
 
   @override
-  String get userInitialsPlaceholder => 'አከ';
+  String get userInitialsPlaceholder => 'D';
 
   @override
   String get yourStatus => 'የእርስዎ ሁኔታ';

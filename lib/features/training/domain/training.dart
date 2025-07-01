@@ -16,8 +16,6 @@ abstract class Training with _$Training {
     required String organizedBy,
     required String trainingCenter,
     required String? certificate,
-    // This field will tell the UI if the current user has already applied.
-    // It's not part of the C# model but is a helpful UI-specific property.
     ApplicantStatus? currentUserApplicationStatus,
   }) = _Training;
 

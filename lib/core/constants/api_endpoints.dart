@@ -58,6 +58,7 @@ class ApiEndpoints {
   static const String _placementApplication = '/placementApplication';
   static const String _recruitment = '/recruitAnnouncement';
 
+
   // --- Recruit/My Recruits Endpoints ---
   static const String recruits = '$_newRecruit/recruits';
 
@@ -143,4 +144,8 @@ class ApiEndpoints {
   // EmpProfile Module
   static const String _empProfile = '/empProfile';
   static String employeeDetails = '$_empProfile/details';
+
+  // Training Module
+    static const String trainings = '$_training/trainings';
+    // static 
 }

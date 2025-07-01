@@ -16,9 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Training {
 
- int get trainingId; String get trainingName; String get description; DateTime get startDate; DateTime get endDate; int get duration; String get organizedBy; String get trainingCenter; String? get certificate;// This field will tell the UI if the current user has already applied.
-// It's not part of the C# model but is a helpful UI-specific property.
- ApplicantStatus? get currentUserApplicationStatus;
+ int get trainingId; String get trainingName; String get description; DateTime get startDate; DateTime get endDate; int get duration; String get organizedBy; String get trainingCenter; String? get certificate; ApplicantStatus? get currentUserApplicationStatus;
 /// Create a copy of Training
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -103,8 +101,6 @@ class _Training implements Training {
 @override final  String organizedBy;
 @override final  String trainingCenter;
 @override final  String? certificate;
-// This field will tell the UI if the current user has already applied.
-// It's not part of the C# model but is a helpful UI-specific property.
 @override final  ApplicantStatus? currentUserApplicationStatus;
 
 /// Create a copy of Training
