@@ -1578,4 +1578,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get error => 'Error';
+
+  @override
+  String get verificationErrorNotFound => 'No employee found with the specified ID.';
 }

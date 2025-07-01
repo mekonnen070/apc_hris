@@ -37,25 +37,10 @@ class VerificationRepository implements IVerificationRepository {
       return EmployeeInfoModel.fromJson(response.data);
     } on DioException catch (e) {
       log('Verification network error for ID: $employeeId', error: e);
-      if (e.response?.statusCode == 404) {
-        throw VerificationException(
-          type: VerificationErrorType.notFound,
-          message: 'No employee found with the specified ID.',
-        );
-      }
+
       throw VerificationException(
         type: VerificationErrorType.notFound,
-        message: 'Couldn\'t find employee with the specified ID.',
-      );
-    } catch (e, st) {
-      log(
-        'Verification parsing error for ID: $employeeId',
-        error: e,
-        stackTrace: st,
-      );
-      throw VerificationException(
-        type: VerificationErrorType.invalidFormat,
-        message: 'The server response was not in the expected format.',
+        message: 'No employee found with the specified ID.',
       );
     }
   }

@@ -818,5 +818,6 @@
     "myPlacementApplications": "የእኔ የዝውውር ማመልከቻዎች",
     "noApplicationsSubmitted": "እስካሁን ምንም የዝውውር ማመልከቻ አላስገቡም።",
     "announcement": "ማስታወቂያ",
-    "error": "ስህተት"
+    "error": "ስህተት",
+    "verificationErrorNotFound": "የሰራተኛ መለያ አልተገኙም።"
 }

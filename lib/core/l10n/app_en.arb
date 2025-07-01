@@ -817,5 +817,6 @@
   "confirmAndApply": "Confirm & Apply",
   "myPlacementApplications": "My Placement Applications",
   "noApplicationsSubmitted": "You have not submitted any placement applications yet.",
-  "error": "Error"
+  "error": "Error",
+  "verificationErrorNotFound": "No employee found with the specified ID."
 }

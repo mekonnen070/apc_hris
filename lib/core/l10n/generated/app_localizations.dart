@@ -3064,6 +3064,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Error'**
   String get error;
+
+  /// No description provided for @verificationErrorNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No employee found with the specified ID.'**
+  String get verificationErrorNotFound;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -1572,4 +1572,7 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get error => 'ስህተት';
+
+  @override
+  String get verificationErrorNotFound => 'የሰራተኛ መለያ አልተገኙም።';
 }
