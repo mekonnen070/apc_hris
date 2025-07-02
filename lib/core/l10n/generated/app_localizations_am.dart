@@ -1616,7 +1616,7 @@ class AppLocalizationsAm extends AppLocalizations {
   String get retryConnection => 'እንደገና ይሞክሩ';
 
   @override
-  String get editServerSettings => 'የሰርቨር ቅንብሮችን ያርትዑ';
+  String get editServerSettings => 'የሰርቨር ቅንብሮችን ይቀይሩ';
 
   @override
   String get errorServerUnreachable => 'ከሰርቨሩ ጋር መገናኘት አልተቻለም። እባክዎ አይፒ፣ ፖርት እና የኔትወርክ ግንኙነትዎን ያረጋግጡ።';
