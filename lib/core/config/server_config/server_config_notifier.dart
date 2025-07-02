@@ -9,12 +9,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'server_config.dart';
 
-final serverConfigProvider =
-    StateNotifierProvider<ServerConfigNotifier, AsyncValue<ServerConfig?>>((
-      ref,
-    ) {
-      return ServerConfigNotifier(ref.watch(sharedPreferencesProvider));
-    });
+final serverConfigProvider = StateNotifierProvider<
+  ServerConfigNotifier,
+  AsyncValue<ServerConfig?>
+>((ref) {
+  // Note: This relies on sharedPreferencesProvider being overridden in main.dart
+  return ServerConfigNotifier(ref.watch(sharedPreferencesProvider));
+});
 
 class ServerConfigNotifier extends StateNotifier<AsyncValue<ServerConfig?>> {
   final SharedPreferences _prefs;
@@ -35,28 +36,36 @@ class ServerConfigNotifier extends StateNotifier<AsyncValue<ServerConfig?>> {
     }
   }
 
+  /// Tests the connection and saves the config if successful.
+  /// Throws user-friendly localization keys on failure.
   Future<ServerConfig> _testAndSetConfig(ServerConfig config) async {
     final dio = Dio();
-    final url = 'https://${config.ip}:${config.port}/api';
+    // Using http for local IPs as per the original prompt.
+    final url =
+        'http://${config.ip}:${config.port}/health'; // Assuming a /health endpoint
 
     try {
-      final response = await dio.get(url).timeout(const Duration(seconds: 2));
+      final response = await dio.get(url).timeout(const Duration(seconds: 3));
       if (response.statusCode == 200) {
         await _prefs.setString(AppConstants.kServerIpKey, config.ip);
         await _prefs.setInt(AppConstants.kServerPortKey, config.port);
         return config;
       } else {
-        throw 'Server returned an unexpected status code: ${response.statusCode}';
+        // The server is reachable but returned an error (e.g., 404, 500)
+        throw 'errorUnexpectedResponse'; // ⭐️ Throw key
       }
     } on DioException catch (e) {
       if (e.type == DioExceptionType.connectionTimeout) {
-        throw 'Connection timed out. Please check the server address and your network connection.';
+        throw 'errorConnectionTimeout'; // ⭐️ Throw key
       }
-      throw 'Failed to connect to the server. Please check the IP address and port.';
+      // For other Dio errors (e.g., connection refused), use a general message.
+      throw 'errorServerUnreachable'; // ⭐️ Throw key
     } on SocketException {
-      throw 'Could not reach the server. Please check your network connection.';
+      // This often happens if there's no route to the host (e.g., wrong IP, no network)
+      throw 'errorServerUnreachable'; // ⭐️ Throw key
     } catch (e) {
-      throw 'An unexpected error occurred: $e';
+      // Catch-all for any other unexpected errors.
+      throw 'errorGeneric'; // ⭐️ Throw key
     }
   }
 

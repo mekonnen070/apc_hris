@@ -1580,7 +1580,7 @@ class AppLocalizationsAm extends AppLocalizations {
   String get serverConfiguration => 'የሰርቨር ማስተካከያ';
 
   @override
-  String get connectToServer => 'ከአገልጋይ ጋር ይገናኙ';
+  String get connectToServer => 'ከሰርቨር ጋር ይገናኙ';
 
   @override
   String get serverIpAddress => 'የሰርቨር አይፒ አድራሻ';
@@ -1617,4 +1617,16 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get editServerSettings => 'የሰርቨር ቅንብሮችን ያርትዑ';
+
+  @override
+  String get errorServerUnreachable => 'ከሰርቨሩ ጋር መገናኘት አልተቻለም። እባክዎ አይፒ፣ ፖርት እና የኔትወርክ ግንኙነትዎን ያረጋግጡ።';
+
+  @override
+  String get errorConnectionTimeout => 'ግንኙነቱ ጊዜው አልፎበታል። ሰርቨሩ ምላሽ ለመስጠት የዘገየ ወይም ከመስመር ውጭ ሊሆን ይችላል።';
+
+  @override
+  String get errorUnexpectedResponse => 'ሰርቨሩ ምላሽ ሰጥቷል፣ ነገር ግን በተጠበቀው መንገድ አይደለም። እባክዎ የሰርቨሩን አድራሻ ያረጋግጡ።';
+
+  @override
+  String get errorGeneric => 'ያልተጠበቀ ስህተት ተፈጥሯል። እባክዎ እንደገና ይሞክሩ።';
 }

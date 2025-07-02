@@ -5,14 +5,16 @@ import 'package:police_com/core/extensions/context_extension.dart';
 import 'package:police_com/core/l10n/language_controller.dart';
 
 class LanguageSwitcherWidget extends ConsumerWidget {
-  const LanguageSwitcherWidget({super.key});
+  const LanguageSwitcherWidget({super.key, this.iconColor = Colors.white});
+
+  final Color iconColor;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final List<Lango> languages = List.from(Lango.values);
 
     return IconButton(
-      icon: const Icon(Icons.language, size: 32, color: Colors.white),
+      icon: Icon(Icons.language, size: 32, color: iconColor),
       tooltip: context.lango.language,
       onPressed: () async {
         final selectedLanguage = await showModalBottomSheet<Lango>(

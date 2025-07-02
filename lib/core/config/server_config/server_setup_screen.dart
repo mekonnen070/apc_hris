@@ -3,11 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:police_com/core/config/server_config/server_config.dart';
 import 'package:police_com/core/config/server_config/server_config_notifier.dart';
 import 'package:police_com/core/extensions/context_extension.dart';
-import 'package:police_com/core/navigation/app_orchestrator.dart'; // Import the orchestrator
+import 'package:police_com/core/navigation/app_orchestrator.dart';
+import 'package:police_com/features/widgets/language_switcher_widget.dart';
+import 'package:police_com/features/widgets/theme_switcher_widget.dart';
 
 class ServerSetupScreen extends ConsumerStatefulWidget {
-  /// A flag to determine if this screen was pushed for editing/recovery.
-  /// If true, it will show a back button in the AppBar.
+  /// If true, this screen was pushed for editing (e.g., from settings or
+  /// a recovery screen), so it should show a back button and pop on success.
+  /// If false, this is the initial setup, and it should replace the navigation
+  /// stack on success.
   final bool isFromSettings;
 
   const ServerSetupScreen({super.key, this.isFromSettings = false});
@@ -24,6 +28,7 @@ class _ServerSetupScreenState extends ConsumerState<ServerSetupScreen> {
   @override
   void initState() {
     super.initState();
+    // Pre-fill the fields with existing data if it exists.
     final initialConfig = ref.read(serverConfigProvider).valueOrNull;
     _ipController = TextEditingController(text: initialConfig?.ip ?? '');
     _portController = TextEditingController(
@@ -38,8 +43,27 @@ class _ServerSetupScreenState extends ConsumerState<ServerSetupScreen> {
     super.dispose();
   }
 
+  /// Translates an error key from the notifier into a user-friendly, localized string.
+  String _translateError(BuildContext context, Object errorKey) {
+    final l10n = context.lango;
+    switch (errorKey.toString()) {
+      case 'errorServerUnreachable':
+        return l10n.errorServerUnreachable;
+      case 'errorConnectionTimeout':
+        return l10n.errorConnectionTimeout;
+      case 'errorUnexpectedResponse':
+        return l10n.errorUnexpectedResponse;
+      case 'errorGeneric':
+        return l10n.errorGeneric;
+      default:
+        return errorKey.toString();
+    }
+  }
+
+  /// Validates the form and triggers the connection test and save logic.
   void _saveAndConnect() {
     FocusManager.instance.primaryFocus?.unfocus();
+
     if (_formKey.currentState!.validate()) {
       final config = ServerConfig(
         ip: _ipController.text.trim(),
@@ -51,13 +75,15 @@ class _ServerSetupScreenState extends ConsumerState<ServerSetupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Listen for a successful connection to handle navigation.
     ref.listen<AsyncValue<ServerConfig?>>(serverConfigProvider, (_, next) {
       next.whenData((config) {
         if (config != null) {
-          // If setup is successful, decide where to navigate.
           if (widget.isFromSettings) {
-            // If we came from settings, just pop back.
-            Navigator.of(context).pop();
+            // If we came here to edit, just pop the screen on success.
+            if (Navigator.of(context).canPop()) {
+              Navigator.of(context).pop();
+            }
           } else {
             // Otherwise, it's the initial setup, so go to the main app flow.
             Navigator.of(context).pushReplacement(
@@ -76,6 +102,13 @@ class _ServerSetupScreenState extends ConsumerState<ServerSetupScreen> {
         appBar: AppBar(
           title: Text(context.lango.serverConfiguration),
           automaticallyImplyLeading: widget.isFromSettings,
+          actions: [
+            LanguageSwitcherWidget(
+              iconColor:
+                  Theme.of(context).textTheme.bodyLarge?.color ?? Colors.white,
+            ),
+            const ThemeSwitcherWidget(),
+          ],
         ),
         body: Center(
           child: SingleChildScrollView(
@@ -86,7 +119,7 @@ class _ServerSetupScreenState extends ConsumerState<ServerSetupScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Icon(Icons.dns_outlined, size: 80),
+                  const Icon(Icons.dns_outlined, size: 80, color: Colors.grey),
                   const SizedBox(height: 20),
                   Text(
                     context.lango.connectToServer,
@@ -102,8 +135,9 @@ class _ServerSetupScreenState extends ConsumerState<ServerSetupScreen> {
                       border: const OutlineInputBorder(),
                     ),
                     keyboardType: TextInputType.url,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
+                      if (value == null || value.trim().isEmpty) {
                         return context.lango.errorEnterIp;
                       }
                       final ipRegex = RegExp(
@@ -124,8 +158,9 @@ class _ServerSetupScreenState extends ConsumerState<ServerSetupScreen> {
                       border: const OutlineInputBorder(),
                     ),
                     keyboardType: TextInputType.number,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
+                      if (value == null || value.trim().isEmpty) {
                         return context.lango.errorEnterPort;
                       }
                       final port = int.tryParse(value.trim());
@@ -141,7 +176,7 @@ class _ServerSetupScreenState extends ConsumerState<ServerSetupScreen> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 16),
                       child: Text(
-                        'Error: ${serverConfigState.error}',
+                        _translateError(context, serverConfigState.error!),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Theme.of(context).colorScheme.error,
@@ -155,6 +190,13 @@ class _ServerSetupScreenState extends ConsumerState<ServerSetupScreen> {
                             ? const Center(child: CircularProgressIndicator())
                             : ElevatedButton(
                               onPressed: _saveAndConnect,
+                              style: ElevatedButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 12,
+                                ),
+                                textStyle:
+                                    Theme.of(context).textTheme.titleMedium,
+                              ),
                               child: Text(context.lango.saveAndConnect),
                             ),
                   ),

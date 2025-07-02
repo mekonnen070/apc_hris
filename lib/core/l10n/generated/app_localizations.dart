@@ -3154,6 +3154,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Edit Server Settings'**
   String get editServerSettings;
+
+  /// No description provided for @errorServerUnreachable.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not connect to the server. Please check the IP, Port, and your network connection.'**
+  String get errorServerUnreachable;
+
+  /// No description provided for @errorConnectionTimeout.
+  ///
+  /// In en, this message translates to:
+  /// **'The connection timed out. The server may be slow to respond or offline.'**
+  String get errorConnectionTimeout;
+
+  /// No description provided for @errorUnexpectedResponse.
+  ///
+  /// In en, this message translates to:
+  /// **'The server responded, but not in the way expected. Please verify the server address.'**
+  String get errorUnexpectedResponse;
+
+  /// No description provided for @errorGeneric.
+  ///
+  /// In en, this message translates to:
+  /// **'An unexpected error occurred. Please try again.'**
+  String get errorGeneric;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

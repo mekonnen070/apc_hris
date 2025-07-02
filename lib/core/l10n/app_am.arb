@@ -821,7 +821,7 @@
     "error": "ስህተት",
     "verificationErrorNotFound": "የሰራተኛ መለያ አልተገኙም።",
     "serverConfiguration": "የሰርቨር ማስተካከያ",
-    "connectToServer": "ከአገልጋይ ጋር ይገናኙ",
+    "connectToServer": "ከሰርቨር ጋር ይገናኙ",
     "serverIpAddress": "የሰርቨር አይፒ አድራሻ",
     "serverIpAddressHint": "ለምሳሌ, 192.168.1.10",
     "errorEnterIp": "እባክዎ የአይፒ አድራሻ ያስገቡ",
@@ -833,5 +833,9 @@
     "saveAndConnect": "አስቀምጥ እና ተገናኝ",
     "connectionFailed": "ግንኙነቱ አልተሳካም",
     "retryConnection": "እንደገና ይሞክሩ",
-    "editServerSettings": "የሰርቨር ቅንብሮችን ያርትዑ"
+    "editServerSettings": "የሰርቨር ቅንብሮችን ይቀይሩ",
+    "errorServerUnreachable": "ከሰርቨሩ ጋር መገናኘት አልተቻለም። እባክዎ አይፒ፣ ፖርት እና የኔትወርክ ግንኙነትዎን ያረጋግጡ።",
+    "errorConnectionTimeout": "ግንኙነቱ ጊዜው አልፎበታል። ሰርቨሩ ምላሽ ለመስጠት የዘገየ ወይም ከመስመር ውጭ ሊሆን ይችላል።",
+    "errorUnexpectedResponse": "ሰርቨሩ ምላሽ ሰጥቷል፣ ነገር ግን በተጠበቀው መንገድ አይደለም። እባክዎ የሰርቨሩን አድራሻ ያረጋግጡ።",
+    "errorGeneric": "ያልተጠበቀ ስህተት ተፈጥሯል። እባክዎ እንደገና ይሞክሩ።"
 }

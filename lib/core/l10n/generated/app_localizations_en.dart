@@ -1623,4 +1623,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get editServerSettings => 'Edit Server Settings';
+
+  @override
+  String get errorServerUnreachable => 'Could not connect to the server. Please check the IP, Port, and your network connection.';
+
+  @override
+  String get errorConnectionTimeout => 'The connection timed out. The server may be slow to respond or offline.';
+
+  @override
+  String get errorUnexpectedResponse => 'The server responded, but not in the way expected. Please verify the server address.';
+
+  @override
+  String get errorGeneric => 'An unexpected error occurred. Please try again.';
 }

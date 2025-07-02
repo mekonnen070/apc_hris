@@ -7,46 +7,41 @@ import 'package:police_com/features/auth/application/auth_notifier.dart';
 import 'package:police_com/features/auth/domain/auth_state.dart';
 import 'package:police_com/features/auth/presentation/log_in_page.dart';
 import 'package:police_com/features/home/presentation/home_page.dart';
-import 'package:police_com/features/widgets/splash_screen.dart'; // The simple, logic-less splash screen
+import 'package:police_com/features/widgets/splash_screen.dart';
 
-/// AppOrchestrator is the new root widget.
-/// It ensures server configuration is ready before checking authentication.
+/// Manages the two-stage launch sequence:
+/// 1. Ensures server is configured and reachable.
+/// 2. Checks authentication state.
 class AppOrchestrator extends ConsumerWidget {
   const AppOrchestrator({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // STAGE 1: Watch the server configuration provider.
     final serverConfigState = ref.watch(serverConfigProvider);
 
     return serverConfigState.when(
-      // While checking server config, show a splash screen.
       loading: () => const SplashScreen(),
-
-      // If server is unreachable or config is invalid, show a recovery screen.
       error:
-          (err, stack) => ServerRecoveryScreen(
-            error: err.toString(),
+          (error, stack) => ServerRecoveryScreen(
+            error: error,
             onRetry:
                 () =>
                     ref.read(serverConfigProvider.notifier).retestConnection(),
             onEdit: () {
-              // Allow user to go to the setup screen to enter a new IP/Port.
-              Navigator.of(context).pushReplacement(
+              // Navigate to the setup screen for editing.
+              Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (_) => const ServerSetupScreen(isFromSettings: true),
                 ),
               );
             },
           ),
-
-      // If we have data about server config...
       data: (config) {
         if (config == null) {
-          // The config is empty (first launch), user must set it up.
+          // First launch: user must set up the server.
           return const ServerSetupScreen();
         } else {
-          // The server is ready. Proceed to STAGE 2: Authentication.
+          // Server is ready, proceed to authentication check.
           return const AuthGate();
         }
       },
@@ -54,21 +49,18 @@ class AppOrchestrator extends ConsumerWidget {
   }
 }
 
-/// AuthGate handles the authentication flow.
-/// It is only ever reached if the server configuration is valid.
+/// Handles authentication logic only after server readiness is confirmed.
 class AuthGate extends ConsumerWidget {
   const AuthGate({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // STAGE 2: Watch the authentication provider.
     final authState = ref.watch(authNotifierProvider);
 
     return authState.when(
-      loading: () => const SplashScreen(), // Show splash while checking auth
-      error: (err, stack) => const LogInPage(), // On error, default to login
+      loading: () => const SplashScreen(),
+      error: (err, stack) => const LogInPage(),
       data: (state) {
-        // Route based on authentication state
         if (state == const AuthState.authenticated()) {
           return const HomePage();
         } else {
@@ -79,10 +71,9 @@ class AuthGate extends ConsumerWidget {
   }
 }
 
-/// A dedicated screen for when the saved server is unreachable.
-
+/// A dedicated screen for when the saved server is unreachable on app launch.
 class ServerRecoveryScreen extends StatelessWidget {
-  final String error;
+  final Object error;
   final VoidCallback onRetry;
   final VoidCallback onEdit;
 
@@ -92,6 +83,24 @@ class ServerRecoveryScreen extends StatelessWidget {
     required this.onRetry,
     required this.onEdit,
   });
+
+  /// Translates an error key from the notifier into a user-friendly, localized string.
+  String _translateError(BuildContext context, Object errorKey) {
+    final l10n = context.lango;
+    switch (errorKey.toString()) {
+      case 'errorServerUnreachable':
+        return l10n.errorServerUnreachable;
+      case 'errorConnectionTimeout':
+        return l10n.errorConnectionTimeout;
+      case 'errorUnexpectedResponse':
+        return l10n.errorUnexpectedResponse;
+      case 'errorGeneric':
+        return l10n.errorGeneric;
+      default:
+        // Fallback for any other error that might not be a key.
+        return errorKey.toString();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,26 +114,26 @@ class ServerRecoveryScreen extends StatelessWidget {
               const Icon(Icons.error_outline, color: Colors.red, size: 60),
               const SizedBox(height: 20),
               Text(
-                context.lango.connectionFailed, // ⭐️ Localized
+                context.lango.connectionFailed,
                 style: Theme.of(context).textTheme.headlineSmall,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 12),
               Text(
-                error,
+                _translateError(context, error),
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const SizedBox(height: 30),
               ElevatedButton.icon(
                 icon: const Icon(Icons.refresh),
-                label: Text(context.lango.retryConnection), // ⭐️ Localized
+                label: Text(context.lango.retryConnection),
                 onPressed: onRetry,
               ),
               const SizedBox(height: 10),
               TextButton(
                 onPressed: onEdit,
-                child: Text(context.lango.editServerSettings), // ⭐️ Localized
+                child: Text(context.lango.editServerSettings),
               ),
             ],
           ),
