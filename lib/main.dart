@@ -10,9 +10,9 @@ import 'package:police_com/core/app_strings.dart';
 import 'package:police_com/core/l10n/generated/app_localizations.dart';
 import 'package:police_com/core/l10n/l10n.dart';
 import 'package:police_com/core/l10n/language_controller.dart';
+import 'package:police_com/core/navigation/app_orchestrator.dart';
 import 'package:police_com/core/network/dio_client.dart';
 import 'package:police_com/core/theme/app_theme_controller.dart';
-import 'package:police_com/features/auth/presentation/auth_wrapper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toastification/toastification.dart';
 
@@ -63,7 +63,7 @@ class MyApp extends ConsumerWidget {
         builder: (_, theme) {
           return MaterialApp(
             theme: theme,
-            home: const AuthWrapper(),
+            home: const AppOrchestrator(),
             navigatorKey: navigatorKey,
             title: AppStrings.appTitle,
             debugShowCheckedModeBanner: false,

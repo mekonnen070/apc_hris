@@ -818,5 +818,19 @@
   "myPlacementApplications": "My Placement Applications",
   "noApplicationsSubmitted": "You have not submitted any placement applications yet.",
   "error": "Error",
-  "verificationErrorNotFound": "No employee found with the specified ID."
+  "verificationErrorNotFound": "No employee found with the specified ID.",
+  "serverConfiguration": "Server Configuration",
+  "connectToServer": "Connect to Server",
+  "serverIpAddress": "Server IP Address",
+  "serverIpAddressHint": "e.g., 192.168.1.10",
+  "errorEnterIp": "Please enter an IP address",
+  "errorInvalidIp": "Invalid IP address format",
+  "port": "Port",
+  "portHint": "e.g., 8000",
+  "errorEnterPort": "Please enter a port number",
+  "errorInvalidPort": "Port must be a number between 1 and 65535",
+  "saveAndConnect": "Save and Connect",
+  "connectionFailed": "Connection Failed",
+  "retryConnection": "Retry Connection",
+  "editServerSettings": "Edit Server Settings"
 }

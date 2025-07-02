@@ -3070,6 +3070,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No employee found with the specified ID.'**
   String get verificationErrorNotFound;
+
+  /// No description provided for @serverConfiguration.
+  ///
+  /// In en, this message translates to:
+  /// **'Server Configuration'**
+  String get serverConfiguration;
+
+  /// No description provided for @connectToServer.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect to Server'**
+  String get connectToServer;
+
+  /// No description provided for @serverIpAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Server IP Address'**
+  String get serverIpAddress;
+
+  /// No description provided for @serverIpAddressHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., 192.168.1.10'**
+  String get serverIpAddressHint;
+
+  /// No description provided for @errorEnterIp.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter an IP address'**
+  String get errorEnterIp;
+
+  /// No description provided for @errorInvalidIp.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid IP address format'**
+  String get errorInvalidIp;
+
+  /// No description provided for @port.
+  ///
+  /// In en, this message translates to:
+  /// **'Port'**
+  String get port;
+
+  /// No description provided for @portHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., 8000'**
+  String get portHint;
+
+  /// No description provided for @errorEnterPort.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a port number'**
+  String get errorEnterPort;
+
+  /// No description provided for @errorInvalidPort.
+  ///
+  /// In en, this message translates to:
+  /// **'Port must be a number between 1 and 65535'**
+  String get errorInvalidPort;
+
+  /// No description provided for @saveAndConnect.
+  ///
+  /// In en, this message translates to:
+  /// **'Save and Connect'**
+  String get saveAndConnect;
+
+  /// No description provided for @connectionFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Connection Failed'**
+  String get connectionFailed;
+
+  /// No description provided for @retryConnection.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry Connection'**
+  String get retryConnection;
+
+  /// No description provided for @editServerSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Server Settings'**
+  String get editServerSettings;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

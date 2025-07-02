@@ -1581,4 +1581,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get verificationErrorNotFound => 'No employee found with the specified ID.';
+
+  @override
+  String get serverConfiguration => 'Server Configuration';
+
+  @override
+  String get connectToServer => 'Connect to Server';
+
+  @override
+  String get serverIpAddress => 'Server IP Address';
+
+  @override
+  String get serverIpAddressHint => 'e.g., 192.168.1.10';
+
+  @override
+  String get errorEnterIp => 'Please enter an IP address';
+
+  @override
+  String get errorInvalidIp => 'Invalid IP address format';
+
+  @override
+  String get port => 'Port';
+
+  @override
+  String get portHint => 'e.g., 8000';
+
+  @override
+  String get errorEnterPort => 'Please enter a port number';
+
+  @override
+  String get errorInvalidPort => 'Port must be a number between 1 and 65535';
+
+  @override
+  String get saveAndConnect => 'Save and Connect';
+
+  @override
+  String get connectionFailed => 'Connection Failed';
+
+  @override
+  String get retryConnection => 'Retry Connection';
+
+  @override
+  String get editServerSettings => 'Edit Server Settings';
 }

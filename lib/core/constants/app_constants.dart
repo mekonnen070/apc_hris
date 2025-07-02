@@ -20,4 +20,7 @@ class AppConstants {
   static const String kLanguagePrefKey = 'language';
   static const String kAuthTokenKey = 'authToken';
   static const String kEmployeeIdKey = 'employeeId';
+  static const String kServerIpKey = 'server_ip';
+  static const String kServerPortKey = 'server_port';
+
 }

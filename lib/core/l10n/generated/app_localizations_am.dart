@@ -1575,4 +1575,46 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get verificationErrorNotFound => 'የሰራተኛ መለያ አልተገኙም።';
+
+  @override
+  String get serverConfiguration => 'የሰርቨር ማስተካከያ';
+
+  @override
+  String get connectToServer => 'ከአገልጋይ ጋር ይገናኙ';
+
+  @override
+  String get serverIpAddress => 'የሰርቨር አይፒ አድራሻ';
+
+  @override
+  String get serverIpAddressHint => 'ለምሳሌ, 192.168.1.10';
+
+  @override
+  String get errorEnterIp => 'እባክዎ የአይፒ አድራሻ ያስገቡ';
+
+  @override
+  String get errorInvalidIp => 'የአይፒ አድራሻው ቅርጸት የተሳሳተ ነው';
+
+  @override
+  String get port => 'ፖርት';
+
+  @override
+  String get portHint => 'ለምሳሌ, 8000';
+
+  @override
+  String get errorEnterPort => 'እባክዎ የፖርት ቁጥር ያስገቡ';
+
+  @override
+  String get errorInvalidPort => 'ፖርት ከ1 እስከ 65535 ባለው ቁጥር ውስጥ መሆን አለበት';
+
+  @override
+  String get saveAndConnect => 'አስቀምጥ እና ተገናኝ';
+
+  @override
+  String get connectionFailed => 'ግንኙነቱ አልተሳካም';
+
+  @override
+  String get retryConnection => 'እንደገና ይሞክሩ';
+
+  @override
+  String get editServerSettings => 'የሰርቨር ቅንብሮችን ያርትዑ';
 }

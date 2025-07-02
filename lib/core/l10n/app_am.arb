@@ -819,5 +819,19 @@
     "noApplicationsSubmitted": "እስካሁን ምንም የዝውውር ማመልከቻ አላስገቡም።",
     "announcement": "ማስታወቂያ",
     "error": "ስህተት",
-    "verificationErrorNotFound": "የሰራተኛ መለያ አልተገኙም።"
+    "verificationErrorNotFound": "የሰራተኛ መለያ አልተገኙም።",
+    "serverConfiguration": "የሰርቨር ማስተካከያ",
+    "connectToServer": "ከአገልጋይ ጋር ይገናኙ",
+    "serverIpAddress": "የሰርቨር አይፒ አድራሻ",
+    "serverIpAddressHint": "ለምሳሌ, 192.168.1.10",
+    "errorEnterIp": "እባክዎ የአይፒ አድራሻ ያስገቡ",
+    "errorInvalidIp": "የአይፒ አድራሻው ቅርጸት የተሳሳተ ነው",
+    "port": "ፖርት",
+    "portHint": "ለምሳሌ, 8000",
+    "errorEnterPort": "እባክዎ የፖርት ቁጥር ያስገቡ",
+    "errorInvalidPort": "ፖርት ከ1 እስከ 65535 ባለው ቁጥር ውስጥ መሆን አለበት",
+    "saveAndConnect": "አስቀምጥ እና ተገናኝ",
+    "connectionFailed": "ግንኙነቱ አልተሳካም",
+    "retryConnection": "እንደገና ይሞክሩ",
+    "editServerSettings": "የሰርቨር ቅንብሮችን ያርትዑ"
 }
