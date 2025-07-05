@@ -22,5 +22,6 @@ class AppConstants {
   static const String kEmployeeIdKey = 'employeeId';
   static const String kServerIpKey = 'server_ip';
   static const String kServerPortKey = 'server_port';
+  static const String kEmployeeUserIdKey = 'employeeUserId';
 
 }

@@ -31,7 +31,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
     final authNotifier = ref.read(authNotifierProvider.notifier);
 
     // 2. Call the signUp method from the notifier.
-    final success = await authNotifier.signUp(
+    final response = await authNotifier.signUp(
       email: fields['email']!.value as String,
       password: fields['password']!.value as String,
       fullName: fields['fullName']!.value as String,
@@ -45,7 +45,7 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
     // 3. The Architect's Mandate: Check if mounted before using context.
     //    Provide clear user feedback based on the result.
     if (mounted) {
-      if (success) {
+      if (response != null) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(context.lango.signupSuccessful),

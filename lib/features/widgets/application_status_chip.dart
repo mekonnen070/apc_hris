@@ -16,7 +16,6 @@ class ApplicationStatusChip extends StatelessWidget {
     switch (status) {
       case ApplicantStatus.completed:
       case ApplicantStatus.offered:
-      case ApplicantStatus.passed:
         return Colors.green.shade700;
       case ApplicantStatus.rejected:
       case ApplicantStatus.withdrawn:
@@ -24,11 +23,9 @@ class ApplicationStatusChip extends StatelessWidget {
       case ApplicantStatus.underReview:
       case ApplicantStatus.progress:
       case ApplicantStatus.selected:
-      case ApplicantStatus.readyForApproval:
         return Colors.blue.shade700;
       case ApplicantStatus.pending:
       case ApplicantStatus.submitted:
-      default:
         return Colors.orange.shade800;
     }
   }
@@ -39,7 +36,7 @@ class ApplicationStatusChip extends StatelessWidget {
       case ApplicantStatus.completed:
       case ApplicantStatus.offered:
         return Icons.verified_user_outlined;
-      case ApplicantStatus.passed:
+      case ApplicantStatus.selected:
         return Icons.check_circle_outline;
       case ApplicantStatus.rejected:
       case ApplicantStatus.withdrawn:
@@ -47,12 +44,8 @@ class ApplicationStatusChip extends StatelessWidget {
       case ApplicantStatus.underReview:
       case ApplicantStatus.progress:
         return Icons.hourglass_top_rounded;
-      case ApplicantStatus.selected:
-      case ApplicantStatus.readyForApproval:
-        return Icons.thumb_up_alt_outlined;
       case ApplicantStatus.pending:
       case ApplicantStatus.submitted:
-      default:
         return Icons.pending_actions_rounded;
     }
   }

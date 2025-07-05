@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:police_com/core/app_preferences.dart';
@@ -7,11 +8,20 @@ import 'package:police_com/features/auth/application/current_employee_provider.d
 import 'package:police_com/features/auth/data/auth_repository.dart';
 import 'package:police_com/features/auth/data/i_auth_repository.dart';
 import 'package:police_com/features/auth/domain/auth_state.dart';
+import 'package:police_com/features/auth/domain/user.dart';
 
+/// Provider for the current employee's ID. Eg. EMP-201
 final currentEmployeeIdProvider = Provider<String?>((ref) {
   final prefs = ref.watch(sharedPreferencesProvider);
   final appPreferences = ref.watch(appPreferencesProvider);
   return appPreferences.getEmployeeId(prefs);
+});
+
+/// Provider for the current employee's user ID. Eg. 25f9366a-3...
+final currentEmployeeUserIdProvider = Provider<String?>((ref) {
+  final prefs = ref.watch(sharedPreferencesProvider);
+  final appPreferences = ref.watch(appPreferencesProvider);
+  return appPreferences.getEmployeeUserId(prefs);
 });
 
 final authNotifierProvider = AsyncNotifierProvider<AuthNotifier, AuthState>(
@@ -27,24 +37,27 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
     return _authRepository.checkAuthState();
   }
 
-  Future<void> login({required String email, required String password}) async {
+  Future<User?> login({required String email, required String password}) async {
     state = const AsyncLoading();
     try {
-      final success = await _authRepository.login(
+      final response = await _authRepository.login(
         email: email,
         password: password,
       );
-      if (success) {
+      if (response != null) {
         // Invalidate both providers to ensure all user data is refreshed.
         ref.invalidate(currentEmployeeIdProvider);
         ref.invalidate(currentEmployeeProvider);
+        ref.invalidate(currentEmployeeUserIdProvider);
         state = const AsyncData(AuthState.authenticated());
       } else {
         state = const AsyncData(AuthState.unauthenticated());
       }
     } catch (e, st) {
+      log('Error during login', error: e, stackTrace: st);
       state = AsyncError(e, st);
     }
+    return null;
   }
 
   Future<void> logout() async {
@@ -53,10 +66,11 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
     // Invalidate both providers to clear all user data.
     ref.invalidate(currentEmployeeIdProvider);
     ref.invalidate(currentEmployeeProvider);
+    ref.invalidate(currentEmployeeUserIdProvider);
     state = const AsyncData(AuthState.unauthenticated());
   }
 
-  Future<bool> signUp({
+  Future<User?> signUp({
     required String email,
     required String password,
     required String fullName,
@@ -77,15 +91,17 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
         gender: gender,
         maritalStatus: maritalStatus,
       );
-    } catch (e) {
-      return false;
+    } catch (e, st) {
+      log('Error during sign up', error: e, stackTrace: st);
+      return null;
     }
   }
 
   Future<bool> forgotPassword({required String email}) async {
     try {
       return await _authRepository.forgotPassword(email: email);
-    } catch (e) {
+    } catch (e, st) {
+      log('Error during forgot password', error: e, stackTrace: st);
       return false;
     }
   }

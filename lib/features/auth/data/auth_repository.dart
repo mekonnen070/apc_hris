@@ -6,6 +6,7 @@ import 'package:police_com/core/constants/api_endpoints.dart';
 import 'package:police_com/core/mixins/logger_mixin.dart';
 import 'package:police_com/core/network/dio_client.dart';
 import 'package:police_com/features/auth/domain/auth_state.dart';
+import 'package:police_com/features/auth/domain/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'i_auth_repository.dart';
@@ -39,28 +40,32 @@ class AuthRepository with LoggerMixin implements IAuthRepository {
   }
 
   @override
-  Future<bool> login({required String email, required String password}) async {
+  Future<User?> login({required String email, required String password}) async {
     final data = {'userName': email, 'password': password, 'rememberMe': true};
     try {
       final response = await _dioClient.post(ApiEndpoints.login, data: data);
 
       if (response.statusCode == 200) {
+        final user = User.fromJson(response.data);
         await _appPreferences.setUserLoginStatus(true, _prefs);
 
-        String? employeeId = response.data?['employeeId'] as String?;
-
-        // FIX: If the backend doesn't return an employeeId, use the default "EMP-001".
-        employeeId ??= 'EMP-001';
+        String? employeeId = user.employeeId;
 
         await _appPreferences.setEmployeeId(employeeId, _prefs);
+        await _appPreferences.setEmployeeUserId(user.userId, _prefs);
         logInfo('Login successful. Employee ID: $employeeId');
-        return true;
+        return user;
       }
       logError('Login failed: Status code ${response.statusCode}');
-      return false;
-    } on DioException catch (e) {
-      logError('Error during login', error: e, stackTrace: e.stackTrace);
-      return false;
+      logError('Login failed: Status code ${response.data}');
+      logError('Login failed: Status code ${response.headers}');
+      logError('Login failed: Status code ${response.requestOptions}');
+      logError('Login failed: Status code ${response.realUri}');
+      logError('Login failed: Status code ${response.isRedirect}');
+      return null;
+    } on DioException catch (e, st) {
+      logError('Error during login', error: e, stackTrace: st);
+      return null;
     }
   }
 
@@ -81,7 +86,7 @@ class AuthRepository with LoggerMixin implements IAuthRepository {
   }
 
   @override
-  Future<bool> signUp({
+  Future<User?> signUp({
     required String email,
     required String password,
     required String fullName,
@@ -104,11 +109,12 @@ class AuthRepository with LoggerMixin implements IAuthRepository {
     data.removeWhere((key, value) => value == null);
 
     try {
-      await _dioClient.post(ApiEndpoints.signUp, data: data);
-      return true;
+      final response = await _dioClient.post(ApiEndpoints.signUp, data: data);
+      final user = User.fromJson(response.data);
+      return user;
     } on DioException catch (e, st) {
       logError('Error during signUp', error: e, stackTrace: st);
-      return false;
+      return null;
     }
   }
 

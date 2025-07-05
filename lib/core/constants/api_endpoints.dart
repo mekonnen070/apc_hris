@@ -50,14 +50,13 @@ class ApiEndpoints {
 
   // Base feature paths to avoid repetition
   static const String _newRecruit = '/newRecruit';
-  static const String _leave = '/leaveRequest';
+  static const String _leave = '/LvRequest';
   static const String _leaveBalance = '/LvBalance';
   static const String _leaveTypes = '/LvType';
   static const String _training = '/training';
   static const String _placementAnnouncement = '/placementAnnounce';
   static const String _placementApplication = '/placementApplication';
   static const String _recruitment = '/recruitAnnouncement';
-
 
   // --- Recruit/My Recruits Endpoints ---
   static const String recruits = '$_newRecruit/recruits';
@@ -73,13 +72,13 @@ class ApiEndpoints {
 
   // --- Leave Endpoints ---
   static const String leaveRequests = '$_leave/requests';
-  static const String applyForLeave = '$_leave/apply';
+  static const String applyForLeave = '$_leave/create';
   static const String leaveBalanceByEmployee =
       '$_leaveBalance/balanceByEmployee';
   static const String leaveTypes = '$_leaveTypes/leaveTypes';
 
   // --- Training Endpoints ---
-  static const String availableTrainings = '$_training/available';
+  static const String availableTrainings = '$_training/trainings';
   static const String trainingDetails = '$_training/details'; // Append /:id
   static const String applyForTraining = '$_training/apply'; // Append /:id
   static const String myTrainingApplications = '$_training/my-applications';
@@ -88,7 +87,6 @@ class ApiEndpoints {
   static const String submitTrainingAppeal = '$_training/appeal'; // Append /:id
 
   // --- Placement Endpoints ---
-  // PlacementAnnounce_PlacementaAnnouncement
   static const String placementAnnouncements =
       '$_placementAnnouncement/placementAnnouncement';
   static const String createPlacementApplication =
@@ -144,8 +142,4 @@ class ApiEndpoints {
   // EmpProfile Module
   static const String _empProfile = '/empProfile';
   static String employeeDetails = '$_empProfile/details';
-
-  // Training Module
-    static const String trainings = '$_training/trainings';
-    // static 
 }

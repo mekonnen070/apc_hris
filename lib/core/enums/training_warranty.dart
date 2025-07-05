@@ -1,33 +1,27 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'applicant_status.g.dart';
+part 'training_warranty.g.dart';
 
 @JsonEnum(alwaysCreate: true)
-enum ApplicantStatus {
+enum TrainingWarranty {
   @JsonValue(0)
-  pending,
+  certificate,
 
   @JsonValue(1)
-  submitted,
+  diploma,
 
   @JsonValue(2)
-  selected,
+  seniorDiploma,
 
   @JsonValue(3)
-  rejected,
+  bscDegree,
 
   @JsonValue(4)
-  underReview,
+  mscDegree,
 
   @JsonValue(5)
-  offered,
+  phdDegree,
 
   @JsonValue(6)
-  completed,
-
-  @JsonValue(7)
-  progress,
-
-  @JsonValue(8)
-  withdrawn,
+  other,
 }

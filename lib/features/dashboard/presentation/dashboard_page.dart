@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -277,7 +275,7 @@ class _ActivityListItem extends StatelessWidget {
 }
 
 class _WelcomeHeader extends ConsumerWidget {
-  const _WelcomeHeader({super.key});
+  const _WelcomeHeader();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -286,7 +284,6 @@ class _WelcomeHeader extends ConsumerWidget {
     return employeeState.when(
       data: (employee) {
         if (employee != null) {
-          log(employee.toString());
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

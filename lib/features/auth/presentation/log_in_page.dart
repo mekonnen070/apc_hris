@@ -23,6 +23,22 @@ class LogInPage extends ConsumerStatefulWidget {
 class _LogInPageState extends ConsumerState<LogInPage> {
   final _formKey = GlobalKey<FormBuilderState>();
 
+  @override
+  void initState() {
+    super.initState();
+    _formKey.currentState?.reset();
+
+    // give default values to the form
+    _formKey.currentState?.fields['email']?.didChange('Peeragetech@gmail.com');
+    _formKey.currentState?.fields['password']?.didChange('P@55w0rd');
+  }
+
+  @override
+  void dispose() {
+    _formKey.currentState?.reset();
+    super.dispose();
+  }
+
   Future<void> _submitLogin() async {
     // 1. Validate the form. If invalid, do nothing.
     if (!(_formKey.currentState?.saveAndValidate() ?? false)) {
@@ -80,6 +96,7 @@ class _LogInPageState extends ConsumerState<LogInPage> {
                   const SizedBox(height: 32),
                   FormBuilderTextField(
                     name: 'email',
+                    initialValue: 'Peeragetech@gmail.com',
                     decoration: InputDecoration(
                       labelText: context.lango.email,
                       prefixIcon: const Icon(Icons.email_outlined),
@@ -96,6 +113,7 @@ class _LogInPageState extends ConsumerState<LogInPage> {
                   const SizedBox(height: 16),
                   FormBuilderTextField(
                     name: 'password',
+                    initialValue: 'P@55w0rd',
                     decoration: InputDecoration(
                       labelText: context.lango.password,
                       prefixIcon: const Icon(Icons.lock_outline),

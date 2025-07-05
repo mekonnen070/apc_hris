@@ -109,10 +109,21 @@ class AppPreferences {
     return prefs.getString(AppConstants.kEmployeeIdKey);
   }
 
+  /// Sets the employee User ID to SharedPreferences.
+  Future<void> setEmployeeUserId(String employeeUserId, SharedPreferences prefs) async {
+    await prefs.setString(AppConstants.kEmployeeUserIdKey, employeeUserId);
+  }
+
+  /// Retrieves the employee User ID from SharedPreferences.
+  String? getEmployeeUserId(SharedPreferences prefs) {
+    return prefs.getString(AppConstants.kEmployeeUserIdKey);
+  }
+
   /// Clears all authentication and user identity data.
   Future<void> clearAuthData(SharedPreferences prefs) async {
     await prefs.remove(AppConstants.kAuthTokenKey);
     await prefs.remove(AppConstants.kEmployeeIdKey);
+    await prefs.remove(AppConstants.kEmployeeUserIdKey);
     await prefs.setBool(AppConstants.isLoggedInKey, false);
   }
 }

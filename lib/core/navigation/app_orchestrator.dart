@@ -37,13 +37,13 @@ class AppOrchestrator extends ConsumerWidget {
             },
           ),
       data: (config) {
-        if (config == null) {
-          // First launch: user must set up the server.
-          return const ServerSetupScreen();
-        } else {
-          // Server is ready, proceed to authentication check.
-          return const AuthGate();
-        }
+        // if (config == null) {
+        //   // First launch: user must set up the server.
+        //   return const ServerSetupScreen();
+        // } else {
+        // Server is ready, proceed to authentication check.
+        return const AuthGate();
+        // }
       },
     );
   }

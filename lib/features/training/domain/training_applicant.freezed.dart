@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TrainingApplicant {
 
- int get trainingApplicantId; int get trainingId; String get employeeId; String? get employeeFullName; String? get employeePhotoPath; DateTime get appliedDate; ApplicantStatus get status; String? get reasonForRejection; String? get appealReason; DateTime? get appealDate;
+ int? get id; String get applicantId; int get appliedFor; ApplicantStatus? get applicantStatus; double? get cgpa; int get age; String? get applicantEntryBy; DateTime? get applicantEntryDate; EmployeeInfoModel? get employee; Training? get training;@JsonKey(includeFromJson: false, includeToJson: false) List<ApplicantSelection?> get applicantSelections;
 /// Create a copy of TrainingApplicant
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $TrainingApplicantCopyWith<TrainingApplicant> get copyWith => _$TrainingApplican
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TrainingApplicant&&(identical(other.trainingApplicantId, trainingApplicantId) || other.trainingApplicantId == trainingApplicantId)&&(identical(other.trainingId, trainingId) || other.trainingId == trainingId)&&(identical(other.employeeId, employeeId) || other.employeeId == employeeId)&&(identical(other.employeeFullName, employeeFullName) || other.employeeFullName == employeeFullName)&&(identical(other.employeePhotoPath, employeePhotoPath) || other.employeePhotoPath == employeePhotoPath)&&(identical(other.appliedDate, appliedDate) || other.appliedDate == appliedDate)&&(identical(other.status, status) || other.status == status)&&(identical(other.reasonForRejection, reasonForRejection) || other.reasonForRejection == reasonForRejection)&&(identical(other.appealReason, appealReason) || other.appealReason == appealReason)&&(identical(other.appealDate, appealDate) || other.appealDate == appealDate));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TrainingApplicant&&(identical(other.id, id) || other.id == id)&&(identical(other.applicantId, applicantId) || other.applicantId == applicantId)&&(identical(other.appliedFor, appliedFor) || other.appliedFor == appliedFor)&&(identical(other.applicantStatus, applicantStatus) || other.applicantStatus == applicantStatus)&&(identical(other.cgpa, cgpa) || other.cgpa == cgpa)&&(identical(other.age, age) || other.age == age)&&(identical(other.applicantEntryBy, applicantEntryBy) || other.applicantEntryBy == applicantEntryBy)&&(identical(other.applicantEntryDate, applicantEntryDate) || other.applicantEntryDate == applicantEntryDate)&&(identical(other.employee, employee) || other.employee == employee)&&(identical(other.training, training) || other.training == training)&&const DeepCollectionEquality().equals(other.applicantSelections, applicantSelections));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,trainingApplicantId,trainingId,employeeId,employeeFullName,employeePhotoPath,appliedDate,status,reasonForRejection,appealReason,appealDate);
+int get hashCode => Object.hash(runtimeType,id,applicantId,appliedFor,applicantStatus,cgpa,age,applicantEntryBy,applicantEntryDate,employee,training,const DeepCollectionEquality().hash(applicantSelections));
 
 @override
 String toString() {
-  return 'TrainingApplicant(trainingApplicantId: $trainingApplicantId, trainingId: $trainingId, employeeId: $employeeId, employeeFullName: $employeeFullName, employeePhotoPath: $employeePhotoPath, appliedDate: $appliedDate, status: $status, reasonForRejection: $reasonForRejection, appealReason: $appealReason, appealDate: $appealDate)';
+  return 'TrainingApplicant(id: $id, applicantId: $applicantId, appliedFor: $appliedFor, applicantStatus: $applicantStatus, cgpa: $cgpa, age: $age, applicantEntryBy: $applicantEntryBy, applicantEntryDate: $applicantEntryDate, employee: $employee, training: $training, applicantSelections: $applicantSelections)';
 }
 
 
@@ -49,11 +49,11 @@ abstract mixin class $TrainingApplicantCopyWith<$Res>  {
   factory $TrainingApplicantCopyWith(TrainingApplicant value, $Res Function(TrainingApplicant) _then) = _$TrainingApplicantCopyWithImpl;
 @useResult
 $Res call({
- int trainingApplicantId, int trainingId, String employeeId, String? employeeFullName, String? employeePhotoPath, DateTime appliedDate, ApplicantStatus status, String? reasonForRejection, String? appealReason, DateTime? appealDate
+ int? id, String applicantId, int appliedFor, ApplicantStatus? applicantStatus, double? cgpa, int age, String? applicantEntryBy, DateTime? applicantEntryDate, EmployeeInfoModel? employee, Training? training,@JsonKey(includeFromJson: false, includeToJson: false) List<ApplicantSelection?> applicantSelections
 });
 
 
-
+$EmployeeInfoModelCopyWith<$Res>? get employee;$TrainingCopyWith<$Res>? get training;
 
 }
 /// @nodoc
@@ -66,22 +66,47 @@ class _$TrainingApplicantCopyWithImpl<$Res>
 
 /// Create a copy of TrainingApplicant
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? trainingApplicantId = null,Object? trainingId = null,Object? employeeId = null,Object? employeeFullName = freezed,Object? employeePhotoPath = freezed,Object? appliedDate = null,Object? status = null,Object? reasonForRejection = freezed,Object? appealReason = freezed,Object? appealDate = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? applicantId = null,Object? appliedFor = null,Object? applicantStatus = freezed,Object? cgpa = freezed,Object? age = null,Object? applicantEntryBy = freezed,Object? applicantEntryDate = freezed,Object? employee = freezed,Object? training = freezed,Object? applicantSelections = null,}) {
   return _then(_self.copyWith(
-trainingApplicantId: null == trainingApplicantId ? _self.trainingApplicantId : trainingApplicantId // ignore: cast_nullable_to_non_nullable
-as int,trainingId: null == trainingId ? _self.trainingId : trainingId // ignore: cast_nullable_to_non_nullable
-as int,employeeId: null == employeeId ? _self.employeeId : employeeId // ignore: cast_nullable_to_non_nullable
-as String,employeeFullName: freezed == employeeFullName ? _self.employeeFullName : employeeFullName // ignore: cast_nullable_to_non_nullable
-as String?,employeePhotoPath: freezed == employeePhotoPath ? _self.employeePhotoPath : employeePhotoPath // ignore: cast_nullable_to_non_nullable
-as String?,appliedDate: null == appliedDate ? _self.appliedDate : appliedDate // ignore: cast_nullable_to_non_nullable
-as DateTime,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as ApplicantStatus,reasonForRejection: freezed == reasonForRejection ? _self.reasonForRejection : reasonForRejection // ignore: cast_nullable_to_non_nullable
-as String?,appealReason: freezed == appealReason ? _self.appealReason : appealReason // ignore: cast_nullable_to_non_nullable
-as String?,appealDate: freezed == appealDate ? _self.appealDate : appealDate // ignore: cast_nullable_to_non_nullable
-as DateTime?,
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int?,applicantId: null == applicantId ? _self.applicantId : applicantId // ignore: cast_nullable_to_non_nullable
+as String,appliedFor: null == appliedFor ? _self.appliedFor : appliedFor // ignore: cast_nullable_to_non_nullable
+as int,applicantStatus: freezed == applicantStatus ? _self.applicantStatus : applicantStatus // ignore: cast_nullable_to_non_nullable
+as ApplicantStatus?,cgpa: freezed == cgpa ? _self.cgpa : cgpa // ignore: cast_nullable_to_non_nullable
+as double?,age: null == age ? _self.age : age // ignore: cast_nullable_to_non_nullable
+as int,applicantEntryBy: freezed == applicantEntryBy ? _self.applicantEntryBy : applicantEntryBy // ignore: cast_nullable_to_non_nullable
+as String?,applicantEntryDate: freezed == applicantEntryDate ? _self.applicantEntryDate : applicantEntryDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,employee: freezed == employee ? _self.employee : employee // ignore: cast_nullable_to_non_nullable
+as EmployeeInfoModel?,training: freezed == training ? _self.training : training // ignore: cast_nullable_to_non_nullable
+as Training?,applicantSelections: null == applicantSelections ? _self.applicantSelections : applicantSelections // ignore: cast_nullable_to_non_nullable
+as List<ApplicantSelection?>,
   ));
 }
+/// Create a copy of TrainingApplicant
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$EmployeeInfoModelCopyWith<$Res>? get employee {
+    if (_self.employee == null) {
+    return null;
+  }
 
+  return $EmployeeInfoModelCopyWith<$Res>(_self.employee!, (value) {
+    return _then(_self.copyWith(employee: value));
+  });
+}/// Create a copy of TrainingApplicant
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$TrainingCopyWith<$Res>? get training {
+    if (_self.training == null) {
+    return null;
+  }
+
+  return $TrainingCopyWith<$Res>(_self.training!, (value) {
+    return _then(_self.copyWith(training: value));
+  });
+}
 }
 
 
@@ -89,19 +114,26 @@ as DateTime?,
 @JsonSerializable()
 
 class _TrainingApplicant implements TrainingApplicant {
-  const _TrainingApplicant({required this.trainingApplicantId, required this.trainingId, required this.employeeId, this.employeeFullName, this.employeePhotoPath, required this.appliedDate, required this.status, this.reasonForRejection, this.appealReason, this.appealDate});
+   _TrainingApplicant({this.id, required this.applicantId, required this.appliedFor, this.applicantStatus, this.cgpa, required this.age, this.applicantEntryBy, this.applicantEntryDate, this.employee, this.training, @JsonKey(includeFromJson: false, includeToJson: false) final  List<ApplicantSelection?> applicantSelections = const []}): _applicantSelections = applicantSelections;
   factory _TrainingApplicant.fromJson(Map<String, dynamic> json) => _$TrainingApplicantFromJson(json);
 
-@override final  int trainingApplicantId;
-@override final  int trainingId;
-@override final  String employeeId;
-@override final  String? employeeFullName;
-@override final  String? employeePhotoPath;
-@override final  DateTime appliedDate;
-@override final  ApplicantStatus status;
-@override final  String? reasonForRejection;
-@override final  String? appealReason;
-@override final  DateTime? appealDate;
+@override final  int? id;
+@override final  String applicantId;
+@override final  int appliedFor;
+@override final  ApplicantStatus? applicantStatus;
+@override final  double? cgpa;
+@override final  int age;
+@override final  String? applicantEntryBy;
+@override final  DateTime? applicantEntryDate;
+@override final  EmployeeInfoModel? employee;
+@override final  Training? training;
+ final  List<ApplicantSelection?> _applicantSelections;
+@override@JsonKey(includeFromJson: false, includeToJson: false) List<ApplicantSelection?> get applicantSelections {
+  if (_applicantSelections is EqualUnmodifiableListView) return _applicantSelections;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_applicantSelections);
+}
+
 
 /// Create a copy of TrainingApplicant
 /// with the given fields replaced by the non-null parameter values.
@@ -116,16 +148,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TrainingApplicant&&(identical(other.trainingApplicantId, trainingApplicantId) || other.trainingApplicantId == trainingApplicantId)&&(identical(other.trainingId, trainingId) || other.trainingId == trainingId)&&(identical(other.employeeId, employeeId) || other.employeeId == employeeId)&&(identical(other.employeeFullName, employeeFullName) || other.employeeFullName == employeeFullName)&&(identical(other.employeePhotoPath, employeePhotoPath) || other.employeePhotoPath == employeePhotoPath)&&(identical(other.appliedDate, appliedDate) || other.appliedDate == appliedDate)&&(identical(other.status, status) || other.status == status)&&(identical(other.reasonForRejection, reasonForRejection) || other.reasonForRejection == reasonForRejection)&&(identical(other.appealReason, appealReason) || other.appealReason == appealReason)&&(identical(other.appealDate, appealDate) || other.appealDate == appealDate));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TrainingApplicant&&(identical(other.id, id) || other.id == id)&&(identical(other.applicantId, applicantId) || other.applicantId == applicantId)&&(identical(other.appliedFor, appliedFor) || other.appliedFor == appliedFor)&&(identical(other.applicantStatus, applicantStatus) || other.applicantStatus == applicantStatus)&&(identical(other.cgpa, cgpa) || other.cgpa == cgpa)&&(identical(other.age, age) || other.age == age)&&(identical(other.applicantEntryBy, applicantEntryBy) || other.applicantEntryBy == applicantEntryBy)&&(identical(other.applicantEntryDate, applicantEntryDate) || other.applicantEntryDate == applicantEntryDate)&&(identical(other.employee, employee) || other.employee == employee)&&(identical(other.training, training) || other.training == training)&&const DeepCollectionEquality().equals(other._applicantSelections, _applicantSelections));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,trainingApplicantId,trainingId,employeeId,employeeFullName,employeePhotoPath,appliedDate,status,reasonForRejection,appealReason,appealDate);
+int get hashCode => Object.hash(runtimeType,id,applicantId,appliedFor,applicantStatus,cgpa,age,applicantEntryBy,applicantEntryDate,employee,training,const DeepCollectionEquality().hash(_applicantSelections));
 
 @override
 String toString() {
-  return 'TrainingApplicant(trainingApplicantId: $trainingApplicantId, trainingId: $trainingId, employeeId: $employeeId, employeeFullName: $employeeFullName, employeePhotoPath: $employeePhotoPath, appliedDate: $appliedDate, status: $status, reasonForRejection: $reasonForRejection, appealReason: $appealReason, appealDate: $appealDate)';
+  return 'TrainingApplicant(id: $id, applicantId: $applicantId, appliedFor: $appliedFor, applicantStatus: $applicantStatus, cgpa: $cgpa, age: $age, applicantEntryBy: $applicantEntryBy, applicantEntryDate: $applicantEntryDate, employee: $employee, training: $training, applicantSelections: $applicantSelections)';
 }
 
 
@@ -136,11 +168,11 @@ abstract mixin class _$TrainingApplicantCopyWith<$Res> implements $TrainingAppli
   factory _$TrainingApplicantCopyWith(_TrainingApplicant value, $Res Function(_TrainingApplicant) _then) = __$TrainingApplicantCopyWithImpl;
 @override @useResult
 $Res call({
- int trainingApplicantId, int trainingId, String employeeId, String? employeeFullName, String? employeePhotoPath, DateTime appliedDate, ApplicantStatus status, String? reasonForRejection, String? appealReason, DateTime? appealDate
+ int? id, String applicantId, int appliedFor, ApplicantStatus? applicantStatus, double? cgpa, int age, String? applicantEntryBy, DateTime? applicantEntryDate, EmployeeInfoModel? employee, Training? training,@JsonKey(includeFromJson: false, includeToJson: false) List<ApplicantSelection?> applicantSelections
 });
 
 
-
+@override $EmployeeInfoModelCopyWith<$Res>? get employee;@override $TrainingCopyWith<$Res>? get training;
 
 }
 /// @nodoc
@@ -153,23 +185,48 @@ class __$TrainingApplicantCopyWithImpl<$Res>
 
 /// Create a copy of TrainingApplicant
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? trainingApplicantId = null,Object? trainingId = null,Object? employeeId = null,Object? employeeFullName = freezed,Object? employeePhotoPath = freezed,Object? appliedDate = null,Object? status = null,Object? reasonForRejection = freezed,Object? appealReason = freezed,Object? appealDate = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? applicantId = null,Object? appliedFor = null,Object? applicantStatus = freezed,Object? cgpa = freezed,Object? age = null,Object? applicantEntryBy = freezed,Object? applicantEntryDate = freezed,Object? employee = freezed,Object? training = freezed,Object? applicantSelections = null,}) {
   return _then(_TrainingApplicant(
-trainingApplicantId: null == trainingApplicantId ? _self.trainingApplicantId : trainingApplicantId // ignore: cast_nullable_to_non_nullable
-as int,trainingId: null == trainingId ? _self.trainingId : trainingId // ignore: cast_nullable_to_non_nullable
-as int,employeeId: null == employeeId ? _self.employeeId : employeeId // ignore: cast_nullable_to_non_nullable
-as String,employeeFullName: freezed == employeeFullName ? _self.employeeFullName : employeeFullName // ignore: cast_nullable_to_non_nullable
-as String?,employeePhotoPath: freezed == employeePhotoPath ? _self.employeePhotoPath : employeePhotoPath // ignore: cast_nullable_to_non_nullable
-as String?,appliedDate: null == appliedDate ? _self.appliedDate : appliedDate // ignore: cast_nullable_to_non_nullable
-as DateTime,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as ApplicantStatus,reasonForRejection: freezed == reasonForRejection ? _self.reasonForRejection : reasonForRejection // ignore: cast_nullable_to_non_nullable
-as String?,appealReason: freezed == appealReason ? _self.appealReason : appealReason // ignore: cast_nullable_to_non_nullable
-as String?,appealDate: freezed == appealDate ? _self.appealDate : appealDate // ignore: cast_nullable_to_non_nullable
-as DateTime?,
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int?,applicantId: null == applicantId ? _self.applicantId : applicantId // ignore: cast_nullable_to_non_nullable
+as String,appliedFor: null == appliedFor ? _self.appliedFor : appliedFor // ignore: cast_nullable_to_non_nullable
+as int,applicantStatus: freezed == applicantStatus ? _self.applicantStatus : applicantStatus // ignore: cast_nullable_to_non_nullable
+as ApplicantStatus?,cgpa: freezed == cgpa ? _self.cgpa : cgpa // ignore: cast_nullable_to_non_nullable
+as double?,age: null == age ? _self.age : age // ignore: cast_nullable_to_non_nullable
+as int,applicantEntryBy: freezed == applicantEntryBy ? _self.applicantEntryBy : applicantEntryBy // ignore: cast_nullable_to_non_nullable
+as String?,applicantEntryDate: freezed == applicantEntryDate ? _self.applicantEntryDate : applicantEntryDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,employee: freezed == employee ? _self.employee : employee // ignore: cast_nullable_to_non_nullable
+as EmployeeInfoModel?,training: freezed == training ? _self.training : training // ignore: cast_nullable_to_non_nullable
+as Training?,applicantSelections: null == applicantSelections ? _self._applicantSelections : applicantSelections // ignore: cast_nullable_to_non_nullable
+as List<ApplicantSelection?>,
   ));
 }
 
+/// Create a copy of TrainingApplicant
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$EmployeeInfoModelCopyWith<$Res>? get employee {
+    if (_self.employee == null) {
+    return null;
+  }
 
+  return $EmployeeInfoModelCopyWith<$Res>(_self.employee!, (value) {
+    return _then(_self.copyWith(employee: value));
+  });
+}/// Create a copy of TrainingApplicant
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$TrainingCopyWith<$Res>? get training {
+    if (_self.training == null) {
+    return null;
+  }
+
+  return $TrainingCopyWith<$Res>(_self.training!, (value) {
+    return _then(_self.copyWith(training: value));
+  });
+}
 }
 
 // dart format on

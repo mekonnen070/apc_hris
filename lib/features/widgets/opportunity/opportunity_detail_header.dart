@@ -10,7 +10,7 @@ class OpportunityDetailHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final dateRange =
-        '${DateFormat.yMMMd().format(training.startDate)} - ${DateFormat.yMMMd().format(training.endDate)}';
+        '${DateFormat.yMMMd().format(training.trainingStartDate)} - ${DateFormat.yMMMd().format(training.trainingEndDate)}';
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -33,28 +33,30 @@ class OpportunityDetailHeader extends StatelessWidget {
           _buildInfoRow(
             context,
             icon: Icons.business_outlined,
-            text: 'Organized by: ${training.organizedBy}',
+            text: 'Organized by: ${training.trainingInstitution}',
           ),
           const SizedBox(height: 8),
           _buildInfoRow(
             context,
             icon: Icons.location_on_outlined,
-            text: 'Location: ${training.trainingCenter}',
+            text: 'Location: ${training.trainingLocation}',
           ),
         ],
       ),
     );
   }
 
-  Widget _buildInfoRow(BuildContext context, {required IconData icon, required String text}) {
+  Widget _buildInfoRow(
+    BuildContext context, {
+    required IconData icon,
+    required String text,
+  }) {
     final theme = Theme.of(context);
     return Row(
       children: [
         Icon(icon, size: 18, color: theme.colorScheme.primary),
         const SizedBox(width: 12),
-        Expanded(
-          child: Text(text, style: theme.textTheme.bodyLarge),
-        ),
+        Expanded(child: Text(text, style: theme.textTheme.bodyLarge)),
       ],
     );
   }
