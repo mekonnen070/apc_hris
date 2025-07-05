@@ -1,34 +1,44 @@
-import 'dart:async';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:police_com/features/auth/application/auth_notifier.dart';
 import 'package:police_com/features/placement/data/placement_repository.dart';
 import 'package:police_com/features/placement/domain/placement_applicant.dart';
 
-/// Provider that fetches and exposes the list of the current user's
-/// placement applications.
-final myPlacementApplicationsProvider = AutoDisposeAsyncNotifierProvider<
-    MyPlacementApplicationsNotifier, List<PlacementApplicant>>(
-  MyPlacementApplicationsNotifier.new,
-);
+final myPlacementApplicationsNotifierProvider =
+    StateNotifierProvider.autoDispose<
+      MyPlacementApplicationsNotifier,
+      AsyncValue<List<PlacementApplicant>>
+    >((ref) {
+      // Fetches the employeeId from the current authenticated user
+      final employeeId = ref.watch(currentEmployeeIdProvider);
+      return MyPlacementApplicationsNotifier(
+        ref.watch(placementRepositoryProvider),
+        employeeId,
+      );
+    });
 
 class MyPlacementApplicationsNotifier
-    extends AutoDisposeAsyncNotifier<List<PlacementApplicant>> {
-  @override
-  FutureOr<List<PlacementApplicant>> build() {
-    final employeeId = ref.watch(currentEmployeeIdProvider);
+    extends StateNotifier<AsyncValue<List<PlacementApplicant>>> {
+  final IPlacementRepository _repository;
+  final String? _employeeId;
 
-    if (employeeId == null) {
-      // If there's no logged-in user, there are no applications to fetch.
-      // Return an empty list to avoid showing an unnecessary error.
-      return [];
+  MyPlacementApplicationsNotifier(this._repository, this._employeeId)
+    : super(const AsyncValue.loading()) {
+    if (_employeeId != null) {
+      getMyApplications();
+    } else {
+      state = AsyncValue.error('Employee not logged in.', StackTrace.current);
     }
-
-    return _fetchMyApplications(employeeId);
   }
 
-  Future<List<PlacementApplicant>> _fetchMyApplications(String employeeId) async {
-    final repository = ref.read(placementRepositoryProvider);
-    return repository.getMyApplications(employeeId: employeeId);
+  Future<void> getMyApplications() async {
+    state = const AsyncValue.loading();
+    try {
+      final applications = await _repository.getMyApplications(
+        employeeId: _employeeId!,
+      );
+      state = AsyncValue.data(applications);
+    } catch (e, st) {
+      state = AsyncValue.error(e, st);
+    }
   }
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:police_com/features/training/presentation/available_trainings_list.dart';
-import 'package:police_com/features/training/presentation/my_training_applications_list.dart';
+import 'package:police_com/features/placement/presentation/widgets/available_placements_list.dart';
+import 'package:police_com/features/placement/presentation/widgets/my_placement_applications_list.dart';
 
-class TrainingScreen extends StatelessWidget {
-  const TrainingScreen({super.key});
+class PlacementScreen extends StatelessWidget {
+  const PlacementScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,15 +13,15 @@ class TrainingScreen extends StatelessWidget {
         children: [
           TabBar(
             tabs: [
-              Tab(text: 'Available Trainings'),
+              Tab(text: 'Available Placements'),
               Tab(text: 'My Applications'),
             ],
           ),
           Expanded(
             child: TabBarView(
               children: [
-                AvailableTrainingsList(),
-                MyTrainingApplicationsList(),
+                AvailablePlacementsList(),
+                MyPlacementApplicationsList(),
               ],
             ),
           ),

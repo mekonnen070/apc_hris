@@ -8,7 +8,7 @@ import 'package:police_com/features/dashboard/presentation/dashboard_page.dart';
 import 'package:police_com/features/employee/new_recruite/presentation/my_recruits_screen.dart';
 import 'package:police_com/features/incident/presentation/incident_screen.dart';
 import 'package:police_com/features/leave_mgmt/presentation/leave_screen.dart';
-import 'package:police_com/features/placement/presentation/my_placement_applications_screen.dart';
+import 'package:police_com/features/placement/presentation/placement_screen.dart';
 import 'package:police_com/features/profile/presentation/profile_screen.dart';
 import 'package:police_com/features/promotion/presentation/promotion_screen.dart';
 import 'package:police_com/features/training/presentation/training_screen.dart';
@@ -92,7 +92,7 @@ extension SubModuleExtension on SubModule {
       case SubModule.training:
         return const TrainingScreen();
       case SubModule.placement:
-        return const MyPlacementApplicationsScreen();
+        return const PlacementScreen();
       case SubModule.clearance:
         return const ClearanceScreen();
       case SubModule.incident:
