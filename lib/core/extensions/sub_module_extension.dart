@@ -6,11 +6,9 @@ import 'package:police_com/core/extensions/main_module_extension.dart';
 import 'package:police_com/features/clearance/presentation/clearance_screen.dart';
 import 'package:police_com/features/dashboard/presentation/dashboard_page.dart';
 import 'package:police_com/features/employee/new_recruite/presentation/my_recruits_screen.dart';
-import 'package:police_com/features/incident/presentation/incident_screen.dart';
 import 'package:police_com/features/leave_mgmt/presentation/leave_screen.dart';
 import 'package:police_com/features/placement/presentation/placement_screen.dart';
 import 'package:police_com/features/profile/presentation/profile_screen.dart';
-import 'package:police_com/features/promotion/presentation/promotion_screen.dart';
 import 'package:police_com/features/training/presentation/training_screen.dart';
 import 'package:police_com/features/transfer/presentation/my_transfer_requests_screen.dart';
 import 'package:police_com/features/verification/presentation/verification_screen.dart';
@@ -36,10 +34,10 @@ extension SubModuleExtension on SubModule {
         return MainModule.placement;
       case SubModule.clearance:
         return MainModule.clearance;
-      case SubModule.incident:
-        return MainModule.incident;
-      case SubModule.promotion:
-        return MainModule.promotion;
+      // case SubModule.incident:
+      //   return MainModule.incident;
+      // case SubModule.promotion:
+      //   return MainModule.promotion;
       case SubModule.verification:
         return MainModule.verification;
     }
@@ -64,10 +62,10 @@ extension SubModuleExtension on SubModule {
         return context.lango.placement; // <-- REPLACED
       case SubModule.clearance:
         return context.lango.clearance; // <-- REPLACED
-      case SubModule.incident:
-        return context.lango.incident; // <-- REPLACED
-      case SubModule.promotion:
-        return context.lango.promotion; // <-- REPLACED
+      // case SubModule.incident:
+      //   return context.lango.incident; // <-- REPLACED
+      // case SubModule.promotion:
+      //   return context.lango.promotion; // <-- REPLACED
       case SubModule.verification:
         return context.lango.verification; // <-- REPLACED
     }
@@ -95,10 +93,10 @@ extension SubModuleExtension on SubModule {
         return const PlacementScreen();
       case SubModule.clearance:
         return const ClearanceScreen();
-      case SubModule.incident:
-        return const IncidentScreen();
-      case SubModule.promotion:
-        return const PromotionScreen();
+      // case SubModule.incident:
+      //   return const IncidentScreen();
+      // case SubModule.promotion:
+      //   return const PromotionScreen();
       case SubModule.verification:
         return const VerificationScreen();
     }

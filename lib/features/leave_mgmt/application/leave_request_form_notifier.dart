@@ -1,17 +1,19 @@
+import 'dart:developer';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:police_com/features/auth/application/auth_notifier.dart';
 import 'package:police_com/features/leave_mgmt/data/leave_repository.dart';
 import 'package:police_com/features/leave_mgmt/domain/leave_balance.dart';
-import 'package:police_com/features/leave_mgmt/domain/leave_request.dart';
+import 'package:police_com/features/leave_mgmt/domain/leave_request_create.dart';
 import 'package:police_com/features/leave_mgmt/domain/leave_type.dart';
 
 part 'leave_request_form_notifier.freezed.dart';
 
 final leaveRequestFormNotifierProvider = StateNotifierProvider.autoDispose<
-    LeaveRequestFormNotifier, LeaveRequestFormState>(
-  (ref) => LeaveRequestFormNotifier(ref),
-);
+  LeaveRequestFormNotifier,
+  LeaveRequestFormState
+>((ref) => LeaveRequestFormNotifier(ref));
 
 @freezed
 abstract class LeaveRequestFormState with _$LeaveRequestFormState {
@@ -36,7 +38,10 @@ class LeaveRequestFormNotifier extends StateNotifier<LeaveRequestFormState> {
     state = const LeaveRequestFormState();
     final employeeId = _ref.read(currentEmployeeIdProvider);
     if (employeeId == null) {
-      state = state.copyWith(isLoading: false, errorMessage: 'User not authenticated.');
+      state = state.copyWith(
+        isLoading: false,
+        errorMessage: 'User not authenticated.',
+      );
       return;
     }
 
@@ -62,24 +67,29 @@ class LeaveRequestFormNotifier extends StateNotifier<LeaveRequestFormState> {
     required DateTime endDate,
     required String reason,
   }) async {
-    state = state.copyWith(isSubmitting: true, successMessage: null, errorMessage: null);
+    state = state.copyWith(
+      isSubmitting: true,
+      successMessage: null,
+      errorMessage: null,
+    );
     final employeeId = _ref.read(currentEmployeeIdProvider);
 
     final balance = state.leaveBalances.firstWhere(
       (b) => b.leaveTypeId == leaveType.typeId, // Correctly match by typeId
-      orElse: () => LeaveBalance(
-        leaveBalanceId: 0,
-        employeeId: employeeId!,
-        leaveTypeId: leaveType.typeId,
-        budgetYear: DateTime.now().year,
-        totalDays: leaveType.maximumLeave,
-        usedDays: 0,
-        balance: leaveType.maximumLeave,
-      ),
+      orElse:
+          () => LeaveBalance(
+            leaveBalanceId: 0,
+            employeeId: employeeId!,
+            leaveTypeId: leaveType.typeId,
+            budgetYear: DateTime.now().year,
+            totalDays: leaveType.maximumLeave,
+            usedDays: 0,
+            balance: leaveType.maximumLeave,
+          ),
     );
 
     final requestedDays = endDate.difference(startDate).inDays + 1;
-    
+
     if (requestedDays <= 0) {
       state = state.copyWith(
         errorMessage: 'End date must be the same as or after the start date.',
@@ -90,29 +100,42 @@ class LeaveRequestFormNotifier extends StateNotifier<LeaveRequestFormState> {
 
     if (requestedDays > balance.balance) {
       state = state.copyWith(
-        errorMessage: 'Requested days ($requestedDays) exceed available balance (${balance.balance}).',
+        errorMessage:
+            'Requested days ($requestedDays) exceed available balance (${balance.balance}).',
         isSubmitting: false,
       );
       return;
     }
 
     try {
-      final request = LeaveRequest(
-        leaveRequestId: 0,
+      final request = LeaveRequestCreate(
         leaveTypeId: leaveType.typeId,
         employeeId: employeeId!,
         startDate: startDate,
         endDate: endDate,
         numOfDays: requestedDays,
         requestReason: reason,
+        requestDate: DateTime.now(),
       );
-      await _ref.read(leaveRepositoryProvider).createLeaveRequest(request);
-      state = state.copyWith(isSubmitting: false, successMessage: 'Leave request submitted successfully.');
-    } catch (e) {
-      state = state.copyWith(isSubmitting: false, errorMessage: e.toString());
+      final response = await _ref
+          .read(leaveRepositoryProvider)
+          .createLeaveRequest(request);
+      if (response.statusCode == 200) {
+        state = state.copyWith(
+          isSubmitting: false,
+          successMessage: 'Leave request submitted successfully!',
+        );
+      }
+    } catch (e, st) {
+      log('Error: $e');
+      log('Stacktrace: $st');
+      state = state.copyWith(
+        isSubmitting: false,
+        errorMessage: 'Failed to submit leave request.',
+      );
     }
   }
-  
+
   void clearMessages() {
     state = state.copyWith(successMessage: null, errorMessage: null);
   }

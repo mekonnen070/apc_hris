@@ -5,8 +5,8 @@ enum MainModule {
   leave,
   training,
   placement,
-  incident,
   clearance,
-  promotion,
+  // incident,
+  // promotion,
   verification,
 }

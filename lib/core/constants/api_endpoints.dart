@@ -77,6 +77,7 @@ class ApiEndpoints {
   static const String leaveBalanceByEmployee =
       '$_leaveBalance/balanceByEmployee';
   static const String leaveTypes = '$_leaveTypes/leaveTypes';
+  static const String leaveRequestByEmployee = '$_leave/requestByEmployee';
 
   // --- Training Endpoints ---
   static const String availableTrainings = '$_training/trainings';

@@ -6,7 +6,6 @@ import 'package:police_com/features/leave_mgmt/application/leave_notifier.dart';
 import 'package:police_com/features/leave_mgmt/presentation/widgets/leave_balance_card_widget.dart';
 import 'package:police_com/features/leave_mgmt/presentation/widgets/leave_history_list_item_widget.dart';
 import 'package:police_com/features/leave_mgmt/presentation/widgets/request_leave_screen.dart';
-import 'package:police_com/features/widgets/app_bar_widget.dart';
 
 class LeaveScreen extends ConsumerWidget {
   const LeaveScreen({super.key});
@@ -16,28 +15,32 @@ class LeaveScreen extends ConsumerWidget {
     final state = ref.watch(leaveNotifierProvider);
     final notifier = ref.read(leaveNotifierProvider.notifier);
 
-    return Scaffold(
-      appBar: AppBarWidget(title: context.lango.leaveManagement),
-      body: RefreshIndicator(
-        onRefresh: notifier.fetchInitialData,
-        child: state.isLoading && state.leaveBalances.isEmpty
-            ? const Center(child: CircularProgressIndicator())
-            : state.errorMessage != null && state.leaveBalances.isEmpty
-                ? Center(child: Text(state.errorMessage!))
-                : _LeaveScreenContent(state: state),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async {
-          final result = await Navigator.push<bool>(
-            context,
-            MaterialPageRoute(builder: (context) => const RequestLeaveScreen()),
-          );
-          if (result == true) {
-            notifier.fetchInitialData();
-          }
-        },
-        label: Text(context.lango.newLeaveRequest),
-        icon: const Icon(Icons.add),
+    return SafeArea(
+      child: Scaffold(
+        body: RefreshIndicator(
+          onRefresh: notifier.fetchInitialData,
+          child:
+              state.isLoading && state.leaveBalances.isEmpty
+                  ? const Center(child: CircularProgressIndicator())
+                  : state.errorMessage != null && state.leaveBalances.isEmpty
+                  ? Center(child: Text(state.errorMessage!))
+                  : _LeaveScreenContent(state: state),
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () async {
+            final result = await Navigator.push<bool>(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const RequestLeaveScreen(),
+              ),
+            );
+            if (result == true) {
+              notifier.fetchInitialData();
+            }
+          },
+          label: Text(context.lango.newLeaveRequest),
+          icon: const Icon(Icons.add),
+        ),
       ),
     );
   }
@@ -58,12 +61,15 @@ class _LeaveScreenContent extends HookConsumerWidget {
           ref.read(leaveNotifierProvider.notifier).fetchNextPage();
         }
       }
+
       scrollController.addListener(listener);
       return () => scrollController.removeListener(listener);
-    }, [scrollController],);
+    }, [scrollController]);
 
     // Create a lookup map for leave types for efficient access.
-    final leaveTypeMap = {for (final type in state.leaveTypes) type.typeId: type};
+    final leaveTypeMap = {
+      for (final type in state.leaveTypes) type.typeId: type,
+    };
 
     return CustomScrollView(
       controller: scrollController,
@@ -84,18 +90,20 @@ class _LeaveScreenContent extends HookConsumerWidget {
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: state.leaveBalances.map((balance) {
-                        final leaveType = leaveTypeMap[balance.leaveTypeId];
-                        if (leaveType == null) return const SizedBox.shrink();
-                        
-                        return SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.45,
-                          child: LeaveBalanceCard(
-                            balance: balance,
-                            leaveType: leaveType,
-                          ),
-                        );
-                      }).toList(),
+                      children:
+                          state.leaveBalances.map((balance) {
+                            final leaveType = leaveTypeMap[balance.leaveTypeId];
+                            if (leaveType == null)
+                              return const SizedBox.shrink();
+
+                            return SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.45,
+                              child: LeaveBalanceCard(
+                                balance: balance,
+                                leaveType: leaveType,
+                              ),
+                            );
+                          }).toList(),
                     ),
                   )
                 else
@@ -115,17 +123,14 @@ class _LeaveScreenContent extends HookConsumerWidget {
           )
         else
           SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                final request = state.leaveHistory[index];
-                final leaveType = leaveTypeMap[request.leaveTypeId];
-                return LeaveHistoryListItem(
-                  request: request,
-                  leaveTypeName: leaveType?.typeName ?? request.leaveTypeId,
-                );
-              },
-              childCount: state.leaveHistory.length,
-            ),
+            delegate: SliverChildBuilderDelegate((context, index) {
+              final request = state.leaveHistory[index];
+              final leaveType = leaveTypeMap[request.leaveTypeId];
+              return LeaveHistoryListItem(
+                request: request,
+                leaveTypeName: leaveType?.typeName ?? request.leaveTypeId,
+              );
+            }, childCount: state.leaveHistory.length),
           ),
         if (state.isFetchingMore)
           const SliverToBoxAdapter(

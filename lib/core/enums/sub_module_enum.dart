@@ -8,6 +8,6 @@ enum SubModule {
   training,
   placement,
   clearance,
-  incident,
-  promotion,
+  // incident,
+  // promotion,
 }

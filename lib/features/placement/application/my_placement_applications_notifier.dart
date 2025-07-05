@@ -37,8 +37,8 @@ class MyPlacementApplicationsNotifier
         employeeId: _employeeId!,
       );
       state = AsyncValue.data(applications);
-    } catch (e, st) {
-      state = AsyncValue.error(e, st);
+    } catch (e) {
+      state = const AsyncValue.data([]);
     }
   }
 }

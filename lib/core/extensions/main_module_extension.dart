@@ -14,8 +14,8 @@ extension MainModuleX on MainModule {
       MainModule.training => context.lango.trainingAndDevelopment,
       MainModule.placement => context.lango.placementManagement,
       MainModule.clearance => context.lango.employeeClearance,
-      MainModule.incident => context.lango.incidentManagement,
-      MainModule.promotion => context.lango.promotionManagement,
+      // MainModule.incident => context.lango.incidentManagement,
+      // MainModule.promotion => context.lango.promotionManagement,
       MainModule.verification => context.lango.verification,
     };
   }
@@ -28,8 +28,8 @@ extension MainModuleX on MainModule {
     MainModule.training => Icons.school_rounded,
     MainModule.placement => Icons.location_city_rounded,
     MainModule.clearance => Icons.how_to_reg_rounded,
-    MainModule.incident => Icons.warning_amber_rounded,
-    MainModule.promotion => Icons.stairs_rounded,
+    // MainModule.incident => Icons.warning_amber_rounded,
+    // MainModule.promotion => Icons.stairs_rounded,
     MainModule.verification => Icons.qr_code_rounded,
   };
 
@@ -41,8 +41,8 @@ extension MainModuleX on MainModule {
     MainModule.training => [SubModule.training],
     MainModule.placement => [SubModule.placement],
     MainModule.clearance => [SubModule.clearance],
-    MainModule.incident => [SubModule.incident],
+    // MainModule.incident => [SubModule.incident],
+    // MainModule.promotion => [SubModule.promotion],
     MainModule.verification => [SubModule.verification],
-    MainModule.promotion => [SubModule.promotion],
   };
 }
