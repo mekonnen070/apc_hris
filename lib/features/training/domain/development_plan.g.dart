@@ -51,10 +51,10 @@ const _$TrainingTypesEnumMap = {
 };
 
 const _$CurrencyEnumMap = {
-  Currency.etb: 'etb',
-  Currency.usd: 'usd',
-  Currency.eur: 'eur',
-  Currency.gbp: 'gbp',
+  Currency.etb: 0,
+  Currency.usd: 1,
+  Currency.eur: 2,
+  Currency.gbp: 3,
 };
 
 const _$DevelopmentSourceEnumMap = {

@@ -1,15 +1,19 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'currency.g.dart';
+
 /// Represents supported currencies in the system.
-///
+@JsonEnum(alwaysCreate: true)
 enum Currency {
-  /// Ethiopian Birr
+  @JsonValue(0)
   etb,
 
-  /// US Dollar
+  @JsonValue(1)
   usd,
 
-  /// Euro
+  @JsonValue(2)
   eur,
 
-  /// British Pound
+  @JsonValue(3)
   gbp,
 }

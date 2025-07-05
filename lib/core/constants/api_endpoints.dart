@@ -54,6 +54,7 @@ class ApiEndpoints {
   static const String _leaveBalance = '/LvBalance';
   static const String _leaveTypes = '/LvType';
   static const String _training = '/training';
+  static const String _trainingApplication = '/trainingApplication';
   static const String _placementAnnouncement = '/placementAnnounce';
   static const String _placementApplication = '/placementApplication';
   static const String _recruitment = '/recruitAnnouncement';
@@ -79,12 +80,13 @@ class ApiEndpoints {
 
   // --- Training Endpoints ---
   static const String availableTrainings = '$_training/trainings';
-  static const String trainingDetails = '$_training/details'; // Append /:id
-  static const String applyForTraining = '$_training/apply'; // Append /:id
-  static const String myTrainingApplications = '$_training/my-applications';
+  static const String trainingDetail = '$_training/detail';
+  static const String applyForTraining = '$_trainingApplication/apply';
+  static const String myTrainingApplications =
+      '$_trainingApplication/applicationByEmployee';
   static const String trainingSelectedApplicants =
-      '$_training/selected-applicants'; // Append /:id
-  static const String submitTrainingAppeal = '$_training/appeal'; // Append /:id
+      '$_trainingApplication/selected-applicants';
+  static const String submitTrainingAppeal = '$_trainingApplication/appeal';
 
   // --- Placement Endpoints ---
   static const String placementAnnouncements =

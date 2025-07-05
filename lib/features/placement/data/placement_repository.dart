@@ -19,13 +19,13 @@ abstract class IPlacementRepository {
   /// Fetches a list of all available placement announcements.
   Future<List<PlacementAnnouncement>> getPlacementAnnouncements();
 
-  /// **NEW:** Fetches the detailed information for a single placement announcement.
+  /// Fetches the detailed information for a single placement announcement.
   Future<PlacementAnnouncement> getPlacementAnnouncementDetail(int id);
 
   /// Submits a new application for a placement.
   Future<void> applyForPlacement(PlacementApplicant application);
 
-  /// **NEW:** Fetches all applications submitted by a specific employee.
+  /// Fetches all applications submitted by a specific employee.
   Future<List<PlacementApplicant>> getMyApplications({
     required String employeeId,
   });
