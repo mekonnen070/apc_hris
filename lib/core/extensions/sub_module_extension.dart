@@ -10,7 +10,7 @@ import 'package:police_com/features/leave_mgmt/presentation/leave_screen.dart';
 import 'package:police_com/features/placement/presentation/placement_screen.dart';
 import 'package:police_com/features/profile/presentation/profile_screen.dart';
 import 'package:police_com/features/training/presentation/training_screen.dart';
-import 'package:police_com/features/transfer/presentation/my_transfer_requests_screen.dart';
+import 'package:police_com/features/transfer/presentation/transfer_screen.dart';
 import 'package:police_com/features/verification/presentation/verification_screen.dart';
 
 extension SubModuleExtension on SubModule {
@@ -84,7 +84,7 @@ extension SubModuleExtension on SubModule {
       case SubModule.newRecruit:
         return const MyRecruitsScreen();
       case SubModule.transfer:
-        return const MyTransferRequestsScreen();
+        return const TransferScreen();
       case SubModule.leave:
         return const LeaveScreen();
       case SubModule.training:

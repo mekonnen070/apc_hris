@@ -5,13 +5,12 @@ class ApiEndpoints {
   // UserAccount Module
   // =======================================================================
   static const String _userAccount = '/UserAccount';
-  static const String signUp = '$_userAccount/SignUp'; // POST
-  static const String login = '$_userAccount/Login'; // POST
-  static const String logOff = '$_userAccount/LogOff'; // POST
-  static const String setLanguage = '$_userAccount/SetLanguage'; // GET
-  static const String forgotPassword =
-      '$_userAccount/ForgotPassword'; // GET & POST
-  static const String resetPassword = '$_userAccount/ResetPassword'; // POST
+  static const String signUp = '$_userAccount/SignUp';
+  static const String login = '$_userAccount/Login';
+  static const String logOff = '$_userAccount/LogOff';
+  static const String setLanguage = '$_userAccount/SetLanguage';
+  static const String forgotPassword = '$_userAccount/ForgotPassword';
+  static const String resetPassword = '$_userAccount/ResetPassword';
   // Note: Many UserAccount endpoints are for UI navigation (e.g., ConfirmEmail)
   // or have identical paths for GET and POST. We define the path once.
   // The DioClient method (get, post) determines the action.
@@ -20,33 +19,31 @@ class ApiEndpoints {
   // Location Module
   // =======================================================================
   static const String _location = '/Location';
-  static const String regions = '$_location/regions'; // GET
-  static String zones({required String region}) =>
-      '$_location/zones/$region'; // GET
-  static String woredas({required String zone}) =>
-      '$_location/woredas/$zone'; // GET
+  static const String regions = '$_location/regions';
+  static String zones({required String region}) => '$_location/zones/$region';
+  static String woredas({required String zone}) => '$_location/woredas/$zone';
   static String kebeles({required String woreda}) =>
-      '$_location/kebeles/$woreda'; // GET
+      '$_location/kebeles/$woreda';
 
   // =======================================================================
   // Transfer Module
   // =======================================================================
   static const String _transfer = '/Transfer';
-  static const String transferRequests = '$_transfer/requests'; // GET
-  static const String transferDetails = '$_transfer/Details'; // GET
-  static const String createTransfer = '$_transfer/Create'; // POST
-  static const String editTransfer = '$_transfer/Edit'; // POST
-  static String deleteTransfer({required String id}) =>
-      '$_transfer/$id'; // DELETE
+  static const String transferRequests = '$_transfer/requests';
+  static const String transferDetails = '$_transfer/Details';
+  static const String createTransfer = '$_transfer/Create';
+  static const String editTransfer = '$_transfer/Edit';
+  static String deleteTransfer({required String id}) => '$_transfer/$id';
   static const String getLocationDataByEmployee =
-      '$_transfer/GetLocationDataByEmployee'; // GET
+      '$_transfer/GetLocationDataByEmployee';
   static const String getDepartmentByLocation =
-      '$_transfer/GetDepartmentByLocation'; // GET
+      '$_transfer/GetDepartmentByLocation';
   static const String getPositionByDepartment =
-      '$_transfer/GetPositionByDepartment'; // GET
-  static const String submitTransferData = '$_transfer/SubmitData'; // POST
+      '$_transfer/GetPositionByDepartment';
+  static const String submitTransferData = '$_transfer/SubmitData';
   static const String initiateTransferSelection =
-      '$_transfer/InitiateSelection'; // GET
+      '$_transfer/InitiateSelection';
+  static const String locationData = '$_transfer/GetLocationDataByEmployee';
 
   // Base feature paths to avoid repetition
   static const String _newRecruit = '/newRecruit';

@@ -97,7 +97,7 @@ abstract class EmployeeInfoModel with _$EmployeeInfoModel {
 
   String get computedFullName {
     final parts = [firstName, fatherName, grandName];
-    return parts
+    return parts  
         .where((part) => part != null && part.isNotEmpty)
         .join(' ')
         .trim();
