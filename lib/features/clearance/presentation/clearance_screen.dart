@@ -31,35 +31,33 @@ class _ClearanceScreenState extends ConsumerState<ClearanceScreen> {
     final state = ref.watch(clearanceNotifierProvider);
 
     return Scaffold(
-      appBar: AppBarWidget(
-        title: context.lango.clearanceRequests,
-      ), // <-- REPLACED & CONST REMOVED
-      body: state.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        data: (requests) {
-          if (requests.isEmpty) {
-            return Center(
-              child: Text(context.lango.noClearanceRequests),
-            ); // <-- REPLACED & CONST REMOVED
-          }
-          return RefreshIndicator(
-            onRefresh:
-                () => ref
-                    .read(clearanceNotifierProvider.notifier)
-                    .getMyClearanceRequests('CURRENT_USER_ID'),
-            child: ListView.builder(
-              padding: const EdgeInsets.all(8.0),
-              itemCount: requests.length,
-              itemBuilder: (context, index) {
-                return ClearanceListItemWidget(request: requests[index]);
-              },
-            ),
-          );
-        },
-        error:
-            (e, st) => SomethingWentWrongWidget(
-              onRetry: () => ref.read(clearanceNotifierProvider),
-            ),
+      appBar: AppBarWidget(title: context.lango.clearanceRequests),
+      body: SafeArea(
+        child: state.when(
+          loading: () => const Center(child: CircularProgressIndicator()),
+          data: (requests) {
+            if (requests.isEmpty) {
+              return Center(child: Text(context.lango.noClearanceRequests));
+            }
+            return RefreshIndicator(
+              onRefresh:
+                  () => ref
+                      .read(clearanceNotifierProvider.notifier)
+                      .getMyClearanceRequests('CURRENT_USER_ID'),
+              child: ListView.builder(
+                padding: const EdgeInsets.all(8.0),
+                itemCount: requests.length,
+                itemBuilder: (context, index) {
+                  return ClearanceListItemWidget(request: requests[index]);
+                },
+              ),
+            );
+          },
+          error:
+              (e, st) => SomethingWentWrongWidget(
+                onRetry: () => ref.read(clearanceNotifierProvider),
+              ),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {

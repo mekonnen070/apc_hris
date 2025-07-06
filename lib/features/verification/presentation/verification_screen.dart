@@ -42,94 +42,98 @@ class VerificationScreen extends HookConsumerWidget {
     }, [verificationState]);
 
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: TextField(
-                  controller: searchController,
-                  decoration: InputDecoration(
-                    labelText: context.lango.enterEmployeeId,
-                    hintText: context.lango.employeeIdHint,
-                    border: const OutlineInputBorder(),
-                    prefixIcon: const Icon(Icons.badge_outlined),
-                    suffixIcon: IconButton(
-                      icon: const Icon(Icons.qr_code_scanner_rounded),
-                      tooltip: context.lango.scanQrCode,
-                      onPressed: () async {
-                        final String? qrCode = await Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => const QRScannerScreen(),
-                          ),
-                        );
-                        if (qrCode != null && qrCode.isNotEmpty) {
-                          searchController.text = qrCode;
-                          notifier.searchEmployee(qrCode);
-                        }
-                      },
-                    ),
-                  ),
-                  onSubmitted: (value) {
-                    if (value.trim().isNotEmpty) {
-                      notifier.searchEmployee(value.trim());
-                    }
-                  },
-                ),
-              ),
-              const SizedBox(height: 24),
-              AnimatedSwitcher(
-                duration: const Duration(milliseconds: 300),
-                child: verificationState.when(
-                  data: (employee) {
-                    if (employee == null) {
-                      return const _InitialStatePrompt();
-                    }
-                    return Column(
-                      children: [
-                        VerificationResultWidget(employee: employee),
-                        const SizedBox(height: 16),
-                        FilledButton.icon(
-                          onPressed: () {
-                            searchController.clear();
-                            notifier.clear();
-                          },
-                          icon: const Icon(Icons.refresh),
-                          label: Text(context.lango.verifyNew),
-                        ),
-                      ],
-                    );
-                  },
-                  loading:
-                      () => Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const CircularProgressIndicator(),
-                            const SizedBox(height: 16),
-                            Text(
-                              context.lango.verifyingEmployee,
-                              style: Theme.of(context).textTheme.titleMedium,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 16.0),
+                  child: TextField(
+                    controller: searchController,
+                    decoration: InputDecoration(
+                      labelText: context.lango.enterEmployeeId,
+                      hintText: context.lango.employeeIdHint,
+                      border: const OutlineInputBorder(),
+                      prefixIcon: const Icon(Icons.badge_outlined),
+                      suffixIcon: IconButton(
+                        icon: const Icon(Icons.qr_code_scanner_rounded),
+                        tooltip: context.lango.scanQrCode,
+                        onPressed: () async {
+                          final String? qrCode = await Navigator.of(
+                            context,
+                          ).push(
+                            MaterialPageRoute(
+                              builder: (context) => const QRScannerScreen(),
                             ),
-                          ],
-                        ),
-                      ),
-                  error:
-                      (err, stack) => _ErrorState(
-                        message: context.lango.verificationErrorNotFound,
-                        onRetry: () {
-                          final query = searchController.text.trim();
-                          if (query.isNotEmpty) {
-                            notifier.searchEmployee(query);
+                          );
+                          if (qrCode != null && qrCode.isNotEmpty) {
+                            searchController.text = qrCode;
+                            notifier.searchEmployee(qrCode);
                           }
                         },
                       ),
+                    ),
+                    onSubmitted: (value) {
+                      if (value.trim().isNotEmpty) {
+                        notifier.searchEmployee(value.trim());
+                      }
+                    },
+                  ),
                 ),
-              ),
-            ],
+                const SizedBox(height: 24),
+                AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  child: verificationState.when(
+                    data: (employee) {
+                      if (employee == null) {
+                        return const _InitialStatePrompt();
+                      }
+                      return Column(
+                        children: [
+                          VerificationResultWidget(employee: employee),
+                          const SizedBox(height: 16),
+                          FilledButton.icon(
+                            onPressed: () {
+                              searchController.clear();
+                              notifier.clear();
+                            },
+                            icon: const Icon(Icons.refresh),
+                            label: Text(context.lango.verifyNew),
+                          ),
+                        ],
+                      );
+                    },
+                    loading:
+                        () => Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const CircularProgressIndicator(),
+                              const SizedBox(height: 16),
+                              Text(
+                                context.lango.verifyingEmployee,
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                            ],
+                          ),
+                        ),
+                    error:
+                        (err, stack) => _ErrorState(
+                          message: context.lango.verificationErrorNotFound,
+                          onRetry: () {
+                            final query = searchController.text.trim();
+                            if (query.isNotEmpty) {
+                              notifier.searchEmployee(query);
+                            }
+                          },
+                        ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

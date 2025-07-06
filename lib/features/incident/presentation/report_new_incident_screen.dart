@@ -43,14 +43,19 @@ class ReportNewIncidentScreen extends HookConsumerWidget {
               .read(incidentRepositoryProvider)
               .submitIncidentReport(report);
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar( // <-- REMOVED CONST
-              content: Text(context.lango.incidentReportSubmitted), // <-- REPLACED
+            SnackBar(
+              // <-- REMOVED CONST
+              content: Text(
+                context.lango.incidentReportSubmitted,
+              ), // <-- REPLACED
             ),
           );
           Navigator.of(context).pop(true);
         } catch (e) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('${context.lango.failedToSubmitReport} $e')), // <-- REPLACED
+            SnackBar(
+              content: Text('${context.lango.failedToSubmitReport} $e'),
+            ), // <-- REPLACED
           );
         } finally {
           isLoading.value = false;
@@ -59,66 +64,81 @@ class ReportNewIncidentScreen extends HookConsumerWidget {
     }
 
     return Scaffold(
-      appBar: AppBarWidget(title: context.lango.reportNewIncident), // <-- REPLACED
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              AppDateField(
-                labelText: context.lango.incidentDate, // <-- REPLACED
-                onDateSelected: (date) => incidentDate.value = date,
-                validator:
-                    (value) =>
-                        incidentDate.value == null
-                            ? context.lango.pleaseSelectIncidentDate // <-- REPLACED
-                            : null,
-              ),
-              const SizedBox(height: 16),
-              AppDropdownField<IncidentType>(
-                value: incidentType.value,
-                labelText: context.lango.incidentType, // <-- REPLACED
-                items:
-                    IncidentType.values
-                        .map(
-                          (type) => DropdownMenuItem(
-                            value: type,
-                            child: Text(type.name.toDisplayCase()),
-                          ),
-                        )
-                        .toList(),
-                onChanged: (value) => incidentType.value = value,
-                validator:
-                    (value) =>
-                        value == null ? context.lango.pleaseSelectAnIncidentType : null, // <-- REPLACED
-              ),
-              const SizedBox(height: 16),
-              AppTextField(
-                controller: descriptionController,
-                labelText: context.lango.descriptionOfIncident, // <-- REPLACED
-                hintText:
-                    context.lango.provideClearDetailedDescription, // <-- REPLACED
-                maxLines: 7,
-                validator:
-                    (value) =>
-                        (value == null || value.isEmpty)
-                            ? context.lango.pleaseEnterDescription // <-- REPLACED
-                            : null,
-              ),
-              const SizedBox(height: 24),
-              FilledButton(
-                onPressed: isLoading.value ? null : submitForm,
-                child:
-                    isLoading.value
-                        ? const CircularProgressIndicator.adaptive()
-                        : Text(context.lango.submitReport), // <-- REPLACED & REMOVED CONST
-              ),
-            ],
+      appBar: AppBarWidget(
+        title: context.lango.reportNewIncident,
+      ), // <-- REPLACED
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                AppDateField(
+                  labelText: context.lango.incidentDate, // <-- REPLACED
+                  onDateSelected: (date) => incidentDate.value = date,
+                  validator:
+                      (value) =>
+                          incidentDate.value == null
+                              ? context
+                                  .lango
+                                  .pleaseSelectIncidentDate // <-- REPLACED
+                              : null,
+                ),
+                const SizedBox(height: 16),
+                AppDropdownField<IncidentType>(
+                  value: incidentType.value,
+                  labelText: context.lango.incidentType, // <-- REPLACED
+                  items:
+                      IncidentType.values
+                          .map(
+                            (type) => DropdownMenuItem(
+                              value: type,
+                              child: Text(type.name.toDisplayCase()),
+                            ),
+                          )
+                          .toList(),
+                  onChanged: (value) => incidentType.value = value,
+                  validator:
+                      (value) =>
+                          value == null
+                              ? context.lango.pleaseSelectAnIncidentType
+                              : null, // <-- REPLACED
+                ),
+                const SizedBox(height: 16),
+                AppTextField(
+                  controller: descriptionController,
+                  labelText:
+                      context.lango.descriptionOfIncident, // <-- REPLACED
+                  hintText:
+                      context
+                          .lango
+                          .provideClearDetailedDescription, // <-- REPLACED
+                  maxLines: 7,
+                  validator:
+                      (value) =>
+                          (value == null || value.isEmpty)
+                              ? context
+                                  .lango
+                                  .pleaseEnterDescription // <-- REPLACED
+                              : null,
+                ),
+                const SizedBox(height: 24),
+                FilledButton(
+                  onPressed: isLoading.value ? null : submitForm,
+                  child:
+                      isLoading.value
+                          ? const CircularProgressIndicator.adaptive()
+                          : Text(
+                            context.lango.submitReport,
+                          ), // <-- REPLACED & REMOVED CONST
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
-} 
+}

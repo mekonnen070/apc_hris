@@ -10,38 +10,37 @@ part 'transfer_request.g.dart';
 @freezed
 abstract class TransferRequest with _$TransferRequest {
   const factory TransferRequest({
-    // --- Renamed & Type Changed ---
     required int transferRequestId,
+    // --- Nullability corrected based on C# model ---
     String? employeeId,
 
-    // --- Current Location/Position ---
-    required String? currentLocation,
+    // --- Current Location/Position (Required in C#) ---
+    required String currentLocation,
     String? currentLocationId,
-    required String? currentDepartment,
-    required String? currentPosition,
+    required String currentDepartment,
+    required String currentPosition,
 
-    // --- New Enum Fields ---
+    // --- Levels (Enums are value types, non-nullable by default in C#) ---
     required TransferLevels transferLevelFrom,
     required TransferLevels transferLevelTo,
 
-    // --- Destination Location/Position (Renamed) ---
-    required String? requestedLocation,
-    String? requestedLocationId,
-    String? requestedDepartment,
-    String? requestedDepartmentId,
-    String? requestedPositionTitle,
-    String? requestedPositionId,
+    // --- Destination Location/Position (Nullable in C#) ---
+    String? toLocation,
+    String? toLocationId,
+    String? toDepartment,
+    String? toDepartmentId,
+    String? toPosition,
+    String? toPositionId,
 
     // --- Date and Reason ---
     required DateTime requestDate,
-    TransferPeriod? transferPeriod,
+    required TransferPeriod transferPeriod,
     String? transferYear,
-    TransferReasons? reasonForRequest,
-
-    // --- Approval Info ---
+    TransferReasons? transferReason, // Corrected to be nullable
+    // --- Approval Info (Nullable in C#) ---
+    @Default(TransferStatus.pending) TransferStatus transferStatus,
     String? approvedBy,
     DateTime? approvalDate,
-    @Default(TransferStatus.pending) TransferStatus status,
   }) = _TransferRequest;
 
   factory TransferRequest.fromJson(Map<String, dynamic> json) =>

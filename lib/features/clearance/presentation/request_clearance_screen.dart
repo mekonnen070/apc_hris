@@ -50,9 +50,7 @@ class RequestClearanceScreen extends HookConsumerWidget {
           Navigator.of(context).pop(true);
         } catch (e) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('${context.lango.failedToSubmitRequest}$e'),
-            ),
+            SnackBar(content: Text('${context.lango.failedToSubmitRequest}$e')),
           );
         } finally {
           isLoading.value = false;
@@ -64,63 +62,65 @@ class RequestClearanceScreen extends HookConsumerWidget {
       appBar: AppBarWidget(
         title: context.lango.requestClearance,
       ), // <-- REPLACED & REMOVED CONST
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              AppDropdownField<ClearanceReason>(
-                labelText: context.lango.reasonForClearance, // <-- REPLACED
-                value: reason.value,
-                items:
-                    ClearanceReason.values
-                        .map(
-                          (type) => DropdownMenuItem(
-                            value: type,
-                            child: Text(type.name.toDisplayCase()),
-                          ),
-                        )
-                        .toList(),
-                onChanged: (value) => reason.value = value,
-                validator:
-                    (value) =>
-                        value == null
-                            ? context.lango.pleaseSelectReason
-                            : null, // <-- REPLACED
-              ),
-              const SizedBox(height: 16),
-              AppDateField(
-                labelText: context.lango.lastDayOfWorkLabel, // <-- REPLACED
-                onDateSelected: (date) => lastDayOfWork.value = date,
-                validator:
-                    (value) =>
-                        lastDayOfWork.value == null
-                            ? context
-                                .lango
-                                .pleaseSelectDate // <-- REPLACED
-                            : null,
-              ),
-              const SizedBox(height: 16),
-              AppTextField(
-                controller: commentsController,
-                labelText: context.lango.commentsOptional, // <-- REPLACED
-                hintText:
-                    context.lango.provideAdditionalDetails, // <-- REPLACED
-                maxLines: 5,
-              ),
-              const SizedBox(height: 24),
-              FilledButton(
-                onPressed: isLoading.value ? null : submitForm,
-                child:
-                    isLoading.value
-                        ? const CircularProgressIndicator.adaptive()
-                        : Text(
-                          context.lango.submitRequest,
-                        ), // <-- REPLACED & REMOVED CONST
-              ),
-            ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                AppDropdownField<ClearanceReason>(
+                  labelText: context.lango.reasonForClearance, // <-- REPLACED
+                  value: reason.value,
+                  items:
+                      ClearanceReason.values
+                          .map(
+                            (type) => DropdownMenuItem(
+                              value: type,
+                              child: Text(type.name.toDisplayCase()),
+                            ),
+                          )
+                          .toList(),
+                  onChanged: (value) => reason.value = value,
+                  validator:
+                      (value) =>
+                          value == null
+                              ? context.lango.pleaseSelectReason
+                              : null, // <-- REPLACED
+                ),
+                const SizedBox(height: 16),
+                AppDateField(
+                  labelText: context.lango.lastDayOfWorkLabel, // <-- REPLACED
+                  onDateSelected: (date) => lastDayOfWork.value = date,
+                  validator:
+                      (value) =>
+                          lastDayOfWork.value == null
+                              ? context
+                                  .lango
+                                  .pleaseSelectDate // <-- REPLACED
+                              : null,
+                ),
+                const SizedBox(height: 16),
+                AppTextField(
+                  controller: commentsController,
+                  labelText: context.lango.commentsOptional, // <-- REPLACED
+                  hintText:
+                      context.lango.provideAdditionalDetails, // <-- REPLACED
+                  maxLines: 5,
+                ),
+                const SizedBox(height: 24),
+                FilledButton(
+                  onPressed: isLoading.value ? null : submitForm,
+                  child:
+                      isLoading.value
+                          ? const CircularProgressIndicator.adaptive()
+                          : Text(
+                            context.lango.submitRequest,
+                          ), // <-- REPLACED & REMOVED CONST
+                ),
+              ],
+            ),
           ),
         ),
       ),

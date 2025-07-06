@@ -28,12 +28,12 @@ class ApiEndpoints {
   // =======================================================================
   // Transfer Module
   // =======================================================================
-  static const String _transfer = '/Transfer';
+  static const String _transfer = '/transfer';
   static const String transferRequests = '$_transfer/requests';
   static const String transferDetails = '$_transfer/Details';
   static const String createTransfer = '$_transfer/Create';
   static const String editTransfer = '$_transfer/Edit';
-  static String deleteTransfer({required String id}) => '$_transfer/$id';
+  static const String deleteTransfer = '$_transfer/delete';
   static const String getLocationDataByEmployee =
       '$_transfer/GetLocationDataByEmployee';
   static const String getDepartmentByLocation =

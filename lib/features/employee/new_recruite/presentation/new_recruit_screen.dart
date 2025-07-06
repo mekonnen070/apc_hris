@@ -89,110 +89,112 @@ class NewRecruitScreen extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBarWidget(title: context.lango.newRecruitApplication),
-      body: Form(
-        key: formKey,
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              AppDropdownField<String>(
-                labelText: context.lango.recruitmentAnnouncement,
-                isRequired: true,
-                value: announcementId.value,
-                items:
-                    state.announcements
-                        .map(
-                          (ann) => DropdownMenuItem(
-                            value: ann.announcementId,
-                            child: Text(ann.announcementTitle ?? 'No Title'),
-                          ),
-                        )
-                        .toList(),
-                onChanged: (value) => announcementId.value = value,
-                validator: FormBuilderValidators.required(),
-              ),
-              const SizedBox(height: 16),
-              AppTextField(
-                controller: firstNameController,
-                labelText: context.lango.firstName,
-                isRequired: true,
-                validator: FormBuilderValidators.required(),
-              ),
-              const SizedBox(height: 16),
-              AppTextField(
-                controller: fatherNameController,
-                labelText: context.lango.middleName,
-                isRequired: true,
-                validator: FormBuilderValidators.required(),
-              ),
-              const SizedBox(height: 16),
-              AppTextField(
-                controller: grandNameController,
-                labelText: context.lango.lastName,
-              ),
-              const SizedBox(height: 16),
-              AppDateField(
-                labelText: context.lango.dateOfBirth,
-                isRequired: true,
-                selectedDate: birthDate.value,
-                onDateSelected: (newDate) => birthDate.value = newDate,
-                validator: (val) {
-                  if (val == null) return 'This field cannot be empty.';
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16),
-              AppDropdownField<Gender>(
-                labelText: context.lango.gender,
-                isRequired: true,
-                value: gender.value,
-                items:
-                    Gender.values
-                        .map(
-                          (g) => DropdownMenuItem(
-                            value: g,
-                            child: Text(g.name.toDisplayCase()),
-                          ),
-                        )
-                        .toList(),
-                onChanged: (value) {
-                  if (value != null) gender.value = value;
-                },
-                validator: FormBuilderValidators.required(),
-              ),
-              const SizedBox(height: 16),
-              AppTextField(
-                controller: mobileController,
-                labelText: context.lango.phoneNumber,
-                isRequired: true,
-                keyboardType: TextInputType.phone,
-                validator: FormBuilderValidators.compose([
-                  FormBuilderValidators.required(),
-                  FormBuilderValidators.numeric(),
-                ]),
-              ),
-              const SizedBox(height: 16),
-              AppTextField(
-                controller: emailController,
-                labelText: context.lango.email,
-                keyboardType: TextInputType.emailAddress,
-                validator: FormBuilderValidators.email(),
-              ),
-              const SizedBox(height: 32),
-              FilledButton(
-                onPressed: state.isSubmitting ? null : handleSubmit,
-                child:
-                    state.isSubmitting
-                        ? const CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            Colors.white,
-                          ),
-                        )
-                        : Text(context.lango.submit),
-              ),
-              const SizedBox(height: 16),
-            ],
+      body: SafeArea(
+        child: Form(
+          key: formKey,
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                AppDropdownField<String>(
+                  labelText: context.lango.recruitmentAnnouncement,
+                  isRequired: true,
+                  value: announcementId.value,
+                  items:
+                      state.announcements
+                          .map(
+                            (ann) => DropdownMenuItem(
+                              value: ann.announcementId,
+                              child: Text(ann.announcementTitle ?? 'No Title'),
+                            ),
+                          )
+                          .toList(),
+                  onChanged: (value) => announcementId.value = value,
+                  validator: FormBuilderValidators.required(),
+                ),
+                const SizedBox(height: 16),
+                AppTextField(
+                  controller: firstNameController,
+                  labelText: context.lango.firstName,
+                  isRequired: true,
+                  validator: FormBuilderValidators.required(),
+                ),
+                const SizedBox(height: 16),
+                AppTextField(
+                  controller: fatherNameController,
+                  labelText: context.lango.middleName,
+                  isRequired: true,
+                  validator: FormBuilderValidators.required(),
+                ),
+                const SizedBox(height: 16),
+                AppTextField(
+                  controller: grandNameController,
+                  labelText: context.lango.lastName,
+                ),
+                const SizedBox(height: 16),
+                AppDateField(
+                  labelText: context.lango.dateOfBirth,
+                  isRequired: true,
+                  selectedDate: birthDate.value,
+                  onDateSelected: (newDate) => birthDate.value = newDate,
+                  validator: (val) {
+                    if (val == null) return 'This field cannot be empty.';
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 16),
+                AppDropdownField<Gender>(
+                  labelText: context.lango.gender,
+                  isRequired: true,
+                  value: gender.value,
+                  items:
+                      Gender.values
+                          .map(
+                            (g) => DropdownMenuItem(
+                              value: g,
+                              child: Text(g.name.toDisplayCase()),
+                            ),
+                          )
+                          .toList(),
+                  onChanged: (value) {
+                    if (value != null) gender.value = value;
+                  },
+                  validator: FormBuilderValidators.required(),
+                ),
+                const SizedBox(height: 16),
+                AppTextField(
+                  controller: mobileController,
+                  labelText: context.lango.phoneNumber,
+                  isRequired: true,
+                  keyboardType: TextInputType.phone,
+                  validator: FormBuilderValidators.compose([
+                    FormBuilderValidators.required(),
+                    FormBuilderValidators.numeric(),
+                  ]),
+                ),
+                const SizedBox(height: 16),
+                AppTextField(
+                  controller: emailController,
+                  labelText: context.lango.email,
+                  keyboardType: TextInputType.emailAddress,
+                  validator: FormBuilderValidators.email(),
+                ),
+                const SizedBox(height: 32),
+                FilledButton(
+                  onPressed: state.isSubmitting ? null : handleSubmit,
+                  child:
+                      state.isSubmitting
+                          ? const CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              Colors.white,
+                            ),
+                          )
+                          : Text(context.lango.submit),
+                ),
+                const SizedBox(height: 16),
+              ],
+            ),
           ),
         ),
       ),

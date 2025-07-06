@@ -21,7 +21,7 @@ class HomePage extends ConsumerWidget {
           actions: const [ThemeSwitcherWidget()],
         ),
         drawer: const AppDrawer(),
-        body: selectedSubModule.body,
+        body: SafeArea(child: selectedSubModule.body),
       ),
     );
   }

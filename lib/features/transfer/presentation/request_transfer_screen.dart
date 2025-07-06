@@ -11,17 +11,19 @@ class RequestTransferScreen extends ConsumerWidget {
     final locationDataAsync = ref.watch(locationDataProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('New Transfer Request'),
-      ),
-      body: locationDataAsync.when(
-        data: (locationData) => RequestTransferForm(locationData: locationData),
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (err, stack) => Center(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text('Failed to load required data: $err'),
-          ),
+      appBar: AppBar(title: const Text('New Transfer Request')),
+      body: SafeArea(
+        child: locationDataAsync.when(
+          data:
+              (locationData) => RequestTransferForm(locationData: locationData),
+          loading: () => const Center(child: CircularProgressIndicator()),
+          error:
+              (err, stack) => Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text('Failed to load required data: $err'),
+                ),
+              ),
         ),
       ),
     );

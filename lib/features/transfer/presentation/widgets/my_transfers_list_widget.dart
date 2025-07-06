@@ -13,12 +13,18 @@ class MyTransfersListWidget extends ConsumerWidget {
     return state.when(
       data: (requests) {
         if (requests.isEmpty) {
-          return const Center(child: Text('You have no active transfer requests.'));
+          return const Center(
+            child: Text('You have no active transfer requests.'),
+          );
         }
         return RefreshIndicator(
-          onRefresh: () => ref.read(transferNotifierProvider.notifier).fetchMyTransferRequests(),
+          onRefresh:
+              () =>
+                  ref
+                      .read(transferNotifierProvider.notifier)
+                      .fetchMyTransferRequests(),
           child: ListView.builder(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(bottom: 80),
             itemCount: requests.length,
             itemBuilder: (context, index) {
               final request = requests[index];
@@ -28,7 +34,9 @@ class MyTransfersListWidget extends ConsumerWidget {
         );
       },
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (error, stack) => Center(child: Text('Failed to load requests: $error')),
+      error:
+          (error, stack) =>
+              Center(child: Text('Failed to load requests: $error')),
     );
   }
 }

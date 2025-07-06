@@ -60,51 +60,53 @@ class RequestPromotionScreen extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBarWidget(title: context.lango.requestPromotion), // <-- REPLACED & REMOVED CONST
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              AppTextField(
-                controller: currentPositionController,
-                labelText: context.lango.currentPosition, // <-- REPLACED
-                readOnly: true,
-              ),
-              const SizedBox(height: 16),
-              // In a real app, this should be a searchable dropdown
-              AppTextField(
-                controller: promotedPositionController,
-                labelText: context.lango.requestedPositionForPromotion, // <-- REPLACED
-                validator:
-                    (value) =>
-                        (value == null || value.isEmpty)
-                            ? context.lango.thisFieldIsRequired // <-- REPLACED
-                            : null,
-              ),
-              const SizedBox(height: 16),
-              AppTextField(
-                controller: reasonController,
-                labelText: context.lango.reasonForRequest, // <-- REPLACED
-                hintText:
-                    context.lango.brieflyExplainPromotionReason, // <-- REPLACED
-                maxLines: 6,
-                validator:
-                    (value) =>
-                        (value == null || value.isEmpty)
-                            ? context.lango.pleaseProvideReason // <-- REPLACED
-                            : null,
-              ),
-              const SizedBox(height: 24),
-              FilledButton(
-                onPressed: isLoading.value ? null : submitForm,
-                child:
-                    isLoading.value
-                        ? const CircularProgressIndicator.adaptive()
-                        : Text(context.lango.submitRequest), // <-- REPLACED & REMOVED CONST
-              ),
-            ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                AppTextField(
+                  controller: currentPositionController,
+                  labelText: context.lango.currentPosition, // <-- REPLACED
+                  readOnly: true,
+                ),
+                const SizedBox(height: 16),
+                // In a real app, this should be a searchable dropdown
+                AppTextField(
+                  controller: promotedPositionController,
+                  labelText: context.lango.requestedPositionForPromotion, // <-- REPLACED
+                  validator:
+                      (value) =>
+                          (value == null || value.isEmpty)
+                              ? context.lango.thisFieldIsRequired // <-- REPLACED
+                              : null,
+                ),
+                const SizedBox(height: 16),
+                AppTextField(
+                  controller: reasonController,
+                  labelText: context.lango.reasonForRequest, // <-- REPLACED
+                  hintText:
+                      context.lango.brieflyExplainPromotionReason, // <-- REPLACED
+                  maxLines: 6,
+                  validator:
+                      (value) =>
+                          (value == null || value.isEmpty)
+                              ? context.lango.pleaseProvideReason // <-- REPLACED
+                              : null,
+                ),
+                const SizedBox(height: 24),
+                FilledButton(
+                  onPressed: isLoading.value ? null : submitForm,
+                  child:
+                      isLoading.value
+                          ? const CircularProgressIndicator.adaptive()
+                          : Text(context.lango.submitRequest), // <-- REPLACED & REMOVED CONST
+                ),
+              ],
+            ),
           ),
         ),
       ),

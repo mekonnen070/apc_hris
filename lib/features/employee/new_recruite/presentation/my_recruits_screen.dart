@@ -174,99 +174,101 @@ class MyRecruitsScreen extends ConsumerWidget {
                 ]
                 : null,
       ),
-      body: RefreshIndicator(
-        onRefresh: notifier.fetchRecruits,
-        child: Column(
-          children: [
-            SizedBox(
-              width: double.infinity,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-                child: SegmentedButton<NewRecruitStatus>(
-                  segments:
-                      NewRecruitStatus.values
-                          .map(
-                            (status) => ButtonSegment<NewRecruitStatus>(
-                              value: status,
-                              label: FittedBox(
-                                child: Text(status.name.toDisplayCase()),
-                              ),
-                            ),
-                          )
-                          .toList(),
-                  selected: {state.filterStatus},
-                  onSelectionChanged: (newSelection) {
-                    notifier.changeFilter(newSelection.first);
-                  },
-                ),
-              ),
-            ),
-            if (state.recruits.isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16.0,
-                  vertical: 8.0,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Flexible(
-                      child: Text(
-                        hasSelection
-                            ? context.lango.itemsSelected(
-                              count: state.selectedRecruitIds.length,
-                            )
-                            : context.lango.selectRecruitsToContinue,
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        TextButton(
-                          onPressed: notifier.selectAll,
-                          child: Text(context.lango.markAll),
-                        ),
-                        const SizedBox(width: 8),
-                        TextButton(
-                          onPressed: notifier.unselectAll,
-                          child: Text(context.lango.unmarkAll),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            Expanded(
-              child:
-                  state.isLoading
-                      ? const Center(child: CircularProgressIndicator())
-                      : state.errorMessage != null
-                      ? const Center(child: Text('Something went wrong!'))
-                      : state.recruits.isEmpty
-                      ? Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Text(context.lango.noRecruitsFound),
-                        ),
-                      )
-                      : ListView.builder(
-                        itemCount: state.recruits.length,
-                        itemBuilder: (context, index) {
-                          final recruit = state.recruits[index];
-                          return RecruitListItemWidget(
-                            recruit: recruit,
-                            isSelected: state.selectedRecruitIds.contains(
-                              recruit.recruitId,
-                            ),
-                            onChanged:
-                                (_) => notifier.toggleRecruitSelection(
-                                  recruit.recruitId!,
+      body: SafeArea(
+        child: RefreshIndicator(
+          onRefresh: notifier.fetchRecruits,
+          child: Column(
+            children: [
+              SizedBox(
+                width: double.infinity,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                  child: SegmentedButton<NewRecruitStatus>(
+                    segments:
+                        NewRecruitStatus.values
+                            .map(
+                              (status) => ButtonSegment<NewRecruitStatus>(
+                                value: status,
+                                label: FittedBox(
+                                  child: Text(status.name.toDisplayCase()),
                                 ),
-                          );
-                        },
+                              ),
+                            )
+                            .toList(),
+                    selected: {state.filterStatus},
+                    onSelectionChanged: (newSelection) {
+                      notifier.changeFilter(newSelection.first);
+                    },
+                  ),
+                ),
+              ),
+              if (state.recruits.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                    vertical: 8.0,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          hasSelection
+                              ? context.lango.itemsSelected(
+                                count: state.selectedRecruitIds.length,
+                              )
+                              : context.lango.selectRecruitsToContinue,
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
                       ),
-            ),
-          ],
+                      Row(
+                        children: [
+                          TextButton(
+                            onPressed: notifier.selectAll,
+                            child: Text(context.lango.markAll),
+                          ),
+                          const SizedBox(width: 8),
+                          TextButton(
+                            onPressed: notifier.unselectAll,
+                            child: Text(context.lango.unmarkAll),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              Expanded(
+                child:
+                    state.isLoading
+                        ? const Center(child: CircularProgressIndicator())
+                        : state.errorMessage != null
+                        ? const Center(child: Text('Something went wrong!'))
+                        : state.recruits.isEmpty
+                        ? Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Text(context.lango.noRecruitsFound),
+                          ),
+                        )
+                        : ListView.builder(
+                          itemCount: state.recruits.length,
+                          itemBuilder: (context, index) {
+                            final recruit = state.recruits[index];
+                            return RecruitListItemWidget(
+                              recruit: recruit,
+                              isSelected: state.selectedRecruitIds.contains(
+                                recruit.recruitId,
+                              ),
+                              onChanged:
+                                  (_) => notifier.toggleRecruitSelection(
+                                    recruit.recruitId!,
+                                  ),
+                            );
+                          },
+                        ),
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton:

@@ -57,29 +57,31 @@ class _QRScannerScreenState extends State<QRScannerScreen>
           ),
         ],
       ),
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          MobileScanner(
-            controller: controller,
-            scanWindow: scanWindow,
-            onDetect: (capture) {
-              if (_isProcessing) return;
-
-              final barcode = capture.barcodes.firstOrNull;
-              if (barcode?.rawValue != null) {
-                setState(() {
-                  _isProcessing = true;
-                });
-                Navigator.of(context).pop(barcode!.rawValue);
-              }
-            },
-          ),
-          // Custom Painter for scanner overlay and animated line
-          CustomPaint(
-            painter: _ScannerOverlayPainter(scanWindow, _animationController),
-          ),
-        ],
+      body: SafeArea(
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            MobileScanner(
+              controller: controller,
+              scanWindow: scanWindow,
+              onDetect: (capture) {
+                if (_isProcessing) return;
+        
+                final barcode = capture.barcodes.firstOrNull;
+                if (barcode?.rawValue != null) {
+                  setState(() {
+                    _isProcessing = true;
+                  });
+                  Navigator.of(context).pop(barcode!.rawValue);
+                }
+              },
+            ),
+            // Custom Painter for scanner overlay and animated line
+            CustomPaint(
+              painter: _ScannerOverlayPainter(scanWindow, _animationController),
+            ),
+          ],
+        ),
       ),
     );
   }

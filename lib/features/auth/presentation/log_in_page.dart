@@ -66,115 +66,116 @@ class _LogInPageState extends ConsumerState<LogInPage> {
           title: context.lango.login,
           actions: const [LanguageSwitcherWidget(), ThemeSwitcherWidget()],
         ),
-        body: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-            child: FormBuilder(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.lock_open_rounded,
-                    size: 100,
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  const SizedBox(height: 24),
-                  Text(
-                    context.lango.welcomeBack,
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
+        body: SafeArea(
+          child: Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+              child: FormBuilder(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.lock_open_rounded,
+                      size: 100,
+                      color: Theme.of(context).primaryColor,
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    context.lango.logInWithEmailAndPassword,
-                    style: Theme.of(
-                      context,
-                    ).textTheme.bodyLarge?.copyWith(color: Colors.grey),
-                  ),
-                  const SizedBox(height: 32),
-                  FormBuilderTextField(
-                    name: 'email',
-                    initialValue: 'Peeragetech@gmail.com',
-                    decoration: InputDecoration(
-                      labelText: context.lango.email,
-                      prefixIcon: const Icon(Icons.email_outlined),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
+                    const SizedBox(height: 24),
+                    Text(
+                      context.lango.welcomeBack,
+                      style: Theme.of(context).textTheme.headlineSmall
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      context.lango.logInWithEmailAndPassword,
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyLarge?.copyWith(color: Colors.grey),
+                    ),
+                    const SizedBox(height: 32),
+                    FormBuilderTextField(
+                      name: 'email',
+                      initialValue: 'Peeragetech@gmail.com',
+                      decoration: InputDecoration(
+                        labelText: context.lango.email,
+                        prefixIcon: const Icon(Icons.email_outlined),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
+                      keyboardType: TextInputType.emailAddress,
+                      validator: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(),
+                        FormBuilderValidators.email(),
+                      ]),
                     ),
-                    keyboardType: TextInputType.emailAddress,
-                    validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(),
-                      FormBuilderValidators.email(),
-                    ]),
-                  ),
-                  const SizedBox(height: 16),
-                  FormBuilderTextField(
-                    name: 'password',
-                    initialValue: 'P@55w0rd',
-                    decoration: InputDecoration(
-                      labelText: context.lango.password,
-                      prefixIcon: const Icon(Icons.lock_outline),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
+                    const SizedBox(height: 16),
+                    FormBuilderTextField(
+                      name: 'password',
+                      initialValue: 'P@55w0rd',
+                      decoration: InputDecoration(
+                        labelText: context.lango.password,
+                        prefixIcon: const Icon(Icons.lock_outline),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
+                      obscureText: true,
+                      validator: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(),
+                        FormBuilderValidators.minLength(6),
+                      ]),
                     ),
-                    obscureText: true,
-                    validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(),
-                      FormBuilderValidators.minLength(6),
-                    ]),
-                  ),
-                  const SizedBox(height: 16),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed:
-                          () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (_) => const ForgotPasswordPage(),
-                            ),
-                          ),
-                      child: Text(context.lango.forgotPassword),
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 50,
-                    child: FilledButton(
-                      // The button is disabled while authState is loading.
-                      onPressed: authState.isLoading ? null : _submitLogin,
-                      child:
-                          authState.isLoading
-                              ? const CircularProgressIndicator(
-                                color: Colors.white,
-                              )
-                              : Text(
-                                context.lango.login,
-                                style: const TextStyle(fontSize: 18),
-                              ),
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(context.lango.dontHaveAnAccount),
-                      TextButton(
+                    const SizedBox(height: 16),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
                         onPressed:
                             () => Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (_) => const SignUpPage(),
+                                builder: (_) => const ForgotPasswordPage(),
                               ),
                             ),
-                        child: Text(context.lango.signUp),
+                        child: Text(context.lango.forgotPassword),
                       ),
-                    ],
-                  ),
-                ],
+                    ),
+                    const SizedBox(height: 24),
+                    SizedBox(
+                      width: double.infinity,
+                      height: 50,
+                      child: FilledButton(
+                        // The button is disabled while authState is loading.
+                        onPressed: authState.isLoading ? null : _submitLogin,
+                        child:
+                            authState.isLoading
+                                ? const CircularProgressIndicator(
+                                  color: Colors.white,
+                                )
+                                : Text(
+                                  context.lango.login,
+                                  style: const TextStyle(fontSize: 18),
+                                ),
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(context.lango.dontHaveAnAccount),
+                        TextButton(
+                          onPressed:
+                              () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => const SignUpPage(),
+                                ),
+                              ),
+                          child: Text(context.lango.signUp),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

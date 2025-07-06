@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:police_com/core/enums/all_enums.dart';
+import 'package:police_com/core/extensions/string_extension.dart';
 import 'package:police_com/features/transfer/application/transfer_notifier.dart';
 import 'package:police_com/features/transfer/domain/transfer_request.dart';
 
@@ -13,14 +14,15 @@ class TransferRequestListItemWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
-    final statusColor = _getStatusColor(theme, request.status);
-    final statusText = request.status.name;
+    final statusColor = _getStatusColor(theme, request.transferStatus);
+    final statusText = request.transferStatus.name.toDisplayCase();
 
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 6.0),
+      margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       elevation: 2,
+      clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: statusColor.withOpacity(0.5)),
+        side: BorderSide(color: statusColor.withValues(alpha: 0.4), width: 1.5),
         borderRadius: BorderRadius.circular(12.0),
       ),
       child: Padding(
@@ -29,92 +31,105 @@ class TransferRequestListItemWidget extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Icon(
-                  Icons.location_on_outlined,
-                  size: 18,
-                  color: Colors.grey,
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    'To: ${request.requestedLocation ?? 'N/A'}',
-                    style: theme.textTheme.titleMedium?.copyWith(
+                Chip(
+                  label: Text(
+                    statusText,
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
-                    overflow: TextOverflow.ellipsis,
                   ),
+                  backgroundColor: statusColor,
+                  side: BorderSide.none,
                 ),
-                if (request.status == TransferStatus.pending ||
-                    request.status == TransferStatus.submitted)
-                  IconButton(
-                    icon: const Icon(Icons.delete_outline, color: Colors.red),
-                    onPressed: () => _confirmDelete(context, ref, request),
-                  ),
+                Text(
+                  DateFormat.yMMMd().format(request.requestDate),
+                  style: theme.textTheme.bodySmall,
+                ),
               ],
             ),
-            const Divider(height: 20),
-            _buildInfoRow(
-              theme,
-              Icons.apartment_outlined,
-              'Department',
-              request.requestedDepartment ?? 'N/A',
+            const SizedBox(height: 16),
+
+            Row(
+              children: [
+                _buildLocationColumn(
+                  theme,
+                  'From',
+                  request.currentDepartment,
+                  request.currentPosition,
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12.0),
+                  child: Icon(Icons.arrow_forward_rounded, color: Colors.grey),
+                ),
+                _buildLocationColumn(
+                  theme,
+                  'To',
+                  '${request.toDepartment}',
+                  '${request.toPosition}',
+                ),
+              ],
             ),
-            const SizedBox(height: 8),
-            _buildInfoRow(
-              theme,
-              Icons.calendar_today_outlined,
-              'Submitted',
-              DateFormat.yMMMd().format(request.requestDate),
-            ),
-            const SizedBox(height: 12),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: Chip(
-                label: Text(
-                  statusText,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+
+            if (request.transferStatus == TransferStatus.pending ||
+                request.transferStatus == TransferStatus.submitted)
+              Align(
+                alignment: Alignment.bottomRight,
+                child: TextButton.icon(
+                  onPressed: () => _confirmDelete(context, ref, request),
+                  icon: const Icon(Icons.delete_outline, size: 18),
+                  label: const Text('Cancel'),
+                  style: TextButton.styleFrom(
+                    foregroundColor: theme.colorScheme.error,
                   ),
                 ),
-                backgroundColor: statusColor,
-                padding: const EdgeInsets.symmetric(horizontal: 8),
               ),
-            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildInfoRow(
+  // Helper widget to build the "From" and "To" columns
+  Widget _buildLocationColumn(
     ThemeData theme,
-    IconData icon,
-    String label,
-    String value,
+    String title,
+    String department,
+    String position,
   ) {
-    return Row(
-      children: [
-        Icon(icon, size: 16, color: theme.primaryColor),
-        const SizedBox(width: 8),
-        Text(
-          '$label: ',
-          style: theme.textTheme.bodySmall?.copyWith(
-            fontWeight: FontWeight.bold,
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: theme.textTheme.labelMedium?.copyWith(
+              color: Colors.grey[600],
+            ),
           ),
-        ),
-        Expanded(
-          child: Text(
-            value,
-            style: theme.textTheme.bodySmall,
+          const SizedBox(height: 4),
+          Text(
+            department,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+            maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
-        ),
-      ],
+          Text(
+            position,
+            style: theme.textTheme.bodySmall,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
+      ),
     );
   }
 
+  // Returns the color for the status chip
   Color _getStatusColor(ThemeData theme, TransferStatus status) {
     switch (status) {
       case TransferStatus.approved:
@@ -126,6 +141,7 @@ class TransferRequestListItemWidget extends ConsumerWidget {
     }
   }
 
+  /// Shows the confirmation dialog for canceling a request
   void _confirmDelete(
     BuildContext context,
     WidgetRef ref,
@@ -137,7 +153,7 @@ class TransferRequestListItemWidget extends ConsumerWidget {
           (ctx) => AlertDialog(
             title: const Text('Cancel Request'),
             content: const Text(
-              'Are you sure you want to cancel this transfer request?',
+              'Are you sure you want to cancel this transfer request? This action cannot be undone.',
             ),
             actions: <Widget>[
               TextButton(

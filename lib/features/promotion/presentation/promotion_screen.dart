@@ -18,30 +18,32 @@ class PromotionScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBarWidget(title: context.lango.promotionRequests), // <-- REPLACED & REMOVED CONST
-      body: asyncRequests.when(
-        data: (requests) {
-          if (requests.isEmpty) {
-            return Center(child: Text(context.lango.noPromotionRequestsFound)); // <-- REPLACED & REMOVED CONST
-          }
-          return RefreshIndicator(
-            onRefresh:
-                () => ref.refresh(
-                  myPromotionRequestsProvider('CURRENT_USER_ID').future,
-                ),
-            child: ListView.builder(
-              padding: const EdgeInsets.all(8.0),
-              itemCount: requests.length,
-              itemBuilder: (context, index) {
-                return PromotionListItemWidget(request: requests[index]);
-              },
-            ),
-          );
-        },
-        error:
-            (err, stack) => SomethingWentWrongWidget(
-              onRetry: () => ref.invalidate(myPromotionRequestsProvider),
-            ),
-        loading: () => const Center(child: CircularProgressIndicator()),
+      body: SafeArea(
+        child: asyncRequests.when(
+          data: (requests) {
+            if (requests.isEmpty) {
+              return Center(child: Text(context.lango.noPromotionRequestsFound)); // <-- REPLACED & REMOVED CONST
+            }
+            return RefreshIndicator(
+              onRefresh:
+                  () => ref.refresh(
+                    myPromotionRequestsProvider('CURRENT_USER_ID').future,
+                  ),
+              child: ListView.builder(
+                padding: const EdgeInsets.all(8.0),
+                itemCount: requests.length,
+                itemBuilder: (context, index) {
+                  return PromotionListItemWidget(request: requests[index]);
+                },
+              ),
+            );
+          },
+          error:
+              (err, stack) => SomethingWentWrongWidget(
+                onRetry: () => ref.invalidate(myPromotionRequestsProvider),
+              ),
+          loading: () => const Center(child: CircularProgressIndicator()),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {

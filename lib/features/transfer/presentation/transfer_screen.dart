@@ -8,8 +8,7 @@ class TransferScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Transfer Requests')),
-      body: const MyTransfersListWidget(),
+      body: const SafeArea(child: MyTransfersListWidget()),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.push(

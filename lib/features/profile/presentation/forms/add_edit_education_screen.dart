@@ -67,105 +67,107 @@ class AddEditEducationScreen extends HookWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              AppDropdownField<EducationLevel>(
-                labelText: context.lango.educationLevelLabel, // <-- REPLACED
-                value: selectedEducationLevel.value,
-                items:
-                    EducationLevel.values
-                        .map(
-                          (e) =>
-                              DropdownMenuItem(value: e, child: Text(e.name)),
-                        )
-                        .toList(),
-                onChanged:
-                    (val) =>
-                        selectedEducationLevel.value =
-                            val ?? EducationLevel.other,
-                validator: (val) => val == null ? context.lango.requiredField : null, // <-- REPLACED
-              ),
-              const SizedBox(height: 16),
-              AppDropdownField<EthiopianUniversity>(
-                labelText: context.lango.universityLabel, // <-- REPLACED
-                value: selectedUniversity.value,
-                items:
-                    EthiopianUniversity.values
-                        .map(
-                          (e) =>
-                              DropdownMenuItem(value: e, child: Text(e.name)),
-                        )
-                        .toList(),
-                onChanged:
-                    (val) =>
-                        selectedUniversity.value =
-                            val ?? EthiopianUniversity.other,
-                validator: (val) => val == null ? context.lango.requiredField : null, // <-- REPLACED
-              ),
-              const SizedBox(height: 16),
-              AppDropdownField<FieldOfStudy>(
-                labelText: context.lango.fieldOfStudyLabel, // <-- REPLACED
-                value: selectedFieldOfStudy.value,
-                items:
-                    FieldOfStudy.values
-                        .map(
-                          (e) =>
-                              DropdownMenuItem(value: e, child: Text(e.name)),
-                        )
-                        .toList(),
-                onChanged:
-                    (val) =>
-                        selectedFieldOfStudy.value = val ?? FieldOfStudy.other,
-                validator: (val) => val == null ? context.lango.requiredField : null, // <-- REPLACED
-              ),
-              const SizedBox(height: 16),
-              AppTextField(
-                controller: cgpaController,
-                labelText: context.lango.cgpa, // <-- REPLACED
-                keyboardType: TextInputType.number,
-              ),
-              const SizedBox(height: 16),
-              AppDateField(
-                labelText: context.lango.startDateLabel, // <-- REPLACED
-                selectedDate: selectedStartDate.value,
-                onDateSelected: (date) => selectedStartDate.value = date,
-                validator:
-                    (val) => val == null ? context.lango.startDateIsRequired : null, // <-- REPLACED
-              ),
-              const SizedBox(height: 16),
-              AppDateField(
-                labelText: context.lango.endDateLabel, // <-- REPLACED
-                selectedDate: selectedEndDate.value,
-                onDateSelected: (date) => selectedEndDate.value = date,
-              ),
-              const SizedBox(height: 16),
-              AppDropdownField<EducationStatus>(
-                labelText: context.lango.educationStatusLabel, // <-- REPLACED
-                value: selectedEducationStatus.value,
-                items:
-                    EducationStatus.values
-                        .map(
-                          (e) =>
-                              DropdownMenuItem(value: e, child: Text(e.name)),
-                        )
-                        .toList(),
-                onChanged:
-                    (val) =>
-                        selectedEducationStatus.value =
-                            val ?? EducationStatus.completed,
-                validator: (val) => val == null ? context.lango.requiredField : null, // <-- REPLACED
-              ),
-              const SizedBox(height: 24),
-              FilledButton(
-                onPressed: handleSaveChanges,
-                child: Text(context.lango.saveChanges), // <-- REPLACED
-              ),
-            ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                AppDropdownField<EducationLevel>(
+                  labelText: context.lango.educationLevelLabel, // <-- REPLACED
+                  value: selectedEducationLevel.value,
+                  items:
+                      EducationLevel.values
+                          .map(
+                            (e) =>
+                                DropdownMenuItem(value: e, child: Text(e.name)),
+                          )
+                          .toList(),
+                  onChanged:
+                      (val) =>
+                          selectedEducationLevel.value =
+                              val ?? EducationLevel.other,
+                  validator: (val) => val == null ? context.lango.requiredField : null, // <-- REPLACED
+                ),
+                const SizedBox(height: 16),
+                AppDropdownField<EthiopianUniversity>(
+                  labelText: context.lango.universityLabel, // <-- REPLACED
+                  value: selectedUniversity.value,
+                  items:
+                      EthiopianUniversity.values
+                          .map(
+                            (e) =>
+                                DropdownMenuItem(value: e, child: Text(e.name)),
+                          )
+                          .toList(),
+                  onChanged:
+                      (val) =>
+                          selectedUniversity.value =
+                              val ?? EthiopianUniversity.other,
+                  validator: (val) => val == null ? context.lango.requiredField : null, // <-- REPLACED
+                ),
+                const SizedBox(height: 16),
+                AppDropdownField<FieldOfStudy>(
+                  labelText: context.lango.fieldOfStudyLabel, // <-- REPLACED
+                  value: selectedFieldOfStudy.value,
+                  items:
+                      FieldOfStudy.values
+                          .map(
+                            (e) =>
+                                DropdownMenuItem(value: e, child: Text(e.name)),
+                          )
+                          .toList(),
+                  onChanged:
+                      (val) =>
+                          selectedFieldOfStudy.value = val ?? FieldOfStudy.other,
+                  validator: (val) => val == null ? context.lango.requiredField : null, // <-- REPLACED
+                ),
+                const SizedBox(height: 16),
+                AppTextField(
+                  controller: cgpaController,
+                  labelText: context.lango.cgpa, // <-- REPLACED
+                  keyboardType: TextInputType.number,
+                ),
+                const SizedBox(height: 16),
+                AppDateField(
+                  labelText: context.lango.startDateLabel, // <-- REPLACED
+                  selectedDate: selectedStartDate.value,
+                  onDateSelected: (date) => selectedStartDate.value = date,
+                  validator:
+                      (val) => val == null ? context.lango.startDateIsRequired : null, // <-- REPLACED
+                ),
+                const SizedBox(height: 16),
+                AppDateField(
+                  labelText: context.lango.endDateLabel, // <-- REPLACED
+                  selectedDate: selectedEndDate.value,
+                  onDateSelected: (date) => selectedEndDate.value = date,
+                ),
+                const SizedBox(height: 16),
+                AppDropdownField<EducationStatus>(
+                  labelText: context.lango.educationStatusLabel, // <-- REPLACED
+                  value: selectedEducationStatus.value,
+                  items:
+                      EducationStatus.values
+                          .map(
+                            (e) =>
+                                DropdownMenuItem(value: e, child: Text(e.name)),
+                          )
+                          .toList(),
+                  onChanged:
+                      (val) =>
+                          selectedEducationStatus.value =
+                              val ?? EducationStatus.completed,
+                  validator: (val) => val == null ? context.lango.requiredField : null, // <-- REPLACED
+                ),
+                const SizedBox(height: 24),
+                FilledButton(
+                  onPressed: handleSaveChanges,
+                  child: Text(context.lango.saveChanges), // <-- REPLACED
+                ),
+              ],
+            ),
           ),
         ),
       ),

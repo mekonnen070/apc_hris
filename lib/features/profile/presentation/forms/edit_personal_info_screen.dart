@@ -63,63 +63,65 @@ class EditPersonalInfoScreen extends HookConsumerWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              AppTextField(
-                controller: phoneController,
-                labelText: context.lango.phoneNumber, // <-- REPLACED
-                keyboardType: TextInputType.phone,
-              ),
-              const SizedBox(height: 16),
-              AppTextField(
-                controller: mobileController,
-                labelText: context.lango.mobileNumber, // <-- REPLACED
-                keyboardType: TextInputType.phone,
-              ),
-              const SizedBox(height: 16),
-              AppTextField(
-                controller: emailController,
-                labelText: context.lango.emailAddress, // <-- REPLACED
-                keyboardType: TextInputType.emailAddress,
-              ),
-              const SizedBox(height: 16),
-              AppTextField(
-                controller: address1Controller,
-                labelText: context.lango.address, // <-- REPLACED
-                maxLines: 2,
-              ),
-              const SizedBox(height: 16),
-              AppDropdownField<MaritalStatus>(
-                labelText: context.lango.maritalStatus, // <-- REPLACED
-                value: maritalStatus.value,
-                items:
-                    MaritalStatus.values
-                        .map(
-                          (e) =>
-                              DropdownMenuItem(value: e, child: Text(e.name)),
-                        )
-                        .toList(),
-                onChanged:
-                    (val) =>
-                        maritalStatus.value = val ?? employeeInfo.maritalStatus,
-              ),
-              const SizedBox(height: 24),
-              FilledButton(
-                onPressed: isLoading.value ? null : handleSave,
-                style: FilledButton.styleFrom(
-                  minimumSize: const Size(double.infinity, 48),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                AppTextField(
+                  controller: phoneController,
+                  labelText: context.lango.phoneNumber, // <-- REPLACED
+                  keyboardType: TextInputType.phone,
                 ),
-                child:
-                    isLoading.value
-                        ? const CircularProgressIndicator()
-                        : Text(context.lango.saveChanges), // <-- REPLACED
-              ),
-            ],
+                const SizedBox(height: 16),
+                AppTextField(
+                  controller: mobileController,
+                  labelText: context.lango.mobileNumber, // <-- REPLACED
+                  keyboardType: TextInputType.phone,
+                ),
+                const SizedBox(height: 16),
+                AppTextField(
+                  controller: emailController,
+                  labelText: context.lango.emailAddress, // <-- REPLACED
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                const SizedBox(height: 16),
+                AppTextField(
+                  controller: address1Controller,
+                  labelText: context.lango.address, // <-- REPLACED
+                  maxLines: 2,
+                ),
+                const SizedBox(height: 16),
+                AppDropdownField<MaritalStatus>(
+                  labelText: context.lango.maritalStatus, // <-- REPLACED
+                  value: maritalStatus.value,
+                  items:
+                      MaritalStatus.values
+                          .map(
+                            (e) =>
+                                DropdownMenuItem(value: e, child: Text(e.name)),
+                          )
+                          .toList(),
+                  onChanged:
+                      (val) =>
+                          maritalStatus.value = val ?? employeeInfo.maritalStatus,
+                ),
+                const SizedBox(height: 24),
+                FilledButton(
+                  onPressed: isLoading.value ? null : handleSave,
+                  style: FilledButton.styleFrom(
+                    minimumSize: const Size(double.infinity, 48),
+                  ),
+                  child:
+                      isLoading.value
+                          ? const CircularProgressIndicator()
+                          : Text(context.lango.saveChanges), // <-- REPLACED
+                ),
+              ],
+            ),
           ),
         ),
       ),

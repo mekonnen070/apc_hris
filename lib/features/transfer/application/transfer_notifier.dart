@@ -3,12 +3,13 @@ import 'package:police_com/features/transfer/data/transfer_repository.dart';
 import 'package:police_com/features/transfer/domain/transfer_request.dart';
 import 'package:police_com/features/transfer/domain/transfer_request_create.dart';
 
-final transferNotifierProvider =
-    StateNotifierProvider.autoDispose<TransferNotifier, AsyncValue<List<TransferRequest>>>(
-  (ref) => TransferNotifier(ref.watch(transferRepositoryProvider)),
-);
+final transferNotifierProvider = StateNotifierProvider.autoDispose<
+  TransferNotifier,
+  AsyncValue<List<TransferRequest>>
+>((ref) => TransferNotifier(ref.watch(transferRepositoryProvider)));
 
-class TransferNotifier extends StateNotifier<AsyncValue<List<TransferRequest>>> {
+class TransferNotifier
+    extends StateNotifier<AsyncValue<List<TransferRequest>>> {
   final ITransferRepository _repository;
 
   TransferNotifier(this._repository) : super(const AsyncValue.loading()) {
@@ -38,8 +39,10 @@ class TransferNotifier extends StateNotifier<AsyncValue<List<TransferRequest>>> 
 
   Future<void> deleteTransferRequest(int requestId) async {
     final previousState = state;
-    state = state.whenData((requests) =>
-        requests.where((req) => req.transferRequestId != requestId).toList());
+    state = state.whenData(
+      (requests) =>
+          requests.where((req) => req.transferRequestId != requestId).toList(),
+    );
     try {
       await _repository.deleteTransferRequest(requestId);
     } catch (e) {

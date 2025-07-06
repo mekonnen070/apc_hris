@@ -39,149 +39,153 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
             ),
           ),
       data:
-          (employee) => DefaultTabController(
-            length: 8,
-            child: Scaffold(
-              body: NestedScrollView(
-                headerSliverBuilder: (context, innerBoxIsScrolled) {
-                  return [
-                    SliverAppBar(
-                      expandedHeight: 280.0,
-                      pinned: true,
-                      stretch: true,
-                      backgroundColor: colorScheme.surface,
-                      flexibleSpace: FlexibleSpaceBar(
-                        background: Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            if (employee.photoUrl != null)
-                              Image.network(
-                                employee.photoUrl ?? '',
-                                fit: BoxFit.cover,
-                                errorBuilder:
-                                    (context, error, stackTrace) => Container(
-                                      color: colorScheme.secondaryContainer,
-                                    ),
-                              ),
-                            DecoratedBox(
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                                    Colors.transparent,
-                                    colorScheme.surface.withValues(alpha: 0.2),
-                                    colorScheme.surface,
-                                  ],
-                                  stops: const [0.0, 0.7, 1.0],
+          (employee) => SafeArea(
+            child: DefaultTabController(
+              length: 8,
+              child: Scaffold(
+                body: NestedScrollView(
+                  headerSliverBuilder: (context, innerBoxIsScrolled) {
+                    return [
+                      SliverAppBar(
+                        expandedHeight: 280.0,
+                        pinned: true,
+                        stretch: true,
+                        backgroundColor: colorScheme.surface,
+                        flexibleSpace: FlexibleSpaceBar(
+                          background: Stack(
+                            fit: StackFit.expand,
+                            children: [
+                              if (employee.photoUrl != null)
+                                Image.network(
+                                  employee.photoUrl ?? '',
+                                  fit: BoxFit.cover,
+                                  errorBuilder:
+                                      (context, error, stackTrace) => Container(
+                                        color: colorScheme.secondaryContainer,
+                                      ),
+                                ),
+                              DecoratedBox(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      Colors.transparent,
+                                      colorScheme.surface.withValues(
+                                        alpha: 0.2,
+                                      ),
+                                      colorScheme.surface,
+                                    ],
+                                    stops: const [0.0, 0.7, 1.0],
+                                  ),
                                 ),
                               ),
-                            ),
-                            Center(
-                              child: Padding(
-                                padding: const EdgeInsets.only(bottom: 50.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    CircleAvatar(
-                                      radius: 52,
-                                      backgroundColor: colorScheme.primary
-                                          .withValues(alpha: 0.8),
-                                      child:
-                                          employee.photoUrl == null
-                                              ? Icon(
-                                                Icons.person,
-                                                size: 60,
-                                                color:
-                                                    colorScheme
-                                                        .onSecondaryContainer,
-                                              )
-                                              : CircleAvatar(
-                                                radius: 50,
-                                                backgroundImage:
-                                                    (employee.photoUrl != null)
-                                                        ? NetworkImage(
-                                                          employee.photoUrl!,
-                                                        )
-                                                        : null,
-                                                onBackgroundImageError:
-                                                    (e, s) {},
-                                                backgroundColor:
-                                                    colorScheme
-                                                        .secondaryContainer,
-                                                child:
-                                                    (employee.photoUrl == null)
-                                                        ? Icon(
-                                                          Icons.person,
-                                                          size: 60,
-                                                          color:
-                                                              colorScheme
-                                                                  .onSecondaryContainer,
-                                                        )
-                                                        : null,
-                                              ),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Text(
-                                      employee.computedFullName,
-                                      style: Theme.of(
-                                        context,
-                                      ).textTheme.headlineSmall?.copyWith(
-                                        color: colorScheme.onSurface,
-                                        fontWeight: FontWeight.bold,
+                              Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(bottom: 50.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      CircleAvatar(
+                                        radius: 52,
+                                        backgroundColor: colorScheme.primary
+                                            .withValues(alpha: 0.8),
+                                        child:
+                                            employee.photoUrl == null
+                                                ? Icon(
+                                                  Icons.person,
+                                                  size: 60,
+                                                  color:
+                                                      colorScheme
+                                                          .onSecondaryContainer,
+                                                )
+                                                : CircleAvatar(
+                                                  radius: 50,
+                                                  backgroundImage:
+                                                      (employee.photoUrl !=
+                                                              null)
+                                                          ? NetworkImage(
+                                                            employee.photoUrl!,
+                                                          )
+                                                          : null,
+                                                  onBackgroundImageError:
+                                                      (e, s) {},
+                                                  backgroundColor:
+                                                      colorScheme
+                                                          .secondaryContainer,
+                                                  child:
+                                                      (employee.photoUrl ==
+                                                              null)
+                                                          ? Icon(
+                                                            Icons.person,
+                                                            size: 60,
+                                                            color:
+                                                                colorScheme
+                                                                    .onSecondaryContainer,
+                                                          )
+                                                          : null,
+                                                ),
                                       ),
-                                    ),
-                                    Text(
-                                      employee.positionId,
-                                      style: Theme.of(
-                                        context,
-                                      ).textTheme.bodyLarge?.copyWith(
-                                        color: colorScheme.onSurface.withValues(
-                                          alpha: 0.8,
+                                      const SizedBox(height: 8),
+                                      Text(
+                                        employee.computedFullName,
+                                        style: Theme.of(
+                                          context,
+                                        ).textTheme.headlineSmall?.copyWith(
+                                          color: colorScheme.onSurface,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                    ),
-                                    const SizedBox(height: 20),
-                                  ],
+                                      Text(
+                                        employee.positionId,
+                                        style: Theme.of(
+                                          context,
+                                        ).textTheme.bodyLarge?.copyWith(
+                                          color: colorScheme.onSurface
+                                              .withValues(alpha: 0.8),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 20),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
+                            ],
+                          ),
+                        ),
+                        bottom: TabBar(
+                          isScrollable: true,
+                          labelColor: colorScheme.primary,
+                          unselectedLabelColor: colorScheme.onSurface
+                              .withValues(alpha: 0.7),
+                          indicatorColor: colorScheme.primary,
+                          indicatorWeight: 3,
+                          tabs: [
+                            Tab(text: context.lango.personal),
+                            Tab(text: context.lango.dependants),
+                            Tab(text: context.lango.contacts),
+                            Tab(text: context.lango.spouse),
+                            Tab(text: context.lango.education),
+                            Tab(text: context.lango.experience),
+                            Tab(text: context.lango.performance),
+                            Tab(text: context.lango.documents),
                           ],
                         ),
                       ),
-                      bottom: TabBar(
-                        isScrollable: true,
-                        labelColor: colorScheme.primary,
-                        unselectedLabelColor: colorScheme.onSurface.withValues(
-                          alpha: 0.7,
-                        ),
-                        indicatorColor: colorScheme.primary,
-                        indicatorWeight: 3,
-                        tabs: [
-                          Tab(text: context.lango.personal),
-                          Tab(text: context.lango.dependants),
-                          Tab(text: context.lango.contacts),
-                          Tab(text: context.lango.spouse),
-                          Tab(text: context.lango.education),
-                          Tab(text: context.lango.experience),
-                          Tab(text: context.lango.performance),
-                          Tab(text: context.lango.documents),
-                        ],
-                      ),
-                    ),
-                  ];
-                },
-                body: TabBarView(
-                  children: [
-                    PersonalInfoTab(employeeInfo: employee),
-                    DependantsTab(employee: employee),
-                    ContactsTab(employee: employee),
-                    SpouseTab(employee: employee),
-                    EducationTab(employee: employee),
-                    ExperienceTab(employee: employee),
-                    PerformanceTab(employee: employee),
-                    DocumentsTab(employee: employee),
-                  ],
+                    ];
+                  },
+                  body: TabBarView(
+                    children: [
+                      PersonalInfoTab(employeeInfo: employee),
+                      DependantsTab(employee: employee),
+                      ContactsTab(employee: employee),
+                      SpouseTab(employee: employee),
+                      EducationTab(employee: employee),
+                      ExperienceTab(employee: employee),
+                      PerformanceTab(employee: employee),
+                      DocumentsTab(employee: employee),
+                    ],
+                  ),
                 ),
               ),
             ),

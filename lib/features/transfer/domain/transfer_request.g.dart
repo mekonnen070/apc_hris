@@ -6,47 +6,45 @@ part of 'transfer_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_TransferRequest _$TransferRequestFromJson(Map<String, dynamic> json) =>
-    _TransferRequest(
-      transferRequestId: (json['transferRequestId'] as num).toInt(),
-      employeeId: json['employeeId'] as String?,
-      currentLocation: json['currentLocation'] as String?,
-      currentLocationId: json['currentLocationId'] as String?,
-      currentDepartment: json['currentDepartment'] as String?,
-      currentPosition: json['currentPosition'] as String?,
-      transferLevelFrom: $enumDecode(
-        _$TransferLevelsEnumMap,
-        json['transferLevelFrom'],
-      ),
-      transferLevelTo: $enumDecode(
-        _$TransferLevelsEnumMap,
-        json['transferLevelTo'],
-      ),
-      requestedLocation: json['requestedLocation'] as String?,
-      requestedLocationId: json['requestedLocationId'] as String?,
-      requestedDepartment: json['requestedDepartment'] as String?,
-      requestedDepartmentId: json['requestedDepartmentId'] as String?,
-      requestedPositionTitle: json['requestedPositionTitle'] as String?,
-      requestedPositionId: json['requestedPositionId'] as String?,
-      requestDate: DateTime.parse(json['requestDate'] as String),
-      transferPeriod: $enumDecodeNullable(
-        _$TransferPeriodEnumMap,
-        json['transferPeriod'],
-      ),
-      transferYear: json['transferYear'] as String?,
-      reasonForRequest: $enumDecodeNullable(
-        _$TransferReasonsEnumMap,
-        json['reasonForRequest'],
-      ),
-      approvedBy: json['approvedBy'] as String?,
-      approvalDate:
-          json['approvalDate'] == null
-              ? null
-              : DateTime.parse(json['approvalDate'] as String),
-      status:
-          $enumDecodeNullable(_$TransferStatusEnumMap, json['status']) ??
-          TransferStatus.pending,
-    );
+_TransferRequest _$TransferRequestFromJson(
+  Map<String, dynamic> json,
+) => _TransferRequest(
+  transferRequestId: (json['transferRequestId'] as num).toInt(),
+  employeeId: json['employeeId'] as String?,
+  currentLocation: json['currentLocation'] as String,
+  currentLocationId: json['currentLocationId'] as String?,
+  currentDepartment: json['currentDepartment'] as String,
+  currentPosition: json['currentPosition'] as String,
+  transferLevelFrom: $enumDecode(
+    _$TransferLevelsEnumMap,
+    json['transferLevelFrom'],
+  ),
+  transferLevelTo: $enumDecode(
+    _$TransferLevelsEnumMap,
+    json['transferLevelTo'],
+  ),
+  toLocation: json['toLocation'] as String?,
+  toLocationId: json['toLocationId'] as String?,
+  toDepartment: json['toDepartment'] as String?,
+  toDepartmentId: json['toDepartmentId'] as String?,
+  toPosition: json['toPosition'] as String?,
+  toPositionId: json['toPositionId'] as String?,
+  requestDate: DateTime.parse(json['requestDate'] as String),
+  transferPeriod: $enumDecode(_$TransferPeriodEnumMap, json['transferPeriod']),
+  transferYear: json['transferYear'] as String?,
+  transferReason: $enumDecodeNullable(
+    _$TransferReasonsEnumMap,
+    json['transferReason'],
+  ),
+  transferStatus:
+      $enumDecodeNullable(_$TransferStatusEnumMap, json['transferStatus']) ??
+      TransferStatus.pending,
+  approvedBy: json['approvedBy'] as String?,
+  approvalDate:
+      json['approvalDate'] == null
+          ? null
+          : DateTime.parse(json['approvalDate'] as String),
+);
 
 Map<String, dynamic> _$TransferRequestToJson(_TransferRequest instance) =>
     <String, dynamic>{
@@ -58,19 +56,19 @@ Map<String, dynamic> _$TransferRequestToJson(_TransferRequest instance) =>
       'currentPosition': instance.currentPosition,
       'transferLevelFrom': _$TransferLevelsEnumMap[instance.transferLevelFrom]!,
       'transferLevelTo': _$TransferLevelsEnumMap[instance.transferLevelTo]!,
-      'requestedLocation': instance.requestedLocation,
-      'requestedLocationId': instance.requestedLocationId,
-      'requestedDepartment': instance.requestedDepartment,
-      'requestedDepartmentId': instance.requestedDepartmentId,
-      'requestedPositionTitle': instance.requestedPositionTitle,
-      'requestedPositionId': instance.requestedPositionId,
+      'toLocation': instance.toLocation,
+      'toLocationId': instance.toLocationId,
+      'toDepartment': instance.toDepartment,
+      'toDepartmentId': instance.toDepartmentId,
+      'toPosition': instance.toPosition,
+      'toPositionId': instance.toPositionId,
       'requestDate': instance.requestDate.toIso8601String(),
-      'transferPeriod': _$TransferPeriodEnumMap[instance.transferPeriod],
+      'transferPeriod': _$TransferPeriodEnumMap[instance.transferPeriod]!,
       'transferYear': instance.transferYear,
-      'reasonForRequest': _$TransferReasonsEnumMap[instance.reasonForRequest],
+      'transferReason': _$TransferReasonsEnumMap[instance.transferReason],
+      'transferStatus': _$TransferStatusEnumMap[instance.transferStatus]!,
       'approvedBy': instance.approvedBy,
       'approvalDate': instance.approvalDate?.toIso8601String(),
-      'status': _$TransferStatusEnumMap[instance.status]!,
     };
 
 const _$TransferLevelsEnumMap = {

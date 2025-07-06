@@ -69,87 +69,89 @@ class AddEditDependantScreen extends HookWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Form(
-          key: formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              AppTextField(
-                controller: fullNameController,
-                labelText: context.lango.dependantsFullNameLabel, // <-- REPLACED
-                validator: (v) => v!.isEmpty ? context.lango.requiredField : null, // <-- REPLACED
-              ),
-              const SizedBox(height: 16),
-              AppDropdownField<RelationTypes>(
-                labelText: context.lango.relationshipLabel, // <-- REPLACED
-                value: selectedRelation.value,
-                items:
-                    RelationTypes.values
-                        .map(
-                          (r) =>
-                              DropdownMenuItem(value: r, child: Text(r.name)),
-                        )
-                        .toList(),
-                onChanged:
-                    (val) =>
-                        selectedRelation.value = val ?? RelationTypes.child,
-              ),
-              const SizedBox(height: 16),
-              AppDropdownField<Gender>(
-                labelText: context.lango.genderLabel, // <-- REPLACED
-                value: selectedGender.value,
-                items:
-                    Gender.values
-                        .map(
-                          (g) =>
-                              DropdownMenuItem(value: g, child: Text(g.name)),
-                        )
-                        .toList(),
-                onChanged: (val) => selectedGender.value = val ?? Gender.other,
-              ),
-              const SizedBox(height: 16),
-              AppDateField(
-                labelText: context.lango.dateOfBirthLabel, // <-- REPLACED
-                selectedDate: selectedBirthDate.value,
-                onDateSelected: (d) => selectedBirthDate.value = d,
-                validator: (d) => d == null ? context.lango.requiredField : null, // <-- REPLACED
-              ),
-              const SizedBox(height: 16),
-              AppTextField(
-                controller: occupationController,
-                labelText: context.lango.occupationLabel, // <-- REPLACED
-              ),
-              const SizedBox(height: 16),
-              AppTextField(
-                controller: phoneNumberController,
-                labelText: context.lango.phoneNumberLabel, // <-- REPLACED
-                keyboardType: TextInputType.phone,
-                validator: (v) => v!.isEmpty ? context.lango.requiredField : null, // <-- REPLACED
-              ),
-              const SizedBox(height: 16),
-              AppDropdownField<EthiopianRegion>(
-                labelText: context.lango.regionLabel, // <-- REPLACED
-                value: selectedRegion.value,
-                items:
-                    EthiopianRegion.values
-                        .map(
-                          (r) =>
-                              DropdownMenuItem(value: r, child: Text(r.name)),
-                        )
-                        .toList(),
-                onChanged:
-                    (val) =>
-                        selectedRegion.value =
-                            val ?? EthiopianRegion.addisAbaba,
-              ),
-              const SizedBox(height: 24),
-              FilledButton(
-                onPressed: handleSaveChanges,
-                child: Text(context.lango.saveChanges), // <-- REPLACED
-              ),
-            ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Form(
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                AppTextField(
+                  controller: fullNameController,
+                  labelText: context.lango.dependantsFullNameLabel, // <-- REPLACED
+                  validator: (v) => v!.isEmpty ? context.lango.requiredField : null, // <-- REPLACED
+                ),
+                const SizedBox(height: 16),
+                AppDropdownField<RelationTypes>(
+                  labelText: context.lango.relationshipLabel, // <-- REPLACED
+                  value: selectedRelation.value,
+                  items:
+                      RelationTypes.values
+                          .map(
+                            (r) =>
+                                DropdownMenuItem(value: r, child: Text(r.name)),
+                          )
+                          .toList(),
+                  onChanged:
+                      (val) =>
+                          selectedRelation.value = val ?? RelationTypes.child,
+                ),
+                const SizedBox(height: 16),
+                AppDropdownField<Gender>(
+                  labelText: context.lango.genderLabel, // <-- REPLACED
+                  value: selectedGender.value,
+                  items:
+                      Gender.values
+                          .map(
+                            (g) =>
+                                DropdownMenuItem(value: g, child: Text(g.name)),
+                          )
+                          .toList(),
+                  onChanged: (val) => selectedGender.value = val ?? Gender.other,
+                ),
+                const SizedBox(height: 16),
+                AppDateField(
+                  labelText: context.lango.dateOfBirthLabel, // <-- REPLACED
+                  selectedDate: selectedBirthDate.value,
+                  onDateSelected: (d) => selectedBirthDate.value = d,
+                  validator: (d) => d == null ? context.lango.requiredField : null, // <-- REPLACED
+                ),
+                const SizedBox(height: 16),
+                AppTextField(
+                  controller: occupationController,
+                  labelText: context.lango.occupationLabel, // <-- REPLACED
+                ),
+                const SizedBox(height: 16),
+                AppTextField(
+                  controller: phoneNumberController,
+                  labelText: context.lango.phoneNumberLabel, // <-- REPLACED
+                  keyboardType: TextInputType.phone,
+                  validator: (v) => v!.isEmpty ? context.lango.requiredField : null, // <-- REPLACED
+                ),
+                const SizedBox(height: 16),
+                AppDropdownField<EthiopianRegion>(
+                  labelText: context.lango.regionLabel, // <-- REPLACED
+                  value: selectedRegion.value,
+                  items:
+                      EthiopianRegion.values
+                          .map(
+                            (r) =>
+                                DropdownMenuItem(value: r, child: Text(r.name)),
+                          )
+                          .toList(),
+                  onChanged:
+                      (val) =>
+                          selectedRegion.value =
+                              val ?? EthiopianRegion.addisAbaba,
+                ),
+                const SizedBox(height: 24),
+                FilledButton(
+                  onPressed: handleSaveChanges,
+                  child: Text(context.lango.saveChanges), // <-- REPLACED
+                ),
+              ],
+            ),
           ),
         ),
       ),

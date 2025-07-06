@@ -21,98 +21,100 @@ class TrainingDetailScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Training Details')),
       // The body now depends on both the training and employee states
-      body: employeeState.when(
-        data: (employeeInfo) {
-          // If employee info is null (logged out), show an error.
-          if (employeeInfo == null) {
-            return const Center(
-              child: Text('Could not load employee information.'),
-            );
-          }
-          // Once employee info is loaded, build the rest of the UI based on training state
-          return trainingState.when(
-            data:
-                (training) => SingleChildScrollView(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        training.trainingName,
-                        style: Theme.of(context).textTheme.headlineSmall
-                            ?.copyWith(fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 16),
-                      _buildDetailRow(
-                        context,
-                        Icons.info_outline,
-                        'Type',
-                        training.trainingType,
-                      ),
-                      _buildDetailRow(
-                        context,
-                        Icons.location_city_outlined,
-                        'Institution',
-                        training.trainingInstitution,
-                      ),
-                      _buildDetailRow(
-                        context,
-                        Icons.location_on_outlined,
-                        'Location',
-                        training.trainingLocation,
-                      ),
-                      _buildDetailRow(
-                        context,
-                        Icons.calendar_today_outlined,
-                        'Duration',
-                        '${DateFormat.yMMMd().format(training.trainingStartDate)} - ${DateFormat.yMMMd().format(training.trainingEndDate)}',
-                      ),
-                      const Divider(height: 32),
-                      Text(
-                        'Description',
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        training.trainingDescription,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                      const Divider(height: 32),
-                      Text(
-                        'Requirements',
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      const SizedBox(height: 8),
-                      _buildDetailRow(
-                        context,
-                        Icons.school_outlined,
-                        'Education',
-                        training.requiredEducation,
-                      ),
-                      _buildDetailRow(
-                        context,
-                        Icons.work_outline,
-                        'Experience',
-                        '${training.requiredExperience} years',
-                      ),
-                      _buildDetailRow(
-                        context,
-                        Icons.person_outline,
-                        'Gender',
-                        training.requiredSex.name,
-                      ),
-                      const SizedBox(height: 40),
-                    ],
+      body: SafeArea(
+        child: employeeState.when(
+          data: (employeeInfo) {
+            // If employee info is null (logged out), show an error.
+            if (employeeInfo == null) {
+              return const Center(
+                child: Text('Could not load employee information.'),
+              );
+            }
+            // Once employee info is loaded, build the rest of the UI based on training state
+            return trainingState.when(
+              data:
+                  (training) => SingleChildScrollView(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          training.trainingName,
+                          style: Theme.of(context).textTheme.headlineSmall
+                              ?.copyWith(fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: 16),
+                        _buildDetailRow(
+                          context,
+                          Icons.info_outline,
+                          'Type',
+                          training.trainingType,
+                        ),
+                        _buildDetailRow(
+                          context,
+                          Icons.location_city_outlined,
+                          'Institution',
+                          training.trainingInstitution,
+                        ),
+                        _buildDetailRow(
+                          context,
+                          Icons.location_on_outlined,
+                          'Location',
+                          training.trainingLocation,
+                        ),
+                        _buildDetailRow(
+                          context,
+                          Icons.calendar_today_outlined,
+                          'Duration',
+                          '${DateFormat.yMMMd().format(training.trainingStartDate)} - ${DateFormat.yMMMd().format(training.trainingEndDate)}',
+                        ),
+                        const Divider(height: 32),
+                        Text(
+                          'Description',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          training.trainingDescription,
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                        const Divider(height: 32),
+                        Text(
+                          'Requirements',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        const SizedBox(height: 8),
+                        _buildDetailRow(
+                          context,
+                          Icons.school_outlined,
+                          'Education',
+                          training.requiredEducation,
+                        ),
+                        _buildDetailRow(
+                          context,
+                          Icons.work_outline,
+                          'Experience',
+                          '${training.requiredExperience} years',
+                        ),
+                        _buildDetailRow(
+                          context,
+                          Icons.person_outline,
+                          'Gender',
+                          training.requiredSex.name,
+                        ),
+                        const SizedBox(height: 40),
+                      ],
+                    ),
                   ),
-                ),
-            loading: () => const Center(child: CircularProgressIndicator()),
-            error: (error, stack) => Center(child: Text('Error: $error')),
-          );
-        },
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error:
-            (err, stack) =>
-                Center(child: Text('Failed to load employee data: $err')),
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, stack) => Center(child: Text('Error: $error')),
+            );
+          },
+          loading: () => const Center(child: CircularProgressIndicator()),
+          error:
+              (err, stack) =>
+                  Center(child: Text('Failed to load employee data: $err')),
+        ),
       ),
       bottomNavigationBar: employeeState.maybeWhen(
         data:

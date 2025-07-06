@@ -65,64 +65,66 @@ class AddEditContactScreen extends HookWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Form(
-          key: formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              AppTextField(
-                controller: fullNameController,
-                labelText: context.lango.fullNameLabel, // <-- REPLACED
-                validator: (v) => v!.isEmpty ? context.lango.requiredField : null, // <-- REPLACED
-              ),
-              const SizedBox(height: 16),
-              AppDropdownField<RelationTypes>(
-                labelText: context.lango.relationshipLabel, // <-- REPLACED
-                value: selectedRelationship.value,
-                items:
-                    RelationTypes.values
-                        .map(
-                          (r) =>
-                              DropdownMenuItem(value: r, child: Text(r.name)),
-                        )
-                        .toList(),
-                onChanged:
-                    (v) =>
-                        selectedRelationship.value = v ?? RelationTypes.other,
-              ),
-              const SizedBox(height: 16),
-              AppTextField(
-                controller: phoneController,
-                labelText: context.lango.phoneLabelRequired, // <-- REPLACED
-                keyboardType: TextInputType.phone,
-                validator: (v) => v!.isEmpty ? context.lango.requiredField : null, // <-- REPLACED
-              ),
-              const SizedBox(height: 16),
-              AppTextField(
-                controller: mobileController,
-                labelText: context.lango.mobile, // <-- REPLACED
-                keyboardType: TextInputType.phone,
-              ),
-              const SizedBox(height: 16),
-              AppTextField(
-                controller: emailController,
-                labelText: context.lango.email, // <-- REPLACED
-                keyboardType: TextInputType.emailAddress,
-              ),
-              const SizedBox(height: 16),
-              AppTextField(
-                controller: addressController,
-                labelText: context.lango.address, // <-- REPLACED
-                maxLines: 2,
-              ),
-              const SizedBox(height: 24),
-              FilledButton(
-                onPressed: handleSaveChanges,
-                child: Text(context.lango.saveChanges), // <-- REPLACED
-              ),
-            ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Form(
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                AppTextField(
+                  controller: fullNameController,
+                  labelText: context.lango.fullNameLabel, // <-- REPLACED
+                  validator: (v) => v!.isEmpty ? context.lango.requiredField : null, // <-- REPLACED
+                ),
+                const SizedBox(height: 16),
+                AppDropdownField<RelationTypes>(
+                  labelText: context.lango.relationshipLabel, // <-- REPLACED
+                  value: selectedRelationship.value,
+                  items:
+                      RelationTypes.values
+                          .map(
+                            (r) =>
+                                DropdownMenuItem(value: r, child: Text(r.name)),
+                          )
+                          .toList(),
+                  onChanged:
+                      (v) =>
+                          selectedRelationship.value = v ?? RelationTypes.other,
+                ),
+                const SizedBox(height: 16),
+                AppTextField(
+                  controller: phoneController,
+                  labelText: context.lango.phoneLabelRequired, // <-- REPLACED
+                  keyboardType: TextInputType.phone,
+                  validator: (v) => v!.isEmpty ? context.lango.requiredField : null, // <-- REPLACED
+                ),
+                const SizedBox(height: 16),
+                AppTextField(
+                  controller: mobileController,
+                  labelText: context.lango.mobile, // <-- REPLACED
+                  keyboardType: TextInputType.phone,
+                ),
+                const SizedBox(height: 16),
+                AppTextField(
+                  controller: emailController,
+                  labelText: context.lango.email, // <-- REPLACED
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                const SizedBox(height: 16),
+                AppTextField(
+                  controller: addressController,
+                  labelText: context.lango.address, // <-- REPLACED
+                  maxLines: 2,
+                ),
+                const SizedBox(height: 24),
+                FilledButton(
+                  onPressed: handleSaveChanges,
+                  child: Text(context.lango.saveChanges), // <-- REPLACED
+                ),
+              ],
+            ),
           ),
         ),
       ),

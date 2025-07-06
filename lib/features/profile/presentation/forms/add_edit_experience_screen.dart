@@ -80,85 +80,87 @@ class AddEditExperienceScreen extends HookWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Form(
-          key: formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              AppTextField(
-                controller: organizationController,
-                labelText: context.lango.organizationLabel, // <-- REPLACED
-                validator: (val) => val!.isEmpty ? context.lango.requiredField : null, // <-- REPLACED
-              ),
-              const SizedBox(height: 16),
-              AppDropdownField<OrganizationType>(
-                labelText: context.lango.organizationTypeLabel, // <-- REPLACED
-                value: selectedOrgType.value,
-                items:
-                    OrganizationType.values
-                        .map(
-                          (e) =>
-                              DropdownMenuItem(value: e, child: Text(e.name)),
-                        )
-                        .toList(),
-                onChanged:
-                    (val) =>
-                        selectedOrgType.value = val ?? OrganizationType.plc,
-              ),
-              const SizedBox(height: 16),
-              AppTextField(
-                controller: positionController,
-                labelText: context.lango.positionLabel, // <-- REPLACED
-                validator: (val) => val!.isEmpty ? context.lango.requiredField : null, // <-- REPLACED
-              ),
-              const SizedBox(height: 16),
-              AppTextField(
-                controller: responsibilitiesController,
-                labelText: context.lango.responsibilitiesLabel, // <-- REPLACED
-                maxLines: 3,
-              ),
-              const SizedBox(height: 16),
-              AppDropdownField<ProficiencyLevel>(
-                labelText: context.lango.proficiencyLevelLabel, // <-- REPLACED
-                value: selectedProficiency.value,
-                items:
-                    ProficiencyLevel.values
-                        .map(
-                          (e) =>
-                              DropdownMenuItem(value: e, child: Text(e.name)),
-                        )
-                        .toList(),
-                onChanged:
-                    (val) =>
-                        selectedProficiency.value =
-                            val ?? ProficiencyLevel.beginner,
-              ),
-              const SizedBox(height: 16),
-              AppDateField(
-                labelText: context.lango.joinDateLabel, // <-- REPLACED
-                selectedDate: selectedJoinDate.value,
-                onDateSelected: (d) => selectedJoinDate.value = d,
-                validator: (d) => d == null ? context.lango.requiredField : null, // <-- REPLACED
-              ),
-              CheckboxListTile(
-                title: Text(context.lango.iCurrentlyWorkHere), // <-- REPLACED
-                value: isCurrentJob.value,
-                onChanged: (val) => isCurrentJob.value = val ?? false,
-              ),
-              if (!isCurrentJob.value)
-                AppDateField(
-                  labelText: context.lango.separationDateLabel, // <-- REPLACED
-                  selectedDate: selectedSeparationDate.value,
-                  onDateSelected: (d) => selectedSeparationDate.value = d,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Form(
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                AppTextField(
+                  controller: organizationController,
+                  labelText: context.lango.organizationLabel, // <-- REPLACED
+                  validator: (val) => val!.isEmpty ? context.lango.requiredField : null, // <-- REPLACED
                 ),
-              const SizedBox(height: 24),
-              FilledButton(
-                onPressed: handleSaveChanges,
-                child: Text(context.lango.saveChanges), // <-- REPLACED
-              ),
-            ],
+                const SizedBox(height: 16),
+                AppDropdownField<OrganizationType>(
+                  labelText: context.lango.organizationTypeLabel, // <-- REPLACED
+                  value: selectedOrgType.value,
+                  items:
+                      OrganizationType.values
+                          .map(
+                            (e) =>
+                                DropdownMenuItem(value: e, child: Text(e.name)),
+                          )
+                          .toList(),
+                  onChanged:
+                      (val) =>
+                          selectedOrgType.value = val ?? OrganizationType.plc,
+                ),
+                const SizedBox(height: 16),
+                AppTextField(
+                  controller: positionController,
+                  labelText: context.lango.positionLabel, // <-- REPLACED
+                  validator: (val) => val!.isEmpty ? context.lango.requiredField : null, // <-- REPLACED
+                ),
+                const SizedBox(height: 16),
+                AppTextField(
+                  controller: responsibilitiesController,
+                  labelText: context.lango.responsibilitiesLabel, // <-- REPLACED
+                  maxLines: 3,
+                ),
+                const SizedBox(height: 16),
+                AppDropdownField<ProficiencyLevel>(
+                  labelText: context.lango.proficiencyLevelLabel, // <-- REPLACED
+                  value: selectedProficiency.value,
+                  items:
+                      ProficiencyLevel.values
+                          .map(
+                            (e) =>
+                                DropdownMenuItem(value: e, child: Text(e.name)),
+                          )
+                          .toList(),
+                  onChanged:
+                      (val) =>
+                          selectedProficiency.value =
+                              val ?? ProficiencyLevel.beginner,
+                ),
+                const SizedBox(height: 16),
+                AppDateField(
+                  labelText: context.lango.joinDateLabel, // <-- REPLACED
+                  selectedDate: selectedJoinDate.value,
+                  onDateSelected: (d) => selectedJoinDate.value = d,
+                  validator: (d) => d == null ? context.lango.requiredField : null, // <-- REPLACED
+                ),
+                CheckboxListTile(
+                  title: Text(context.lango.iCurrentlyWorkHere), // <-- REPLACED
+                  value: isCurrentJob.value,
+                  onChanged: (val) => isCurrentJob.value = val ?? false,
+                ),
+                if (!isCurrentJob.value)
+                  AppDateField(
+                    labelText: context.lango.separationDateLabel, // <-- REPLACED
+                    selectedDate: selectedSeparationDate.value,
+                    onDateSelected: (d) => selectedSeparationDate.value = d,
+                  ),
+                const SizedBox(height: 24),
+                FilledButton(
+                  onPressed: handleSaveChanges,
+                  child: Text(context.lango.saveChanges), // <-- REPLACED
+                ),
+              ],
+            ),
           ),
         ),
       ),
