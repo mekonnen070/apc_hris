@@ -17,7 +17,6 @@ class ClearanceScreen extends ConsumerWidget {
             context,
             MaterialPageRoute(builder: (_) => const RequestClearanceScreen()),
           );
-          // If the form was submitted successfully, refresh the list
           if (result == true) {
             ref
                 .read(clearanceNotifierProvider.notifier)
