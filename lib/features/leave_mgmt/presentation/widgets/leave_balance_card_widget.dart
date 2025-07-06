@@ -43,37 +43,41 @@ class LeaveBalanceCard extends StatelessWidget {
     final icon = visuals.icon;
     final remaining = balance.balance;
 
-    // FIX: Removed the incorrect `Expanded` widget. The widget now returns
-    // a Card directly, making it a valid, reusable component.
     return Card(
-      color: color.withOpacity(0.1),
-      elevation: 0,
+      color: color.withValues(alpha: 0.1),
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: color.withOpacity(0.3)),
-        borderRadius: BorderRadius.circular(12),
+        side: BorderSide(color: color.withValues(alpha: 0.3)),
+        borderRadius: BorderRadius.circular(16),
       ),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Row(
+              // THE FIX: The Row itself is not problematic, but its children cannot
+              // have flex factors. By removing `Expanded`/`Flexible`, the Text
+              // widget now has a calculable width, resolving the error.
               children: [
                 Icon(icon, color: color, size: 20),
                 const SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    leaveType.typeName,
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: color,
-                    ),
-                    overflow: TextOverflow.ellipsis,
+                // The Text is now allowed to take up its natural space and
+                // will truncate with an ellipsis if it's too long for the card.
+                // We wrap it in a Flexible to allow it to shrink if needed, but not expand.
+                Text(
+                  leaveType.typeName,
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: color,
                   ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            const Spacer(),
             Text.rich(
               TextSpan(
                 style: theme.textTheme.bodyLarge?.copyWith(color: color),
@@ -92,14 +96,14 @@ class LeaveBalanceCard extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 4),
             Text(
               context.lango.usedOf(
                 used: balance.usedDays,
                 allowed: balance.totalDays,
               ),
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: color.withOpacity(0.8),
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: color.withValues(alpha: 0.8),
               ),
             ),
           ],

@@ -1,98 +1,85 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:police_com/features/auth/application/auth_notifier.dart';
 import 'package:police_com/features/leave_mgmt/data/leave_repository.dart';
 import 'package:police_com/features/leave_mgmt/domain/leave_balance.dart';
 import 'package:police_com/features/leave_mgmt/domain/leave_request.dart';
+import 'package:police_com/features/leave_mgmt/domain/leave_request_create.dart';
+import 'package:police_com/features/leave_mgmt/domain/leave_screen_data.dart';
 import 'package:police_com/features/leave_mgmt/domain/leave_type.dart';
 
-part 'leave_notifier.freezed.dart';
+final leaveNotifierProvider = StateNotifierProvider.autoDispose<
+  LeaveNotifier,
+  AsyncValue<LeaveScreenData>
+>((ref) => LeaveNotifier(ref));
 
-final leaveNotifierProvider =
-    StateNotifierProvider.autoDispose<LeaveNotifier, LeaveState>(
-  (ref) => LeaveNotifier(ref),
-);
-
-@freezed
-abstract class LeaveState with _$LeaveState {
-  const factory LeaveState({
-    @Default(true) bool isLoading,
-    @Default(false) bool isFetchingMore,
-    @Default(true) bool canFetchMore,
-    @Default(1) int page,
-    String? errorMessage,
-    @Default([]) List<LeaveBalance> leaveBalances,
-    @Default([]) List<LeaveRequest> leaveHistory,
-    @Default([]) List<LeaveType> leaveTypes,
-  }) = _LeaveState;
-}
-
-class LeaveNotifier extends StateNotifier<LeaveState> {
+class LeaveNotifier extends StateNotifier<AsyncValue<LeaveScreenData>> {
   final Ref _ref;
-  final int _pageSize = 10;
+  late final ILeaveRepository _repository;
+  late final String? _employeeId;
 
-  LeaveNotifier(this._ref) : super(const LeaveState()) {
+  LeaveNotifier(this._ref) : super(const AsyncValue.loading()) {
+    _repository = _ref.read(leaveRepositoryProvider);
+    _employeeId = _ref.read(currentEmployeeIdProvider);
     fetchInitialData();
   }
 
   Future<void> fetchInitialData() async {
-    state = const LeaveState();
-    final employeeId = _ref.read(currentEmployeeIdProvider);
-    if (employeeId == null) {
-      state = state.copyWith(
-        isLoading: false,
-        errorMessage: 'User not authenticated.',
-      );
+    state = const AsyncValue.loading();
+    if (_employeeId == null) {
+      state = AsyncValue.error('User not authenticated.', StackTrace.current);
       return;
     }
-
     try {
-      final repository = _ref.read(leaveRepositoryProvider);
-      // Fetch all required data in parallel for maximum efficiency
+      // Fetch all data in parallel
       final results = await Future.wait([
-        repository.getLeaveBalanceByEmployee(employeeId: employeeId),
-        repository.getLeaveRequests(page: 1, pageSize: _pageSize),
-        repository.getLeaveTypes(),
+        _repository.getLeaveBalanceByEmployee(employeeId: _employeeId),
+        _repository.getLeaveRequests(page: 1, pageSize: 10),
+        _repository.getLeaveTypes(),
       ]);
 
-      final balances = results[0] as List<LeaveBalance>;
-      final requests = results[1] as List<LeaveRequest>;
-      final types = results[2] as List<LeaveType>;
-
-      state = state.copyWith(
-        leaveBalances: balances,
-        leaveHistory: requests,
-        leaveTypes: types,
-        page: 2,
-        canFetchMore: requests.length == _pageSize,
-        isLoading: false,
+      state = AsyncValue.data(
+        LeaveScreenData(
+          balances: results[0] as List<LeaveBalance>,
+          history: results[1] as List<LeaveRequest>,
+          types: results[2] as List<LeaveType>,
+        ),
       );
-    } catch (e) {
-      state = state.copyWith(errorMessage: e.toString(), isLoading: false);
+    } catch (e, st) {
+      state = AsyncValue.error(e, st);
     }
   }
 
-  Future<void> fetchNextPage() async {
-    if (state.isFetchingMore || !state.canFetchMore) return;
-    state = state.copyWith(isFetchingMore: true);
+  Future<void> createRequest(LeaveRequestCreate request) async {
+    await _repository.createLeaveRequest(request);
+    await fetchInitialData(); // Refetch all data to ensure consistency
+  }
 
+  Future<void> editRequest({
+    required int id,
+    required LeaveRequestCreate request,
+  }) async {
+    await _repository.editLeaveRequest(id: id, request: request);
+    await fetchInitialData();
+  }
+
+  Future<void> deleteRequest(int requestId) async {
+    final previousState = state;
+    // Optimistic UI update
+    state = state.whenData(
+      (data) => data.copyWith(
+        history:
+            data.history
+                .where((req) => req.leaveRequestId != requestId)
+                .toList(),
+      ),
+    );
     try {
-      final repository = _ref.read(leaveRepositoryProvider);
-      final newRequests = await repository.getLeaveRequests(
-        page: state.page,
-        pageSize: _pageSize,
-      );
-
-      state = state.copyWith(
-        leaveHistory: [...state.leaveHistory, ...newRequests],
-        page: state.page + 1,
-        canFetchMore: newRequests.length == _pageSize,
-        isFetchingMore: false,
-      );
+      await _repository.deleteLeaveRequest(id: requestId);
     } catch (e) {
-      state = state.copyWith(errorMessage: e.toString(), isFetchingMore: false);
+      state = previousState; // Revert on error
+      rethrow;
     }
   }
 }

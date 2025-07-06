@@ -3178,6 +3178,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'An unexpected error occurred. Please try again.'**
   String get errorGeneric;
+
+  /// No description provided for @editLeaveRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Leave Request'**
+  String get editLeaveRequest;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

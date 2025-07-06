@@ -73,6 +73,8 @@ class ApiEndpoints {
   // --- Leave Endpoints ---
   static const String leaveRequests = '$_leave/requests';
   static const String applyForLeave = '$_leave/create';
+  static const String editLeave = '$_leave/edit';
+  static const String deleteLeave = '$_leave/delete';
   static const String leaveBalanceByEmployee =
       '$_leaveBalance/balanceByEmployee';
   static const String leaveTypes = '$_leaveTypes/leaveTypes';

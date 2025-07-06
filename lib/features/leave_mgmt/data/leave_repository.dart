@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:police_com/core/constants/api_endpoints.dart';
@@ -21,6 +23,11 @@ abstract class ILeaveRepository {
   });
   Future<Response> createLeaveRequest(LeaveRequestCreate request);
   Future<List<LeaveType>> getLeaveTypes();
+  Future<void> editLeaveRequest({
+    required int id,
+    required LeaveRequestCreate request,
+  });
+  Future<void> deleteLeaveRequest({required int id});
 }
 
 class LeaveRepository implements ILeaveRepository {
@@ -63,5 +70,36 @@ class LeaveRepository implements ILeaveRepository {
   Future<List<LeaveType>> getLeaveTypes() async {
     final response = await _dio.get(ApiEndpoints.leaveTypes);
     return (response.data as List).map((e) => LeaveType.fromJson(e)).toList();
+  }
+
+  @override
+  Future<void> editLeaveRequest({
+    required int id,
+    required LeaveRequestCreate request,
+  }) async {
+    try {
+      await _dio.put(
+        ApiEndpoints.editLeave,
+        queryParameters: {'id': id},
+        data: request.toJson(),
+      );
+    } catch (e, st) {
+      log('Failed to edit leave request for ID: $id', error: e, stackTrace: st);
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> deleteLeaveRequest({required int id}) async {
+    try {
+      await _dio.delete(ApiEndpoints.deleteLeave, queryParameters: {'id': id});
+    } catch (e, st) {
+      log(
+        'Failed to delete leave request for ID: $id',
+        error: e,
+        stackTrace: st,
+      );
+      rethrow;
+    }
   }
 }

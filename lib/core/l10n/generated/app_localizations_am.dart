@@ -1629,4 +1629,7 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get errorGeneric => 'ያልተጠበቀ ስህተት ተፈጥሯል። እባክዎ እንደገና ይሞክሩ።';
+
+  @override
+  String get editLeaveRequest => 'የፍቃድ ጥያቄን ቀይር';
 }

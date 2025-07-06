@@ -1635,4 +1635,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errorGeneric => 'An unexpected error occurred. Please try again.';
+
+  @override
+  String get editLeaveRequest => 'Edit Leave Request';
 }
