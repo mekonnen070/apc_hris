@@ -4,9 +4,8 @@ import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
 // A section for displaying a list of dynamic entries with an "Add New" button.
 class DynamicEntrySection<T> extends StatelessWidget {
   final String sectionTitle;
-  final String? emptyListMessage; // <-- Made nullable
+  final String? emptyListMessage;
   final List<T> itemsData;
-  // itemBuilder provides the context, specific item data, and its index.
   final Widget Function(BuildContext context, T itemData, int index)
   itemBuilder;
   final VoidCallback onAddNew;
@@ -35,7 +34,6 @@ class DynamicEntrySection<T> extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                // Allow title to wrap if too long
                 child: Text(
                   sectionTitle,
                   style: Theme.of(
@@ -61,12 +59,9 @@ class DynamicEntrySection<T> extends StatelessWidget {
           if (itemsData.isEmpty)
             Center(
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 20.0,
-                ), // More padding for empty message
+                padding: const EdgeInsets.symmetric(vertical: 20.0),
                 child: Text(
-                  emptyListMessage ??
-                      context.lango.noItemsAdded, // <-- REPLACED
+                  emptyListMessage ?? context.lango.noItemsAdded,
                   style: Theme.of(
                     context,
                   ).textTheme.bodyMedium?.copyWith(fontStyle: FontStyle.italic),
