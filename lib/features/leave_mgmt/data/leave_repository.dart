@@ -7,6 +7,7 @@ import 'package:police_com/core/network/dio_client.dart';
 import 'package:police_com/features/leave_mgmt/domain/leave_balance.dart';
 import 'package:police_com/features/leave_mgmt/domain/leave_request.dart';
 import 'package:police_com/features/leave_mgmt/domain/leave_request_create.dart';
+import 'package:police_com/features/leave_mgmt/domain/leave_request_edit.dart';
 import 'package:police_com/features/leave_mgmt/domain/leave_type.dart';
 
 final leaveRepositoryProvider = Provider<ILeaveRepository>((ref) {
@@ -25,7 +26,7 @@ abstract class ILeaveRepository {
   Future<List<LeaveType>> getLeaveTypes();
   Future<void> editLeaveRequest({
     required int id,
-    required LeaveRequestCreate request,
+    required LeaveRequestEdit request,
   });
   Future<void> deleteLeaveRequest({required int id});
 }
@@ -75,10 +76,10 @@ class LeaveRepository implements ILeaveRepository {
   @override
   Future<void> editLeaveRequest({
     required int id,
-    required LeaveRequestCreate request,
+    required LeaveRequestEdit request,
   }) async {
     try {
-      await _dio.put(
+      await _dio.post(
         ApiEndpoints.editLeave,
         queryParameters: {'id': id},
         data: request.toJson(),
@@ -92,7 +93,7 @@ class LeaveRepository implements ILeaveRepository {
   @override
   Future<void> deleteLeaveRequest({required int id}) async {
     try {
-      await _dio.delete(ApiEndpoints.deleteLeave, queryParameters: {'id': id});
+      await _dio.post(ApiEndpoints.deleteLeave, queryParameters: {'id': id});
     } catch (e, st) {
       log(
         'Failed to delete leave request for ID: $id',

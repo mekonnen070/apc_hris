@@ -6,6 +6,7 @@ import 'package:police_com/features/leave_mgmt/data/leave_repository.dart';
 import 'package:police_com/features/leave_mgmt/domain/leave_balance.dart';
 import 'package:police_com/features/leave_mgmt/domain/leave_request.dart';
 import 'package:police_com/features/leave_mgmt/domain/leave_request_create.dart';
+import 'package:police_com/features/leave_mgmt/domain/leave_request_edit.dart';
 import 'package:police_com/features/leave_mgmt/domain/leave_screen_data.dart';
 import 'package:police_com/features/leave_mgmt/domain/leave_type.dart';
 
@@ -58,7 +59,7 @@ class LeaveNotifier extends StateNotifier<AsyncValue<LeaveScreenData>> {
 
   Future<void> editRequest({
     required int id,
-    required LeaveRequestCreate request,
+    required LeaveRequestEdit request,
   }) async {
     await _repository.editLeaveRequest(id: id, request: request);
     await fetchInitialData();
