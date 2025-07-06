@@ -35,11 +35,11 @@ class ContactsTab extends ConsumerWidget {
     }
 
     return DynamicEntrySection<EmployeeContactModel>(
-      addNewButtonText: context.lango.addEmergencyContact, // <-- REPLACED
-      sectionTitle: context.lango.emergencyContacts, // <-- REPLACED
+      addNewButtonText: context.lango.addEmergencyContact,
+      sectionTitle: context.lango.emergencyContacts,
       onAddNew: () => navigateToAddEdit(null),
       itemsData: employee.employeeContacts,
-      emptyListMessage: context.lango.noEmergencyContactsListed, // <-- REPLACED
+      emptyListMessage: context.lango.noEmergencyContactsListed,
       itemBuilder: (context, contact, index) {
         return EditableListItemCard(
           title: contact.fullName,

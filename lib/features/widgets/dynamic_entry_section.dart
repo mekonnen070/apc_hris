@@ -8,7 +8,7 @@ class DynamicEntrySection<T> extends StatelessWidget {
   final List<T> itemsData;
   // itemBuilder provides the context, specific item data, and its index.
   final Widget Function(BuildContext context, T itemData, int index)
-      itemBuilder;
+  itemBuilder;
   final VoidCallback onAddNew;
   final String addNewButtonText;
   final bool showDivider; // New: control divider visibility
@@ -16,7 +16,7 @@ class DynamicEntrySection<T> extends StatelessWidget {
   const DynamicEntrySection({
     super.key,
     required this.sectionTitle,
-    this.emptyListMessage, // <-- Made nullable
+    this.emptyListMessage,
     required this.itemsData,
     required this.itemBuilder,
     required this.onAddNew,
@@ -65,7 +65,8 @@ class DynamicEntrySection<T> extends StatelessWidget {
                   vertical: 20.0,
                 ), // More padding for empty message
                 child: Text(
-                  emptyListMessage ?? context.lango.noItemsAdded, // <-- REPLACED
+                  emptyListMessage ??
+                      context.lango.noItemsAdded, // <-- REPLACED
                   style: Theme.of(
                     context,
                   ).textTheme.bodyMedium?.copyWith(fontStyle: FontStyle.italic),
