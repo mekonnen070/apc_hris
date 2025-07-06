@@ -87,6 +87,8 @@ class ApiEndpoints {
   static const String trainingSelectedApplicants =
       '$_trainingApplication/selected-applicants';
   static const String submitTrainingAppeal = '$_trainingApplication/appeal';
+  static const String trainingApprovedApplicants =
+      '$_trainingApplication/approved-applicants';
 
   // --- Placement Endpoints ---
   static const String placementAnnouncements =
@@ -97,6 +99,8 @@ class ApiEndpoints {
       '$_placementAnnouncement/detail';
   static const String myPlacementApplications =
       '$_placementApplication/applicationByEmployee';
+  static const String placementApprovedApplicants =
+      '$_placementApplication/approvedApplicantsByAnnouncement';
 
   // --- Clearance Endpoints ---
   static const String createClearance = '$_clearance/request';

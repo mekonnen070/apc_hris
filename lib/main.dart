@@ -61,7 +61,7 @@ class MyApp extends ConsumerWidget {
         initTheme: themeData,
         duration: const Duration(milliseconds: 500),
         builder: (_, theme) {
-          return MaterialApp(
+          return MaterialApp( 
             theme: theme,
             home: const AppOrchestrator(),
             navigatorKey: navigatorKey,

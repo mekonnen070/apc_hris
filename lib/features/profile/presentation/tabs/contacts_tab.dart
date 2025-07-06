@@ -44,7 +44,7 @@ class ContactsTab extends ConsumerWidget {
         return EditableListItemCard(
           title: contact.fullName,
           subtitle:
-              '${context.lango.relationLabel(relation: contact.relationship.name.toDisplayCase())}\n${context.lango.phoneLabel(phone: contact.phone)}', // <-- REPLACED
+              '${context.lango.relationLabel(relation: contact.relationship.name.toDisplayCase())}\n${context.lango.phoneLabel(phone: contact.phone)}',
           isThreeLine: true,
           onEdit: () => navigateToAddEdit(contact),
           onDelete:

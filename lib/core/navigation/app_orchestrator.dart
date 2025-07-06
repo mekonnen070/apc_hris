@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:police_com/core/config/server_config/server_config_notifier.dart';
@@ -61,6 +63,7 @@ class AuthGate extends ConsumerWidget {
       loading: () => const SplashScreen(),
       error: (err, stack) => const LogInPage(),
       data: (state) {
+        log('Auth state: $state');
         if (state == const AuthState.authenticated()) {
           return const HomePage();
         } else {

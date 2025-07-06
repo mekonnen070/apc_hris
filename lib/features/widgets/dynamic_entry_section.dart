@@ -55,7 +55,7 @@ class DynamicEntrySection<T> extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 12), // Increased spacing
+          const SizedBox(height: 12),
           if (itemsData.isEmpty)
             Center(
               child: Padding(

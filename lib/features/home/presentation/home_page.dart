@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,6 +15,9 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedSubModule = ref.watch(selectedSubModuleProvider);
+
+    log('selectedSubModule: $selectedSubModule');
+    log('selectedSubModule: ${selectedSubModule.index}');
 
     return ThemeSwitchingArea(
       child: Scaffold(
