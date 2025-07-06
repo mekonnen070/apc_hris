@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:police_com/core/enums/clearance_reason.dart';
 import 'package:police_com/core/enums/clearance_status.dart';
-import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
+import 'package:police_com/core/enums/clearance_type.dart';
 import 'package:police_com/core/extensions/string_extension.dart';
-import 'package:police_com/features/clearance/data/clearance_repository.dart';
-import 'package:police_com/features/clearance/domain/clearance_request.dart';
-import 'package:police_com/features/widgets/app_bar_widget.dart';
+import 'package:police_com/features/auth/application/auth_notifier.dart';
+import 'package:police_com/features/clearance/application/clearance_notifier.dart';
+import 'package:police_com/features/clearance/domain/clearance_request_create.dart';
 import 'package:police_com/features/widgets/app_date_field.dart';
 import 'package:police_com/features/widgets/app_dropdown_field.dart';
 import 'package:police_com/features/widgets/app_text_field.dart';
+import 'package:uuid/uuid.dart';
 
 class RequestClearanceScreen extends HookConsumerWidget {
   const RequestClearanceScreen({super.key});
@@ -18,110 +19,116 @@ class RequestClearanceScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final formKey = useMemoized(() => GlobalKey<FormState>());
-    final commentsController = useTextEditingController();
-    final lastDayOfWork = useState<DateTime?>(null);
-    final reason = useState<ClearanceReason?>(null);
-    final isLoading = useState(false);
+    final isSubmitting = useState(false);
+    final employeeId = ref.watch(currentEmployeeIdProvider);
 
-    void submitForm() async {
-      if (formKey.currentState!.validate()) {
-        isLoading.value = true;
+    final clearanceType = useState<ClearanceType?>(null);
+    final completionDate = useState<DateTime?>(null);
+    final remarksController = useTextEditingController();
 
-        final request = ClearanceRequest(
-          id: 0, // Set by backend
-          employeeId:
-              'CURRENT_USER_ID', // Replace with actual authenticated user ID
-          reason: reason.value!,
-          requestDate: DateTime.now(),
-          lastDayOfWork: lastDayOfWork.value!,
-          comments: commentsController.text,
-          status: ClearanceStatus.pending,
-          createdAt: DateTime.now(),
-          updatedAt: DateTime.now(),
+    void handleSubmit() async {
+      if (!formKey.currentState!.validate()) return;
+      if (employeeId == null) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('Error: Not logged in.')));
+        return;
+      }
+
+      isSubmitting.value = true;
+
+      final request = ClearanceRequestCreate(
+        requestId: const Uuid().v4(),
+        employeeId: employeeId,
+        type: clearanceType.value!,
+        requestDate: DateTime.now(),
+        targetCompletionDate: completionDate.value,
+        clearanceStatus: ClearanceStatus.pending,
+        remarks: remarksController.text,
+      );
+
+      try {
+        await ref
+            .read(clearanceNotifierProvider.notifier)
+            .createRequest(request);
+        // Pop with true to signal success to the previous screen
+        Navigator.of(context).pop(true);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.green,
+            content: Text('Clearance request submitted successfully!'),
+          ),
         );
-
-        try {
-          await ref
-              .read(clearanceRepositoryProvider)
-              .submitClearanceRequest(request);
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(context.lango.clearanceRequestSubmitted)),
-          );
-          Navigator.of(context).pop(true);
-        } catch (e) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('${context.lango.failedToSubmitRequest}$e')),
-          );
-        } finally {
-          isLoading.value = false;
-        }
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.red,
+            content: Text('Submission Failed: $e'),
+          ),
+        );
+      } finally {
+        isSubmitting.value = false;
       }
     }
 
     return Scaffold(
-      appBar: AppBarWidget(
-        title: context.lango.requestClearance,
-      ), // <-- REPLACED & REMOVED CONST
-      body: SafeArea(
-        child: SingleChildScrollView(
+      appBar: AppBar(title: const Text('New Clearance Request')),
+      body: Form(
+        key: formKey,
+        child: ListView(
           padding: const EdgeInsets.all(16.0),
-          child: Form(
-            key: formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                AppDropdownField<ClearanceReason>(
-                  labelText: context.lango.reasonForClearance, // <-- REPLACED
-                  value: reason.value,
-                  items:
-                      ClearanceReason.values
-                          .map(
-                            (type) => DropdownMenuItem(
-                              value: type,
-                              child: Text(type.name.toDisplayCase()),
-                            ),
-                          )
-                          .toList(),
-                  onChanged: (value) => reason.value = value,
-                  validator:
-                      (value) =>
-                          value == null
-                              ? context.lango.pleaseSelectReason
-                              : null, // <-- REPLACED
-                ),
-                const SizedBox(height: 16),
-                AppDateField(
-                  labelText: context.lango.lastDayOfWorkLabel, // <-- REPLACED
-                  onDateSelected: (date) => lastDayOfWork.value = date,
-                  validator:
-                      (value) =>
-                          lastDayOfWork.value == null
-                              ? context
-                                  .lango
-                                  .pleaseSelectDate // <-- REPLACED
-                              : null,
-                ),
-                const SizedBox(height: 16),
-                AppTextField(
-                  controller: commentsController,
-                  labelText: context.lango.commentsOptional, // <-- REPLACED
-                  hintText:
-                      context.lango.provideAdditionalDetails, // <-- REPLACED
-                  maxLines: 5,
-                ),
-                const SizedBox(height: 24),
-                FilledButton(
-                  onPressed: isLoading.value ? null : submitForm,
-                  child:
-                      isLoading.value
-                          ? const CircularProgressIndicator.adaptive()
-                          : Text(
-                            context.lango.submitRequest,
-                          ), // <-- REPLACED & REMOVED CONST
-                ),
-              ],
+          children: [
+            AppDropdownField<ClearanceType>(
+              labelText: 'Reason for Clearance',
+              value: clearanceType.value,
+              items:
+                  ClearanceType.values
+                      .map(
+                        (t) => DropdownMenuItem(
+                          value: t,
+                          child: Text(t.name.toDisplayCase()),
+                        ),
+                      )
+                      .toList(),
+              onChanged: (value) => clearanceType.value = value,
+              validator: FormBuilderValidators.required(),
+              isRequired: true,
             ),
-          ),
+            const SizedBox(height: 16),
+
+            // --- This is the corrected usage of AppDateField ---
+            AppDateField(
+              labelText: 'Target Completion Date (Optional)',
+              selectedDate: completionDate.value,
+              onDateSelected: (date) {
+                completionDate.value = date;
+              },
+              // No validator as it's optional
+            ),
+
+            const SizedBox(height: 16),
+            AppTextField(
+              controller: remarksController,
+              labelText: 'Remarks (Optional)',
+              maxLines: 4,
+            ),
+            const SizedBox(height: 32),
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton(
+                style: FilledButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                ),
+                onPressed: isSubmitting.value ? null : handleSubmit,
+                child:
+                    isSubmitting.value
+                        ? const CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation(Colors.white),
+                        )
+                        : const Text('Submit Request'),
+              ),
+            ),
+          ],
         ),
       ),
     );

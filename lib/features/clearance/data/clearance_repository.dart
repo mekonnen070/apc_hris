@@ -1,53 +1,78 @@
-// lib/features/clearance/data/clearance_repository.dart
+import 'dart:developer';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:police_com/core/enums/clearance_reason.dart';
-import 'package:police_com/core/enums/clearance_status.dart';
+import 'package:police_com/core/constants/api_endpoints.dart';
 import 'package:police_com/core/network/dio_client.dart';
 import 'package:police_com/features/clearance/domain/clearance_request.dart';
+import 'package:police_com/features/clearance/domain/clearance_request_create.dart';
 
-final clearanceRepositoryProvider = Provider(
-  (ref) => ClearanceRepository(ref.watch(dioClientProvider)),
-);
+final clearanceRepositoryProvider = Provider<IClearanceRepository>((ref) {
+  final dio = ref.watch(dioClientProvider);
+  return ClearanceRepository(dio);
+});
 
-class ClearanceRepository {
-  final DioClient _dioClient;
+abstract class IClearanceRepository {
+  /// Fetches all clearance requests for a given employee.
+  Future<List<ClearanceRequest>> getMyClearanceRequests({
+    required String employeeId,
+  });
 
-  ClearanceRepository(this._dioClient);
+  /// Creates a new clearance request.
+  Future<void> createClearanceRequest(ClearanceRequestCreate request);
 
-  Future<List<ClearanceRequest>> getMyClearanceRequests(
-    String employeeId,
-  ) async {
-    // Mock data based on the defined model
-    await Future.delayed(const Duration(seconds: 1));
-    return [
-      ClearanceRequest(
-        id: 201,
-        employeeId: employeeId,
-        reason: ClearanceReason.resignation,
-        requestDate: DateTime.now().subtract(const Duration(days: 30)),
-        lastDayOfWork: DateTime.now().subtract(const Duration(days: 15)),
-        status: ClearanceStatus.completed,
-        comments: 'All assets returned and handover completed.',
-        createdAt: DateTime.now().subtract(const Duration(days: 30)),
-        updatedAt: DateTime.now().subtract(const Duration(days: 14)),
-      ),
-      ClearanceRequest(
-        id: 202,
-        employeeId: employeeId,
-        reason: ClearanceReason.longTermLeave,
-        requestDate: DateTime.now().subtract(const Duration(days: 5)),
-        lastDayOfWork: DateTime.now().add(const Duration(days: 10)),
-        status: ClearanceStatus.approved,
-        comments: 'Approved for 3-month sabbatical.',
-        createdAt: DateTime.now().subtract(const Duration(days: 5)),
-        updatedAt: DateTime.now().subtract(const Duration(days: 2)),
-      ),
-    ];
+  /// Deletes a clearance request by its ID.
+  Future<void> deleteClearanceRequest({required String requestId});
+}
+
+class ClearanceRepository implements IClearanceRepository {
+  final DioClient _dio;
+  ClearanceRepository(this._dio);
+
+  @override
+  Future<List<ClearanceRequest>> getMyClearanceRequests({
+    required String employeeId,
+  }) async {
+    try {
+      final response = await _dio.get(
+        ApiEndpoints.myClearanceRequests,
+        queryParameters: {'employeeId': employeeId},
+      );
+      final data = response.data as List;
+      return data.map((item) => ClearanceRequest.fromJson(item)).toList();
+    } catch (e, st) {
+      log(
+        'Failed to fetch clearance requests for employee: $employeeId',
+        error: e,
+        stackTrace: st,
+      );
+      rethrow;
+    }
   }
 
-  Future<void> submitClearanceRequest(ClearanceRequest request) async {
-    // Mock network request
-    await Future.delayed(const Duration(seconds: 2));
-    print('Submitting new clearance request: ${request.toJson()}');
+  @override
+  Future<void> createClearanceRequest(ClearanceRequestCreate request) async {
+    try {
+      await _dio.post(ApiEndpoints.createClearance, data: request.toJson());
+    } catch (e, st) {
+      log('Failed to create clearance request', error: e, stackTrace: st);
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> deleteClearanceRequest({required String requestId}) async {
+    try {
+      await _dio.post(
+        ApiEndpoints.deleteClearance,
+        queryParameters: {'id': requestId},
+      );
+    } catch (e, st) {
+      log(
+        'Failed to delete clearance request for ID: $requestId',
+        error: e,
+        stackTrace: st,
+      );
+      rethrow;
+    }
   }
 }

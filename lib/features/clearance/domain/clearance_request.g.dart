@@ -8,36 +8,42 @@ part of 'clearance_request.dart';
 
 _ClearanceRequest _$ClearanceRequestFromJson(Map<String, dynamic> json) =>
     _ClearanceRequest(
-      id: (json['id'] as num).toInt(),
+      requestId: json['requestId'] as String,
       employeeId: json['employeeId'] as String,
-      reason: $enumDecode(_$ClearanceReasonEnumMap, json['reason']),
+      type: $enumDecode(_$ClearanceTypeEnumMap, json['type']),
       requestDate: DateTime.parse(json['requestDate'] as String),
-      lastDayOfWork: DateTime.parse(json['lastDayOfWork'] as String),
-      comments: json['comments'] as String?,
-      status: $enumDecode(_$ClearanceStatusEnumMap, json['status']),
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: DateTime.parse(json['updatedAt'] as String),
+      targetCompletionDate:
+          json['targetCompletionDate'] == null
+              ? null
+              : DateTime.parse(json['targetCompletionDate'] as String),
+      clearanceStatus:
+          $enumDecodeNullable(
+            _$ClearanceStatusEnumMap,
+            json['clearanceStatus'],
+          ) ??
+          ClearanceStatus.pending,
+      remarks: json['remarks'] as String?,
     );
 
 Map<String, dynamic> _$ClearanceRequestToJson(_ClearanceRequest instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      'requestId': instance.requestId,
       'employeeId': instance.employeeId,
-      'reason': _$ClearanceReasonEnumMap[instance.reason]!,
+      'type': _$ClearanceTypeEnumMap[instance.type]!,
       'requestDate': instance.requestDate.toIso8601String(),
-      'lastDayOfWork': instance.lastDayOfWork.toIso8601String(),
-      'comments': instance.comments,
-      'status': _$ClearanceStatusEnumMap[instance.status]!,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt.toIso8601String(),
+      'targetCompletionDate': instance.targetCompletionDate?.toIso8601String(),
+      'clearanceStatus': _$ClearanceStatusEnumMap[instance.clearanceStatus]!,
+      'remarks': instance.remarks,
     };
 
-const _$ClearanceReasonEnumMap = {
-  ClearanceReason.resignation: 0,
-  ClearanceReason.endOfContract: 1,
-  ClearanceReason.retirement: 2,
-  ClearanceReason.longTermLeave: 3,
-  ClearanceReason.other: 4,
+const _$ClearanceTypeEnumMap = {
+  ClearanceType.resignation: 0,
+  ClearanceType.termination: 1,
+  ClearanceType.retirement: 2,
+  ClearanceType.transfer: 3,
+  ClearanceType.promotion: 4,
+  ClearanceType.contractEnd: 5,
+  ClearanceType.leaveOfAbsence: 6,
 };
 
 const _$ClearanceStatusEnumMap = {

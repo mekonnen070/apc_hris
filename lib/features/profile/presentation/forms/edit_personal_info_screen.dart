@@ -38,13 +38,13 @@ class EditPersonalInfoScreen extends HookConsumerWidget {
           maritalStatus: maritalStatus.value,
         );
 
-        await ref.read(profileNotifierProvider.notifier).updatePersonalInfo(updatedInfo);
+        await ref
+            .read(profileNotifierProvider.notifier)
+            .updatePersonalInfo(updatedInfo);
 
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(context.lango.profileUpdatedSuccessfully),
-            ), // <-- REPLACED
+            SnackBar(content: Text(context.lango.profileUpdatedSuccessfully)),
           );
           Navigator.of(context).pop();
         }
@@ -54,12 +54,12 @@ class EditPersonalInfoScreen extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBarWidget(
-        title: context.lango.editPersonalInfo, // <-- REPLACED
+        title: context.lango.editPersonalInfo,
         actions: [
           IconButton(
             onPressed: isLoading.value ? null : handleSave,
             icon: const Icon(Icons.save_outlined),
-            tooltip: context.lango.saveChanges, // <-- REPLACED
+            tooltip: context.lango.saveChanges,
           ),
         ],
       ),
@@ -73,30 +73,30 @@ class EditPersonalInfoScreen extends HookConsumerWidget {
               children: [
                 AppTextField(
                   controller: phoneController,
-                  labelText: context.lango.phoneNumber, // <-- REPLACED
+                  labelText: context.lango.phoneNumber,
                   keyboardType: TextInputType.phone,
                 ),
                 const SizedBox(height: 16),
                 AppTextField(
                   controller: mobileController,
-                  labelText: context.lango.mobileNumber, // <-- REPLACED
+                  labelText: context.lango.mobileNumber,
                   keyboardType: TextInputType.phone,
                 ),
                 const SizedBox(height: 16),
                 AppTextField(
                   controller: emailController,
-                  labelText: context.lango.emailAddress, // <-- REPLACED
+                  labelText: context.lango.emailAddress,
                   keyboardType: TextInputType.emailAddress,
                 ),
                 const SizedBox(height: 16),
                 AppTextField(
                   controller: address1Controller,
-                  labelText: context.lango.address, // <-- REPLACED
+                  labelText: context.lango.address,
                   maxLines: 2,
                 ),
                 const SizedBox(height: 16),
                 AppDropdownField<MaritalStatus>(
-                  labelText: context.lango.maritalStatus, // <-- REPLACED
+                  labelText: context.lango.maritalStatus,
                   value: maritalStatus.value,
                   items:
                       MaritalStatus.values
@@ -107,7 +107,8 @@ class EditPersonalInfoScreen extends HookConsumerWidget {
                           .toList(),
                   onChanged:
                       (val) =>
-                          maritalStatus.value = val ?? employeeInfo.maritalStatus,
+                          maritalStatus.value =
+                              val ?? employeeInfo.maritalStatus,
                 ),
                 const SizedBox(height: 24),
                 FilledButton(
@@ -118,7 +119,7 @@ class EditPersonalInfoScreen extends HookConsumerWidget {
                   child:
                       isLoading.value
                           ? const CircularProgressIndicator()
-                          : Text(context.lango.saveChanges), // <-- REPLACED
+                          : Text(context.lango.saveChanges),
                 ),
               ],
             ),

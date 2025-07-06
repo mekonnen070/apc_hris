@@ -1,5 +1,3 @@
-// lib/core/enums/clearance_status.dart
-
 import 'package:json_annotation/json_annotation.dart';
 
 part 'clearance_status.g.dart';
