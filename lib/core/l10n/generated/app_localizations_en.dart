@@ -1638,4 +1638,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get editLeaveRequest => 'Edit Leave Request';
+
+  @override
+  String get changeServer => 'Change Server';
+
+  @override
+  String get userNotFound => 'User not found';
+
+  @override
+  String get contactInformation => 'Contact Information';
+
+  @override
+  String get personalDetails => 'Personal Details';
 }

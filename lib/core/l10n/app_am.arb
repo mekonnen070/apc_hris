@@ -838,5 +838,9 @@
     "errorConnectionTimeout": "ግንኙነቱ ጊዜው አልፎበታል። ሰርቨሩ ምላሽ ለመስጠት የዘገየ ወይም ከመስመር ውጭ ሊሆን ይችላል።",
     "errorUnexpectedResponse": "ሰርቨሩ ምላሽ ሰጥቷል፣ ነገር ግን በተጠበቀው መንገድ አይደለም። እባክዎ የሰርቨሩን አድራሻ ያረጋግጡ።",
     "errorGeneric": "ያልተጠበቀ ስህተት ተፈጥሯል። እባክዎ እንደገና ይሞክሩ።",
-    "editLeaveRequest": "የፍቃድ ጥያቄን ቀይር"
+    "editLeaveRequest": "የፍቃድ ጥያቄን ቀይር",
+    "changeServer": "ሰርቨር ቀይር",
+    "userNotFound": "ተጠቃሚ አልተገኘም።",
+    "personalDetails": "የግል ዝርዝሮች",
+    "contactInformation": "የአድራሻ መረጃ"
 }

@@ -837,5 +837,9 @@
   "errorConnectionTimeout": "The connection timed out. The server may be slow to respond or offline.",
   "errorUnexpectedResponse": "The server responded, but not in the way expected. Please verify the server address.",
   "errorGeneric": "An unexpected error occurred. Please try again.",
-  "editLeaveRequest": "Edit Leave Request"
+  "editLeaveRequest": "Edit Leave Request",
+  "changeServer": "Change Server",
+  "userNotFound": "User not found",
+  "contactInformation" : "Contact Information",
+  "personalDetails" : "Personal Details"
 }

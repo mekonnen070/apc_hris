@@ -1632,4 +1632,16 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get editLeaveRequest => 'የፍቃድ ጥያቄን ቀይር';
+
+  @override
+  String get changeServer => 'ሰርቨር ቀይር';
+
+  @override
+  String get userNotFound => 'ተጠቃሚ አልተገኘም።';
+
+  @override
+  String get contactInformation => 'የአድራሻ መረጃ';
+
+  @override
+  String get personalDetails => 'የግል ዝርዝሮች';
 }

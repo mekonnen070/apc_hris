@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:police_com/core/config/server_config/server_setup_screen.dart';
 import 'package:police_com/core/enums/sub_module_enum.dart';
 import 'package:police_com/core/extensions/context_extension.dart';
 import 'package:police_com/core/extensions/sub_module_extension.dart';
@@ -96,6 +97,21 @@ class AppDrawer extends ConsumerWidget {
                   Navigator.of(context).pop();
                 },
               ),
+            const Divider(),
+            ListTile(
+              dense: true,
+              leading: const Icon(Icons.dns_outlined),
+              title: Text(context.lango.changeServer),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder:
+                        (_) => const ServerSetupScreen(isFromSettings: true),
+                  ),
+                );
+              },
+            ),
             const Divider(),
             const LogoutButton(),
             const SizedBox(height: 20),
