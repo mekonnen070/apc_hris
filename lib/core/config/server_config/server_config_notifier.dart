@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
-import 'package:flutter/foundation.dart'; // Import for kDebugMode
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:police_com/core/constants/app_constants.dart';
 import 'package:police_com/core/network/dio_client.dart'; // Keep for sharedPreferencesProvider
@@ -48,14 +47,14 @@ class ServerConfigNotifier extends StateNotifier<AsyncValue<ServerConfig?>> {
     // --- THE FIX: PART 2 ---
     // In debug mode, we must configure this temporary Dio instance to trust
     // the self-signed certificate, just like the main DioClient does.
-    if (kDebugMode) {
-      (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
-        final client = HttpClient();
-        client.badCertificateCallback = (cert, host, port) => true;
-        return client;
-      };
-    }
-
+    // if (kDebugMode) {
+    (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
+      final client = HttpClient();
+      client.badCertificateCallback = (cert, host, port) => true;
+      return client;
+    };
+    // }
+    //
     try {
       // We don't need to check the status code; a successful response is enough.
       // A simple ping to the base URL is sufficient.
