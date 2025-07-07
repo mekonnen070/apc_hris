@@ -30,9 +30,9 @@ class _ServerSetupScreenState extends ConsumerState<ServerSetupScreen> {
     super.initState();
     // Pre-fill the fields with existing data if it exists.
     final initialConfig = ref.read(serverConfigProvider).valueOrNull;
-    _ipController = TextEditingController(text: initialConfig?.ip ?? '');
+    _ipController = TextEditingController(text: initialConfig?.ip ?? '192.168.8.130');
     _portController = TextEditingController(
-      text: initialConfig?.port.toString() ?? '',
+      text: initialConfig?.port.toString() ?? '7153',
     );
   }
 
@@ -61,7 +61,7 @@ class _ServerSetupScreenState extends ConsumerState<ServerSetupScreen> {
   }
 
   /// Validates the form and triggers the connection test and save logic.
-  void _saveAndConnect() {
+  Future<void> _saveAndConnect() async {
     FocusManager.instance.primaryFocus?.unfocus();
 
     if (_formKey.currentState!.validate()) {
@@ -69,7 +69,7 @@ class _ServerSetupScreenState extends ConsumerState<ServerSetupScreen> {
         ip: _ipController.text.trim(),
         port: int.parse(_portController.text.trim()),
       );
-      ref.read(serverConfigProvider.notifier).setConfig(config);
+      await ref.read(serverConfigProvider.notifier).setConfig(config);
     }
   }
 

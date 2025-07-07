@@ -1,21 +1,22 @@
-import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
+import 'package:flutter/foundation.dart'; // Import for kDebugMode
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:police_com/core/constants/app_constants.dart';
-import 'package:police_com/core/network/dio_client.dart';
+import 'package:police_com/core/network/dio_client.dart'; // Keep for sharedPreferencesProvider
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'server_config.dart';
 
-final serverConfigProvider = StateNotifierProvider<
-  ServerConfigNotifier,
-  AsyncValue<ServerConfig?>
->((ref) {
-  // Note: This relies on sharedPreferencesProvider being overridden in main.dart
-  return ServerConfigNotifier(ref.watch(sharedPreferencesProvider));
-});
+final serverConfigProvider =
+    StateNotifierProvider<ServerConfigNotifier, AsyncValue<ServerConfig?>>((
+      ref,
+    ) {
+      return ServerConfigNotifier(ref.watch(sharedPreferencesProvider));
+    });
 
 class ServerConfigNotifier extends StateNotifier<AsyncValue<ServerConfig?>> {
   final SharedPreferences _prefs;
@@ -37,35 +38,50 @@ class ServerConfigNotifier extends StateNotifier<AsyncValue<ServerConfig?>> {
   }
 
   /// Tests the connection and saves the config if successful.
-  /// Throws user-friendly localization keys on failure.
   Future<ServerConfig> _testAndSetConfig(ServerConfig config) async {
     final dio = Dio();
-    // Using http for local IPs as per the original prompt.
-    final url =
-        'http://${config.ip}:${config.port}/health'; // Assuming a /health endpoint
+
+    // --- THE FIX: PART 1 ---
+    // Use the correct `https` protocol to match the working configuration.
+    final url = 'https://${config.ip}:${config.port}';
+
+    // --- THE FIX: PART 2 ---
+    // In debug mode, we must configure this temporary Dio instance to trust
+    // the self-signed certificate, just like the main DioClient does.
+    if (kDebugMode) {
+      (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
+        final client = HttpClient();
+        client.badCertificateCallback = (cert, host, port) => true;
+        return client;
+      };
+    }
 
     try {
-      final response = await dio.get(url).timeout(const Duration(seconds: 3));
-      if (response.statusCode == 200) {
-        await _prefs.setString(AppConstants.kServerIpKey, config.ip);
-        await _prefs.setInt(AppConstants.kServerPortKey, config.port);
-        return config;
-      } else {
-        // The server is reachable but returned an error (e.g., 404, 500)
-        throw 'errorUnexpectedResponse'; // ⭐️ Throw key
-      }
-    } on DioException catch (e) {
+      // We don't need to check the status code; a successful response is enough.
+      // A simple ping to the base URL is sufficient.
+      await dio.get(url).timeout(const Duration(seconds: 5));
+
+      // If the request succeeds, save the config.
+      await _prefs.setString(AppConstants.kServerIpKey, config.ip);
+      await _prefs.setInt(AppConstants.kServerPortKey, config.port);
+      return config;
+    } on DioException catch (e, st) {
+      log(
+        'DioException during server test: ${e.type}',
+        error: e,
+        stackTrace: st,
+      );
       if (e.type == DioExceptionType.connectionTimeout) {
-        throw 'errorConnectionTimeout'; // ⭐️ Throw key
+        throw 'errorConnectionTimeout'; // Connection timed out
       }
-      // For other Dio errors (e.g., connection refused), use a general message.
-      throw 'errorServerUnreachable'; // ⭐️ Throw key
-    } on SocketException {
-      // This often happens if there's no route to the host (e.g., wrong IP, no network)
-      throw 'errorServerUnreachable'; // ⭐️ Throw key
-    } catch (e) {
-      // Catch-all for any other unexpected errors.
-      throw 'errorGeneric'; // ⭐️ Throw key
+      // For other Dio errors (connection refused, certificate issues if not handled), use a general message.
+      throw 'errorServerUnreachable';
+    } on SocketException catch (e, st) {
+      log('SocketException during server test', error: e, stackTrace: st);
+      throw 'errorServerUnreachable';
+    } catch (e, st) {
+      log('Generic exception during server test', error: e, stackTrace: st);
+      throw 'errorGeneric';
     }
   }
 
@@ -75,9 +91,10 @@ class ServerConfigNotifier extends StateNotifier<AsyncValue<ServerConfig?>> {
   }
 
   Future<void> retestConnection() async {
-    if (state.value != null) {
+    final currentConfig = state.valueOrNull;
+    if (currentConfig != null) {
       state = const AsyncValue.loading();
-      state = await AsyncValue.guard(() => _testAndSetConfig(state.value!));
+      state = await AsyncValue.guard(() => _testAndSetConfig(currentConfig));
     }
   }
 

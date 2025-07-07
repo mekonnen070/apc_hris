@@ -7,12 +7,13 @@ import 'package:dio/io.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:police_com/core/config/app_config.dart';
+import 'package:police_com/core/config/server_config/server_config_notifier.dart'; // Import server config
 import 'package:police_com/core/network/auth_interceptor.dart';
-import 'package:police_com/core/network/redirect_interceptor.dart'; // Import the new interceptor
+import 'package:police_com/core/network/redirect_interceptor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// --- Providers (No changes needed here) ---
+// --- Providers ---
+
 final sharedPreferencesProvider = Provider<SharedPreferences>((ref) {
   throw UnimplementedError('SharedPreferences must be provided in main.dart');
 });
@@ -21,19 +22,37 @@ final cookieJarProvider = Provider<CookieJar>((ref) {
   throw UnimplementedError('CookieJar must be provided in main.dart');
 });
 
+// --- THE FIX IS HERE ---
+// The dioClientProvider now depends on the serverConfigProvider
 final dioClientProvider = Provider<DioClient>((ref) {
   final cookieJar = ref.watch(cookieJarProvider);
-  return DioClient(ref, cookieJar);
+  // Get the server configuration state
+  final serverConfig = ref.watch(serverConfigProvider).valueOrNull;
+
+  // If the config is missing, it's a critical error because the AppOrchestrator
+  // should prevent this from ever happening in a real flow.
+  if (serverConfig == null) {
+    throw Exception(
+      'DioClient cannot be created without a valid server configuration.',
+    );
+  }
+
+  // Dynamically construct the baseUrl from the user's settings.
+  final baseUrl = 'https://${serverConfig.ip}:${serverConfig.port}/api';
+
+  return DioClient(ref, cookieJar, baseUrl);
 });
 
 // --- DioClient Implementation ---
+
 class DioClient {
   final Dio dio;
 
-  DioClient(Ref ref, CookieJar cookieJar)
+  // The constructor now accepts the dynamic baseUrl
+  DioClient(Ref ref, CookieJar cookieJar, String baseUrl)
     : dio = Dio(
         BaseOptions(
-          baseUrl: AppConfig.baseUrl,
+          baseUrl: baseUrl, // Use the passed-in baseUrl
           connectTimeout: const Duration(seconds: 20),
           validateStatus: (status) => status != null && status < 500,
         ),
@@ -57,7 +76,8 @@ class DioClient {
       };
     }
   }
-  // --- Public API Methods (No changes needed) ---
+
+  // --- Public API Methods (Unchanged) ---
   Future<Response> get(String path, {Map<String, dynamic>? queryParameters}) =>
       dio.get(path, queryParameters: queryParameters);
 
