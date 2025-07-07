@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:police_com/features/auth/application/auth_notifier.dart';
 import 'package:police_com/features/placement/data/placement_repository.dart';
@@ -36,8 +38,8 @@ class MyPlacementApplicationsNotifier
         employeeId: _employeeId,
       );
       state = AsyncValue.data(applications);
-    } catch (e, st) {
-      state = AsyncValue.error(e, st);
+    } catch (e) {
+      log(e.toString());
     }
   }
 
