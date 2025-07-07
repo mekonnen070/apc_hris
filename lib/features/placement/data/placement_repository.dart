@@ -5,6 +5,7 @@ import 'package:police_com/core/constants/api_endpoints.dart';
 import 'package:police_com/core/network/dio_client.dart';
 import 'package:police_com/features/placement/domain/placement_announcement.dart';
 import 'package:police_com/features/placement/domain/placement_applicant.dart';
+import 'package:police_com/features/placement/domain/placement_application_edit.dart';
 
 /// Provider for the Placement Repository.
 /// This will be the single entry point for the application layer to interact
@@ -29,6 +30,13 @@ abstract class IPlacementRepository {
   Future<List<PlacementApplicant>> getMyApplications({
     required String employeeId,
   });
+
+  Future<PlacementApplicant> getPlacementApplicationDetail({required int id});
+  Future<void> editPlacementApplication({
+    required int id,
+    required PlacementApplicationEdit application,
+  });
+  Future<void> deletePlacementApplication({required int id});
 }
 
 /// The concrete implementation of the repository.
@@ -105,4 +113,63 @@ class PlacementRepository implements IPlacementRepository {
       rethrow;
     }
   }
-}
+
+  @override
+  Future<PlacementApplicant> getPlacementApplicationDetail({
+    required int id,
+  }) async {
+    try {
+      final response = await _dio.get(
+        ApiEndpoints.placementApplicationDetail,
+        queryParameters: {'id': id},
+      );
+      return PlacementApplicant.fromJson(response.data);
+    } catch (e, st) {
+      log(
+        'Failed to fetch placement application detail for ID: $id',
+        error: e,
+        stackTrace: st,
+      );
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> editPlacementApplication({
+    required int id,
+    required PlacementApplicationEdit application,
+  }) async {
+    try {
+      // Endpoint uses POST for editing, as per Swagger
+      await _dio.post(
+        ApiEndpoints.editPlacementApplication,
+        queryParameters: {'id': id},
+        data: application.toJson(),
+      );
+    } catch (e, st) {
+      log(
+        'Failed to edit placement application for ID: $id',
+        error: e,
+        stackTrace: st,
+      );
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> deletePlacementApplication({required int id}) async {
+    try {
+      // Endpoint uses POST for deleting, as per Swagger
+      await _dio.post(
+        ApiEndpoints.deletePlacementApplication,
+        queryParameters: {'id': id},
+      );
+    } catch (e, st) {
+      log(
+        'Failed to delete placement application for ID: $id',
+        error: e,
+        stackTrace: st,
+      );
+      rethrow;
+    }
+  }}

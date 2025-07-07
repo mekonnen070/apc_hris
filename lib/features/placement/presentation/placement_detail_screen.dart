@@ -100,7 +100,7 @@ class PlacementDetailScreen extends ConsumerWidget {
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(vertical: 16),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       final application = PlacementApplicant(
                         applicantId: 0, // Backend likely generates this
                         pAnnouncementId: placement.announcementId,
@@ -111,28 +111,10 @@ class PlacementDetailScreen extends ConsumerWidget {
                         applicantStatus: ApplicantStatus.submitted,
                       );
 
-                      ref
+                      await ref
                           .read(placementApplicationNotifierProvider.notifier)
-                          .applyForPlacement(application)
-                          .then((_) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                backgroundColor: Colors.green,
-                                content: Text(
-                                  'Application Submitted Successfully!',
-                                ),
-                              ),
-                            );
-                            Navigator.pop(context);
-                          })
-                          .catchError((e) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                backgroundColor: Colors.red,
-                                content: Text('Submission Failed: $e'),
-                              ),
-                            );
-                          });
+                          .applyForPlacement(application);
+                      if (context.mounted) Navigator.pop(context);
                     },
                     child: const Text('Apply Now'),
                   ),

@@ -103,6 +103,12 @@ class ApiEndpoints {
       '$_placementApplication/applicationByEmployee';
   static const String placementApprovedApplicants =
       '$_placementApplication/approvedApplicantsByAnnouncement';
+  static const String placementApplicationDetail =
+      '$_placementApplication/detail';
+  static const String editPlacementApplication =
+      '$_placementApplication/edit';
+      static const String deletePlacementApplication =
+      '$_placementApplication/delete';
 
   // --- Clearance Endpoints ---
   static const String createClearance = '$_clearance/request';

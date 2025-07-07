@@ -13,24 +13,19 @@ class TrainingDetailScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Correctly watch the provider for the training's details
     final trainingState = ref.watch(trainingDetailNotifierProvider(trainingId));
-    // Correctly watch the provider for the current employee's info
     final employeeState = ref.watch(currentEmployeeProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Training Details')),
-      // The body now depends on both the training and employee states
       body: SafeArea(
         child: employeeState.when(
           data: (employeeInfo) {
-            // If employee info is null (logged out), show an error.
             if (employeeInfo == null) {
               return const Center(
                 child: Text('Could not load employee information.'),
               );
             }
-            // Once employee info is loaded, build the rest of the UI based on training state
             return trainingState.when(
               data:
                   (training) => SingleChildScrollView(

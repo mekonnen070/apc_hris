@@ -26,9 +26,6 @@ class MyPlacementApplicationsList extends ConsumerWidget {
             itemCount: applications.length,
             itemBuilder: (context, index) {
               final application = applications[index];
-              // You need a way to get the announcement details for the application
-              // This part assumes you might fetch them together or have a separate provider.
-              // For now, we pass the application itself.
               return MyPlacementApplicationListItemWidget(
                 application: application,
               );
@@ -36,7 +33,7 @@ class MyPlacementApplicationsList extends ConsumerWidget {
           ),
         );
       },
-      loading: () => const Center(child: CircularProgressIndicator()),
+      loading: () => const Center(child: CircularProgressIndicator.adaptive()),
       error: (error, stackTrace) => Center(child: Text(error.toString())),
     );
   }

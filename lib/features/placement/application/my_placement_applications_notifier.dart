@@ -8,7 +8,6 @@ final myPlacementApplicationsNotifierProvider =
       MyPlacementApplicationsNotifier,
       AsyncValue<List<PlacementApplicant>>
     >((ref) {
-      // Fetches the employeeId from the current authenticated user
       final employeeId = ref.watch(currentEmployeeIdProvider);
       return MyPlacementApplicationsNotifier(
         ref.watch(placementRepositoryProvider),
@@ -23,22 +22,39 @@ class MyPlacementApplicationsNotifier
 
   MyPlacementApplicationsNotifier(this._repository, this._employeeId)
     : super(const AsyncValue.loading()) {
-    if (_employeeId != null) {
-      getMyApplications();
-    } else {
-      state = AsyncValue.error('Employee not logged in.', StackTrace.current);
+    fetchMyApplications();
+  }
+
+  Future<void> fetchMyApplications() async {
+    state = const AsyncValue.loading();
+    if (_employeeId == null) {
+      state = AsyncValue.error('User not logged in.', StackTrace.current);
+      return;
+    }
+    try {
+      final applications = await _repository.getMyApplications(
+        employeeId: _employeeId,
+      );
+      state = AsyncValue.data(applications);
+    } catch (e, st) {
+      state = AsyncValue.error(e, st);
     }
   }
 
-  Future<void> getMyApplications() async {
-    state = const AsyncValue.loading();
+  Future<void> deleteApplication(int applicationId) async {
+    final previousState = state;
+    // Optimistic UI update for a snappy feel
+    state = state.whenData(
+      (applications) =>
+          applications
+              .where((app) => app.applicantId != applicationId)
+              .toList(),
+    );
     try {
-      final applications = await _repository.getMyApplications(
-        employeeId: _employeeId!,
-      );
-      state = AsyncValue.data(applications);
+      await _repository.deletePlacementApplication(id: applicationId);
     } catch (e) {
-      state = const AsyncValue.data([]);
+      state = previousState; // Revert on error
+      rethrow;
     }
   }
 }
