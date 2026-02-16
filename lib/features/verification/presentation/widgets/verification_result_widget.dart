@@ -1,15 +1,45 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
-import 'package:police_com/features/employee_profile/domain/employee_info_model.dart';
+import 'package:police_com/core/constants/api_endpoints.dart';
+import 'package:police_com/core/extensions/context_extension.dart';
+import 'package:police_com/features/employee_profile/domain/employee_verification_data_model.dart';
 
 class VerificationResultWidget extends StatelessWidget {
-  final EmployeeInfoModel employee;
-  const VerificationResultWidget({super.key, required this.employee});
+  final EmployeeVerificationDataModel employee;
+  final String baseUrl;
+  const VerificationResultWidget({
+    super.key,
+    required this.employee,
+    required this.baseUrl,
+  });
+
+  String _formatDate(String? dateStr) {
+    if (dateStr == null || dateStr.isEmpty) return '—';
+    try {
+      return DateFormat.yMMMd().format(DateTime.parse(dateStr));
+    } catch (_) {
+      return dateStr;
+    }
+  }
+
+  String _genderLabel(BuildContext context, String gender) {
+    final l = context.lango;
+    switch (gender.toLowerCase()) {
+      case '0' || 'male' || 'm':
+        return l.male;
+      case '1' || 'female' || 'f':
+        return l.female;
+      default:
+        return gender.isNotEmpty ? gender : '—';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l = context.lango;
 
     return SingleChildScrollView(
       child: Card(
@@ -19,40 +49,100 @@ class VerificationResultWidget extends StatelessWidget {
         child: Column(
           children: [
             _buildHeader(context, colorScheme),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  _buildDetailRow(
-                    context, // <-- ADDED
-                    Icons.badge_outlined,
-                    context.lango.employeeIdLabel, // <-- REPLACED
-                    employee.employeeId,
-                  ),
-                  const Divider(),
-                  _buildDetailRow(
-                    context, // <-- ADDED
-                    Icons.work_outline,
-                    context.lango.position, // <-- REPLACED
-                    employee.positionId,
-                  ),
-                  const Divider(),
-                  _buildDetailRow(
-                    context, // <-- ADDED
-                    Icons.business_outlined,
-                    context.lango.department, // <-- REPLACED
-                    'Technology',
-                  ), // Placeholder
-                  const Divider(),
-                  _buildDetailRow(
-                    context, // <-- ADDED
-                    Icons.schedule_outlined,
-                    context.lango.hiredOn, // <-- REPLACED
-                    DateFormat.yMMMd().format(employee.hiredDate),
-                  ),
-                ],
-              ),
+            // Personal Information
+            _buildSection(
+              context,
+              title: l.personalInformation,
+              icon: Icons.person_outline,
+              rows: [
+                _row(
+                  Icons.badge_outlined,
+                  l.employeeIdLabel,
+                  employee.employeeId,
+                ),
+                _row(Icons.fingerprint, l.staffId, employee.staffId),
+                _row(
+                  Icons.person,
+                  l.gender,
+                  _genderLabel(context, employee.gender),
+                ),
+                _row(
+                  Icons.cake_outlined,
+                  l.birthDate,
+                  _formatDate(employee.birthDate),
+                ),
+                _row(
+                  Icons.woman,
+                  l.mothersFullName,
+                  employee.motherName ?? '—',
+                ),
+                _row(
+                  Icons.location_on_outlined,
+                  l.address,
+                  employee.address ?? '—',
+                ),
+                _row(Icons.phone_android, l.mobile, employee.mobile ?? '—'),
+                _row(Icons.email_outlined, l.email, employee.email ?? '—'),
+                _row(Icons.public, l.nationality, employee.nationality ?? '—'),
+                _row(
+                  Icons.bloodtype_outlined,
+                  l.bloodGroup,
+                  employee.bloodGroup ?? '—',
+                ),
+                _row(
+                  Icons.church_outlined,
+                  l.religion,
+                  employee.religion ?? '—',
+                ),
+                _row(
+                  Icons.favorite_outline,
+                  l.maritalStatus,
+                  employee.maritalStatus ?? '—',
+                ),
+              ],
             ),
+            // Employment Information
+            _buildSection(
+              context,
+              title: l.employmentDetails,
+              icon: Icons.work_outline,
+              rows: [
+                _row(Icons.work, l.position, employee.positionName ?? '—'),
+                _row(
+                  Icons.business,
+                  l.department,
+                  employee.departmentName ?? '—',
+                ),
+                _row(
+                  Icons.corporate_fare,
+                  l.organizationLabel,
+                  employee.organizationName ?? '—',
+                ),
+                _row(Icons.military_tech, l.level, employee.levelName ?? '—'),
+                _row(Icons.stars_outlined, l.scale, employee.scaleName ?? '—'),
+                _row(
+                  Icons.calendar_today,
+                  l.hiredDate,
+                  _formatDate(employee.hiredDate),
+                ),
+                _row(
+                  Icons.event,
+                  l.employmentStatus,
+                  employee.employmentStatus ?? '—',
+                ),
+                _row(
+                  Icons.assignment_ind,
+                  l.retirementNumber,
+                  employee.retirementNumber ?? '—',
+                ),
+                _row(
+                  Icons.supervisor_account,
+                  l.manager,
+                  employee.managerName ?? '—',
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
           ],
         ),
       ),
@@ -79,8 +169,19 @@ class VerificationResultWidget extends StatelessWidget {
             backgroundColor: Colors.white,
             child: CircleAvatar(
               radius: 50,
-              backgroundImage: NetworkImage(employee.photoUrl ?? ''),
-              onBackgroundImageError: (e, s) {},
+              backgroundImage:
+                  employee.photoUrl != null
+                      ? NetworkImage(
+                        '$baseUrl${ApiEndpoints.employeeImage}${employee.photoUrl!.split('\\').last}',
+                      )
+                      : null,
+              onBackgroundImageError: (e, s) {
+                log(
+                  e.toString(),
+                  name: 'VerificationResultWidget',
+                  stackTrace: s,
+                );
+              },
               child:
                   (employee.photoUrl == null)
                       ? const Icon(Icons.person, size: 50)
@@ -89,7 +190,7 @@ class VerificationResultWidget extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            employee.computedFullName,
+            employee.fullName,
             style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -97,45 +198,100 @@ class VerificationResultWidget extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 8),
-          Chip(
-            avatar: const Icon(
-              Icons.verified_user_outlined,
-              color: Colors.green,
-              size: 20,
-            ),
-            label: Text(
-              context.lango.verified.toUpperCase(), // <-- REPLACED
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.green,
-              ),
-            ),
-            backgroundColor: Colors.green.withValues(alpha: 0.1),
-          ),
         ],
       ),
     );
   }
 
-  Widget _buildDetailRow(
-    BuildContext context,
-    IconData icon,
-    String label,
-    String value,
-  ) {
-    // <-- Pass context
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        children: [
-          Icon(icon, color: Colors.grey.shade600, size: 20),
-          const SizedBox(width: 16),
-          Text('$label:', style: const TextStyle(fontWeight: FontWeight.bold)),
-          const Spacer(),
-          Text(value),
-        ],
-      ),
+  Widget _buildSection(
+    BuildContext context, {
+    required String title,
+    required IconData icon,
+    required List<Widget> rows,
+  }) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+          color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.4),
+          child: Row(
+            children: [
+              Icon(icon, size: 20, color: colorScheme.primary),
+              const SizedBox(width: 10),
+              Text(
+                title,
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: colorScheme.primary,
+                  letterSpacing: 0.3,
+                ),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(children: rows),
+        ),
+      ],
+    );
+  }
+
+  Widget _row(IconData icon, String label, String value) {
+    return Builder(
+      builder: (context) {
+        final textTheme = Theme.of(context).textTheme;
+        final colorScheme = Theme.of(context).colorScheme;
+
+        return Container(
+          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 4.0),
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: colorScheme.outlineVariant.withValues(alpha: 0.3),
+              ),
+            ),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 1.0),
+                child: Icon(
+                  icon,
+                  color: colorScheme.onSurfaceVariant,
+                  size: 18,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Text(
+                label,
+                style: textTheme.bodySmall?.copyWith(
+                  color: colorScheme.onSurfaceVariant,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  value,
+                  textAlign: TextAlign.end,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                  style: textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.onSurface,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

@@ -55,7 +55,6 @@ class ApiEndpoints {
   static const String _placementAnnouncement = '/placementAnnounce';
   static const String _placementApplication = '/placementApplication';
   static const String _recruitment = '/recruitAnnouncement';
-  // https://192.168.8.130:7153/api/Clearance/Requests
   static const String _clearance = '/clearance';
 
   // --- Recruit/My Recruits Endpoints ---
@@ -162,4 +161,8 @@ class ApiEndpoints {
   static const String _empProfile = '/empProfile';
   static const String employeeDetails = '$_empProfile/details';
   static const String employeeDataById = '$_empProfile/EmployeeDataById';
+
+  // Storage Uploads Module
+  static const String _uploads = '/Uploads';
+  static const String employeeImage = '$_uploads/Employee/';
 }

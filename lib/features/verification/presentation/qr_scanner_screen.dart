@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-import 'package:police_com/core/extensions/context_extension.dart'; // <-- ADDED
+import 'package:police_com/core/extensions/context_extension.dart';
 
 class QRScannerScreen extends StatefulWidget {
   const QRScannerScreen({super.key});
@@ -66,7 +66,7 @@ class _QRScannerScreenState extends State<QRScannerScreen>
               scanWindow: scanWindow,
               onDetect: (capture) {
                 if (_isProcessing) return;
-        
+
                 final barcode = capture.barcodes.firstOrNull;
                 if (barcode?.rawValue != null) {
                   setState(() {

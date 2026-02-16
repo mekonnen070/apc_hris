@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:police_com/features/employee_profile/domain/employee_info_model.dart';
+import 'package:police_com/features/employee_profile/domain/employee_verification_data_model.dart';
 import 'package:police_com/features/verification/data/verification_repository.dart';
 
 /// Defines the types of errors specific to the verification feature.
@@ -25,14 +25,15 @@ class VerificationException implements Exception {
 /// The provider for the verification state.
 /// The UI will watch this to react to changes (loading, data, error).
 final verifyEmployeeProvider = AutoDisposeAsyncNotifierProvider<
-    VerifyEmployeeNotifier, EmployeeInfoModel?>(
-  VerifyEmployeeNotifier.new,
-);
+  VerifyEmployeeNotifier,
+  EmployeeVerificationDataModel?
+>(VerifyEmployeeNotifier.new);
 
 /// Manages the state for the employee verification process.
-class VerifyEmployeeNotifier extends AutoDisposeAsyncNotifier<EmployeeInfoModel?> {
+class VerifyEmployeeNotifier
+    extends AutoDisposeAsyncNotifier<EmployeeVerificationDataModel?> {
   @override
-  FutureOr<EmployeeInfoModel?> build() {
+  FutureOr<EmployeeVerificationDataModel?> build() {
     // The initial state is null, indicating no search has been performed yet.
     return null;
   }
@@ -45,7 +46,7 @@ class VerifyEmployeeNotifier extends AutoDisposeAsyncNotifier<EmployeeInfoModel?
     // Use AsyncValue.guard to automatically handle success and error states.
     state = await AsyncValue.guard(() async {
       final repository = ref.read(verificationRepositoryProvider);
-      return repository.verifyEmployee(employeeId: employeeId);
+      return repository.verifyEmployeeDataById(employeeId: employeeId);
     });
   }
 

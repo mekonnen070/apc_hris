@@ -27,7 +27,7 @@ mixin _$EmployeeInfoModel {
  String get positionId;// Foreign key to CommissionDesignation
  String? get managerId;// Foreign key to another EmployeeInfo (self-referential)
 // Contact & Address Details
- String get address1; String? get address2; String? get houseNumber; String get phone; String get mobile; String get email;// C# [Required]
+ String? get address1; String? get address2; String? get houseNumber; String? get phone; String get mobile; String get email;// C# [Required]
 // Other Attributes
  Country get nationality;// C# [Required], has default
  BloodGroup get bloodGroup; Religion get religion;// Assuming Religion.other is a valid default
@@ -74,7 +74,7 @@ abstract mixin class $EmployeeInfoModelCopyWith<$Res>  {
   factory $EmployeeInfoModelCopyWith(EmployeeInfoModel value, $Res Function(EmployeeInfoModel) _then) = _$EmployeeInfoModelCopyWithImpl;
 @useResult
 $Res call({
- String employeeId, StaffTitle? title, String firstName, String? fatherName, String? grandName, Gender gender, DateTime birthDate,@JsonKey(includeFromJson: false, includeToJson: false) File? photoFile, String? photoUrl, String? motherName, String positionId, String? managerId, String address1, String? address2, String? houseNumber, String phone, String mobile, String email, Country nationality, BloodGroup bloodGroup, Religion religion, MedicalStatus medicalStatus, String? retirementNumber, String? tin, MaritalStatus maritalStatus, EmploymentStatus employmentStatus, bool isManager, EmployeeType employeeType, DateTime hiredDate, DateTime? retirementEligibilityDate, String? entryBy, DateTime? entryDate, List<EmployeeContactModel> employeeContacts, List<EmployeeDependantModel> employeeDependants, List<EmployeeEducationModel> employeeEducations, List<EmployeeExperienceModel> employeeExperiences, List<EmployeePerformanceModel> performances, List<EmployeeSpouseModel> employeeSpouse, List<EmployeeUploadModel> generalDocuments
+ String employeeId, StaffTitle? title, String firstName, String? fatherName, String? grandName, Gender gender, DateTime birthDate,@JsonKey(includeFromJson: false, includeToJson: false) File? photoFile, String? photoUrl, String? motherName, String positionId, String? managerId, String? address1, String? address2, String? houseNumber, String? phone, String mobile, String email, Country nationality, BloodGroup bloodGroup, Religion religion, MedicalStatus medicalStatus, String? retirementNumber, String? tin, MaritalStatus maritalStatus, EmploymentStatus employmentStatus, bool isManager, EmployeeType employeeType, DateTime hiredDate, DateTime? retirementEligibilityDate, String? entryBy, DateTime? entryDate, List<EmployeeContactModel> employeeContacts, List<EmployeeDependantModel> employeeDependants, List<EmployeeEducationModel> employeeEducations, List<EmployeeExperienceModel> employeeExperiences, List<EmployeePerformanceModel> performances, List<EmployeeSpouseModel> employeeSpouse, List<EmployeeUploadModel> generalDocuments
 });
 
 
@@ -91,7 +91,7 @@ class _$EmployeeInfoModelCopyWithImpl<$Res>
 
 /// Create a copy of EmployeeInfoModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? employeeId = null,Object? title = freezed,Object? firstName = null,Object? fatherName = freezed,Object? grandName = freezed,Object? gender = null,Object? birthDate = null,Object? photoFile = freezed,Object? photoUrl = freezed,Object? motherName = freezed,Object? positionId = null,Object? managerId = freezed,Object? address1 = null,Object? address2 = freezed,Object? houseNumber = freezed,Object? phone = null,Object? mobile = null,Object? email = null,Object? nationality = null,Object? bloodGroup = null,Object? religion = null,Object? medicalStatus = null,Object? retirementNumber = freezed,Object? tin = freezed,Object? maritalStatus = null,Object? employmentStatus = null,Object? isManager = null,Object? employeeType = null,Object? hiredDate = null,Object? retirementEligibilityDate = freezed,Object? entryBy = freezed,Object? entryDate = freezed,Object? employeeContacts = null,Object? employeeDependants = null,Object? employeeEducations = null,Object? employeeExperiences = null,Object? performances = null,Object? employeeSpouse = null,Object? generalDocuments = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? employeeId = null,Object? title = freezed,Object? firstName = null,Object? fatherName = freezed,Object? grandName = freezed,Object? gender = null,Object? birthDate = null,Object? photoFile = freezed,Object? photoUrl = freezed,Object? motherName = freezed,Object? positionId = null,Object? managerId = freezed,Object? address1 = freezed,Object? address2 = freezed,Object? houseNumber = freezed,Object? phone = freezed,Object? mobile = null,Object? email = null,Object? nationality = null,Object? bloodGroup = null,Object? religion = null,Object? medicalStatus = null,Object? retirementNumber = freezed,Object? tin = freezed,Object? maritalStatus = null,Object? employmentStatus = null,Object? isManager = null,Object? employeeType = null,Object? hiredDate = null,Object? retirementEligibilityDate = freezed,Object? entryBy = freezed,Object? entryDate = freezed,Object? employeeContacts = null,Object? employeeDependants = null,Object? employeeEducations = null,Object? employeeExperiences = null,Object? performances = null,Object? employeeSpouse = null,Object? generalDocuments = null,}) {
   return _then(_self.copyWith(
 employeeId: null == employeeId ? _self.employeeId : employeeId // ignore: cast_nullable_to_non_nullable
 as String,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
@@ -105,11 +105,11 @@ as File?,photoUrl: freezed == photoUrl ? _self.photoUrl : photoUrl // ignore: ca
 as String?,motherName: freezed == motherName ? _self.motherName : motherName // ignore: cast_nullable_to_non_nullable
 as String?,positionId: null == positionId ? _self.positionId : positionId // ignore: cast_nullable_to_non_nullable
 as String,managerId: freezed == managerId ? _self.managerId : managerId // ignore: cast_nullable_to_non_nullable
-as String?,address1: null == address1 ? _self.address1 : address1 // ignore: cast_nullable_to_non_nullable
-as String,address2: freezed == address2 ? _self.address2 : address2 // ignore: cast_nullable_to_non_nullable
+as String?,address1: freezed == address1 ? _self.address1 : address1 // ignore: cast_nullable_to_non_nullable
+as String?,address2: freezed == address2 ? _self.address2 : address2 // ignore: cast_nullable_to_non_nullable
 as String?,houseNumber: freezed == houseNumber ? _self.houseNumber : houseNumber // ignore: cast_nullable_to_non_nullable
-as String?,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
-as String,mobile: null == mobile ? _self.mobile : mobile // ignore: cast_nullable_to_non_nullable
+as String?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
+as String?,mobile: null == mobile ? _self.mobile : mobile // ignore: cast_nullable_to_non_nullable
 as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,nationality: null == nationality ? _self.nationality : nationality // ignore: cast_nullable_to_non_nullable
 as Country,bloodGroup: null == bloodGroup ? _self.bloodGroup : bloodGroup // ignore: cast_nullable_to_non_nullable
@@ -143,7 +143,7 @@ as List<EmployeeUploadModel>,
 @JsonSerializable()
 
 class _EmployeeInfoModel extends EmployeeInfoModel {
-  const _EmployeeInfoModel({required this.employeeId, this.title, required this.firstName, this.fatherName, this.grandName, required this.gender, required this.birthDate, @JsonKey(includeFromJson: false, includeToJson: false) this.photoFile, this.photoUrl, this.motherName, required this.positionId, this.managerId, required this.address1, this.address2, this.houseNumber, required this.phone, required this.mobile, required this.email, this.nationality = Country.ethiopia, this.bloodGroup = BloodGroup.unknown, this.religion = Religion.other, this.medicalStatus = MedicalStatus.pending, this.retirementNumber, this.tin, this.maritalStatus = MaritalStatus.single, this.employmentStatus = EmploymentStatus.active, this.isManager = false, this.employeeType = EmployeeType.military, required this.hiredDate, this.retirementEligibilityDate, this.entryBy, this.entryDate, final  List<EmployeeContactModel> employeeContacts = const [], final  List<EmployeeDependantModel> employeeDependants = const [], final  List<EmployeeEducationModel> employeeEducations = const [], final  List<EmployeeExperienceModel> employeeExperiences = const [], final  List<EmployeePerformanceModel> performances = const [], final  List<EmployeeSpouseModel> employeeSpouse = const [], final  List<EmployeeUploadModel> generalDocuments = const []}): _employeeContacts = employeeContacts,_employeeDependants = employeeDependants,_employeeEducations = employeeEducations,_employeeExperiences = employeeExperiences,_performances = performances,_employeeSpouse = employeeSpouse,_generalDocuments = generalDocuments,super._();
+  const _EmployeeInfoModel({required this.employeeId, this.title, required this.firstName, this.fatherName, this.grandName, required this.gender, required this.birthDate, @JsonKey(includeFromJson: false, includeToJson: false) this.photoFile, this.photoUrl, this.motherName, required this.positionId, this.managerId, this.address1, this.address2, this.houseNumber, this.phone, required this.mobile, required this.email, this.nationality = Country.ethiopia, this.bloodGroup = BloodGroup.unknown, this.religion = Religion.other, this.medicalStatus = MedicalStatus.pending, this.retirementNumber, this.tin, this.maritalStatus = MaritalStatus.single, this.employmentStatus = EmploymentStatus.active, this.isManager = false, this.employeeType = EmployeeType.military, required this.hiredDate, this.retirementEligibilityDate, this.entryBy, this.entryDate, final  List<EmployeeContactModel> employeeContacts = const [], final  List<EmployeeDependantModel> employeeDependants = const [], final  List<EmployeeEducationModel> employeeEducations = const [], final  List<EmployeeExperienceModel> employeeExperiences = const [], final  List<EmployeePerformanceModel> performances = const [], final  List<EmployeeSpouseModel> employeeSpouse = const [], final  List<EmployeeUploadModel> generalDocuments = const []}): _employeeContacts = employeeContacts,_employeeDependants = employeeDependants,_employeeEducations = employeeEducations,_employeeExperiences = employeeExperiences,_performances = performances,_employeeSpouse = employeeSpouse,_generalDocuments = generalDocuments,super._();
   factory _EmployeeInfoModel.fromJson(Map<String, dynamic> json) => _$EmployeeInfoModelFromJson(json);
 
 // Identifying Information
@@ -169,10 +169,10 @@ class _EmployeeInfoModel extends EmployeeInfoModel {
 @override final  String? managerId;
 // Foreign key to another EmployeeInfo (self-referential)
 // Contact & Address Details
-@override final  String address1;
+@override final  String? address1;
 @override final  String? address2;
 @override final  String? houseNumber;
-@override final  String phone;
+@override final  String? phone;
 @override final  String mobile;
 @override final  String email;
 // C# [Required]
@@ -288,7 +288,7 @@ abstract mixin class _$EmployeeInfoModelCopyWith<$Res> implements $EmployeeInfoM
   factory _$EmployeeInfoModelCopyWith(_EmployeeInfoModel value, $Res Function(_EmployeeInfoModel) _then) = __$EmployeeInfoModelCopyWithImpl;
 @override @useResult
 $Res call({
- String employeeId, StaffTitle? title, String firstName, String? fatherName, String? grandName, Gender gender, DateTime birthDate,@JsonKey(includeFromJson: false, includeToJson: false) File? photoFile, String? photoUrl, String? motherName, String positionId, String? managerId, String address1, String? address2, String? houseNumber, String phone, String mobile, String email, Country nationality, BloodGroup bloodGroup, Religion religion, MedicalStatus medicalStatus, String? retirementNumber, String? tin, MaritalStatus maritalStatus, EmploymentStatus employmentStatus, bool isManager, EmployeeType employeeType, DateTime hiredDate, DateTime? retirementEligibilityDate, String? entryBy, DateTime? entryDate, List<EmployeeContactModel> employeeContacts, List<EmployeeDependantModel> employeeDependants, List<EmployeeEducationModel> employeeEducations, List<EmployeeExperienceModel> employeeExperiences, List<EmployeePerformanceModel> performances, List<EmployeeSpouseModel> employeeSpouse, List<EmployeeUploadModel> generalDocuments
+ String employeeId, StaffTitle? title, String firstName, String? fatherName, String? grandName, Gender gender, DateTime birthDate,@JsonKey(includeFromJson: false, includeToJson: false) File? photoFile, String? photoUrl, String? motherName, String positionId, String? managerId, String? address1, String? address2, String? houseNumber, String? phone, String mobile, String email, Country nationality, BloodGroup bloodGroup, Religion religion, MedicalStatus medicalStatus, String? retirementNumber, String? tin, MaritalStatus maritalStatus, EmploymentStatus employmentStatus, bool isManager, EmployeeType employeeType, DateTime hiredDate, DateTime? retirementEligibilityDate, String? entryBy, DateTime? entryDate, List<EmployeeContactModel> employeeContacts, List<EmployeeDependantModel> employeeDependants, List<EmployeeEducationModel> employeeEducations, List<EmployeeExperienceModel> employeeExperiences, List<EmployeePerformanceModel> performances, List<EmployeeSpouseModel> employeeSpouse, List<EmployeeUploadModel> generalDocuments
 });
 
 
@@ -305,7 +305,7 @@ class __$EmployeeInfoModelCopyWithImpl<$Res>
 
 /// Create a copy of EmployeeInfoModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? employeeId = null,Object? title = freezed,Object? firstName = null,Object? fatherName = freezed,Object? grandName = freezed,Object? gender = null,Object? birthDate = null,Object? photoFile = freezed,Object? photoUrl = freezed,Object? motherName = freezed,Object? positionId = null,Object? managerId = freezed,Object? address1 = null,Object? address2 = freezed,Object? houseNumber = freezed,Object? phone = null,Object? mobile = null,Object? email = null,Object? nationality = null,Object? bloodGroup = null,Object? religion = null,Object? medicalStatus = null,Object? retirementNumber = freezed,Object? tin = freezed,Object? maritalStatus = null,Object? employmentStatus = null,Object? isManager = null,Object? employeeType = null,Object? hiredDate = null,Object? retirementEligibilityDate = freezed,Object? entryBy = freezed,Object? entryDate = freezed,Object? employeeContacts = null,Object? employeeDependants = null,Object? employeeEducations = null,Object? employeeExperiences = null,Object? performances = null,Object? employeeSpouse = null,Object? generalDocuments = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? employeeId = null,Object? title = freezed,Object? firstName = null,Object? fatherName = freezed,Object? grandName = freezed,Object? gender = null,Object? birthDate = null,Object? photoFile = freezed,Object? photoUrl = freezed,Object? motherName = freezed,Object? positionId = null,Object? managerId = freezed,Object? address1 = freezed,Object? address2 = freezed,Object? houseNumber = freezed,Object? phone = freezed,Object? mobile = null,Object? email = null,Object? nationality = null,Object? bloodGroup = null,Object? religion = null,Object? medicalStatus = null,Object? retirementNumber = freezed,Object? tin = freezed,Object? maritalStatus = null,Object? employmentStatus = null,Object? isManager = null,Object? employeeType = null,Object? hiredDate = null,Object? retirementEligibilityDate = freezed,Object? entryBy = freezed,Object? entryDate = freezed,Object? employeeContacts = null,Object? employeeDependants = null,Object? employeeEducations = null,Object? employeeExperiences = null,Object? performances = null,Object? employeeSpouse = null,Object? generalDocuments = null,}) {
   return _then(_EmployeeInfoModel(
 employeeId: null == employeeId ? _self.employeeId : employeeId // ignore: cast_nullable_to_non_nullable
 as String,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
@@ -319,11 +319,11 @@ as File?,photoUrl: freezed == photoUrl ? _self.photoUrl : photoUrl // ignore: ca
 as String?,motherName: freezed == motherName ? _self.motherName : motherName // ignore: cast_nullable_to_non_nullable
 as String?,positionId: null == positionId ? _self.positionId : positionId // ignore: cast_nullable_to_non_nullable
 as String,managerId: freezed == managerId ? _self.managerId : managerId // ignore: cast_nullable_to_non_nullable
-as String?,address1: null == address1 ? _self.address1 : address1 // ignore: cast_nullable_to_non_nullable
-as String,address2: freezed == address2 ? _self.address2 : address2 // ignore: cast_nullable_to_non_nullable
+as String?,address1: freezed == address1 ? _self.address1 : address1 // ignore: cast_nullable_to_non_nullable
+as String?,address2: freezed == address2 ? _self.address2 : address2 // ignore: cast_nullable_to_non_nullable
 as String?,houseNumber: freezed == houseNumber ? _self.houseNumber : houseNumber // ignore: cast_nullable_to_non_nullable
-as String?,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
-as String,mobile: null == mobile ? _self.mobile : mobile // ignore: cast_nullable_to_non_nullable
+as String?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
+as String?,mobile: null == mobile ? _self.mobile : mobile // ignore: cast_nullable_to_non_nullable
 as String,email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String,nationality: null == nationality ? _self.nationality : nationality // ignore: cast_nullable_to_non_nullable
 as Country,bloodGroup: null == bloodGroup ? _self.bloodGroup : bloodGroup // ignore: cast_nullable_to_non_nullable

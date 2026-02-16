@@ -1667,4 +1667,16 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get personalDetails => 'የግል ዝርዝሮች';
+
+  @override
+  String get staffId => 'የሰራተኛ መለያ';
+
+  @override
+  String get level => 'ደረጃ';
+
+  @override
+  String get scale => 'ስኬል';
+
+  @override
+  String get manager => 'ሃላፊ';
 }

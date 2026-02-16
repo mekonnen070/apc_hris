@@ -30,9 +30,9 @@ class _ServerSetupScreenState extends ConsumerState<ServerSetupScreen> {
     super.initState();
     // Pre-fill the fields with existing data if it exists.
     final initialConfig = ref.read(serverConfigProvider).valueOrNull;
-    _ipController = TextEditingController(text: initialConfig?.ip ?? '192.168.8.130');
+    _ipController = TextEditingController(text: initialConfig?.ip ?? '196.190.116.240');
     _portController = TextEditingController(
-      text: initialConfig?.port.toString() ?? '7153',
+      text: initialConfig?.port.toString() ?? '8181',
     );
   }
 

@@ -20,10 +20,10 @@ _EmployeeInfoModel _$EmployeeInfoModelFromJson(
   motherName: json['motherName'] as String?,
   positionId: json['positionId'] as String,
   managerId: json['managerId'] as String?,
-  address1: json['address1'] as String,
+  address1: json['address1'] as String?,
   address2: json['address2'] as String?,
   houseNumber: json['houseNumber'] as String?,
-  phone: json['phone'] as String,
+  phone: json['phone'] as String?,
   mobile: json['mobile'] as String,
   email: json['email'] as String,
   nationality:

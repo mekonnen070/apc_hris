@@ -42,21 +42,23 @@ class ProfileScreen extends ConsumerWidget {
                         label: context.lango.email,
                         value: employee.email,
                       ),
-                      _InfoTile(
-                        icon: Icons.phone_outlined,
-                        label: context.lango.phoneNumber,
-                        value: employee.phone,
-                      ),
+                      if (employee.phone != null)
+                        _InfoTile(
+                          icon: Icons.phone_outlined,
+                          label: context.lango.phoneNumber,
+                          value: '${employee.phone}',
+                        ),
                       _InfoTile(
                         icon: Icons.phone_android_outlined,
                         label: context.lango.mobileNumber,
                         value: employee.mobile,
                       ),
-                      _InfoTile(
-                        icon: Icons.location_on_outlined,
-                        label: context.lango.address,
-                        value: employee.address1,
-                      ),
+                      if (employee.address1 != null)
+                        _InfoTile(
+                          icon: Icons.location_on_outlined,
+                          label: context.lango.address,
+                          value: '${employee.address1}',
+                        ),
                     ],
                   ),
                   const SizedBox(height: 24),

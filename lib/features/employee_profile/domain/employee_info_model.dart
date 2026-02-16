@@ -52,10 +52,10 @@ abstract class EmployeeInfoModel with _$EmployeeInfoModel {
     required String positionId, // Foreign key to CommissionDesignation
     String? managerId, // Foreign key to another EmployeeInfo (self-referential)
     // Contact & Address Details
-    required String address1,
+    String? address1,
     String? address2,
     String? houseNumber,
-    required String phone,
+    String? phone,
     required String mobile,
     required String email, // C# [Required]
     // Other Attributes
@@ -97,7 +97,7 @@ abstract class EmployeeInfoModel with _$EmployeeInfoModel {
 
   String get computedFullName {
     final parts = [firstName, fatherName, grandName];
-    return parts  
+    return parts
         .where((part) => part != null && part.isNotEmpty)
         .join(' ')
         .trim();

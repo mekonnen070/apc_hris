@@ -28,9 +28,9 @@ class PersonalInfoTab extends ConsumerWidget {
             value: employeeInfo.computedFullName,
           ),
           ProfileDetailItem(label: context.lango.email, value: employeeInfo.email), // <-- REPLACED
-          ProfileDetailItem(label: context.lango.phone, value: employeeInfo.phone), // <-- REPLACED
+          ProfileDetailItem(label: context.lango.phone, value: '${employeeInfo.phone}'), // <-- REPLACED
           ProfileDetailItem(label: context.lango.mobileNumber, value: employeeInfo.mobile), // <-- REPLACED
-          ProfileDetailItem(label: context.lango.address, value: employeeInfo.address1), // <-- REPLACED
+          ProfileDetailItem(label: context.lango.address, value: '${employeeInfo.address1}, ${employeeInfo.address2}'), // <-- REPLACED
           const Divider(height: 32),
           ProfileDetailItem(
             label: context.lango.birthDate, // <-- REPLACED

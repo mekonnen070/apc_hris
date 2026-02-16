@@ -1,5 +1,7 @@
 // lib/main.dart
 
+import 'dart:io';
+
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +14,7 @@ import 'package:police_com/core/l10n/generated/app_localizations.dart';
 import 'package:police_com/core/l10n/l10n.dart';
 import 'package:police_com/core/l10n/language_controller.dart';
 import 'package:police_com/core/navigation/app_orchestrator.dart';
+import 'package:police_com/core/network/dev_http_overrides.dart'; // TODO: Rename file when proper certs are deployed.
 import 'package:police_com/core/network/dio_client.dart';
 import 'package:police_com/core/theme/app_theme_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,6 +24,9 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // TODO: Remove once proper SSL certificates are deployed on all servers.
+  HttpOverrides.global = UnsafeSslOverrides();
 
   // Initialize services that must be available before the app starts.
   final sharedPreferences = await SharedPreferences.getInstance();
@@ -68,7 +74,7 @@ class MyApp extends ConsumerWidget {
         initTheme: themeData,
         duration: const Duration(milliseconds: 500),
         builder: (_, theme) {
-          return MaterialApp( 
+          return MaterialApp(
             theme: theme,
             home: const AppOrchestrator(),
             navigatorKey: navigatorKey,

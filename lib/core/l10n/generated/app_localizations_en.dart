@@ -1695,4 +1695,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get personalDetails => 'Personal Details';
+
+  @override
+  String get staffId => 'Staff ID';
+
+  @override
+  String get level => 'Level';
+
+  @override
+  String get scale => 'Scale';
+
+  @override
+  String get manager => 'Manager';
 }

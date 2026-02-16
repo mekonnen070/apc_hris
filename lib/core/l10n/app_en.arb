@@ -841,5 +841,9 @@
   "changeServer": "Change Server",
   "userNotFound": "User not found",
   "contactInformation" : "Contact Information",
-  "personalDetails" : "Personal Details"
+  "personalDetails" : "Personal Details",
+  "staffId": "Staff ID",
+  "level": "Level",
+  "scale": "Scale",
+  "manager": "Manager"
 }

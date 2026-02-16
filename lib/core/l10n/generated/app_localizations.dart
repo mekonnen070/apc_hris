@@ -3226,6 +3226,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Personal Details'**
   String get personalDetails;
+
+  /// No description provided for @staffId.
+  ///
+  /// In en, this message translates to:
+  /// **'Staff ID'**
+  String get staffId;
+
+  /// No description provided for @level.
+  ///
+  /// In en, this message translates to:
+  /// **'Level'**
+  String get level;
+
+  /// No description provided for @scale.
+  ///
+  /// In en, this message translates to:
+  /// **'Scale'**
+  String get scale;
+
+  /// No description provided for @manager.
+  ///
+  /// In en, this message translates to:
+  /// **'Manager'**
+  String get manager;
 }
 
 class _AppLocalizationsDelegate

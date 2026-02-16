@@ -842,5 +842,9 @@
     "changeServer": "ሰርቨር ቀይር",
     "userNotFound": "ተጠቃሚ አልተገኘም።",
     "personalDetails": "የግል ዝርዝሮች",
-    "contactInformation": "የአድራሻ መረጃ"
+    "contactInformation": "የአድራሻ መረጃ",
+    "staffId": "የሰራተኛ መለያ",
+    "level": "ደረጃ",
+    "scale": "ስኬል",
+    "manager": "ሃላፊ"
 }

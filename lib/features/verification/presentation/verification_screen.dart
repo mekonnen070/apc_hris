@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:police_com/core/config/server_config/server_config_notifier.dart';
 import 'package:police_com/core/extensions/context_extension.dart';
 import 'package:police_com/features/verification/application/verification_providers.dart';
 import 'package:police_com/features/verification/presentation/qr_scanner_screen.dart';
@@ -15,6 +18,11 @@ class VerificationScreen extends HookConsumerWidget {
     final searchController = useTextEditingController();
     final verificationState = ref.watch(verifyEmployeeProvider);
     final notifier = ref.read(verifyEmployeeProvider.notifier);
+    final serverConfig = ref.watch(serverConfigProvider).valueOrNull;
+    final baseUrl =
+        serverConfig != null
+            ? 'https://${serverConfig.ip}:${serverConfig.port}'
+            : '';
     final previousState = usePrevious(verificationState);
 
     // useEffect to handle showing toast notifications for errors
@@ -70,8 +78,37 @@ class VerificationScreen extends HookConsumerWidget {
                             ),
                           );
                           if (qrCode != null && qrCode.isNotEmpty) {
-                            searchController.text = qrCode;
-                            notifier.searchEmployee(qrCode);
+                            String? employeeId;
+                            try {
+                              final decoded = jsonDecode(qrCode);
+                              if (decoded is Map<String, dynamic> &&
+                                  decoded.containsKey('መለያ')) {
+                                employeeId = decoded['መለያ'] as String?;
+                              }
+                            } catch (_) {
+                              // Not valid JSON — treat as plain employee ID.
+                              employeeId = qrCode;
+                            }
+
+                            if (employeeId != null &&
+                                employeeId.trim().isNotEmpty &&
+                                employeeId.length <= 100) {
+                              searchController.text = employeeId;
+                              notifier.searchEmployee(employeeId);
+                            } else if (context.mounted) {
+                              toastification.show(
+                                context: context,
+                                title: Text(context.lango.verificationError),
+                                description: Text(
+                                  context.lango.verificationErrorNotFound,
+                                ),
+                                type: ToastificationType.error,
+                                style: ToastificationStyle.fillColored,
+                                autoCloseDuration: const Duration(seconds: 5),
+                                showProgressBar: true,
+                                icon: const Icon(Icons.error_outline),
+                              );
+                            }
                           }
                         },
                       ),
@@ -93,7 +130,10 @@ class VerificationScreen extends HookConsumerWidget {
                       }
                       return Column(
                         children: [
-                          VerificationResultWidget(employee: employee),
+                          VerificationResultWidget(
+                            employee: employee,
+                            baseUrl: baseUrl,
+                          ),
                           const SizedBox(height: 16),
                           FilledButton.icon(
                             onPressed: () {

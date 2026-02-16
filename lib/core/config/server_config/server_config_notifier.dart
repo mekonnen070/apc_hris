@@ -3,10 +3,10 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:police_com/core/constants/app_constants.dart';
-import 'package:police_com/core/network/dio_client.dart'; // Keep for sharedPreferencesProvider
+import 'package:police_com/core/network/dio_client.dart';
+import 'package:police_com/features/auth/application/auth_notifier.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'server_config.dart';
@@ -15,13 +15,15 @@ final serverConfigProvider =
     StateNotifierProvider<ServerConfigNotifier, AsyncValue<ServerConfig?>>((
       ref,
     ) {
-      return ServerConfigNotifier(ref.watch(sharedPreferencesProvider));
+      return ServerConfigNotifier(ref);
     });
 
 class ServerConfigNotifier extends StateNotifier<AsyncValue<ServerConfig?>> {
-  final SharedPreferences _prefs;
+  final Ref _ref;
 
-  ServerConfigNotifier(this._prefs) : super(const AsyncValue.loading()) {
+  SharedPreferences get _prefs => _ref.read(sharedPreferencesProvider);
+
+  ServerConfigNotifier(this._ref) : super(const AsyncValue.loading()) {
     _loadConfig();
   }
 
@@ -45,21 +47,17 @@ class ServerConfigNotifier extends StateNotifier<AsyncValue<ServerConfig?>> {
     // Use the correct `https` protocol to match the working configuration.
     final url = 'https://${config.ip}:${config.port}';
 
-    // --- THE FIX: PART 2 ---
-    // In debug mode, we must configure this temporary Dio instance to trust
-    // the self-signed certificate, just like the main DioClient does.
-    if (kDebugMode) {
-      (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
-        final client = HttpClient();
-        client.badCertificateCallback = (cert, host, port) => true;
-        return client;
-      };
-    }
+    // TODO: Remove once proper SSL certificates are deployed on all servers.
+    (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
+      final client = HttpClient();
+      client.badCertificateCallback = (cert, host, port) => true;
+      return client;
+    };
     //
     try {
       // We don't need to check the status code; a successful response is enough.
       // A simple ping to the base URL is sufficient.
-      await dio.get(url).timeout(const Duration(seconds: 5));
+      await dio.get(url).timeout(const Duration(seconds: 10));
 
       // If the request succeeds, save the config.
       await _prefs.setString(AppConstants.kServerIpKey, config.ip);
@@ -86,6 +84,20 @@ class ServerConfigNotifier extends StateNotifier<AsyncValue<ServerConfig?>> {
   }
 
   Future<void> setConfig(ServerConfig config) async {
+    final previousConfig = state.valueOrNull;
+    final serverChanged =
+        previousConfig != null &&
+        (previousConfig.ip != config.ip || previousConfig.port != config.port);
+
+    if (serverChanged) {
+      log(
+        'Server changed from ${previousConfig.ip}:${previousConfig.port} '
+        'to ${config.ip}:${config.port}. Logging out.',
+      );
+      await _ref.read(authNotifierProvider.notifier).logout();
+      await _ref.read(cookieJarProvider).deleteAll();
+    }
+
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() => _testAndSetConfig(config));
   }
