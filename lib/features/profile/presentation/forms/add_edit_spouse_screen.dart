@@ -23,9 +23,7 @@ class AddEditSpouseScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final formKey = useMemoized(() => GlobalKey<FormState>());
-    final titleController = useTextEditingController(
-      text: initialSpouse?.title?.name ?? '',
-    );
+    final selectedTitle = useState<StaffTitle?>(initialSpouse?.title);
     final fullNameController = useTextEditingController(
       text: initialSpouse?.spouseFullName ?? '',
     );
@@ -58,9 +56,7 @@ class AddEditSpouseScreen extends HookConsumerWidget {
         final spouse = EmployeeSpouseModel(
           spouseId: initialSpouse?.spouseId,
           employeeId: employeeId,
-          title: StaffTitle.values.firstWhere(
-            (e) => e.name == titleController.text,
-          ),
+          title: selectedTitle.value,
           spouseFullName: fullNameController.text,
           gender: selectedGender.value,
           spouseBirthDate: birthDate.value!,
@@ -98,15 +94,21 @@ class AddEditSpouseScreen extends HookConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                AppTextField(
-                  controller: titleController,
-                  labelText: context.lango.titleLabel, // <-- REPLACED
+                AppDropdownField<StaffTitle>(
+                  labelText: context.lango.titleLabel,
+                  value: selectedTitle.value,
+                  items:
+                      StaffTitle.values.map((StaffTitle value) {
+                        return DropdownMenuItem<StaffTitle>(
+                          value: value,
+                          child: Text(value.name.toDisplayCase()),
+                        );
+                      }).toList(),
+                  onChanged: (val) => selectedTitle.value = val,
                   validator:
                       (val) =>
-                          (val == null || val.isEmpty)
-                              ? context
-                                  .lango
-                                  .titleIsRequired // <-- REPLACED
+                          val == null
+                              ? context.lango.titleIsRequired
                               : null,
                 ),
                 const SizedBox(height: 16),

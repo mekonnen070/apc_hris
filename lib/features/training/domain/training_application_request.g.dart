@@ -9,6 +9,7 @@ part of 'training_application_request.dart';
 _TrainingApplicationRequest _$TrainingApplicationRequestFromJson(
   Map<String, dynamic> json,
 ) => _TrainingApplicationRequest(
+  id: (json['id'] as num?)?.toInt() ?? 0,
   applicantId: json['applicantId'] as String,
   appliedFor: (json['appliedFor'] as num).toInt(),
   applicantStatus: $enumDecode(
@@ -27,6 +28,7 @@ _TrainingApplicationRequest _$TrainingApplicationRequestFromJson(
 Map<String, dynamic> _$TrainingApplicationRequestToJson(
   _TrainingApplicationRequest instance,
 ) => <String, dynamic>{
+  'id': instance.id,
   'applicantId': instance.applicantId,
   'appliedFor': instance.appliedFor,
   'applicantStatus': _$ApplicantStatusEnumMap[instance.applicantStatus]!,

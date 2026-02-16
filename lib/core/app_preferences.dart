@@ -2,23 +2,82 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:police_com/core/constants/app_constants.dart';
 import 'package:police_com/core/enums/lango_enum.dart';
 import 'package:police_com/core/theme/theme_strings.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// The Architect's Note:
-// A provider is the correct way to expose this class to the rest of the app.
-// This prevents direct instantiation and improves testability.
 final appPreferencesProvider = Provider<AppPreferences>((ref) {
   return AppPreferences();
 });
 
 /// A class that handles application preferences such as theme mode, language,
-/// and now, user authentication state.
+/// and user authentication state.
+///
+/// Sensitive auth data (employee IDs, login status) is stored in
+/// [FlutterSecureStorage] and cached in memory after [loadAuthData] is called.
 class AppPreferences {
-  /// Sets the theme mode in shared preferences.
-  ///
+  static const _secureStorage = FlutterSecureStorage();
+
+  // In-memory cache populated by [loadAuthData] at startup.
+  String? _employeeId;
+  String? _employeeUserId;
+  bool _isLoggedIn = false;
+
+  /// Must be called once at app startup to hydrate the in-memory cache
+  /// from secure storage. Includes one-time migration from SharedPreferences
+  /// for users upgrading from previous versions.
+  Future<void> loadAuthData() async {
+    _employeeId = await _secureStorage.read(key: AppConstants.kEmployeeIdKey);
+    _employeeUserId = await _secureStorage.read(
+      key: AppConstants.kEmployeeUserIdKey,
+    );
+    final loginStr = await _secureStorage.read(key: AppConstants.isLoggedInKey);
+
+    // One-time migration from SharedPreferences → SecureStorage
+    if (_employeeId == null && _employeeUserId == null && loginStr == null) {
+      final prefs = await SharedPreferences.getInstance();
+      final legacyId = prefs.getString(AppConstants.kEmployeeIdKey);
+      final legacyUserId = prefs.getString(AppConstants.kEmployeeUserIdKey);
+      final legacyLoginBool = prefs.getBool(AppConstants.isLoggedInKey);
+      final legacyLogin = legacyLoginBool?.toString();
+
+      if (legacyId != null || legacyUserId != null || legacyLogin != null) {
+        if (legacyId != null) {
+          _employeeId = legacyId;
+          await _secureStorage.write(
+            key: AppConstants.kEmployeeIdKey,
+            value: legacyId,
+          );
+          await prefs.remove(AppConstants.kEmployeeIdKey);
+        }
+        if (legacyUserId != null) {
+          _employeeUserId = legacyUserId;
+          await _secureStorage.write(
+            key: AppConstants.kEmployeeUserIdKey,
+            value: legacyUserId,
+          );
+          await prefs.remove(AppConstants.kEmployeeUserIdKey);
+        }
+        if (legacyLogin != null) {
+          await _secureStorage.write(
+            key: AppConstants.isLoggedInKey,
+            value: legacyLogin,
+          );
+          await prefs.remove(AppConstants.isLoggedInKey);
+        }
+      }
+    }
+
+    _isLoggedIn =
+        (loginStr ??
+            await _secureStorage.read(key: AppConstants.isLoggedInKey)) ==
+        'true';
+  }
+
+  // --- Theme (non-sensitive, stays in SharedPreferences) ---
+
   Future<void> setThemeMode(ThemeMode themeMode) async {
     final prefs = await SharedPreferences.getInstance();
     String themeString;
@@ -35,8 +94,6 @@ class AppPreferences {
     await prefs.setString(AppConstants.themeKey, themeString);
   }
 
-  /// Gets the theme mode from shared preferences.
-  ///
   ThemeMode getThemeMode(SharedPreferences prefs) {
     final themeString = prefs.getString(AppConstants.themeKey);
     if (themeString == ThemeStrings.light) return ThemeMode.light;
@@ -44,15 +101,13 @@ class AppPreferences {
     return ThemeMode.system;
   }
 
-  /// Sets the language in shared preferences.
-  ///
+  // --- Language (non-sensitive, stays in SharedPreferences) ---
+
   Future<void> setLanguage(String language) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(AppConstants.languageKey, language);
   }
 
-  /// Gets the language from shared preferences.
-  ///
   Lango getLanguage(SharedPreferences prefs) {
     final languageString = prefs.getString(AppConstants.languageKey);
     if (languageString == null) {
@@ -65,65 +120,59 @@ class AppPreferences {
     }
   }
 
-  /// sets user login status
-  Future<void> setUserLoginStatus(bool isLoggedIn, SharedPreferences prefs) async {
-    await prefs.setBool(AppConstants.isLoggedInKey, isLoggedIn);
-  }
+  // --- Auth State (sensitive, stored in FlutterSecureStorage) ---
 
-  /// gets user login status
-  bool getUserLoginStatus(SharedPreferences prefs) {
-    return prefs.getBool(AppConstants.isLoggedInKey) ?? false;
-  }
-
-  // --- Auth State Management ---
-  Future<void> setLoginStatus(
+  Future<void> setUserLoginStatus(
     bool isLoggedIn,
     SharedPreferences prefs,
   ) async {
-    await prefs.setBool(AppConstants.isLoggedInKey, isLoggedIn);
+    _isLoggedIn = isLoggedIn;
+    await _secureStorage.write(
+      key: AppConstants.isLoggedInKey,
+      value: isLoggedIn.toString(),
+    );
   }
 
-  bool getLoginStatus(SharedPreferences prefs) {
-    return prefs.getBool(AppConstants.isLoggedInKey) ?? false;
+  bool getUserLoginStatus(SharedPreferences prefs) {
+    return _isLoggedIn;
   }
 
-  Future<void> setToken(String token, SharedPreferences prefs) async {
-    await prefs.setString(AppConstants.kAuthTokenKey, token);
+  Future<void> setEmployeeId(
+    String? employeeId,
+    SharedPreferences prefs,
+  ) async {
+    _employeeId = employeeId;
+    await _secureStorage.write(
+      key: AppConstants.kEmployeeIdKey,
+      value: employeeId,
+    );
   }
 
-  String? getToken(SharedPreferences prefs) {
-    return prefs.getString(AppConstants.kAuthTokenKey);
-  }
-
-  // The Architect's Note:
-  // These are the only methods needed for managing the user's identity.
-  // We store and retrieve the ID, nothing more.
-
-  /// Saves the employee ID to SharedPreferences.
-  Future<void> setEmployeeId(String employeeId, SharedPreferences prefs) async {
-    await prefs.setString(AppConstants.kEmployeeIdKey, employeeId);
-  }
-
-  /// Retrieves the employee ID from SharedPreferences.
   String? getEmployeeId(SharedPreferences prefs) {
-    return prefs.getString(AppConstants.kEmployeeIdKey);
+    return _employeeId;
   }
 
-  /// Sets the employee User ID to SharedPreferences.
-  Future<void> setEmployeeUserId(String employeeUserId, SharedPreferences prefs) async {
-    await prefs.setString(AppConstants.kEmployeeUserIdKey, employeeUserId);
+  Future<void> setEmployeeUserId(
+    String? employeeUserId,
+    SharedPreferences prefs,
+  ) async {
+    _employeeUserId = employeeUserId;
+    await _secureStorage.write(
+      key: AppConstants.kEmployeeUserIdKey,
+      value: employeeUserId,
+    );
   }
 
-  /// Retrieves the employee User ID from SharedPreferences.
   String? getEmployeeUserId(SharedPreferences prefs) {
-    return prefs.getString(AppConstants.kEmployeeUserIdKey);
+    return _employeeUserId;
   }
 
-  /// Clears all authentication and user identity data.
   Future<void> clearAuthData(SharedPreferences prefs) async {
-    await prefs.remove(AppConstants.kAuthTokenKey);
-    await prefs.remove(AppConstants.kEmployeeIdKey);
-    await prefs.remove(AppConstants.kEmployeeUserIdKey);
-    await prefs.setBool(AppConstants.isLoggedInKey, false);
+    _employeeId = null;
+    _employeeUserId = null;
+    _isLoggedIn = false;
+    await _secureStorage.delete(key: AppConstants.kEmployeeIdKey);
+    await _secureStorage.delete(key: AppConstants.kEmployeeUserIdKey);
+    await _secureStorage.write(key: AppConstants.isLoggedInKey, value: 'false');
   }
 }

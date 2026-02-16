@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$User {
 
- String get userName; String get employeeId; String get userId;
+ String get userName; String? get employeeId; String get userId;
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $UserCopyWith<$Res>  {
   factory $UserCopyWith(User value, $Res Function(User) _then) = _$UserCopyWithImpl;
 @useResult
 $Res call({
- String userName, String employeeId, String userId
+ String userName, String? employeeId, String userId
 });
 
 
@@ -66,11 +66,11 @@ class _$UserCopyWithImpl<$Res>
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? userName = null,Object? employeeId = null,Object? userId = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? userName = null,Object? employeeId = freezed,Object? userId = null,}) {
   return _then(_self.copyWith(
 userName: null == userName ? _self.userName : userName // ignore: cast_nullable_to_non_nullable
-as String,employeeId: null == employeeId ? _self.employeeId : employeeId // ignore: cast_nullable_to_non_nullable
-as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,employeeId: freezed == employeeId ? _self.employeeId : employeeId // ignore: cast_nullable_to_non_nullable
+as String?,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -86,7 +86,7 @@ class _User implements User {
   factory _User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
 @override final  String userName;
-@override final  String employeeId;
+@override final  String? employeeId;
 @override final  String userId;
 
 /// Create a copy of User
@@ -122,7 +122,7 @@ abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$UserCopyWith(_User value, $Res Function(_User) _then) = __$UserCopyWithImpl;
 @override @useResult
 $Res call({
- String userName, String employeeId, String userId
+ String userName, String? employeeId, String userId
 });
 
 
@@ -139,11 +139,11 @@ class __$UserCopyWithImpl<$Res>
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? userName = null,Object? employeeId = null,Object? userId = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? userName = null,Object? employeeId = freezed,Object? userId = null,}) {
   return _then(_User(
 userName: null == userName ? _self.userName : userName // ignore: cast_nullable_to_non_nullable
-as String,employeeId: null == employeeId ? _self.employeeId : employeeId // ignore: cast_nullable_to_non_nullable
-as String,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
+as String,employeeId: freezed == employeeId ? _self.employeeId : employeeId // ignore: cast_nullable_to_non_nullable
+as String?,userId: null == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

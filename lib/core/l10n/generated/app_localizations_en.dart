@@ -18,7 +18,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get resetYourPassword => 'Reset Your Password';
 
   @override
-  String get enterEmailForPasswordReset => 'Enter your email to receive password reset instructions.';
+  String get enterEmailForPasswordReset =>
+      'Enter your email to receive password reset instructions.';
 
   @override
   String get email => 'Email';
@@ -42,7 +43,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get passwordResetSent => 'Password Reset Sent';
 
   @override
-  String get checkEmailForResetInstructions => 'Check your email for reset instructions.';
+  String get checkEmailForResetInstructions =>
+      'Check your email for reset instructions.';
 
   @override
   String get passwordResetFailed => 'Password Reset Failed';
@@ -81,7 +83,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get createAnAccount => 'Create an Account';
 
   @override
-  String get signUpWithEmailAndPassword => 'Sign up with your email and password';
+  String get signUpWithEmailAndPassword =>
+      'Sign up with your email and password';
 
   @override
   String get fullName => 'Full Name';
@@ -291,7 +294,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noApplicants => 'No Applicants';
 
   @override
-  String get noApplicantsForPlacement => 'There are no applicants for this placement yet.';
+  String get noApplicantsForPlacement =>
+      'There are no applicants for this placement yet.';
 
   @override
   String get applicants => 'Applicants';
@@ -396,7 +400,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dependants => 'Dependants';
 
   @override
-  String get noDependantsAvailable => 'No dependants available. Please add one.';
+  String get noDependantsAvailable =>
+      'No dependants available. Please add one.';
 
   @override
   String get addNewDependant => 'Add New Dependant';
@@ -408,7 +413,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get education => 'Education';
 
   @override
-  String get noEducationAvailable => 'No education history available. Please add one.';
+  String get noEducationAvailable =>
+      'No education history available. Please add one.';
 
   @override
   String get addNewEducation => 'Add New Education';
@@ -417,7 +423,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get experience => 'Experience';
 
   @override
-  String get noExperienceAvailable => 'No work experience available. Please add one.';
+  String get noExperienceAvailable =>
+      'No work experience available. Please add one.';
 
   @override
   String get addNewExperience => 'Add New Experience';
@@ -453,7 +460,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get spouse => 'Spouse';
 
   @override
-  String get noSpouseAvailable => 'No spouse information available. Please add one.';
+  String get noSpouseAvailable =>
+      'No spouse information available. Please add one.';
 
   @override
   String get addNewSpouse => 'Add New Spouse';
@@ -498,7 +506,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cost => 'Cost';
 
   @override
-  String get noApplicantsForTraining => 'There are no applicants for this training yet.';
+  String get noApplicantsForTraining =>
+      'There are no applicants for this training yet.';
 
   @override
   String get myTransferRequests => 'My Transfer Requests';
@@ -683,7 +692,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get accepted => 'Accepted';
 
   @override
-  String get clearanceRequestSubmitted => 'Clearance request submitted successfully';
+  String get clearanceRequestSubmitted =>
+      'Clearance request submitted successfully';
 
   @override
   String get failedToSubmitRequest => 'Failed to submit request: ';
@@ -745,7 +755,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get newPromotionRequest => 'New Promotion Request';
 
   @override
-  String fromToPosition({required String currentRank, required String name, required String newPosition}) {
+  String fromToPosition({
+    required String currentRank,
+    required String name,
+    required String newPosition,
+  }) {
     return 'From $currentRank $name for $newPosition position.';
   }
 
@@ -753,7 +767,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get resignationSubmitted => 'Resignation Submitted';
 
   @override
-  String byEffective({required String rank, required String name, required String date}) {
+  String byEffective({
+    required String rank,
+    required String name,
+    required String date,
+  }) {
     return 'By $rank $name, effective $date.';
   }
 
@@ -796,7 +814,11 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String recruitIdentifier({required String firstName, required String middleName, required int id}) {
+  String recruitIdentifier({
+    required String firstName,
+    required String middleName,
+    required int id,
+  }) {
     return '$firstName $middleName (ID: $id)';
   }
 
@@ -874,13 +896,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get descriptionOfIncident => 'Description of Incident';
 
   @override
-  String get provideClearDetailedDescription => 'Please provide a clear and detailed description of the incident.';
+  String get provideClearDetailedDescription =>
+      'Please provide a clear and detailed description of the incident.';
 
   @override
   String get submitReport => 'Submit Report';
 
   @override
-  String get incidentReportSubmitted => 'Incident report submitted successfully';
+  String get incidentReportSubmitted =>
+      'Incident report submitted successfully';
 
   @override
   String get failedToSubmitReport => 'Failed to submit report:';
@@ -918,7 +942,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pleaseSelectLeaveType => 'Please select a leave type';
 
   @override
-  String get selectLeaveTypeToSeeBalance => 'Select a leave type to see balance';
+  String get selectLeaveTypeToSeeBalance =>
+      'Select a leave type to see balance';
 
   @override
   String availableDays({required int days}) {
@@ -972,7 +997,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get applicationSubmittedSuccessfully => 'Application submitted successfully!';
+  String get applicationSubmittedSuccessfully =>
+      'Application submitted successfully!';
 
   @override
   String get submitAppeal => 'Submit Appeal';
@@ -1002,7 +1028,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get submitApplication => 'Submit Application';
 
   @override
-  String get noSelectedApplicantInfo => 'No information on selected applicants is available.';
+  String get noSelectedApplicantInfo =>
+      'No information on selected applicants is available.';
 
   @override
   String get notAvailable => 'N/A';
@@ -1011,10 +1038,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noPromotionRequestsFound => 'No promotion requests found.';
 
   @override
-  String get promotionRequestSubmitted => 'Promotion request submitted successfully';
+  String get promotionRequestSubmitted =>
+      'Promotion request submitted successfully';
 
   @override
-  String get requestedPositionForPromotion => 'Requested Position for Promotion';
+  String get requestedPositionForPromotion =>
+      'Requested Position for Promotion';
 
   @override
   String get thisFieldIsRequired => 'This field is required';
@@ -1023,7 +1052,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get reasonForRequest => 'Reason for Request';
 
   @override
-  String get brieflyExplainPromotionReason => 'Briefly explain why you are requesting this promotion.';
+  String get brieflyExplainPromotionReason =>
+      'Briefly explain why you are requesting this promotion.';
 
   @override
   String get pleaseProvideReason => 'Please provide a reason';
@@ -1043,12 +1073,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get applyForThisTraining => 'Apply for this Training';
 
   @override
-  String trainingLocationAndOrganizer({required String center, required String organizer}) {
+  String trainingLocationAndOrganizer({
+    required String center,
+    required String organizer,
+  }) {
     return '$center by $organizer';
   }
 
   @override
-  String get noTransferRequestsYet => 'You have not submitted any transfer requests yet.';
+  String get noTransferRequestsYet =>
+      'You have not submitted any transfer requests yet.';
 
   @override
   String get refresh => 'Refresh';
@@ -1104,7 +1138,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get yesCancel => 'Yes, Cancel';
 
   @override
-  String get pleaseCorrectErrorsInForm => 'Please correct the errors in the form.';
+  String get pleaseCorrectErrorsInForm =>
+      'Please correct the errors in the form.';
 
   @override
   String get currentEmployeeDetails => 'Current Employee Details:';
@@ -1125,13 +1160,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get requestedLocationLabel => 'Requested Location *';
 
   @override
-  String get requestedLocationHint => 'e.g., Gondar Zonal Office, Bahir Dar City';
+  String get requestedLocationHint =>
+      'e.g., Gondar Zonal Office, Bahir Dar City';
 
   @override
   String get requestedLocationRequired => 'Requested location is required.';
 
   @override
-  String get requestedPositionTitleOptional => 'Requested Position Title (Optional)';
+  String get requestedPositionTitleOptional =>
+      'Requested Position Title (Optional)';
 
   @override
   String get requestedPositionTitleHint => 'e.g., Investigator, Trainer';
@@ -1140,7 +1177,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get reasonForRequestLabel => 'Reason for Request *';
 
   @override
-  String get reasonForRequestHint => 'Provide a detailed reason for your transfer request.';
+  String get reasonForRequestHint =>
+      'Provide a detailed reason for your transfer request.';
 
   @override
   String get reasonForRequestRequired => 'Reason for request is required.';
@@ -1185,7 +1223,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get readyToVerify => 'Ready to Verify';
 
   @override
-  String get enterIdOrScanQr => 'Enter an Employee ID or scan a QR code to begin.';
+  String get enterIdOrScanQr =>
+      'Enter an Employee ID or scan a QR code to begin.';
 
   @override
   String get retrySearch => 'Retry Search';
@@ -1487,7 +1526,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get verificationFailed => 'Verification Failed';
 
   @override
-  String get googleSignInNotImplemented => 'Google sign-in is not implemented yet. Use email instead.';
+  String get googleSignInNotImplemented =>
+      'Google sign-in is not implemented yet. Use email instead.';
 
   @override
   String get signInWithGoogle => 'Sign in with Google';
@@ -1574,13 +1614,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get myPlacementApplications => 'My Placement Applications';
 
   @override
-  String get noApplicationsSubmitted => 'You have not submitted any placement applications yet.';
+  String get noApplicationsSubmitted =>
+      'You have not submitted any placement applications yet.';
 
   @override
   String get error => 'Error';
 
   @override
-  String get verificationErrorNotFound => 'No employee found with the specified ID.';
+  String get verificationErrorNotFound =>
+      'No employee found with the specified ID.';
 
   @override
   String get serverConfiguration => 'Server Configuration';
@@ -1625,13 +1667,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get editServerSettings => 'Edit Server Settings';
 
   @override
-  String get errorServerUnreachable => 'Could not connect to the server. Please check the IP, Port, and your network connection.';
+  String get errorServerUnreachable =>
+      'Could not connect to the server. Please check the IP, Port, and your network connection.';
 
   @override
-  String get errorConnectionTimeout => 'The connection timed out. The server may be slow to respond or offline.';
+  String get errorConnectionTimeout =>
+      'The connection timed out. The server may be slow to respond or offline.';
 
   @override
-  String get errorUnexpectedResponse => 'The server responded, but not in the way expected. Please verify the server address.';
+  String get errorUnexpectedResponse =>
+      'The server responded, but not in the way expected. Please verify the server address.';
 
   @override
   String get errorGeneric => 'An unexpected error occurred. Please try again.';

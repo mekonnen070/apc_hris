@@ -1,6 +1,7 @@
 // lib/features/promotion/data/promotion_repository.dart
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:police_com/core/enums/promotion_status.dart';
+import 'package:police_com/core/mixins/logger_mixin.dart';
 import 'package:police_com/core/network/dio_client.dart';
 import 'package:police_com/features/promotion/domain/promotion_request.dart';
 import 'package:uuid/uuid.dart';
@@ -9,7 +10,8 @@ final promotionRepositoryProvider = Provider(
   (ref) => PromotionRepository(ref.read(dioClientProvider)),
 );
 
-class PromotionRepository {
+// TODO: Replace mock data with real API calls before production.
+class PromotionRepository with LoggerMixin {
   final DioClient _dioClient;
   final _uuid = const Uuid();
 
@@ -52,6 +54,6 @@ class PromotionRepository {
     await Future.delayed(const Duration(seconds: 1));
     final newRequest = request.copyWith(id: _uuid.v4().hashCode);
     _mockDb.add(newRequest);
-    print('Submitting new promotion request: ${newRequest.toJson()}');
+    logInfo('Submitting new promotion request: ${newRequest.toJson()}');
   }
 }

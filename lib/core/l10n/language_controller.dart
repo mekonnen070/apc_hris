@@ -5,23 +5,24 @@ import 'package:police_com/core/enums/lango_enum.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LanguageController extends StateNotifier<Lango> {
-  LanguageController() : super(Lango.en) {
+  final AppPreferences _appPref;
+
+  LanguageController(this._appPref) : super(Lango.en) {
     _initialize();
   }
 
   Future<void> _initialize() async {
     final prefs = await SharedPreferences.getInstance();
-    state = AppPreferences().getLanguage(prefs);
+    state = _appPref.getLanguage(prefs);
   }
 
   Future<void> updateLanguage(Lango language) async {
     state = language;
-    await AppPreferences().setLanguage(language.code);
+    await _appPref.setLanguage(language.code);
   }
 }
 
 final languageControllerProvider =
     StateNotifierProvider<LanguageController, Lango>((ref) {
-      return LanguageController();
+      return LanguageController(ref.watch(appPreferencesProvider));
     });
-

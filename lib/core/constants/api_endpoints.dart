@@ -1,5 +1,7 @@
 // lib/core/constants/api_endpoints.dart
 
+import 'dart:core';
+
 class ApiEndpoints {
   // =======================================================================
   // UserAccount Module
@@ -34,8 +36,6 @@ class ApiEndpoints {
   static const String createTransfer = '$_transfer/Create';
   static const String editTransfer = '$_transfer/Edit';
   static const String deleteTransfer = '$_transfer/delete';
-  static const String getLocationDataByEmployee =
-      '$_transfer/GetLocationDataByEmployee';
   static const String getDepartmentByLocation =
       '$_transfer/GetDepartmentByLocation';
   static const String getPositionByDepartment =
@@ -160,5 +160,6 @@ class ApiEndpoints {
 
   // EmpProfile Module
   static const String _empProfile = '/empProfile';
-  static String employeeDetails = '$_empProfile/details';
+  static const String employeeDetails = '$_empProfile/details';
+  static const String employeeDataById = '$_empProfile/EmployeeDataById';
 }

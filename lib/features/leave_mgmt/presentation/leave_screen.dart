@@ -51,12 +51,15 @@ class LeaveScreen extends ConsumerWidget {
                                   shrinkWrap: true,
                                   itemBuilder: (context, index) {
                                     final balance = data.balances[index];
-                                    final leaveType = data.types.firstWhere(
+                                    final matchingTypes = data.types.where(
                                       (t) => t.typeId == balance.leaveTypeId,
                                     );
+                                    if (matchingTypes.isEmpty) {
+                                      return const SizedBox.shrink();
+                                    }
                                     return LeaveBalanceCard(
                                       balance: balance,
-                                      leaveType: leaveType,
+                                      leaveType: matchingTypes.first,
                                     );
                                   },
                                 ),
@@ -81,12 +84,15 @@ class LeaveScreen extends ConsumerWidget {
                       SliverList(
                         delegate: SliverChildBuilderDelegate((context, index) {
                           final request = data.history[index];
-                          final leaveType = data.types.firstWhere(
+                          final matchingTypes = data.types.where(
                             (t) => t.typeId == request.leaveTypeId,
                           );
+                          if (matchingTypes.isEmpty) {
+                            return const SizedBox.shrink();
+                          }
                           return LeaveHistoryListItem(
                             request: request,
-                            leaveTypeName: leaveType.typeName,
+                            leaveTypeName: matchingTypes.first.typeName,
                           );
                         }, childCount: data.history.length),
                       ),

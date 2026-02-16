@@ -74,10 +74,15 @@ class ProfileRepository with LoggerMixin implements IProfileRepository {
     String employeeId,
     EmployeeEducationModel education,
   ) async {
-    await _dioClient.post(
-      ApiEndpoints.education(employeeId: employeeId),
-      data: education.toJson(),
-    );
+    try {
+      await _dioClient.post(
+        ApiEndpoints.education(employeeId: employeeId),
+        data: education.toJson(),
+      );
+    } on DioException catch (e, st) {
+      logError('Failed to add education for $employeeId', error: e, stackTrace: st);
+      rethrow;
+    }
   }
 
   @override
@@ -85,23 +90,33 @@ class ProfileRepository with LoggerMixin implements IProfileRepository {
     String employeeId,
     EmployeeEducationModel education,
   ) async {
-    await _dioClient.put(
-      ApiEndpoints.educationById(
-        employeeId: employeeId,
-        educationId: education.educationId!,
-      ),
-      data: education.toJson(),
-    );
+    try {
+      await _dioClient.put(
+        ApiEndpoints.educationById(
+          employeeId: employeeId,
+          educationId: education.educationId!,
+        ),
+        data: education.toJson(),
+      );
+    } on DioException catch (e, st) {
+      logError('Failed to update education for $employeeId', error: e, stackTrace: st);
+      rethrow;
+    }
   }
 
   @override
   Future<void> deleteEducation(String employeeId, String educationId) async {
-    await _dioClient.delete(
-      ApiEndpoints.educationById(
-        employeeId: employeeId,
-        educationId: educationId,
-      ),
-    );
+    try {
+      await _dioClient.delete(
+        ApiEndpoints.educationById(
+          employeeId: employeeId,
+          educationId: educationId,
+        ),
+      );
+    } on DioException catch (e, st) {
+      logError('Failed to delete education $educationId', error: e, stackTrace: st);
+      rethrow;
+    }
   }
 
   // --- Experience ---
@@ -110,10 +125,15 @@ class ProfileRepository with LoggerMixin implements IProfileRepository {
     String employeeId,
     EmployeeExperienceModel experience,
   ) async {
-    await _dioClient.post(
-      ApiEndpoints.experience(employeeId: employeeId),
-      data: experience.toJson(),
-    );
+    try {
+      await _dioClient.post(
+        ApiEndpoints.experience(employeeId: employeeId),
+        data: experience.toJson(),
+      );
+    } on DioException catch (e, st) {
+      logError('Failed to add experience for $employeeId', error: e, stackTrace: st);
+      rethrow;
+    }
   }
 
   @override
@@ -121,23 +141,33 @@ class ProfileRepository with LoggerMixin implements IProfileRepository {
     String employeeId,
     EmployeeExperienceModel experience,
   ) async {
-    await _dioClient.put(
-      ApiEndpoints.experienceById(
-        employeeId: employeeId,
-        experienceId: experience.experienceId!,
-      ),
-      data: experience.toJson(),
-    );
+    try {
+      await _dioClient.put(
+        ApiEndpoints.experienceById(
+          employeeId: employeeId,
+          experienceId: experience.experienceId!,
+        ),
+        data: experience.toJson(),
+      );
+    } on DioException catch (e, st) {
+      logError('Failed to update experience for $employeeId', error: e, stackTrace: st);
+      rethrow;
+    }
   }
 
   @override
   Future<void> deleteExperience(String employeeId, String experienceId) async {
-    await _dioClient.delete(
-      ApiEndpoints.experienceById(
-        employeeId: employeeId,
-        experienceId: experienceId,
-      ),
-    );
+    try {
+      await _dioClient.delete(
+        ApiEndpoints.experienceById(
+          employeeId: employeeId,
+          experienceId: experienceId,
+        ),
+      );
+    } on DioException catch (e, st) {
+      logError('Failed to delete experience $experienceId', error: e, stackTrace: st);
+      rethrow;
+    }
   }
 
   // --- Dependant ---
@@ -146,10 +176,15 @@ class ProfileRepository with LoggerMixin implements IProfileRepository {
     String employeeId,
     EmployeeDependantModel dependant,
   ) async {
-    await _dioClient.post(
-      ApiEndpoints.dependant(employeeId: employeeId),
-      data: dependant.toJson(),
-    );
+    try {
+      await _dioClient.post(
+        ApiEndpoints.dependant(employeeId: employeeId),
+        data: dependant.toJson(),
+      );
+    } on DioException catch (e, st) {
+      logError('Failed to add dependant for $employeeId', error: e, stackTrace: st);
+      rethrow;
+    }
   }
 
   @override
@@ -157,23 +192,33 @@ class ProfileRepository with LoggerMixin implements IProfileRepository {
     String employeeId,
     EmployeeDependantModel dependant,
   ) async {
-    await _dioClient.put(
-      ApiEndpoints.dependantById(
-        employeeId: employeeId,
-        dependantId: dependant.dependantId!,
-      ),
-      data: dependant.toJson(),
-    );
+    try {
+      await _dioClient.put(
+        ApiEndpoints.dependantById(
+          employeeId: employeeId,
+          dependantId: dependant.dependantId!,
+        ),
+        data: dependant.toJson(),
+      );
+    } on DioException catch (e, st) {
+      logError('Failed to update dependant for $employeeId', error: e, stackTrace: st);
+      rethrow;
+    }
   }
 
   @override
   Future<void> deleteDependant(String employeeId, String dependantId) async {
-    await _dioClient.delete(
-      ApiEndpoints.dependantById(
-        employeeId: employeeId,
-        dependantId: dependantId,
-      ),
-    );
+    try {
+      await _dioClient.delete(
+        ApiEndpoints.dependantById(
+          employeeId: employeeId,
+          dependantId: dependantId,
+        ),
+      );
+    } on DioException catch (e, st) {
+      logError('Failed to delete dependant $dependantId', error: e, stackTrace: st);
+      rethrow;
+    }
   }
 
   // --- Contact ---
@@ -182,10 +227,15 @@ class ProfileRepository with LoggerMixin implements IProfileRepository {
     String employeeId,
     EmployeeContactModel contact,
   ) async {
-    await _dioClient.post(
-      ApiEndpoints.contact(employeeId: employeeId),
-      data: contact.toJson(),
-    );
+    try {
+      await _dioClient.post(
+        ApiEndpoints.contact(employeeId: employeeId),
+        data: contact.toJson(),
+      );
+    } on DioException catch (e, st) {
+      logError('Failed to add contact for $employeeId', error: e, stackTrace: st);
+      rethrow;
+    }
   }
 
   @override
@@ -193,29 +243,44 @@ class ProfileRepository with LoggerMixin implements IProfileRepository {
     String employeeId,
     EmployeeContactModel contact,
   ) async {
-    await _dioClient.put(
-      ApiEndpoints.contactById(
-        employeeId: employeeId,
-        contactId: contact.contactId!,
-      ),
-      data: contact.toJson(),
-    );
+    try {
+      await _dioClient.put(
+        ApiEndpoints.contactById(
+          employeeId: employeeId,
+          contactId: contact.contactId!,
+        ),
+        data: contact.toJson(),
+      );
+    } on DioException catch (e, st) {
+      logError('Failed to update contact for $employeeId', error: e, stackTrace: st);
+      rethrow;
+    }
   }
 
   @override
   Future<void> deleteContact(String employeeId, String contactId) async {
-    await _dioClient.delete(
-      ApiEndpoints.contactById(employeeId: employeeId, contactId: contactId),
-    );
+    try {
+      await _dioClient.delete(
+        ApiEndpoints.contactById(employeeId: employeeId, contactId: contactId),
+      );
+    } on DioException catch (e, st) {
+      logError('Failed to delete contact $contactId', error: e, stackTrace: st);
+      rethrow;
+    }
   }
 
   // --- Spouse ---
   @override
   Future<void> addSpouse(String employeeId, EmployeeSpouseModel spouse) async {
-    await _dioClient.post(
-      ApiEndpoints.spouse(employeeId: employeeId),
-      data: spouse.toJson(),
-    );
+    try {
+      await _dioClient.post(
+        ApiEndpoints.spouse(employeeId: employeeId),
+        data: spouse.toJson(),
+      );
+    } on DioException catch (e, st) {
+      logError('Failed to add spouse for $employeeId', error: e, stackTrace: st);
+      rethrow;
+    }
   }
 
   @override
@@ -223,19 +288,29 @@ class ProfileRepository with LoggerMixin implements IProfileRepository {
     String employeeId,
     EmployeeSpouseModel spouse,
   ) async {
-    await _dioClient.put(
-      ApiEndpoints.spouseById(
-        employeeId: employeeId,
-        spouseId: spouse.spouseId!,
-      ),
-      data: spouse.toJson(),
-    );
+    try {
+      await _dioClient.put(
+        ApiEndpoints.spouseById(
+          employeeId: employeeId,
+          spouseId: spouse.spouseId!,
+        ),
+        data: spouse.toJson(),
+      );
+    } on DioException catch (e, st) {
+      logError('Failed to update spouse for $employeeId', error: e, stackTrace: st);
+      rethrow;
+    }
   }
 
   @override
   Future<void> deleteSpouse(String employeeId, String spouseId) async {
-    await _dioClient.delete(
-      ApiEndpoints.spouseById(employeeId: employeeId, spouseId: spouseId),
-    );
+    try {
+      await _dioClient.delete(
+        ApiEndpoints.spouseById(employeeId: employeeId, spouseId: spouseId),
+      );
+    } on DioException catch (e, st) {
+      logError('Failed to delete spouse $spouseId', error: e, stackTrace: st);
+      rethrow;
+    }
   }
 }

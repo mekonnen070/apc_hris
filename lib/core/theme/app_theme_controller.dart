@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:police_com/core/app_preferences.dart';
 import 'package:police_com/core/theme/app_colors.dart';
+import 'package:police_com/core/network/dio_client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeControllerProvider extends ChangeNotifier {
-  final AppPreferences _appPref = AppPreferences();
   ThemeMode _themeMode = ThemeMode.system;
+  late AppPreferences _appPref;
 
   ThemeMode get themeMode => _themeMode;
 
@@ -27,16 +28,20 @@ class ThemeControllerProvider extends ChangeNotifier {
       primary: AppColors.primary,
       secondary: AppColors.secondary,
     ),
-  ).copyWith(cardTheme: const CardTheme(color: AppColors.cardColorLight));
+  ).copyWith(cardTheme: const CardThemeData(color: AppColors.cardColorLight));
 
   ThemeData get darkThemeData => FlexThemeData.dark(
     colors: const FlexSchemeColor(
       primary: AppColors.primary,
       secondary: AppColors.secondary,
     ),
-  ).copyWith(cardTheme: const CardTheme(color: AppColors.cardColorDark));
+  ).copyWith(cardTheme: const CardThemeData(color: AppColors.cardColorDark));
 
-  Future<ThemeData> initialize(SharedPreferences prefs) async {
+  Future<ThemeData> initialize(
+    SharedPreferences prefs, {
+    AppPreferences? appPreferences,
+  }) async {
+    _appPref = appPreferences ?? AppPreferences();
     _themeMode = _appPref.getThemeMode(prefs);
     notifyListeners();
     return currentThemeData;
@@ -51,5 +56,11 @@ class ThemeControllerProvider extends ChangeNotifier {
 
 /// A provider for the [ThemeControllerProvider] class.
 final themeControllerProvider = ChangeNotifierProvider<ThemeControllerProvider>(
-  (ref) => ThemeControllerProvider(),
+  (ref) {
+    final controller = ThemeControllerProvider();
+    final appPref = ref.watch(appPreferencesProvider);
+    final prefs = ref.watch(sharedPreferencesProvider);
+    controller.initialize(prefs, appPreferences: appPref);
+    return controller;
+  },
 );

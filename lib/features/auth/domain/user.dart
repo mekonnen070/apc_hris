@@ -7,7 +7,7 @@ part 'user.g.dart';
 abstract class User with _$User {
   factory User({
     required String userName,
-    required String employeeId,
+    required String? employeeId,
     required String userId,
   }) = _User;
 

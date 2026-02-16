@@ -5,8 +5,9 @@ import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:police_com/core/config/server_config/server_config_notifier.dart'; // Import server config
+import 'package:police_com/core/config/server_config/server_config_notifier.dart';
 import 'package:police_com/core/network/auth_interceptor.dart';
 import 'package:police_com/core/network/redirect_interceptor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -53,6 +54,7 @@ class DioClient {
         BaseOptions(
           baseUrl: baseUrl, // Use the passed-in baseUrl
           connectTimeout: const Duration(seconds: 20),
+          receiveTimeout: const Duration(seconds: 30),
           validateStatus: (status) => status != null && status < 500,
         ),
       ) {
@@ -67,13 +69,13 @@ class DioClient {
       AuthInterceptor(ref),
     ]);
 
-    // if (kDebugMode) {
-    (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
-      final client = HttpClient();
-      client.badCertificateCallback = (cert, host, port) => true;
-      return client;
-    };
-    // }
+    if (kDebugMode) {
+      (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
+        final client = HttpClient();
+        client.badCertificateCallback = (cert, host, port) => true;
+        return client;
+      };
+    }
   }
 
   // --- Public API Methods (Unchanged) ---

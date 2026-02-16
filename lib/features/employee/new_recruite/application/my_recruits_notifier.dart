@@ -62,7 +62,9 @@ class MyRecruitsNotifier extends StateNotifier<MyRecruitsState> {
     state = state.copyWith(isUpdatingStatus: true, errorMessage: null);
     try {
       for (final id in state.selectedRecruitIds) {
-        final info = state.recruits.firstWhere((r) => r.recruitId == id);
+        final recruit = state.recruits.where((r) => r.recruitId == id);
+        if (recruit.isEmpty) continue;
+        final info = recruit.first;
         await _repository.editRecruit(
           id: id,
           info: info.copyWith(recruitStatus: newStatus),

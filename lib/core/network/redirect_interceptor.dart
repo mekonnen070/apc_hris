@@ -22,7 +22,7 @@ class RedirectInterceptor extends Interceptor {
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     // We assume API requests should NOT return HTML.
-    final isApiRequest = response.requestOptions.path.startsWith('/api/');
+    final isApiRequest = response.requestOptions.uri.path.contains('/api/');
     final isHtmlResponse =
         response.headers
             .value(Headers.contentTypeHeader)

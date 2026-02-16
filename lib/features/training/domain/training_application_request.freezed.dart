@@ -16,8 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TrainingApplicationRequest {
 
-// id can be omitted if the backend generates it
- String get applicantId; int get appliedFor; ApplicantStatus get applicantStatus; double? get cgpa; int get age; String? get applicantEntryBy; DateTime? get applicantEntryDate;
+ int get id; String get applicantId; int get appliedFor; ApplicantStatus get applicantStatus; double? get cgpa; int get age; String? get applicantEntryBy; DateTime? get applicantEntryDate;
 /// Create a copy of TrainingApplicationRequest
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,16 +29,16 @@ $TrainingApplicationRequestCopyWith<TrainingApplicationRequest> get copyWith => 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TrainingApplicationRequest&&(identical(other.applicantId, applicantId) || other.applicantId == applicantId)&&(identical(other.appliedFor, appliedFor) || other.appliedFor == appliedFor)&&(identical(other.applicantStatus, applicantStatus) || other.applicantStatus == applicantStatus)&&(identical(other.cgpa, cgpa) || other.cgpa == cgpa)&&(identical(other.age, age) || other.age == age)&&(identical(other.applicantEntryBy, applicantEntryBy) || other.applicantEntryBy == applicantEntryBy)&&(identical(other.applicantEntryDate, applicantEntryDate) || other.applicantEntryDate == applicantEntryDate));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TrainingApplicationRequest&&(identical(other.id, id) || other.id == id)&&(identical(other.applicantId, applicantId) || other.applicantId == applicantId)&&(identical(other.appliedFor, appliedFor) || other.appliedFor == appliedFor)&&(identical(other.applicantStatus, applicantStatus) || other.applicantStatus == applicantStatus)&&(identical(other.cgpa, cgpa) || other.cgpa == cgpa)&&(identical(other.age, age) || other.age == age)&&(identical(other.applicantEntryBy, applicantEntryBy) || other.applicantEntryBy == applicantEntryBy)&&(identical(other.applicantEntryDate, applicantEntryDate) || other.applicantEntryDate == applicantEntryDate));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,applicantId,appliedFor,applicantStatus,cgpa,age,applicantEntryBy,applicantEntryDate);
+int get hashCode => Object.hash(runtimeType,id,applicantId,appliedFor,applicantStatus,cgpa,age,applicantEntryBy,applicantEntryDate);
 
 @override
 String toString() {
-  return 'TrainingApplicationRequest(applicantId: $applicantId, appliedFor: $appliedFor, applicantStatus: $applicantStatus, cgpa: $cgpa, age: $age, applicantEntryBy: $applicantEntryBy, applicantEntryDate: $applicantEntryDate)';
+  return 'TrainingApplicationRequest(id: $id, applicantId: $applicantId, appliedFor: $appliedFor, applicantStatus: $applicantStatus, cgpa: $cgpa, age: $age, applicantEntryBy: $applicantEntryBy, applicantEntryDate: $applicantEntryDate)';
 }
 
 
@@ -50,7 +49,7 @@ abstract mixin class $TrainingApplicationRequestCopyWith<$Res>  {
   factory $TrainingApplicationRequestCopyWith(TrainingApplicationRequest value, $Res Function(TrainingApplicationRequest) _then) = _$TrainingApplicationRequestCopyWithImpl;
 @useResult
 $Res call({
- String applicantId, int appliedFor, ApplicantStatus applicantStatus, double? cgpa, int age, String? applicantEntryBy, DateTime? applicantEntryDate
+ int id, String applicantId, int appliedFor, ApplicantStatus applicantStatus, double? cgpa, int age, String? applicantEntryBy, DateTime? applicantEntryDate
 });
 
 
@@ -67,9 +66,10 @@ class _$TrainingApplicationRequestCopyWithImpl<$Res>
 
 /// Create a copy of TrainingApplicationRequest
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? applicantId = null,Object? appliedFor = null,Object? applicantStatus = null,Object? cgpa = freezed,Object? age = null,Object? applicantEntryBy = freezed,Object? applicantEntryDate = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? applicantId = null,Object? appliedFor = null,Object? applicantStatus = null,Object? cgpa = freezed,Object? age = null,Object? applicantEntryBy = freezed,Object? applicantEntryDate = freezed,}) {
   return _then(_self.copyWith(
-applicantId: null == applicantId ? _self.applicantId : applicantId // ignore: cast_nullable_to_non_nullable
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,applicantId: null == applicantId ? _self.applicantId : applicantId // ignore: cast_nullable_to_non_nullable
 as String,appliedFor: null == appliedFor ? _self.appliedFor : appliedFor // ignore: cast_nullable_to_non_nullable
 as int,applicantStatus: null == applicantStatus ? _self.applicantStatus : applicantStatus // ignore: cast_nullable_to_non_nullable
 as ApplicantStatus,cgpa: freezed == cgpa ? _self.cgpa : cgpa // ignore: cast_nullable_to_non_nullable
@@ -87,10 +87,10 @@ as DateTime?,
 @JsonSerializable()
 
 class _TrainingApplicationRequest implements TrainingApplicationRequest {
-   _TrainingApplicationRequest({required this.applicantId, required this.appliedFor, required this.applicantStatus, this.cgpa, required this.age, this.applicantEntryBy, this.applicantEntryDate});
+   _TrainingApplicationRequest({this.id = 0, required this.applicantId, required this.appliedFor, required this.applicantStatus, this.cgpa, required this.age, this.applicantEntryBy, this.applicantEntryDate});
   factory _TrainingApplicationRequest.fromJson(Map<String, dynamic> json) => _$TrainingApplicationRequestFromJson(json);
 
-// id can be omitted if the backend generates it
+@override@JsonKey() final  int id;
 @override final  String applicantId;
 @override final  int appliedFor;
 @override final  ApplicantStatus applicantStatus;
@@ -112,16 +112,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TrainingApplicationRequest&&(identical(other.applicantId, applicantId) || other.applicantId == applicantId)&&(identical(other.appliedFor, appliedFor) || other.appliedFor == appliedFor)&&(identical(other.applicantStatus, applicantStatus) || other.applicantStatus == applicantStatus)&&(identical(other.cgpa, cgpa) || other.cgpa == cgpa)&&(identical(other.age, age) || other.age == age)&&(identical(other.applicantEntryBy, applicantEntryBy) || other.applicantEntryBy == applicantEntryBy)&&(identical(other.applicantEntryDate, applicantEntryDate) || other.applicantEntryDate == applicantEntryDate));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TrainingApplicationRequest&&(identical(other.id, id) || other.id == id)&&(identical(other.applicantId, applicantId) || other.applicantId == applicantId)&&(identical(other.appliedFor, appliedFor) || other.appliedFor == appliedFor)&&(identical(other.applicantStatus, applicantStatus) || other.applicantStatus == applicantStatus)&&(identical(other.cgpa, cgpa) || other.cgpa == cgpa)&&(identical(other.age, age) || other.age == age)&&(identical(other.applicantEntryBy, applicantEntryBy) || other.applicantEntryBy == applicantEntryBy)&&(identical(other.applicantEntryDate, applicantEntryDate) || other.applicantEntryDate == applicantEntryDate));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,applicantId,appliedFor,applicantStatus,cgpa,age,applicantEntryBy,applicantEntryDate);
+int get hashCode => Object.hash(runtimeType,id,applicantId,appliedFor,applicantStatus,cgpa,age,applicantEntryBy,applicantEntryDate);
 
 @override
 String toString() {
-  return 'TrainingApplicationRequest(applicantId: $applicantId, appliedFor: $appliedFor, applicantStatus: $applicantStatus, cgpa: $cgpa, age: $age, applicantEntryBy: $applicantEntryBy, applicantEntryDate: $applicantEntryDate)';
+  return 'TrainingApplicationRequest(id: $id, applicantId: $applicantId, appliedFor: $appliedFor, applicantStatus: $applicantStatus, cgpa: $cgpa, age: $age, applicantEntryBy: $applicantEntryBy, applicantEntryDate: $applicantEntryDate)';
 }
 
 
@@ -132,7 +132,7 @@ abstract mixin class _$TrainingApplicationRequestCopyWith<$Res> implements $Trai
   factory _$TrainingApplicationRequestCopyWith(_TrainingApplicationRequest value, $Res Function(_TrainingApplicationRequest) _then) = __$TrainingApplicationRequestCopyWithImpl;
 @override @useResult
 $Res call({
- String applicantId, int appliedFor, ApplicantStatus applicantStatus, double? cgpa, int age, String? applicantEntryBy, DateTime? applicantEntryDate
+ int id, String applicantId, int appliedFor, ApplicantStatus applicantStatus, double? cgpa, int age, String? applicantEntryBy, DateTime? applicantEntryDate
 });
 
 
@@ -149,9 +149,10 @@ class __$TrainingApplicationRequestCopyWithImpl<$Res>
 
 /// Create a copy of TrainingApplicationRequest
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? applicantId = null,Object? appliedFor = null,Object? applicantStatus = null,Object? cgpa = freezed,Object? age = null,Object? applicantEntryBy = freezed,Object? applicantEntryDate = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? applicantId = null,Object? appliedFor = null,Object? applicantStatus = null,Object? cgpa = freezed,Object? age = null,Object? applicantEntryBy = freezed,Object? applicantEntryDate = freezed,}) {
   return _then(_TrainingApplicationRequest(
-applicantId: null == applicantId ? _self.applicantId : applicantId // ignore: cast_nullable_to_non_nullable
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,applicantId: null == applicantId ? _self.applicantId : applicantId // ignore: cast_nullable_to_non_nullable
 as String,appliedFor: null == appliedFor ? _self.appliedFor : appliedFor // ignore: cast_nullable_to_non_nullable
 as int,applicantStatus: null == applicantStatus ? _self.applicantStatus : applicantStatus // ignore: cast_nullable_to_non_nullable
 as ApplicantStatus,cgpa: freezed == cgpa ? _self.cgpa : cgpa // ignore: cast_nullable_to_non_nullable

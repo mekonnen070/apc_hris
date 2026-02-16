@@ -26,9 +26,9 @@ class AppOrchestrator extends ConsumerWidget {
       error:
           (error, stack) => ServerRecoveryScreen(
             error: error,
-            onRetry:
-                () =>
-                    ref.read(serverConfigProvider.notifier).retestConnection(),
+            // onRetry:
+            //     () =>
+            //         ref.read(serverConfigProvider.notifier).retestConnection(),
             onEdit: () {
               // Navigate to the setup screen for editing.
               Navigator.of(context).push(
@@ -43,8 +43,8 @@ class AppOrchestrator extends ConsumerWidget {
           // First launch: user must set up the server.
           return const ServerSetupScreen();
         } else {
-        // Server is ready, proceed to authentication check.
-        return const AuthGate();
+          // Server is ready, proceed to authentication check.
+          return const AuthGate();
         }
       },
     );
@@ -77,13 +77,13 @@ class AuthGate extends ConsumerWidget {
 /// A dedicated screen for when the saved server is unreachable on app launch.
 class ServerRecoveryScreen extends StatelessWidget {
   final Object error;
-  final VoidCallback onRetry;
+  // final VoidCallback onRetry;
   final VoidCallback onEdit;
 
   const ServerRecoveryScreen({
     super.key,
     required this.error,
-    required this.onRetry,
+    // required this.onRetry,
     required this.onEdit,
   });
 
@@ -128,11 +128,11 @@ class ServerRecoveryScreen extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const SizedBox(height: 30),
-              ElevatedButton.icon(
-                icon: const Icon(Icons.refresh),
-                label: Text(context.lango.retryConnection),
-                onPressed: onRetry,
-              ),
+              // ElevatedButton.icon(
+              //   icon: const Icon(Icons.refresh),
+              //   label: Text(context.lango.retryConnection),
+              //   onPressed: onRetry,
+              // ),
               const SizedBox(height: 10),
               TextButton(
                 onPressed: onEdit,

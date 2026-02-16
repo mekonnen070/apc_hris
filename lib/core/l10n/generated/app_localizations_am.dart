@@ -18,7 +18,8 @@ class AppLocalizationsAm extends AppLocalizations {
   String get resetYourPassword => 'የይለፍ ቃልዎን ዳግም ያስጀምሩ';
 
   @override
-  String get enterEmailForPasswordReset => 'የይለፍ ቃል ዳግም ማስጀመሪያ መመሪያዎችን ለመቀበል ኢሜልዎን ያስገቡ።';
+  String get enterEmailForPasswordReset =>
+      'የይለፍ ቃል ዳግም ማስጀመሪያ መመሪያዎችን ለመቀበል ኢሜልዎን ያስገቡ።';
 
   @override
   String get email => 'ኢሜል';
@@ -42,7 +43,8 @@ class AppLocalizationsAm extends AppLocalizations {
   String get passwordResetSent => 'የይለፍ ቃል ዳግም ማስጀመሪያ ተልኳል';
 
   @override
-  String get checkEmailForResetInstructions => 'ለዳግም ማስጀመሪያ መመሪያዎች ኢሜልዎን ያረጋግጡ።';
+  String get checkEmailForResetInstructions =>
+      'ለዳግም ማስጀመሪያ መመሪያዎች ኢሜልዎን ያረጋግጡ።';
 
   @override
   String get passwordResetFailed => 'የይለፍ ቃል ዳግም ማስጀመር አልተሳካም';
@@ -745,7 +747,11 @@ class AppLocalizationsAm extends AppLocalizations {
   String get newPromotionRequest => 'አዲስ የደረጃ እድገት ጥያቄ';
 
   @override
-  String fromToPosition({required String currentRank, required String name, required String newPosition}) {
+  String fromToPosition({
+    required String currentRank,
+    required String name,
+    required String newPosition,
+  }) {
     return 'ከ$currentRank $name ለ$newPosition የሥራ መደብ።';
   }
 
@@ -753,7 +759,11 @@ class AppLocalizationsAm extends AppLocalizations {
   String get resignationSubmitted => 'የሥራ መልቀቂያ ቀርቧል';
 
   @override
-  String byEffective({required String rank, required String name, required String date}) {
+  String byEffective({
+    required String rank,
+    required String name,
+    required String date,
+  }) {
     return 'በ$rank $name፣ ከ$date ጀምሮ።';
   }
 
@@ -796,7 +806,11 @@ class AppLocalizationsAm extends AppLocalizations {
   }
 
   @override
-  String recruitIdentifier({required String firstName, required String middleName, required int id}) {
+  String recruitIdentifier({
+    required String firstName,
+    required String middleName,
+    required int id,
+  }) {
     return '$firstName $middleName (ID: $id)';
   }
 
@@ -874,7 +888,8 @@ class AppLocalizationsAm extends AppLocalizations {
   String get descriptionOfIncident => 'የክስተቱ መግለጫ';
 
   @override
-  String get provideClearDetailedDescription => 'እባክዎ የክስተቱን ግልጽ እና ዝርዝር መግለጫ ያቅርቡ።';
+  String get provideClearDetailedDescription =>
+      'እባክዎ የክስተቱን ግልጽ እና ዝርዝር መግለጫ ያቅርቡ።';
 
   @override
   String get submitReport => 'ሪፖርት አስገባ';
@@ -1023,7 +1038,8 @@ class AppLocalizationsAm extends AppLocalizations {
   String get reasonForRequest => 'የጥያቄው ምክንያት';
 
   @override
-  String get brieflyExplainPromotionReason => 'ይህን የደረጃ እድገት ለምን እንደጠየቁ በአጭሩ ይግለጹ።';
+  String get brieflyExplainPromotionReason =>
+      'ይህን የደረጃ እድገት ለምን እንደጠየቁ በአጭሩ ይግለጹ።';
 
   @override
   String get pleaseProvideReason => 'እባክዎ ምክንያት ያቅርቡ';
@@ -1043,7 +1059,10 @@ class AppLocalizationsAm extends AppLocalizations {
   String get applyForThisTraining => 'ለዚህ ስልጠና ያመልክቱ';
 
   @override
-  String trainingLocationAndOrganizer({required String center, required String organizer}) {
+  String trainingLocationAndOrganizer({
+    required String center,
+    required String organizer,
+  }) {
     return '$center በ$organizer';
   }
 
@@ -1487,7 +1506,8 @@ class AppLocalizationsAm extends AppLocalizations {
   String get verificationFailed => 'የመታወቂያ ማረጋገጫ አልተሳካም';
 
   @override
-  String get googleSignInNotImplemented => 'የጉግል መግቢያ ገና አልተተገበረም። በምትኩ ኢሜል ይጠቀሙ።';
+  String get googleSignInNotImplemented =>
+      'የጉግል መግቢያ ገና አልተተገበረም። በምትኩ ኢሜል ይጠቀሙ።';
 
   @override
   String get signInWithGoogle => 'በGoogle ይግቡ';
@@ -1619,13 +1639,16 @@ class AppLocalizationsAm extends AppLocalizations {
   String get editServerSettings => 'የሰርቨር ቅንብሮችን ይቀይሩ';
 
   @override
-  String get errorServerUnreachable => 'ከሰርቨሩ ጋር መገናኘት አልተቻለም። እባክዎ አይፒ፣ ፖርት እና የኔትወርክ ግንኙነትዎን ያረጋግጡ።';
+  String get errorServerUnreachable =>
+      'ከሰርቨሩ ጋር መገናኘት አልተቻለም። እባክዎ አይፒ፣ ፖርት እና የኔትወርክ ግንኙነትዎን ያረጋግጡ።';
 
   @override
-  String get errorConnectionTimeout => 'ግንኙነቱ ጊዜው አልፎበታል። ሰርቨሩ ምላሽ ለመስጠት የዘገየ ወይም ከመስመር ውጭ ሊሆን ይችላል።';
+  String get errorConnectionTimeout =>
+      'ግንኙነቱ ጊዜው አልፎበታል። ሰርቨሩ ምላሽ ለመስጠት የዘገየ ወይም ከመስመር ውጭ ሊሆን ይችላል።';
 
   @override
-  String get errorUnexpectedResponse => 'ሰርቨሩ ምላሽ ሰጥቷል፣ ነገር ግን በተጠበቀው መንገድ አይደለም። እባክዎ የሰርቨሩን አድራሻ ያረጋግጡ።';
+  String get errorUnexpectedResponse =>
+      'ሰርቨሩ ምላሽ ሰጥቷል፣ ነገር ግን በተጠበቀው መንገድ አይደለም። እባክዎ የሰርቨሩን አድራሻ ያረጋግጡ።';
 
   @override
   String get errorGeneric => 'ያልተጠበቀ ስህተት ተፈጥሯል። እባክዎ እንደገና ይሞክሩ።';

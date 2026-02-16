@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:police_com/core/app_preferences.dart';
 import 'package:police_com/core/app_strings.dart';
 import 'package:police_com/core/l10n/generated/app_localizations.dart';
 import 'package:police_com/core/l10n/l10n.dart';
@@ -28,8 +29,13 @@ Future<void> main() async {
     storage: FileStorage('${appDocDir.path}/.cookies/'),
     ignoreExpires: true,
   );
+  // Hydrate secure auth data into memory before the app starts.
+  final appPreferences = AppPreferences();
+  await appPreferences.loadAuthData();
+
   final themeData = await ThemeControllerProvider().initialize(
     sharedPreferences,
+    appPreferences: appPreferences,
   );
 
   // Run the app with a single ProviderScope at the root.
@@ -40,6 +46,7 @@ Future<void> main() async {
         // them will have access to the correct instance.
         sharedPreferencesProvider.overrideWithValue(sharedPreferences),
         cookieJarProvider.overrideWithValue(cookieJar),
+        appPreferencesProvider.overrideWithValue(appPreferences),
       ],
       child: MyApp(themeData: themeData),
     ),
