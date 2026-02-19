@@ -85,7 +85,7 @@ class AppDrawer extends ConsumerWidget {
                   accountEmail: Text(context.lango.userEmailPlaceholder),
                   currentAccountPicture: CircleAvatar(
                     backgroundColor: Colors.grey,
-                    child: Text(
+                    child: Text( 
                       context.lango.userInitialsPlaceholder,
                       style: const TextStyle(fontSize: 40.0),
                     ),
