@@ -3250,6 +3250,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Manager'**
   String get manager;
+
+  /// No description provided for @verifyEmployee.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify Employee'**
+  String get verifyEmployee;
+
+  /// No description provided for @or.
+  ///
+  /// In en, this message translates to:
+  /// **'or'**
+  String get or;
+
+  /// No description provided for @noEmployeeLinked.
+  ///
+  /// In en, this message translates to:
+  /// **'No employee linked to this account. Try another account or contact HR.'**
+  String get noEmployeeLinked;
 }
 
 class _AppLocalizationsDelegate

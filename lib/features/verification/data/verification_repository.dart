@@ -18,7 +18,7 @@ final verificationRepositoryProvider = Provider<IVerificationRepository>((ref) {
 /// Abstract interface for the verification repository.
 abstract class IVerificationRepository {
   Future<EmployeeInfoModel> verifyEmployee({required String employeeId});
-  Future<EmployeeVerificationDataModel> verifyEmployeeDataById({
+  Future<EmployeeVerificationDataModel?> verifyEmployeeDataById({
     required String employeeId,
   });
 }
@@ -56,7 +56,7 @@ class VerificationRepository implements IVerificationRepository {
 
   // employeeDataById
   @override
-  Future<EmployeeVerificationDataModel> verifyEmployeeDataById({
+  Future<EmployeeVerificationDataModel?> verifyEmployeeDataById({
     required String employeeId,
   }) async {
     try {
@@ -67,8 +67,12 @@ class VerificationRepository implements IVerificationRepository {
         queryParameters: {'employeeId': employeeId},
       );
 
-      // The backend returns the employee data directly in the response body.
-      return EmployeeVerificationDataModel.fromJson(response.data);
+      if (response.statusCode == 200) {
+        // The backend returns the employee data directly in the response body.
+        return EmployeeVerificationDataModel.fromJson(response.data);
+      }
+
+      return null;
     } on DioException catch (e, st) {
       final safeId =
           kDebugMode

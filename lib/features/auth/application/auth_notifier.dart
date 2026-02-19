@@ -37,27 +37,24 @@ class AuthNotifier extends AsyncNotifier<AuthState> {
     return _authRepository.checkAuthState();
   }
 
-  Future<User?> login({required String email, required String password}) async {
+  Future<User> login({required String email, required String password}) async {
     state = const AsyncLoading();
     try {
       final response = await _authRepository.login(
         email: email,
         password: password,
       );
-      if (response != null) {
-        // Invalidate both providers to ensure all user data is refreshed.
-        ref.invalidate(currentEmployeeIdProvider);
-        ref.invalidate(currentEmployeeProvider);
-        ref.invalidate(currentEmployeeUserIdProvider);
-        state = const AsyncData(AuthState.authenticated());
-      } else {
-        state = const AsyncData(AuthState.unauthenticated());
-      }
+      // Invalidate both providers to ensure all user data is refreshed.
+      ref.invalidate(currentEmployeeIdProvider);
+      ref.invalidate(currentEmployeeProvider);
+      ref.invalidate(currentEmployeeUserIdProvider);
+      state = const AsyncData(AuthState.authenticated());
+      return response;
     } catch (e, st) {
       log('Error during login', error: e, stackTrace: st);
-      state = AsyncError(e, st);
+      state = const AsyncData(AuthState.unauthenticated());
+      rethrow;
     }
-    return null;
   }
 
   Future<void> logout() async {

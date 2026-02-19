@@ -845,5 +845,8 @@
   "staffId": "Staff ID",
   "level": "Level",
   "scale": "Scale",
-  "manager": "Manager"
+  "manager": "Manager",
+  "verifyEmployee": "Verify Employee",
+  "or": "or",
+  "noEmployeeLinked": "No employee linked to this account. Try another account or contact HR."
 }

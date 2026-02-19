@@ -14,7 +14,7 @@ abstract class IAuthRepository {
     String? gender,
     String? maritalStatus,
   });
-  Future<User?> login({required String email, required String password});
+  Future<User> login({required String email, required String password});
   Future<void> logout();
   Future<bool> forgotPassword({required String email});
   Future<AuthState> checkAuthState();

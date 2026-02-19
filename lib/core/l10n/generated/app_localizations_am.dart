@@ -1679,4 +1679,14 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get manager => 'ሃላፊ';
+
+  @override
+  String get verifyEmployee => 'ሰራተኛ አረጋግጥ';
+
+  @override
+  String get or => 'ወይም';
+
+  @override
+  String get noEmployeeLinked =>
+      'ከዚህ አካውንት ጋር የተገናኘ ሰራተኛ የለም። ሌላ አካውንት ይሞክሩ ወይም HR ያግኙ።';
 }

@@ -846,5 +846,8 @@
     "staffId": "የሰራተኛ መለያ",
     "level": "ደረጃ",
     "scale": "ስኬል",
-    "manager": "ሃላፊ"
+    "manager": "ሃላፊ",
+    "verifyEmployee": "ሰራተኛ አረጋግጥ",
+    "or": "ወይም",
+    "noEmployeeLinked": "ከዚህ አካውንት ጋር የተገናኘ ሰራተኛ የለም። ሌላ አካውንት ይሞክሩ ወይም HR ያግኙ።"
 }

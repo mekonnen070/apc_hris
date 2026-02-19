@@ -60,7 +60,19 @@ class AuthGate extends ConsumerWidget {
     final authState = ref.watch(authNotifierProvider);
 
     return authState.when(
-      loading: () => const SplashScreen(),
+      loading: () {
+        // If we already have a previous auth state (e.g. login in progress),
+        // keep the current page alive so snackbars and UI state are preserved.
+        // Only show the splash screen on the very first load.
+        final previousState = authState.valueOrNull;
+        if (previousState != null) {
+          if (previousState == const AuthState.authenticated()) {
+            return const HomePage();
+          }
+          return const LogInPage();
+        }
+        return const SplashScreen();
+      },
       error: (err, stack) => const LogInPage(),
       data: (state) {
         log('Auth state: $state');

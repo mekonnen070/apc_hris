@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:police_com/core/config/server_config/server_config_notifier.dart';
 import 'package:police_com/core/config/server_config/server_setup_screen.dart';
+import 'package:police_com/core/constants/api_endpoints.dart';
 import 'package:police_com/core/enums/sub_module_enum.dart';
 import 'package:police_com/core/extensions/context_extension.dart';
 import 'package:police_com/core/extensions/sub_module_extension.dart';
@@ -16,6 +18,11 @@ class AppDrawer extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // Watch the new global provider for the current employee's data.
     final employeeState = ref.watch(currentEmployeeProvider);
+    final serverConfig = ref.watch(serverConfigProvider).valueOrNull;
+    final baseUrl =
+        serverConfig != null
+            ? 'https://${serverConfig.ip}:${serverConfig.port}'
+            : '';
 
     return SafeArea(
       child: Drawer(
@@ -27,16 +34,19 @@ class AppDrawer extends ConsumerWidget {
                 // If data is available, display it.
                 if (employee != null) {
                   return UserAccountsDrawerHeader(
-                    accountName: Text(employee.firstName ?? 'N/A'),
-                    accountEmail: Text(employee.email ?? 'N/A'),
+                    accountName: Text(employee.firstName),
+                    accountEmail: Text(employee.email),
                     currentAccountPicture: CircleAvatar(
                       backgroundColor: Colors.grey,
                       backgroundImage:
-                          employee.photoUrl != null
-                              ? NetworkImage(employee.photoUrl!)
+                          employee.photoUrl != null && baseUrl.isNotEmpty
+                              ? NetworkImage(
+                                '$baseUrl${ApiEndpoints.employeeImage}${employee.photoUrl!.split('\\').last}',
+                              )
                               : null,
+                      onBackgroundImageError: (_, __) {},
                       child:
-                          employee.photoUrl == null
+                          employee.photoUrl == null || baseUrl.isEmpty
                               ? Text(
                                 employee.firstName.isNotEmpty
                                     ? employee.firstName[0].toUpperCase()

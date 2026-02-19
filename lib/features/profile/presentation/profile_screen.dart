@@ -1,7 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:police_com/core/config/server_config/server_config_notifier.dart';
+import 'package:police_com/core/constants/api_endpoints.dart';
 import 'package:police_com/core/extensions/context_extension.dart';
 import 'package:police_com/core/extensions/string_extension.dart';
 import 'package:police_com/features/auth/application/current_employee_provider.dart';
@@ -14,6 +17,11 @@ class ProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final employeeState = ref.watch(currentEmployeeProvider);
+    final serverConfig = ref.watch(serverConfigProvider).valueOrNull;
+    final baseUrl =
+        serverConfig != null
+            ? 'https://${serverConfig.ip}:${serverConfig.port}'
+            : '';
 
     return Scaffold(
       body: SafeArea(
@@ -32,7 +40,7 @@ class ProfileScreen extends ConsumerWidget {
               child: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 children: [
-                  _ProfileHeader(employee: employee),
+                  _ProfileHeader(employee: employee, baseUrl: baseUrl),
                   const SizedBox(height: 24),
                   _InfoSection(
                     title: context.lango.contactInformation,
@@ -119,15 +127,19 @@ class ProfileScreen extends ConsumerWidget {
   }
 }
 
-class _ProfileHeader extends StatelessWidget {
+class _ProfileHeader extends ConsumerWidget {
   final EmployeeInfoModel employee;
-  const _ProfileHeader({required this.employee});
+  final String baseUrl;
+  const _ProfileHeader({required this.employee, required this.baseUrl});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final hasImage = employee.photoUrl != null && employee.photoUrl!.isNotEmpty;
+    final hasValidUrl = hasImage && baseUrl.isNotEmpty;
+    log('baseUrl: $baseUrl');
+    log('hasImage: $hasImage');
 
     return Center(
       child: Column(
@@ -142,12 +154,15 @@ class _ProfileHeader extends StatelessWidget {
               backgroundColor: colorScheme.surfaceContainerHighest,
               // Use CachedNetworkImageProvider if a URL exists, otherwise null
               backgroundImage:
-                  hasImage
-                      ? CachedNetworkImageProvider(employee.photoUrl!)
+                  hasValidUrl
+                      ? NetworkImage(
+                        '$baseUrl${ApiEndpoints.employeeImage}${employee.photoUrl!.split('\\').last}',
+                      )
                       : null,
+              onBackgroundImageError: (_, __) {},
               // The child is only shown if there is no image
               child:
-                  !hasImage
+                  !hasValidUrl
                       ? Text(
                         employee.firstName.isNotEmpty
                             ? employee.firstName[0].toUpperCase()

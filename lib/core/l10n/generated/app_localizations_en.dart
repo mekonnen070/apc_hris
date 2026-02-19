@@ -1707,4 +1707,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get manager => 'Manager';
+
+  @override
+  String get verifyEmployee => 'Verify Employee';
+
+  @override
+  String get or => 'or';
+
+  @override
+  String get noEmployeeLinked =>
+      'No employee linked to this account. Try another account or contact HR.';
 }

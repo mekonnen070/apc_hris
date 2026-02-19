@@ -15,6 +15,15 @@ class VerificationScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    return const Scaffold(body: SafeArea(child: VerificationBody()));
+  }
+}
+
+class VerificationBody extends HookConsumerWidget {
+  const VerificationBody({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
     final searchController = useTextEditingController();
     final verificationState = ref.watch(verifyEmployeeProvider);
     final notifier = ref.read(verifyEmployeeProvider.notifier);
@@ -49,132 +58,128 @@ class VerificationScreen extends HookConsumerWidget {
       return null;
     }, [verificationState]);
 
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
-                  child: TextField(
-                    controller: searchController,
-                    decoration: InputDecoration(
-                      labelText: context.lango.enterEmployeeId,
-                      hintText: context.lango.employeeIdHint,
-                      border: const OutlineInputBorder(),
-                      prefixIcon: const Icon(Icons.badge_outlined),
-                      suffixIcon: IconButton(
-                        icon: const Icon(Icons.qr_code_scanner_rounded),
-                        tooltip: context.lango.scanQrCode,
-                        onPressed: () async {
-                          final String? qrCode = await Navigator.of(
-                            context,
-                          ).push(
-                            MaterialPageRoute(
-                              builder: (context) => const QRScannerScreen(),
-                            ),
-                          );
-                          if (qrCode != null && qrCode.isNotEmpty) {
-                            String? employeeId;
-                            try {
-                              final decoded = jsonDecode(qrCode);
-                              if (decoded is Map<String, dynamic> &&
-                                  decoded.containsKey('መለያ')) {
-                                employeeId = decoded['መለያ'] as String?;
-                              }
-                            } catch (_) {
-                              // Not valid JSON — treat as plain employee ID.
-                              employeeId = qrCode;
-                            }
-
-                            if (employeeId != null &&
-                                employeeId.trim().isNotEmpty &&
-                                employeeId.length <= 100) {
-                              searchController.text = employeeId;
-                              notifier.searchEmployee(employeeId);
-                            } else if (context.mounted) {
-                              toastification.show(
-                                context: context,
-                                title: Text(context.lango.verificationError),
-                                description: Text(
-                                  context.lango.verificationErrorNotFound,
-                                ),
-                                type: ToastificationType.error,
-                                style: ToastificationStyle.fillColored,
-                                autoCloseDuration: const Duration(seconds: 5),
-                                showProgressBar: true,
-                                icon: const Icon(Icons.error_outline),
-                              );
-                            }
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: TextField(
+                controller: searchController,
+                decoration: InputDecoration(
+                  labelText: context.lango.enterEmployeeId,
+                  hintText: context.lango.employeeIdHint,
+                  border: const OutlineInputBorder(),
+                  prefixIcon: const Icon(Icons.badge_outlined),
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.qr_code_scanner_rounded),
+                    tooltip: context.lango.scanQrCode,
+                    onPressed: () async {
+                      final String? qrCode = await Navigator.of(
+                        context,
+                      ).push(
+                        MaterialPageRoute(
+                          builder: (context) => const QRScannerScreen(),
+                        ),
+                      );
+                      if (qrCode != null && qrCode.isNotEmpty) {
+                        String? employeeId;
+                        try {
+                          final decoded = jsonDecode(qrCode);
+                          if (decoded is Map<String, dynamic> &&
+                              decoded.containsKey('መለያ')) {
+                            employeeId = decoded['መለያ'] as String?;
                           }
-                        },
-                      ),
-                    ),
-                    onSubmitted: (value) {
-                      if (value.trim().isNotEmpty) {
-                        notifier.searchEmployee(value.trim());
+                        } catch (_) {
+                          // Not valid JSON — treat as plain employee ID.
+                          employeeId = qrCode;
+                        }
+
+                        if (employeeId != null &&
+                            employeeId.trim().isNotEmpty &&
+                            employeeId.length <= 100) {
+                          searchController.text = employeeId;
+                          notifier.searchEmployee(employeeId);
+                        } else if (context.mounted) {
+                          toastification.show(
+                            context: context,
+                            title: Text(context.lango.verificationError),
+                            description: Text(
+                              context.lango.verificationErrorNotFound,
+                            ),
+                            type: ToastificationType.error,
+                            style: ToastificationStyle.fillColored,
+                            autoCloseDuration: const Duration(seconds: 5),
+                            showProgressBar: true,
+                            icon: const Icon(Icons.error_outline),
+                          );
+                        }
                       }
                     },
                   ),
                 ),
-                const SizedBox(height: 24),
-                AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
-                  child: verificationState.when(
-                    data: (employee) {
-                      if (employee == null) {
-                        return const _InitialStatePrompt();
-                      }
-                      return Column(
+                onSubmitted: (value) {
+                  if (value.trim().isNotEmpty) {
+                    notifier.searchEmployee(value.trim());
+                  }
+                },
+              ),
+            ),
+            const SizedBox(height: 24),
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              child: verificationState.when(
+                data: (employee) {
+                  if (employee == null) {
+                    return const _InitialStatePrompt();
+                  }
+                  return Column(
+                    children: [
+                      VerificationResultWidget(
+                        employee: employee,
+                        baseUrl: baseUrl,
+                      ),
+                      const SizedBox(height: 16),
+                      FilledButton.icon(
+                        onPressed: () {
+                          searchController.clear();
+                          notifier.clear();
+                        },
+                        icon: const Icon(Icons.refresh),
+                        label: Text(context.lango.verifyNew),
+                      ),
+                    ],
+                  );
+                },
+                loading:
+                    () => Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          VerificationResultWidget(
-                            employee: employee,
-                            baseUrl: baseUrl,
-                          ),
+                          const CircularProgressIndicator(),
                           const SizedBox(height: 16),
-                          FilledButton.icon(
-                            onPressed: () {
-                              searchController.clear();
-                              notifier.clear();
-                            },
-                            icon: const Icon(Icons.refresh),
-                            label: Text(context.lango.verifyNew),
+                          Text(
+                            context.lango.verifyingEmployee,
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ],
-                      );
-                    },
-                    loading:
-                        () => Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const CircularProgressIndicator(),
-                              const SizedBox(height: 16),
-                              Text(
-                                context.lango.verifyingEmployee,
-                                style: Theme.of(context).textTheme.titleMedium,
-                              ),
-                            ],
-                          ),
-                        ),
-                    error:
-                        (err, stack) => _ErrorState(
-                          message: context.lango.verificationErrorNotFound,
-                          onRetry: () {
-                            final query = searchController.text.trim();
-                            if (query.isNotEmpty) {
-                              notifier.searchEmployee(query);
-                            }
-                          },
-                        ),
-                  ),
-                ),
-              ],
+                      ),
+                    ),
+                error:
+                    (err, stack) => _ErrorState(
+                      message: context.lango.verificationErrorNotFound,
+                      onRetry: () {
+                        final query = searchController.text.trim();
+                        if (query.isNotEmpty) {
+                          notifier.searchEmployee(query);
+                        }
+                      },
+                    ),
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );

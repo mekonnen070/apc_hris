@@ -5,13 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:police_com/core/errors/app_exceptions.dart';
 import 'package:police_com/core/extensions/context_extension.dart';
 import 'package:police_com/features/auth/application/auth_notifier.dart';
 import 'package:police_com/features/auth/presentation/forgot_password_page.dart';
 import 'package:police_com/features/auth/presentation/sign_up_page.dart';
+import 'package:police_com/features/verification/presentation/guest_verification_page.dart';
 import 'package:police_com/features/widgets/app_bar_widget.dart';
 import 'package:police_com/features/widgets/language_switcher_widget.dart';
 import 'package:police_com/features/widgets/theme_switcher_widget.dart';
+import 'package:toastification/toastification.dart';
 
 class LogInPage extends ConsumerStatefulWidget {
   const LogInPage({super.key});
@@ -49,10 +52,44 @@ class _LogInPageState extends ConsumerState<LogInPage> {
     final authNotifier = ref.read(authNotifierProvider.notifier);
 
     // 2. Call the login method. The notifier and wrapper handle state and navigation.
-    await authNotifier.login(
-      email: fields['email']!.value as String,
-      password: fields['password']!.value as String,
-    );
+    try {
+      await authNotifier.login(
+        email: fields['email']!.value as String,
+        password: fields['password']!.value as String,
+      );
+    } catch (e) {
+      if (!mounted) return;
+      toastification.dismissAll();
+      if (e is NoEmployeeLinkedExeption) {
+        toastification.show(
+          context: context,
+          title: Text(
+            context.lango.loginFailed,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          description: Text(context.lango.noEmployeeLinked),
+          type: ToastificationType.error,
+          style: ToastificationStyle.fillColored,
+          autoCloseDuration: const Duration(seconds: 5),
+          showProgressBar: true,
+          icon: const Icon(Icons.error_outline),
+        );
+      } else {
+        toastification.show(
+          context: context,
+          title: Text(
+            context.lango.loginFailed,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          description: Text(e.toString().replaceFirst('Exception: ', '')),
+          type: ToastificationType.error,
+          style: ToastificationStyle.fillColored,
+          autoCloseDuration: const Duration(seconds: 5),
+          showProgressBar: true,
+          icon: const Icon(Icons.error_outline),
+        );
+      }
+    }
   }
 
   @override
@@ -75,12 +112,6 @@ class _LogInPageState extends ConsumerState<LogInPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
-                      Icons.lock_open_rounded,
-                      size: 100,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                    const SizedBox(height: 24),
                     Text(
                       context.lango.welcomeBack,
                       style: Theme.of(context).textTheme.headlineSmall
@@ -140,7 +171,7 @@ class _LogInPageState extends ConsumerState<LogInPage> {
                         child: Text(context.lango.forgotPassword),
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 16),
                     SizedBox(
                       width: double.infinity,
                       height: 50,
@@ -158,7 +189,7 @@ class _LogInPageState extends ConsumerState<LogInPage> {
                                 ),
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 12),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -174,6 +205,39 @@ class _LogInPageState extends ConsumerState<LogInPage> {
                         ),
                       ],
                     ),
+                    Row(
+                      children: [
+                        const Expanded(child: Divider()),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Text(
+                            context.lango.or,
+                            style: Theme.of(context).textTheme.bodyMedium
+                                ?.copyWith(color: Colors.grey),
+                          ),
+                        ),
+                        const Expanded(child: Divider()),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      width: double.infinity,
+                      height: 50,
+                      child: OutlinedButton.icon(
+                        onPressed:
+                            () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => const GuestVerificationPage(),
+                              ),
+                            ),
+                        icon: const Icon(Icons.verified_user_outlined),
+                        label: Text(
+                          context.lango.verifyEmployee,
+                          style: const TextStyle(fontSize: 16),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 24),
                   ],
                 ),
               ),
