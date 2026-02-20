@@ -101,7 +101,7 @@ class LeaveScreen extends ConsumerWidget {
                 ),
               ),
           loading: () => const Center(child: CircularProgressIndicator()),
-          error: (e, st) => Center(child: Text('Error: $e')),
+          error: (e, st) => const Center(child: Text('Something went wrong.')),
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(

@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -111,6 +110,136 @@ $ApplicantSelectionCopyWith<$Res>? get selectedApplicant {
 }
 }
 
+
+/// Adds pattern-matching-related methods to [ApplicantEvaluation].
+extension ApplicantEvaluationPatterns on ApplicantEvaluation {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ApplicantEvaluation value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _ApplicantEvaluation() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ApplicantEvaluation value)  $default,){
+final _that = this;
+switch (_that) {
+case _ApplicantEvaluation():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ApplicantEvaluation value)?  $default,){
+final _that = this;
+switch (_that) {
+case _ApplicantEvaluation() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int selectionId,  String employeeId,  double? performanceScore,  double? performanceExpectation,  double? serviceScore,  double? serviceExpectation,  double? educationScore,  double? educationExpectation,  double? trainingRelevanceScore,  double? trainingRelevanceExpectation,  double? ageScore,  double? ageExpectation,  double? profileQualityScore,  double? profileQualityExpectation,  double? affirmativeScore,  Gender? affirmativeExpectation,  bool hasPriority,  double totalScore,  String comments,  ApplicantStatus? evaluationStatus,  String enteredBy,  DateTime entryDate,  ApplicantSelection? selectedApplicant,  bool meetsMinimumRequirements,  double calculateWeightedTotal)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _ApplicantEvaluation() when $default != null:
+return $default(_that.selectionId,_that.employeeId,_that.performanceScore,_that.performanceExpectation,_that.serviceScore,_that.serviceExpectation,_that.educationScore,_that.educationExpectation,_that.trainingRelevanceScore,_that.trainingRelevanceExpectation,_that.ageScore,_that.ageExpectation,_that.profileQualityScore,_that.profileQualityExpectation,_that.affirmativeScore,_that.affirmativeExpectation,_that.hasPriority,_that.totalScore,_that.comments,_that.evaluationStatus,_that.enteredBy,_that.entryDate,_that.selectedApplicant,_that.meetsMinimumRequirements,_that.calculateWeightedTotal);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int selectionId,  String employeeId,  double? performanceScore,  double? performanceExpectation,  double? serviceScore,  double? serviceExpectation,  double? educationScore,  double? educationExpectation,  double? trainingRelevanceScore,  double? trainingRelevanceExpectation,  double? ageScore,  double? ageExpectation,  double? profileQualityScore,  double? profileQualityExpectation,  double? affirmativeScore,  Gender? affirmativeExpectation,  bool hasPriority,  double totalScore,  String comments,  ApplicantStatus? evaluationStatus,  String enteredBy,  DateTime entryDate,  ApplicantSelection? selectedApplicant,  bool meetsMinimumRequirements,  double calculateWeightedTotal)  $default,) {final _that = this;
+switch (_that) {
+case _ApplicantEvaluation():
+return $default(_that.selectionId,_that.employeeId,_that.performanceScore,_that.performanceExpectation,_that.serviceScore,_that.serviceExpectation,_that.educationScore,_that.educationExpectation,_that.trainingRelevanceScore,_that.trainingRelevanceExpectation,_that.ageScore,_that.ageExpectation,_that.profileQualityScore,_that.profileQualityExpectation,_that.affirmativeScore,_that.affirmativeExpectation,_that.hasPriority,_that.totalScore,_that.comments,_that.evaluationStatus,_that.enteredBy,_that.entryDate,_that.selectedApplicant,_that.meetsMinimumRequirements,_that.calculateWeightedTotal);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int selectionId,  String employeeId,  double? performanceScore,  double? performanceExpectation,  double? serviceScore,  double? serviceExpectation,  double? educationScore,  double? educationExpectation,  double? trainingRelevanceScore,  double? trainingRelevanceExpectation,  double? ageScore,  double? ageExpectation,  double? profileQualityScore,  double? profileQualityExpectation,  double? affirmativeScore,  Gender? affirmativeExpectation,  bool hasPriority,  double totalScore,  String comments,  ApplicantStatus? evaluationStatus,  String enteredBy,  DateTime entryDate,  ApplicantSelection? selectedApplicant,  bool meetsMinimumRequirements,  double calculateWeightedTotal)?  $default,) {final _that = this;
+switch (_that) {
+case _ApplicantEvaluation() when $default != null:
+return $default(_that.selectionId,_that.employeeId,_that.performanceScore,_that.performanceExpectation,_that.serviceScore,_that.serviceExpectation,_that.educationScore,_that.educationExpectation,_that.trainingRelevanceScore,_that.trainingRelevanceExpectation,_that.ageScore,_that.ageExpectation,_that.profileQualityScore,_that.profileQualityExpectation,_that.affirmativeScore,_that.affirmativeExpectation,_that.hasPriority,_that.totalScore,_that.comments,_that.evaluationStatus,_that.enteredBy,_that.entryDate,_that.selectedApplicant,_that.meetsMinimumRequirements,_that.calculateWeightedTotal);case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 @JsonSerializable()

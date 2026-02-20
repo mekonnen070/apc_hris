@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -78,7 +80,10 @@ class _WelcomeHeader extends ConsumerWidget {
             ],
           ),
       loading: () => const SizedBox(height: 60),
-      error: (e, s) => Text('Error: $e'),
+      error: (e, s) {
+        log('Error: $e, stacktrace: $s');
+        return const Text('Something went wrong.');
+      },
     );
   }
 }

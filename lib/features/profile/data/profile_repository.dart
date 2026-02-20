@@ -36,7 +36,7 @@ class ProfileRepository with LoggerMixin implements IProfileRepository {
         queryParameters: {'EmpId': employeeId},
       );
 
-      return EmployeeInfoModel.fromJson(response.data);
+        return EmployeeInfoModel.fromJson(response.data);
     } on DioException catch (e, stackTrace) {
       logError(
         'Failed to fetch employee profile for ID: $employeeId',
@@ -80,7 +80,11 @@ class ProfileRepository with LoggerMixin implements IProfileRepository {
         data: education.toJson(),
       );
     } on DioException catch (e, st) {
-      logError('Failed to add education for $employeeId', error: e, stackTrace: st);
+      logError(
+        'Failed to add education for $employeeId',
+        error: e,
+        stackTrace: st,
+      );
       rethrow;
     }
   }
@@ -99,7 +103,11 @@ class ProfileRepository with LoggerMixin implements IProfileRepository {
         data: education.toJson(),
       );
     } on DioException catch (e, st) {
-      logError('Failed to update education for $employeeId', error: e, stackTrace: st);
+      logError(
+        'Failed to update education for $employeeId',
+        error: e,
+        stackTrace: st,
+      );
       rethrow;
     }
   }
@@ -114,7 +122,11 @@ class ProfileRepository with LoggerMixin implements IProfileRepository {
         ),
       );
     } on DioException catch (e, st) {
-      logError('Failed to delete education $educationId', error: e, stackTrace: st);
+      logError(
+        'Failed to delete education $educationId',
+        error: e,
+        stackTrace: st,
+      );
       rethrow;
     }
   }
@@ -131,7 +143,11 @@ class ProfileRepository with LoggerMixin implements IProfileRepository {
         data: experience.toJson(),
       );
     } on DioException catch (e, st) {
-      logError('Failed to add experience for $employeeId', error: e, stackTrace: st);
+      logError(
+        'Failed to add experience for $employeeId',
+        error: e,
+        stackTrace: st,
+      );
       rethrow;
     }
   }
@@ -150,7 +166,11 @@ class ProfileRepository with LoggerMixin implements IProfileRepository {
         data: experience.toJson(),
       );
     } on DioException catch (e, st) {
-      logError('Failed to update experience for $employeeId', error: e, stackTrace: st);
+      logError(
+        'Failed to update experience for $employeeId',
+        error: e,
+        stackTrace: st,
+      );
       rethrow;
     }
   }
@@ -165,7 +185,11 @@ class ProfileRepository with LoggerMixin implements IProfileRepository {
         ),
       );
     } on DioException catch (e, st) {
-      logError('Failed to delete experience $experienceId', error: e, stackTrace: st);
+      logError(
+        'Failed to delete experience $experienceId',
+        error: e,
+        stackTrace: st,
+      );
       rethrow;
     }
   }
@@ -182,7 +206,11 @@ class ProfileRepository with LoggerMixin implements IProfileRepository {
         data: dependant.toJson(),
       );
     } on DioException catch (e, st) {
-      logError('Failed to add dependant for $employeeId', error: e, stackTrace: st);
+      logError(
+        'Failed to add dependant for $employeeId',
+        error: e,
+        stackTrace: st,
+      );
       rethrow;
     }
   }
@@ -201,7 +229,11 @@ class ProfileRepository with LoggerMixin implements IProfileRepository {
         data: dependant.toJson(),
       );
     } on DioException catch (e, st) {
-      logError('Failed to update dependant for $employeeId', error: e, stackTrace: st);
+      logError(
+        'Failed to update dependant for $employeeId',
+        error: e,
+        stackTrace: st,
+      );
       rethrow;
     }
   }
@@ -216,7 +248,11 @@ class ProfileRepository with LoggerMixin implements IProfileRepository {
         ),
       );
     } on DioException catch (e, st) {
-      logError('Failed to delete dependant $dependantId', error: e, stackTrace: st);
+      logError(
+        'Failed to delete dependant $dependantId',
+        error: e,
+        stackTrace: st,
+      );
       rethrow;
     }
   }
@@ -233,7 +269,11 @@ class ProfileRepository with LoggerMixin implements IProfileRepository {
         data: contact.toJson(),
       );
     } on DioException catch (e, st) {
-      logError('Failed to add contact for $employeeId', error: e, stackTrace: st);
+      logError(
+        'Failed to add contact for $employeeId',
+        error: e,
+        stackTrace: st,
+      );
       rethrow;
     }
   }
@@ -252,7 +292,11 @@ class ProfileRepository with LoggerMixin implements IProfileRepository {
         data: contact.toJson(),
       );
     } on DioException catch (e, st) {
-      logError('Failed to update contact for $employeeId', error: e, stackTrace: st);
+      logError(
+        'Failed to update contact for $employeeId',
+        error: e,
+        stackTrace: st,
+      );
       rethrow;
     }
   }
@@ -278,7 +322,11 @@ class ProfileRepository with LoggerMixin implements IProfileRepository {
         data: spouse.toJson(),
       );
     } on DioException catch (e, st) {
-      logError('Failed to add spouse for $employeeId', error: e, stackTrace: st);
+      logError(
+        'Failed to add spouse for $employeeId',
+        error: e,
+        stackTrace: st,
+      );
       rethrow;
     }
   }
@@ -297,7 +345,11 @@ class ProfileRepository with LoggerMixin implements IProfileRepository {
         data: spouse.toJson(),
       );
     } on DioException catch (e, st) {
-      logError('Failed to update spouse for $employeeId', error: e, stackTrace: st);
+      logError(
+        'Failed to update spouse for $employeeId',
+        error: e,
+        stackTrace: st,
+      );
       rethrow;
     }
   }

@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -138,6 +137,136 @@ as List<EmployeeUploadModel>,
 
 }
 
+
+/// Adds pattern-matching-related methods to [EmployeeInfoModel].
+extension EmployeeInfoModelPatterns on EmployeeInfoModel {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _EmployeeInfoModel value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _EmployeeInfoModel() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _EmployeeInfoModel value)  $default,){
+final _that = this;
+switch (_that) {
+case _EmployeeInfoModel():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _EmployeeInfoModel value)?  $default,){
+final _that = this;
+switch (_that) {
+case _EmployeeInfoModel() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String employeeId,  StaffTitle? title,  String firstName,  String? fatherName,  String? grandName,  Gender gender,  DateTime birthDate, @JsonKey(includeFromJson: false, includeToJson: false)  File? photoFile,  String? photoUrl,  String? motherName,  String positionId,  String? managerId,  String? address1,  String? address2,  String? houseNumber,  String? phone,  String mobile,  String email,  Country nationality,  BloodGroup bloodGroup,  Religion religion,  MedicalStatus medicalStatus,  String? retirementNumber,  String? tin,  MaritalStatus maritalStatus,  EmploymentStatus employmentStatus,  bool isManager,  EmployeeType employeeType,  DateTime hiredDate,  DateTime? retirementEligibilityDate,  String? entryBy,  DateTime? entryDate,  List<EmployeeContactModel> employeeContacts,  List<EmployeeDependantModel> employeeDependants,  List<EmployeeEducationModel> employeeEducations,  List<EmployeeExperienceModel> employeeExperiences,  List<EmployeePerformanceModel> performances,  List<EmployeeSpouseModel> employeeSpouse,  List<EmployeeUploadModel> generalDocuments)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _EmployeeInfoModel() when $default != null:
+return $default(_that.employeeId,_that.title,_that.firstName,_that.fatherName,_that.grandName,_that.gender,_that.birthDate,_that.photoFile,_that.photoUrl,_that.motherName,_that.positionId,_that.managerId,_that.address1,_that.address2,_that.houseNumber,_that.phone,_that.mobile,_that.email,_that.nationality,_that.bloodGroup,_that.religion,_that.medicalStatus,_that.retirementNumber,_that.tin,_that.maritalStatus,_that.employmentStatus,_that.isManager,_that.employeeType,_that.hiredDate,_that.retirementEligibilityDate,_that.entryBy,_that.entryDate,_that.employeeContacts,_that.employeeDependants,_that.employeeEducations,_that.employeeExperiences,_that.performances,_that.employeeSpouse,_that.generalDocuments);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String employeeId,  StaffTitle? title,  String firstName,  String? fatherName,  String? grandName,  Gender gender,  DateTime birthDate, @JsonKey(includeFromJson: false, includeToJson: false)  File? photoFile,  String? photoUrl,  String? motherName,  String positionId,  String? managerId,  String? address1,  String? address2,  String? houseNumber,  String? phone,  String mobile,  String email,  Country nationality,  BloodGroup bloodGroup,  Religion religion,  MedicalStatus medicalStatus,  String? retirementNumber,  String? tin,  MaritalStatus maritalStatus,  EmploymentStatus employmentStatus,  bool isManager,  EmployeeType employeeType,  DateTime hiredDate,  DateTime? retirementEligibilityDate,  String? entryBy,  DateTime? entryDate,  List<EmployeeContactModel> employeeContacts,  List<EmployeeDependantModel> employeeDependants,  List<EmployeeEducationModel> employeeEducations,  List<EmployeeExperienceModel> employeeExperiences,  List<EmployeePerformanceModel> performances,  List<EmployeeSpouseModel> employeeSpouse,  List<EmployeeUploadModel> generalDocuments)  $default,) {final _that = this;
+switch (_that) {
+case _EmployeeInfoModel():
+return $default(_that.employeeId,_that.title,_that.firstName,_that.fatherName,_that.grandName,_that.gender,_that.birthDate,_that.photoFile,_that.photoUrl,_that.motherName,_that.positionId,_that.managerId,_that.address1,_that.address2,_that.houseNumber,_that.phone,_that.mobile,_that.email,_that.nationality,_that.bloodGroup,_that.religion,_that.medicalStatus,_that.retirementNumber,_that.tin,_that.maritalStatus,_that.employmentStatus,_that.isManager,_that.employeeType,_that.hiredDate,_that.retirementEligibilityDate,_that.entryBy,_that.entryDate,_that.employeeContacts,_that.employeeDependants,_that.employeeEducations,_that.employeeExperiences,_that.performances,_that.employeeSpouse,_that.generalDocuments);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String employeeId,  StaffTitle? title,  String firstName,  String? fatherName,  String? grandName,  Gender gender,  DateTime birthDate, @JsonKey(includeFromJson: false, includeToJson: false)  File? photoFile,  String? photoUrl,  String? motherName,  String positionId,  String? managerId,  String? address1,  String? address2,  String? houseNumber,  String? phone,  String mobile,  String email,  Country nationality,  BloodGroup bloodGroup,  Religion religion,  MedicalStatus medicalStatus,  String? retirementNumber,  String? tin,  MaritalStatus maritalStatus,  EmploymentStatus employmentStatus,  bool isManager,  EmployeeType employeeType,  DateTime hiredDate,  DateTime? retirementEligibilityDate,  String? entryBy,  DateTime? entryDate,  List<EmployeeContactModel> employeeContacts,  List<EmployeeDependantModel> employeeDependants,  List<EmployeeEducationModel> employeeEducations,  List<EmployeeExperienceModel> employeeExperiences,  List<EmployeePerformanceModel> performances,  List<EmployeeSpouseModel> employeeSpouse,  List<EmployeeUploadModel> generalDocuments)?  $default,) {final _that = this;
+switch (_that) {
+case _EmployeeInfoModel() when $default != null:
+return $default(_that.employeeId,_that.title,_that.firstName,_that.fatherName,_that.grandName,_that.gender,_that.birthDate,_that.photoFile,_that.photoUrl,_that.motherName,_that.positionId,_that.managerId,_that.address1,_that.address2,_that.houseNumber,_that.phone,_that.mobile,_that.email,_that.nationality,_that.bloodGroup,_that.religion,_that.medicalStatus,_that.retirementNumber,_that.tin,_that.maritalStatus,_that.employmentStatus,_that.isManager,_that.employeeType,_that.hiredDate,_that.retirementEligibilityDate,_that.entryBy,_that.entryDate,_that.employeeContacts,_that.employeeDependants,_that.employeeEducations,_that.employeeExperiences,_that.performances,_that.employeeSpouse,_that.generalDocuments);case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 @JsonSerializable()

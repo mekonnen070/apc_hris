@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -124,6 +123,136 @@ as String?,
 
 }
 
+
+/// Adds pattern-matching-related methods to [EmployeeVerificationDataModel].
+extension EmployeeVerificationDataModelPatterns on EmployeeVerificationDataModel {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _EmployeeVerificationDataModel value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _EmployeeVerificationDataModel() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _EmployeeVerificationDataModel value)  $default,){
+final _that = this;
+switch (_that) {
+case _EmployeeVerificationDataModel():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _EmployeeVerificationDataModel value)?  $default,){
+final _that = this;
+switch (_that) {
+case _EmployeeVerificationDataModel() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String employeeId,  String staffId,  String firstName,  String fatherName,  String grandName,  String fullName,  String gender,  String birthDate,  String? photoUrl,  String? signature,  String? motherName,  String? address,  String? appearance,  String? height,  String? mobile,  String? email,  String? bloodGroup,  String? nationality,  String? religion,  String? medicalStatus,  String? retirementNumber,  String? maritalStatus,  bool? isManager, @JsonKey(includeToJson: false)  String? bankAccount,  bool? isRepresented, @JsonKey(includeToJson: false)  String? repBankAccount,  String? entryBy,  String? entryDate,  String? employmentStatus,  String? recuritmentType,  String? employmentType,  String? hiredDate,  String? retirementEligibilityDate,  String? positionJoinedDate,  String? employmentTerminationDate,  String? levelHoldingDate,  String? scaleHoldingDate,  bool? isCardIssued,  String? positionId,  String? positionName,  String? departmentId,  String? departmentName,  String? organizationId,  String? organizationName,  String? currentLevelId,  String? levelName,  String? rankScaleId,  String? scaleName,  String? managerId,  String? managerName)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _EmployeeVerificationDataModel() when $default != null:
+return $default(_that.employeeId,_that.staffId,_that.firstName,_that.fatherName,_that.grandName,_that.fullName,_that.gender,_that.birthDate,_that.photoUrl,_that.signature,_that.motherName,_that.address,_that.appearance,_that.height,_that.mobile,_that.email,_that.bloodGroup,_that.nationality,_that.religion,_that.medicalStatus,_that.retirementNumber,_that.maritalStatus,_that.isManager,_that.bankAccount,_that.isRepresented,_that.repBankAccount,_that.entryBy,_that.entryDate,_that.employmentStatus,_that.recuritmentType,_that.employmentType,_that.hiredDate,_that.retirementEligibilityDate,_that.positionJoinedDate,_that.employmentTerminationDate,_that.levelHoldingDate,_that.scaleHoldingDate,_that.isCardIssued,_that.positionId,_that.positionName,_that.departmentId,_that.departmentName,_that.organizationId,_that.organizationName,_that.currentLevelId,_that.levelName,_that.rankScaleId,_that.scaleName,_that.managerId,_that.managerName);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String employeeId,  String staffId,  String firstName,  String fatherName,  String grandName,  String fullName,  String gender,  String birthDate,  String? photoUrl,  String? signature,  String? motherName,  String? address,  String? appearance,  String? height,  String? mobile,  String? email,  String? bloodGroup,  String? nationality,  String? religion,  String? medicalStatus,  String? retirementNumber,  String? maritalStatus,  bool? isManager, @JsonKey(includeToJson: false)  String? bankAccount,  bool? isRepresented, @JsonKey(includeToJson: false)  String? repBankAccount,  String? entryBy,  String? entryDate,  String? employmentStatus,  String? recuritmentType,  String? employmentType,  String? hiredDate,  String? retirementEligibilityDate,  String? positionJoinedDate,  String? employmentTerminationDate,  String? levelHoldingDate,  String? scaleHoldingDate,  bool? isCardIssued,  String? positionId,  String? positionName,  String? departmentId,  String? departmentName,  String? organizationId,  String? organizationName,  String? currentLevelId,  String? levelName,  String? rankScaleId,  String? scaleName,  String? managerId,  String? managerName)  $default,) {final _that = this;
+switch (_that) {
+case _EmployeeVerificationDataModel():
+return $default(_that.employeeId,_that.staffId,_that.firstName,_that.fatherName,_that.grandName,_that.fullName,_that.gender,_that.birthDate,_that.photoUrl,_that.signature,_that.motherName,_that.address,_that.appearance,_that.height,_that.mobile,_that.email,_that.bloodGroup,_that.nationality,_that.religion,_that.medicalStatus,_that.retirementNumber,_that.maritalStatus,_that.isManager,_that.bankAccount,_that.isRepresented,_that.repBankAccount,_that.entryBy,_that.entryDate,_that.employmentStatus,_that.recuritmentType,_that.employmentType,_that.hiredDate,_that.retirementEligibilityDate,_that.positionJoinedDate,_that.employmentTerminationDate,_that.levelHoldingDate,_that.scaleHoldingDate,_that.isCardIssued,_that.positionId,_that.positionName,_that.departmentId,_that.departmentName,_that.organizationId,_that.organizationName,_that.currentLevelId,_that.levelName,_that.rankScaleId,_that.scaleName,_that.managerId,_that.managerName);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String employeeId,  String staffId,  String firstName,  String fatherName,  String grandName,  String fullName,  String gender,  String birthDate,  String? photoUrl,  String? signature,  String? motherName,  String? address,  String? appearance,  String? height,  String? mobile,  String? email,  String? bloodGroup,  String? nationality,  String? religion,  String? medicalStatus,  String? retirementNumber,  String? maritalStatus,  bool? isManager, @JsonKey(includeToJson: false)  String? bankAccount,  bool? isRepresented, @JsonKey(includeToJson: false)  String? repBankAccount,  String? entryBy,  String? entryDate,  String? employmentStatus,  String? recuritmentType,  String? employmentType,  String? hiredDate,  String? retirementEligibilityDate,  String? positionJoinedDate,  String? employmentTerminationDate,  String? levelHoldingDate,  String? scaleHoldingDate,  bool? isCardIssued,  String? positionId,  String? positionName,  String? departmentId,  String? departmentName,  String? organizationId,  String? organizationName,  String? currentLevelId,  String? levelName,  String? rankScaleId,  String? scaleName,  String? managerId,  String? managerName)?  $default,) {final _that = this;
+switch (_that) {
+case _EmployeeVerificationDataModel() when $default != null:
+return $default(_that.employeeId,_that.staffId,_that.firstName,_that.fatherName,_that.grandName,_that.fullName,_that.gender,_that.birthDate,_that.photoUrl,_that.signature,_that.motherName,_that.address,_that.appearance,_that.height,_that.mobile,_that.email,_that.bloodGroup,_that.nationality,_that.religion,_that.medicalStatus,_that.retirementNumber,_that.maritalStatus,_that.isManager,_that.bankAccount,_that.isRepresented,_that.repBankAccount,_that.entryBy,_that.entryDate,_that.employmentStatus,_that.recuritmentType,_that.employmentType,_that.hiredDate,_that.retirementEligibilityDate,_that.positionJoinedDate,_that.employmentTerminationDate,_that.levelHoldingDate,_that.scaleHoldingDate,_that.isCardIssued,_that.positionId,_that.positionName,_that.departmentId,_that.departmentName,_that.organizationId,_that.organizationName,_that.currentLevelId,_that.levelName,_that.rankScaleId,_that.scaleName,_that.managerId,_that.managerName);case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 @JsonSerializable()

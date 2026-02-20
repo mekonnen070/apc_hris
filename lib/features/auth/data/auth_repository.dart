@@ -48,6 +48,20 @@ class AuthRepository with LoggerMixin implements IAuthRepository {
   Future<AuthState> checkAuthState() async {
     final isLoggedIn = _appPreferences.getUserLoginStatus(_prefs);
     if (isLoggedIn) {
+      final storedEmployeeId = _appPreferences.getEmployeeId(_prefs);
+      if (storedEmployeeId == null || storedEmployeeId.trim().isEmpty) {
+        logWarning(
+          'Stale session detected: logged-in flag is true but no '
+          'employeeId is stored. Clearing auth data.',
+        );
+        try {
+          await _appPreferences.clearAuthData(_prefs);
+          await _cookieJar.deleteAll();
+        } catch (e, st) {
+          logError('Failed to clear stale auth data', error: e, stackTrace: st);
+        }
+        return const AuthState.unauthenticated();
+      }
       return const AuthState.authenticated();
     }
     return const AuthState.unauthenticated();
@@ -61,7 +75,7 @@ class AuthRepository with LoggerMixin implements IAuthRepository {
 
       if (response.statusCode == 200) {
         final user = User.fromJson(response.data);
-        if (user.employeeId == null) {
+        if (user.employeeId == null || user.employeeId!.trim().isEmpty) {
           // The server already created a session from the successful 200
           // response (cookies were stored by CookieManager). We must
           // tear down that session so repeated taps don't slip through.
